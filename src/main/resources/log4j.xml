@@ -15,6 +15,24 @@
 		<level value="info" />
 	</logger>
 	
+	<!-- SQL Loggers -->
+    <logger name="jdbc.sqlonly" additivity="false">
+        <level value="info" />
+        <appender-ref ref="console" />
+    </logger>
+    <logger name="jdbc.sqltiming" additivity="false">
+        <level value="off" />
+        <appender-ref ref="console" />
+    </logger>
+    <logger name="jdbc.connection" additivity="false">
+        <level value="off" />
+        <appender-ref ref="console" />
+    </logger>
+    <logger name="jdbc.resultsettable" additivity="false">
+        <level value="info" />
+        <appender-ref ref="console" />
+    </logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

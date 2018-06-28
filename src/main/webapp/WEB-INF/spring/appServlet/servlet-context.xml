@@ -23,6 +23,25 @@
 	
 	<context:component-scan base-package="com.kh.hamo" />
 	
+	<!-- MyBatis 설정 import -->
+	<beans:import resource="classpath:config/mybatis.xml" />
+
+	<!-- 트랜잭션 설정 import -->
+	<beans:import resource="classpath:config/transaction.xml" />
+
+	<!-- 파일 서비스 설정 import -->
+	<beans:import resource="classpath:config/fileService.xml" />
+
+	<!-- Interceptor 설정 import -->
+	<beans:import resource="classpath:config/interceptor.xml" />
 	
+	<!-- AOP 설정 import -->
+	<beans:import resource="classpath:config/aop.xml" />
+	
+	<!-- 스케줄러 설정 import -->
+	<beans:import resource="classpath:config/scheduler.xml" />
+	
+	<!-- Spring Security 설정 import -->
+	<beans:import resource="classpath:config/spring-security.xml" />
 	
 </beans:beans>
