@@ -32,7 +32,7 @@ public class SampleController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "sample";
+		return "main";
 	}
 	
 }
