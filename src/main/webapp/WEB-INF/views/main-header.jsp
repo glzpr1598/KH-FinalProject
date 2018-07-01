@@ -9,90 +9,159 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
-	.container {
+	body {
+		margin: 0px;
+	}
+
+	#header {
 		width: 1000px;
 		height: 120px;
 		margin: auto;
-	}
-	#top {
 		position: relative;
 	}
 
-	.link {
+	/* 로그인, 회원정보수정 */
+	#header #link {
 		position: absolute;
-		top: 5px;
+		top: 10px;
 		right: 0px;
 	}
-	.link a {
+	#header #link a {
 		font-size: 12px;
 		color: black;
 		text-decoration: none;
 		font-weight: bold;
+		cursor: pointer;
 	}
-	.link a:hover {
+	#header #link a:hover {
 		text-decoration: underline;
 	}
 	
-	.search {
+	/* 로고, 검색창 div */
+	#header #areaSearch {
 		position: absolute;
 		top: 50px;
 		left: 20px;
 	}
-	
-	#logo {
+	/* 로고 */
+	#header #logo {
 		height: 60px;
 		cursor: pointer;
 	}
-	
-	#divSearch {
-		border: 3px solid #ffbf00;
+	/* 검색창, 버튼 div */
+	#header #divSearch {
+		border: medium solid #ffbf00;
 		float: right;
 		margin-top: 6px;
-		margin-left: 20px;
+		margin-left: 100px;
 	}
-	#inputSearch {
+	/* 검색창 */
+	#header #inputSearch {
 		height: 40px;
 		width: 400px;
         padding-left: 10px;
         border: none;
 	}
-	
-	#btnSearch {
+	/* 검색버튼 */
+	#header #btnSearch {
 		height: 40px;
 		width: 40px;
 		cursor: pointer;
 		background-color: transparent;
 		border: none;
 	}
-	#btnSearch:before {
+	#header #btnSearch:before {
 		content: "\f002";
 		font-family: FontAwesome;
 		font-size: 16px;
 		color: #ffbf00;
 	}
 	
+	/* 메뉴 div */
+	#menuBar {
+		margin: 20px 0px;
+		background: #ffbf00;
+	}
+	/* 메뉴 container */
+	#menuBar #container {
+		width: 1000px;
+		margin: auto;
+	}
+	/* 메뉴 */
+	#menuBar .menu {
+		display: inline-block;
+		padding: 12px 15px;
+		margin: 0px 15px;
+		text-align: center;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 14px;
+		color: #ffffff;
+	}
+	#menuBar .menu:hover {
+		background: #F3E2A9;
+		color: #848484;
+	}
 </style>
 </head>
 <body>
-	<div id="top" class="container">
-		<div class="link">
-			<a href="">로그인</a>
+	<div id="header">
+		<div id="link">
+			<a id="login"></a>
 			|
-			<a href="">회원정보 수정</a>
+			<a href="">회원정보수정</a>
 		</div>
-		<div class="search">
+		<div id="areaSearch">
 			<img id="logo" src="./resources/image/logo.png" />
 			<div id="divSearch">
-				<form>
+				<form action="">
 					<input id="inputSearch" type="text" placeholder="검색어 입력">
 					<button id="btnSearch" type="submit"></button>
 				</form>
 			</div>
 		</div>
 	</div>
-     
-</form>
-</div>
+	<div id="menuBar">
+		<div id="container">
+			<a class="menu" id="myClub" href="">내 동호회</a>
+			<a class="menu" id="findClub" href="">동호회 찾기</a>
+			<a class="menu" id="makeClub" href="">동호회 만들기</a>
+			<a class="menu" id="comunity" href="">커뮤니티</a>
+		</div>
+	</div>
 </body>
-<script></script>
+<script>
+	// 로고 클릭
+	$("#logo").click(function() {
+		location.href="./"
+		<% session.setAttribute("userId", "test"); %>
+	});
+	
+	///////////////////// 로그인 상태에 따라 로그인/로그아웃 미완성 ///////////////////////
+	// 로그인 상태 변수
+	var loginState = "logout";  
+	
+	// 로그인 체크
+	if('<%= session.getAttribute("userId") %>' == '') {  // 로그아웃 상태
+		loginState = "logout";
+		$("#login").html("로그인");
+	} else {  // 로그인 상태
+		loginState = "login";
+		$("#login").html("로그아웃");
+	}
+	
+	// 로그인/로그아웃 클릭
+	$("#login").click(function() {
+		if(loginState == "login") {  // 로그인 상태
+			// 세션 삭제 후 홈으로 이동
+			<% session.removeAttribute("userId"); %>
+			location.href="./";
+		} else {  // 로그아웃 상태
+			// 로그인 페이지로 이동
+			location.href="";
+		}
+	});
+	///////////////////// 로그인 상태에 따라 로그인/로그아웃 미완성 ///////////////////////
+
+</script>
 </html>

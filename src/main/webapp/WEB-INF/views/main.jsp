@@ -8,10 +8,7 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-	.container {
-		width: 1000px;
-		margin: auto;
-	}
+
 </style>
 </head>
 <body>
