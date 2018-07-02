@@ -30,8 +30,8 @@ public class HamoMainController {
 	}
 	
 	@RequestMapping(value = "/totalClubSearch")
-	public ModelAndView totalClubSearch(@RequestParam ("search") String search) {
+	public ModelAndView totalClubSearch(@RequestParam HashMap<String, String> map) {
 		logger.info("종합검색 요청");
-		return service.totalClubSearch(search);
+		return service.totalClubSearch(map);
 	}
 }
