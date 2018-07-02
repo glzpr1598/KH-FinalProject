@@ -14,5 +14,7 @@
 <body>
 	<%@ include file="./main-header.jsp" %>
 </body>
-<script></script>
+<script>
+
+</script>
 </html>
