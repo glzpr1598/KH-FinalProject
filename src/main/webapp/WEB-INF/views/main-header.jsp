@@ -114,8 +114,8 @@
 		<div id="areaSearch">
 			<img id="logo" src="./resources/image/logo.png" />
 			<div id="divSearch">
-				<form action="">
-					<input id="inputSearch" type="text" placeholder="검색어 입력">
+				<form action="totalClubSearch">
+					<input name="search" id="inputSearch" type="text" placeholder="검색어 입력">
 					<button id="btnSearch" type="submit"></button>
 				</form>
 			</div>
