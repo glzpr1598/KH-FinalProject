@@ -7,23 +7,25 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
-		table, th{
-			width : 900px;
-			border: 1px solid #ffbf00;
-			border-collapse: collapse;
-			text-align: center;
-		}
 		table{
+			width : 900px;
+			text-align: center;
+			border-collapse: collapse;
 			position: absolute;
 			left: 20%;
 			top: 40%;
+		}
+		th{
+			background-color:#F8F3D4;
+		}
+		td{
+			border-bottom: 1px solid #ffbf00;
 		}
 	</style>
 	</head>
 	<body>
 		<%@ include file="./main-header.jsp" %>
 		<table id="listTable">
-			<thead>
 				<tr>
 					<th>주제</th>
 					<th>지역</th>
@@ -32,12 +34,6 @@
 					<th>설립일</th>
 					<th>회원수</th>
 				</tr>
-			</thead>
-			<tr>
-				<td colspan="6" id="paging">
-					<div id="container"></div>
-			</td>
-			</tr>						
 			
 		</table>
 	</body>
