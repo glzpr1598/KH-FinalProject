@@ -3,5 +3,12 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
 <mapper namespace="com.kh.hamo.dao.ClubMemberInter">
-
+	<select id="clubMemberList" resultType="java.util.HashMap">
+		SELECT M.member_id, cj.clubjoin_nickname, M.mamber_email, M.member_phone FROM club C
+		    JOIN clubjoin cj
+		    ON C.club_id = cj.club_id
+		    JOIN MEMBER M
+		    ON cj.member_id = M.member_id
+		    WHERE C.club_id = #{club_id}
+	</select>
 </mapper>
