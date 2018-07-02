@@ -155,10 +155,10 @@
 		if(loginState == "login") {  // 로그인 상태
 			// 세션 삭제 후 홈으로 이동
 			<% session.removeAttribute("userId"); %>
-			location.href="./";
+			location.href="login";
 		} else {  // 로그아웃 상태
 			// 로그인 페이지로 이동
-			location.href="";
+			location.href="login";
 		}
 	});
 	///////////////////// 로그인 상태에 따라 로그인/로그아웃 미완성 ///////////////////////

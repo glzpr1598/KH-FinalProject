@@ -1,5 +1,5 @@
 package com.kh.hamo.dto;
 
-public class SampleDTO {
+public class HamoMemberDTO {
 
 }
