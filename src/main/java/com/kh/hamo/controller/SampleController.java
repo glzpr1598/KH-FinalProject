@@ -21,7 +21,7 @@ public class SampleController {
 	@Autowired
 	SampleService sampleService;
 	
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/sample")
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
