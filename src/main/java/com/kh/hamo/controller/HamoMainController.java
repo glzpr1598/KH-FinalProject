@@ -27,11 +27,13 @@ public class HamoMainController {
 		
 		return "main";
 	}
+	// 검색 값 가져오는 컨트롤러
 	@RequestMapping(value = "/m08move")
 	public ModelAndView m08move(@RequestParam ("search") String search) {
-		logger.info(search);
+		logger.info("검색 값 : "+search);
 		return service.m08move(search);
 	}
+	// /m08move에서 가져온 값으로 리스트를 분류하는 기능
 	@RequestMapping(value = "/totalClubSearch")
 	public @ResponseBody HashMap<String, Object> totalClubSearch(@RequestParam HashMap<String, String> map) {
 		logger.info("종합검색 요청");

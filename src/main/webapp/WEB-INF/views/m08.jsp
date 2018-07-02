@@ -5,12 +5,18 @@
 	<head>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>HAMO</title>
 	<style>
 		table, th{
+			width : 900px;
 			border: 1px solid #ffbf00;
 			border-collapse: collapse;
 			text-align: center;
+		}
+		table{
+			position: absolute;
+			left: 20%;
+			top: 40%;
 		}
 	</style>
 	</head>
