@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
 <mapper namespace="com.kh.hamo.dao.HamoMainInter">
 	<select id="totalClubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
-		SELECT C.club_name, C.club_location,I.Interest_interest 
+		SELECT C.club_name,C.club_introduce, C.club_date,C.club_memberCount, C.club_location,I.Interest_interest 
 		FROM club C JOIN interest I ON C.interest_id=I.interest_id 
 		WHERE C.club_id LIKE '%'||#{search}||'%' OR C.club_location LIKE '%'||#{search}||'%' OR I.interest_interest LIKE '%'||#{search}||'%'
 	</select>

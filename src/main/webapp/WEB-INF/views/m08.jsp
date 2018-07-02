@@ -7,11 +7,71 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<style>
+		table, th{
+			border: 1px solid #ffbf00;
+			border-collapse: collapse;
+			text-align: center;
+		}
 	</style>
 	</head>
 	<body>
 		<%@ include file="./main-header.jsp" %>
+		<table id="listTable">
+			<thead>
+				<tr>
+					<th>주제</th>
+					<th>지역</th>
+					<th>동호회명</th>
+					<th>소개</th>
+					<th>설립일</th>
+					<th>회원수</th>
+				</tr>
+			</thead>
+			<tr>
+				<td colspan="6" id="paging">
+					<div id="container"></div>
+			</td>
+			</tr>						
+			
+		</table>
 	</body>
 	<script>
+		var obj = {};
+		obj.error=function(e){console.log(e)};
+		obj.type="POST";
+		obj.dataType = "JSON";
+		obj.data ={"search": "${search}"};
+		$(document).ready(function(){
+			obj.url="./totalClubSearch";
+			obj.success = function(data){
+				console.log(data);
+				listPrint(data.list);
+
+		}
+			ajaxCall(obj);
+		});
+		
+		function listPrint(list){
+			console.log(list);
+			var content ="";
+			list.forEach(function(item, idx){
+				content +="<tr>";
+				content +="<td>"+item.interest_interest+"</td>";
+				content +="<td>"+item.club_location+"</td>";
+				content +="<td>"+item.club_name+"</td>";
+				content +="<td>"+item.club_introduce+"</td>";
+				content +="<td>"+item.club_date+"</td>";
+				content +="<td>"+item.club_memberConunt+"</td>";
+				content += "</tr>";
+			});		
+			$("#listTable").append(content);
+		}
+		
+		
+		function ajaxCall(param){
+			$.ajax(param);
+		}
+	
+	
 	</script>
 </html>

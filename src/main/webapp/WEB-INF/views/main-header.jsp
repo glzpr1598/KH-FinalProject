@@ -20,6 +20,10 @@
 		position: relative;
 	}
 
+	#header form {
+		margin: 0px;
+	}
+	
 	/* 로그인, 회원정보수정 */
 	#header #link {
 		position: absolute;
@@ -114,7 +118,7 @@
 		<div id="areaSearch">
 			<img id="logo" src="./resources/image/logo.png" />
 			<div id="divSearch">
-				<form action="totalClubSearch">
+				<form action="m08move">
 					<input name="search" id="inputSearch" type="text" placeholder="검색어 입력">
 					<button id="btnSearch" type="submit"></button>
 				</form>

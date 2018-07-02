@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
-<mapper namespace="com.kh.hamo.dao.HomeMemberInter">
+<mapper namespace="com.kh.hamo.dao.HamoMemberInter">
 
 <select id="idOverlay" resultType="int">
 SELECT id FROM member WHERE id
