@@ -144,7 +144,7 @@
 	var loginState = "logout";  
 	
 	// 로그인 체크
-	if(<%= session.getAttribute("userId") %> == null) {  // 로그아웃 상태
+	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";
 		$("#login").html("로그인");
 	} else {  // 로그인 상태
