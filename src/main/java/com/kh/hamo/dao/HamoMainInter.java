@@ -1,7 +1,10 @@
 package com.kh.hamo.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public interface HamoMainInter {
 
-	void totalClubSearch(String search);
+	ArrayList<HashMap<String, String>> totalClubSearch(String search);
 
 }
