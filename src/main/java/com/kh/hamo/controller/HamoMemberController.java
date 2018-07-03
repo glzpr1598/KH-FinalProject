@@ -1,5 +1,6 @@
 package com.kh.hamo.controller;
 
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,13 +17,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpSession;
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,20 +44,6 @@ public class HamoMemberController {
 	
 	@Autowired
 	HamoMemberService service;
-	
-	@RequestMapping(value = "/sample")
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "main";
-	}
 	
 	/**로그인페이지이동 - 김응주 */	
 	@RequestMapping(value="/loginForm")
@@ -160,5 +152,17 @@ public class HamoMemberController {
 	
 		
 		
+
+
+	// 로그아웃
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session) {
+		logger.info("로그아웃 요청");
+		
+		session.removeAttribute("userId");
+		
+		return "main";
+	}
+	
 
 }

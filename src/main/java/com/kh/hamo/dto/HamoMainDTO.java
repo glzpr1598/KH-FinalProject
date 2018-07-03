@@ -1,14 +1,45 @@
 package com.kh.hamo.dto;
 
+import java.sql.Date;
+
 public class HamoMainDTO {
 	private int club_id;
 	private String club_name;
 	private String club_introduce;
 	private String club_date;
-	private int club_memberConunt;
+	
+	private int club_memberCount;
 	private String club_location;
 	private int clubPicture_id;
 	private String clubPicture_oldName;
+	private int interest_id;
+	private String interest_interest;
+	private String member_id;
+	
+	public void setClub_date(String club_date) {
+		this.club_date = club_date;
+	}
+	public String getMember_id() {
+		return member_id;
+	}
+	public String getClub_date() {
+		return club_date;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	public int getInterest_id() {
+		return interest_id;
+	}
+	public void setInterest_id(int interest_id) {
+		this.interest_id = interest_id;
+	}
+	public String getInterest_interest() {
+		return interest_interest;
+	}
+	public void setInterest_interest(String interest_interest) {
+		this.interest_interest = interest_interest;
+	}
 	public int getClub_id() {
 		return club_id;
 	}
@@ -27,17 +58,11 @@ public class HamoMainDTO {
 	public void setClub_introduce(String club_introduce) {
 		this.club_introduce = club_introduce;
 	}
-	public String getClub_date() {
-		return club_date;
+	public int getClub_memberCount() {
+		return club_memberCount;
 	}
-	public void setClub_date(String club_date) {
-		this.club_date = club_date;
-	}
-	public int getClub_memberConunt() {
-		return club_memberConunt;
-	}
-	public void setClub_memberConunt(int club_memberConunt) {
-		this.club_memberConunt = club_memberConunt;
+	public void setClub_memberCount(int club_memberCount) {
+		this.club_memberCount = club_memberCount;
 	}
 	public String getClub_location() {
 		return club_location;

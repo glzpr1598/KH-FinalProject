@@ -4,9 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
 	body {
@@ -20,6 +17,10 @@
 		position: relative;
 	}
 
+	#header form {
+		margin: 0px;
+	}
+	
 	/* 로그인, 회원정보수정 */
 	#header #link {
 		position: absolute;
@@ -78,17 +79,17 @@
 	}
 	
 	/* 메뉴 div */
-	#menuBar {
+	#naviBar {
 		margin: 20px 0px;
 		background: #ffbf00;
 	}
 	/* 메뉴 container */
-	#menuBar #container {
+	#naviBar #container {
 		width: 1000px;
 		margin: auto;
 	}
 	/* 메뉴 */
-	#menuBar .menu {
+	.navi {
 		display: inline-block;
 		padding: 12px 15px;
 		margin: 0px 15px;
@@ -98,8 +99,8 @@
 		font-size: 14px;
 		color: #ffffff;
 	}
-	#menuBar .menu:hover {
-		background: #F3E2A9;
+	.navi:hover {
+		background: #FDF5DC;
 		color: #848484;
 	}
 </style>
@@ -108,25 +109,24 @@
 	<div id="header">
 		<div id="link">
 			<a id="login"></a>
-			|
 			<a href="">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
-			<img id="logo" src="./resources/image/logo.png" />
+			<a href="./"><img id="logo" src="./resources/image/logo.png" /></a>
 			<div id="divSearch">
-				<form action="totalClubSearch">
+				<form action="m08move">
 					<input name="search" id="inputSearch" type="text" placeholder="검색어 입력">
 					<button id="btnSearch" type="submit"></button>
 				</form>
 			</div>
 		</div>
 	</div>
-	<div id="menuBar">
+	<div id="naviBar">
 		<div id="container">
-			<a class="menu" id="myClub" href="">내 동호회</a>
-			<a class="menu" id="findClub" href="">동호회 찾기</a>
-			<a class="menu" id="makeClub" href="">동호회 만들기</a>
-			<a class="menu" id="comunity" href="">커뮤니티</a>
+			<a class="navi" id="myClub" href="m09move">내 동호회</a>
+			<a class="navi" id="findClub" href="">동호회 찾기</a>
+			<a class="navi" id="makeClub" href="">동호회 만들기</a>
+			<a class="navi" id="comunity" href="freeBbsList">커뮤니티</a>
 		</div>
 	</div>
 </body>
@@ -140,7 +140,7 @@
 	var loginState = "logout";  
 	
 	// 로그인 체크
-	if(<%= session.getAttribute("userId") %> == null) {  // 로그아웃 상태
+	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";
 		$("#login").html("로그인");
 	} else {  // 로그인 상태
