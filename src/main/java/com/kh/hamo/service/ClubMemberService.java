@@ -25,6 +25,7 @@ public class ClubMemberService {
 	public void clubMemberList(Model model, String club_id) {
 		inter = sqlSession.getMapper(ClubMemberInter.class);
 		
+		// 특정 동호회의 멤버 리스트 가져오기
 		ArrayList<HashMap<String, Object>> result = 
 				inter.clubMemberList(Integer.parseInt(club_id));
 		
