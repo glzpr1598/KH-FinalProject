@@ -15,7 +15,7 @@
 
 	#header {
 		width: 1000px;
-		height: 120px;
+		height: 100px;
 		margin: auto;
 		position: relative;
 	}
@@ -38,21 +38,21 @@
 	}
 	#first{
 		width: 1000px;
-		height: 200px;
+		height: 120px;
 		margin: auto;
 		position: relative;
 		text-align: center;
 	}
 	#first span{
-		font-size: 50px;
-		font-weight: 600;
+		font-size: 35px;
+		font-weight: bold;
 	}
 </style>
 </head>
 <body>
 	<div id="header">
 		<div id="link">
-			<a href="#">HAMO</a>
+			<a href="./">HAMO</a>
 			|
 			<a id="login"></a>
 			|
@@ -64,18 +64,11 @@
 	</div>
 </body>
 <script>
-	// 로고 클릭
-	$("#logo").click(function() {
-		location.href="./"
-		<% session.setAttribute("userId", "test"); %>
-	});
-	
-	///////////////////// 로그인 상태에 따라 로그인/로그아웃 미완성 ///////////////////////
 	// 로그인 상태 변수
 	var loginState = "logout";  
 	
 	// 로그인 체크
-	if('<%= session.getAttribute("userId") %>' == '') {  // 로그아웃 상태
+	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";
 		$("#login").html("로그인");
 	} else {  // 로그인 상태
@@ -86,15 +79,13 @@
 	// 로그인/로그아웃 클릭
 	$("#login").click(function() {
 		if(loginState == "login") {  // 로그인 상태
-			// 세션 삭제 후 홈으로 이동
-			<% session.removeAttribute("userId"); %>
-			location.href="./";
+			// 로그아웃
+			location.href="./logout";
 		} else {  // 로그아웃 상태
 			// 로그인 페이지로 이동
-			location.href="";
+			location.href="./loginForm";
 		}
 	});
-	///////////////////// 로그인 상태에 따라 로그인/로그아웃 미완성 ///////////////////////
 
 </script>
 </html>
