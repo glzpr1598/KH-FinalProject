@@ -7,8 +7,8 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/로그인체크할URL" />
-			<bean class="com.kh.hamo.interceptor.SampleInterceptor" />
+			<mvc:mapping path="/로그인체크할URI" />
+			<bean class="com.kh.hamo.interceptor.LoginCheck" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

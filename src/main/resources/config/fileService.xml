@@ -12,4 +12,8 @@
 		<property name="maxInMemorySize" value="10000000" />  <!-- 10MB -->
 	</bean>
 
+
+
+
+
 </beans>

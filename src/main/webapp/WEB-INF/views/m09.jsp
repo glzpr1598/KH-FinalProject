@@ -11,7 +11,7 @@
 	<title>HAMO</title>
 	<style>
 		#myclub{
-			background-color: #F3E2A9;
+			background-color: #FDF5DC;
 			color: #848484;
 		}
 		table{
@@ -21,7 +21,7 @@
 			border-collapse: collapse;
 		}
 		th{
-			background-color:#F8F3D4;
+			background-color:#FDF5DC;
 		}
 		td{
 			border-bottom: 1px solid #ffbf00;
