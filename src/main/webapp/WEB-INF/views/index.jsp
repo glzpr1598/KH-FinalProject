@@ -6,10 +6,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
+<style>
+	#menu{
+		width : 200px;
+		height: 170px;
+		border: 3px solid #ffbf00;
+		background-color: #FDF5DC;
+		position: absolute;
+		left: 480px;
+		top: 245px;
+	}
+	#frm{
+		position: absolute;
+		left: 730px;
+		top: 245px;
+	}
+</style>
 <body>
 	<%@ include file="./main-header.jsp" %>
+	<div id="menu">
+		<a id="menu1" href="#"><img id="list3" src="./resources/image/list.png" />&nbsp;&nbsp;&nbsp;&nbsp;자유게시판</a>
+		<a id="menu2" href="#"><img id="list4" src="./resources/image/list.png" />&nbsp;&nbsp;&nbsp;&nbsp;동호회 친목</a>
+	</div>
 	<form action="home" name="frm" id="frm">
 	    <b>|자유게시판|<b></br>
 		<input type="text" placeholder="포스트 제목을 입력해주세요." style="width:766px;">

@@ -9,6 +9,27 @@ public class HamoMainDTO {
 	private String club_location;
 	private int clubPicture_id;
 	private String clubPicture_oldName;
+	private int interest_id;
+	private String interest_interest;
+	private String member_id;
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	public int getInterest_id() {
+		return interest_id;
+	}
+	public void setInterest_id(int interest_id) {
+		this.interest_id = interest_id;
+	}
+	public String getInterest_interest() {
+		return interest_interest;
+	}
+	public void setInterest_interest(String interest_interest) {
+		this.interest_interest = interest_interest;
+	}
 	public int getClub_id() {
 		return club_id;
 	}

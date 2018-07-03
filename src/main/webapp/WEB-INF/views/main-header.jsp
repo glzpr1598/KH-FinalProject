@@ -20,6 +20,10 @@
 		position: relative;
 	}
 
+	#header form {
+		margin: 0px;
+	}
+	
 	/* 로그인, 회원정보수정 */
 	#header #link {
 		position: absolute;
@@ -114,7 +118,7 @@
 		<div id="areaSearch">
 			<img id="logo" src="./resources/image/logo.png" />
 			<div id="divSearch">
-				<form action="totalClubSearch">
+				<form action="m08move">
 					<input name="search" id="inputSearch" type="text" placeholder="검색어 입력">
 					<button id="btnSearch" type="submit"></button>
 				</form>
@@ -123,7 +127,7 @@
 	</div>
 	<div id="menuBar">
 		<div id="container">
-			<a class="menu" id="myClub" href="">내 동호회</a>
+			<a class="menu" id="myClub" href="m09move">내 동호회</a>
 			<a class="menu" id="findClub" href="">동호회 찾기</a>
 			<a class="menu" id="makeClub" href="">동호회 만들기</a>
 			<a class="menu" id="comunity" href="">커뮤니티</a>
@@ -140,7 +144,7 @@
 	var loginState = "logout";  
 	
 	// 로그인 체크
-	if(<%= session.getAttribute("userId") %> == null) {  // 로그아웃 상태
+	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";
 		$("#login").html("로그인");
 	} else {  // 로그인 상태
