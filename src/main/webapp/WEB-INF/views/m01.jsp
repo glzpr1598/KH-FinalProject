@@ -13,6 +13,9 @@
 	</style>
 	</head>
 	<body>
+	
+	
+
 		<table>
             <tr>
                 <td>
@@ -39,7 +42,7 @@
 	</body>
 	<script>
 	function join(){
-		location.href="hamoJoin";
+		location.href="hamoJoinForm";
 	}
 	</script>
 </html>

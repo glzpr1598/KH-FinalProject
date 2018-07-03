@@ -201,7 +201,17 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-				
+		
+	
+	<!-- 메일확인용 메일발송 - 김응주 -->
+		
+	<dependency> 
+		<groupId>javax.mail</groupId>
+		 <artifactId>mail</artifactId>
+		  <version>1.4.7</version> 
+	</dependency>
+	
+	
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -229,6 +239,8 @@
 			<scope>test</scope>
 		</dependency>        
 	</dependencies>
+		
+	
     <build>
         <plugins>
             <plugin>

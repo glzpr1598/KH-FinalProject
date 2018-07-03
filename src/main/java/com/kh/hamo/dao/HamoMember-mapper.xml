@@ -2,9 +2,23 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
-<mapper namespace="com.kh.hamo.dao.HomeMemberInter">
+<mapper namespace="com.kh.hamo.dao.HamoMemberInter">
 
 <select id="idOverlay" resultType="int">
-SELECT id FROM member WHERE id
+	SELECT count(*) FROM member WHERE member_id = #{param1}   
 </select>
-</mapper>
+
+<insert id="memberJoin">
+	INSERT INTO member(member_id, member_pw, member_name, member_email, member_phone, member_location) 
+			VALUES(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_location})
+</insert>
+
+<select id="memberSelect" resultType="int">
+	SELECT interest_id FROM interest WHERE interest_interest = #{param1}
+</select>
+
+<insert id="memberInterest">
+	INSERT INTO memberinterest(memberinterest_id, member_id, interest_id) 
+		VALUES(seq_memberinterest_id.NEXTVAL, #{param1}, #{param2})
+</insert>
+</mapper>         
