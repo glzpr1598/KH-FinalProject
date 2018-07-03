@@ -109,7 +109,6 @@
 	<div id="header">
 		<div id="link">
 			<a id="login"></a>
-			|
 			<a href="">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
@@ -127,7 +126,7 @@
 			<a class="navi" id="myClub" href="m09move">내 동호회</a>
 			<a class="navi" id="findClub" href="">동호회 찾기</a>
 			<a class="navi" id="makeClub" href="">동호회 만들기</a>
-			<a class="navi" id="comunity" href="">커뮤니티</a>
+			<a class="navi" id="comunity" href="freeBbsList">커뮤니티</a>
 		</div>
 	</div>
 </body>
