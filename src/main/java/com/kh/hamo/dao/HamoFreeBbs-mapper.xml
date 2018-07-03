@@ -7,7 +7,7 @@
 		HashMap 에 값이 들어있음
 		  resultType :  쿼리문 돌린 결과를 담을 클래스명
 	-->
-	<select id="freeBbsList" parameterType="HashMap" resultType="com.kh.hamo.HamoBbsDTO">
+	<select id="freeBbsList" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT * FROM member
 	</select>
 </mapper>
