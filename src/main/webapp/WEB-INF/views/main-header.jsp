@@ -82,17 +82,17 @@
 	}
 	
 	/* 메뉴 div */
-	#menuBar {
+	#naviBar {
 		margin: 20px 0px;
 		background: #ffbf00;
 	}
 	/* 메뉴 container */
-	#menuBar #container {
+	#naviBar #container {
 		width: 1000px;
 		margin: auto;
 	}
 	/* 메뉴 */
-	#menuBar .menu {
+	.navi {
 		display: inline-block;
 		padding: 12px 15px;
 		margin: 0px 15px;
@@ -102,8 +102,8 @@
 		font-size: 14px;
 		color: #ffffff;
 	}
-	#menuBar .menu:hover {
-		background: #F3E2A9;
+	.navi:hover {
+		background: #FDF5DC;
 		color: #848484;
 	}
 </style>
@@ -125,12 +125,12 @@
 			</div>
 		</div>
 	</div>
-	<div id="menuBar">
+	<div id="naviBar">
 		<div id="container">
-			<a class="menu" id="myClub" href="m09move">내 동호회</a>
-			<a class="menu" id="findClub" href="">동호회 찾기</a>
-			<a class="menu" id="makeClub" href="">동호회 만들기</a>
-			<a class="menu" id="comunity" href="">커뮤니티</a>
+			<a class="navi" id="myClub" href="m09move">내 동호회</a>
+			<a class="navi" id="findClub" href="">동호회 찾기</a>
+			<a class="navi" id="makeClub" href="">동호회 만들기</a>
+			<a class="navi" id="comunity" href="">커뮤니티</a>
 		</div>
 	</div>
 </body>
