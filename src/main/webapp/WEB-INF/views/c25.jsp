@@ -59,7 +59,7 @@
 				<tr>
 					<td>${ item.MEMBER_ID }</td>
 					<td>${ item.CLUBJOIN_NICKNAME }</td>
-					<td>${ item.MAMBER_EMAIL }</td>
+					<td>${ item.MEMBER_EMAIL }</td>
 					<td>${ item.MEMBER_PHONE }</td>
 					<td><button class="fire">강퇴</button></td>
 				</tr>
