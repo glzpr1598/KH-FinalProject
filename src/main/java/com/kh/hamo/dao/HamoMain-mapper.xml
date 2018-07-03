@@ -4,20 +4,27 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
 <mapper namespace="com.kh.hamo.dao.HamoMainInter">
 	<select id="totalClubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
-		SELECT C.club_name,C.club_introduce, C.club_date,C.club_memberCount, C.club_location,I.Interest_interest 
+		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
 		FROM club C JOIN interest I ON C.interest_id=I.interest_id 
 		WHERE C.club_name LIKE '%'||#{search}||'%' OR C.club_location LIKE '%'||#{search}||'%' OR I.interest_interest LIKE '%'||#{search}||'%'
 	</select>
 	
 	<select id="myClubList" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
-		SELECT C.club_name,C.club_introduce, C.club_date,C.club_memberCount, C.club_location,I.Interest_interest
+		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest
 		FROM member M Join club C ON M.member_id=C.member_id
 		JOIN interest I ON I.interest_id=C.interest_id
 		WHERE M.member_id=#{param1}
 	</select>
 	
 	<select id="myClubJoin" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
-	
+		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
+		FROM clubJoin CJ JOIN club C ON C.club_id=CJ.club_id 
+		JOIN interest I ON I.interest_id=C.interest_id
+		WHERE C.member_id=#{param1}
 	</select>
+	
+	
+	
+	
 	
 </mapper>

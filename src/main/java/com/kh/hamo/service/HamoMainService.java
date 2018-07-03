@@ -51,6 +51,7 @@ public class HamoMainService {
 		logger.info("가입한 동호회 리스트 서비스 실행 : "+id);
 		inter = sqlSession.getMapper(HamoMainInter.class);
 		ArrayList<HamoMainDTO> myClubJoin = inter.myClubJoin(id);
+		System.out.println(myClubJoin.get(0).getClub_date());
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("myClubJoin", myClubJoin);
 		return result;
