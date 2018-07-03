@@ -63,7 +63,7 @@
 				content +="<td>"+item.club_name+"</td>";
 				content +="<td>"+item.club_introduce+"</td>";
 				content +="<td>"+item.club_date+"</td>";
-				content +="<td>"+item.club_memberConunt+"</td>";
+				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
 			});		
 			$("#listTable").append(content);

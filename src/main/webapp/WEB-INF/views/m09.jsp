@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 	<head>
+	
 	<link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,6 +35,7 @@
 			color: #FFBF00;
 		}
 		a{
+			cursor:pointer;
 			color: black;
 			text-decoration: none;
 		}
@@ -50,8 +53,8 @@
 		
 			<div id="myClubList">
 				<h3>| 설립한 동호회 |</h3>
-				<a href="#"><i class="fa fa-check"></i>설립일순</a>
-				<a href="#"><i class="fa fa-check"></i>회원수순</a>
+				<a onclick="day()"><i class="fa fa-check"></i>설립일순</a>
+				<a onclick="count()"><i class="fa fa-check"></i>회원수순</a>
 				<table id="myClubListTable">
 					<tr>
 						<th>주제</th>
@@ -82,7 +85,9 @@
 			</div>
 		</div>
 	</body>
+	
 	<script>
+	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
@@ -90,6 +95,7 @@
 		$(document).ready(function(){
 			obj.url="./myClubList";
 			obj.success = function(data){
+				
 				console.log(data);
 				 listPrint1(data.myClubList);
 	
@@ -116,7 +122,7 @@
 				content +="<td>"+item.club_name+"</td>";
 				content +="<td>"+item.club_introduce+"</td>";
 				content +="<td>"+item.club_date+"</td>";
-				content +="<td>"+item.club_memberConunt+"</td>";
+				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
 			});		
 			$("#myClubListTable").append(content);
@@ -131,8 +137,8 @@
 				content +="<td>"+item.club_name+"</td>";
 				content +="<td>"+item.club_introduce+"</td>";
 				content +="<td>"+item.club_date+"</td>";
-				content +="<td>"+item.club_memberConunt+"</td>";
-				content +="<td><button>삭제</button></td>";
+				content +="<td>"+item.club_memberCount+"</td>";
+				content +="<td><button>탈퇴</button></td>";
 				content += "</tr>";
 			});		
 			$("#myClubJoinTable").append(content);
