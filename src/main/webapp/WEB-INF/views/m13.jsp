@@ -10,16 +10,6 @@
 	src="<%=request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
-/* 	#menu{
-		width : 200px;
-		height: 170px;
-		border: 3px solid #ffbf00;
-		background-color: #FDF5DC;
-		border-radius:20px;
-		position: absolute;
-		left: 480px;
-		top: 245px;
-	} */
 	#frm{
 		position: absolute;
 		left: 730px;
@@ -44,10 +34,6 @@
 <body>
 	<%@ include file="./main-header.jsp" %>
 	<%@ include file="./main-community_menu.jsp" %>
-<!-- 	<div id="menu">
-		<a id="menu1" href="#"><img class="list" src="./resources/image/list.png" />자유게시판</a>
-		<a id="menu2" href="#"><img class="list" src="./resources/image/list.png" />동호회 친목</a>
-	</div> -->
 	<form action="freeBbsWrite" name="frm" id="frm">
 	    <b>|자유게시판|<b><br/>
 		<input type="text" placeholder="포스트 제목을 입력해주세요." style="width:766px;">
@@ -85,8 +71,7 @@ $(function(){
         //폼 submit
         if(confirm("글쓰기를 등록하시겠습니까?")){
         	   $("#frm").submit();
-        	 //true 일 경우 자유게시판 리스트로 이동
-        	   location.href="./freeBbsList";
+        	 //true 일 경우 상세보기 리스트로 이동
         }
      
     });

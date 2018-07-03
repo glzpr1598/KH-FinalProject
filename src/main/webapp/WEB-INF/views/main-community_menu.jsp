@@ -11,6 +11,10 @@
 	body {
 		margin: 0px;
 	}
+	.list{
+		width: 20px;
+		height: 20px;
+	}
 	#menu{
 		width : 200px;
 		height: 170px;
@@ -21,12 +25,28 @@
 		left: 480px;
 		top: 245px;
 	}
+	#menu #menu1{
+		text-decoration: none;
+		color: #5a5a5a;
+		font-weight: 600;
+		position: absolute;
+		top: 10px;
+		left: 10px;
+	}
+	#menu #menu2{
+	text-decoration: none;
+	color: #5a5a5a;
+	font-weight: 600;
+	position: absolute;
+	top: 60px;
+	left: 10px;
+}
 </style>
 </head>
 <body>
 		<div id="menu">
-			<a id="menu1" href="freeBbsList"><img class="list" src="./resources/image/list.png" />자유게시판</a>
-			<a id="menu2" href="#"><img class="list" src="./resources/image/list.png" />동호회 친목</a>
+			<a id="menu1" href="freeBbsList"><img class="list" src="./resources/image/list.png" />&nbsp;&nbsp;자유게시판</a>
+			<a id="menu2" href="#"><img class="list" src="./resources/image/list.png" />&nbsp;&nbsp;동호회 친목</a>
 		</div>
 </body>
 <script>

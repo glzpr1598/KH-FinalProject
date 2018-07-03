@@ -26,30 +26,42 @@
 	th{
 		background-color: #FDF5DC;
 	}
+	#writeBtn{
+		position:absolute;
+		top:480px;
+		right:500px;
+		border:none;
+		background-color: #FFBF00;
+		color:white;
+		padding:5px;
+	}
 </style>
 <body>
 	<%@ include file="./main-header.jsp" %>
 	<%@ include file="./main-community_menu.jsp" %>
-	<table>
-		<tr>
-			<th>글번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
-		</tr>
-		<tr>
-			<td>글번호</td>
-			<td>제목</td>
-			<td>작성자</td>
-			<td>작성일</td>
-			<td>조회수</td>
-		</tr>
-	</table>
-	<input id="write" type="button" value="글쓰기">
+	<form>
+		<table>
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+			</tr>
+			<tr>
+				<td>글번호</td>
+				<td>제목</td>
+				<td>작성자</td>
+				<td>작성일</td>
+				<td>조회수</td>
+			</tr>
+		</table>
+		<input id="writeBtn" type="button" value="글쓰기">
+	</form>
 </body>
 <script>
-	$("#write").click(function(){
+	$("#writeBtn").click(function(){
+		//세션 검사 추후에 개발
 		location.href="freeBbsWriteForm";
 	});
 </script>

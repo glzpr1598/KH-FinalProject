@@ -38,7 +38,6 @@ public class HamoComunityController {
 	public String freeBbsWrite(@RequestParam("smarteditor") String write) {
 		logger.info("글쓰기 요청");
 		logger.info("작성한 글: "+write);	
-		return "main";
+		return "redirect:/freeBbsList";
 	}
-	
 }
