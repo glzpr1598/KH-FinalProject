@@ -26,6 +26,7 @@ public class HamoComunityController {
 	@RequestMapping(value = "/freeBbsList")
 	public String freeBbsList() {
 		logger.info("자유게시판 리스트 요청");
+		hamoFreeBbsService.freeBbsList();
 		return "m12";
 	}	
 	@RequestMapping(value = "/freeBbsWriteForm")
