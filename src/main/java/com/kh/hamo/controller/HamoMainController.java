@@ -60,7 +60,7 @@ public class HamoMainController {
 	@RequestMapping(value = "/myClubJoin")
 	public @ResponseBody HashMap<String, Object> myClubJoin(String id) {
 		logger.info("설립한 동회 리스트");
-		id="tester";
+		id="tester";// 임의 설정 
 		return service.myClubJoin(id);
 	}
 }
