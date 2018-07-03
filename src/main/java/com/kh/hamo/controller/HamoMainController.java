@@ -28,16 +28,9 @@ public class HamoMainController {
 	@RequestMapping(value = "/")
 	public String main() {
 		logger.info("메인페이지 요청");
-		
-		return "index";
+		return "main";
 	}
-	@RequestMapping(value = "/home")
-	public String home(@RequestParam("smarteditor") String text) {
-		logger.info("home 요청");
-		logger.info("text: "+text);
-		
-		return "index";
-	}
+	
 
 	// 검색 값 가져오는 컨트롤러
 	@RequestMapping(value = "/m08move")

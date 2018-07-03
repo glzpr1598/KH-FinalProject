@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
@@ -112,7 +111,6 @@
 	<div id="header">
 		<div id="link">
 			<a id="login"></a>
-			|
 			<a href="">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
@@ -130,7 +128,7 @@
 			<a class="menu" id="myClub" href="m09move">내 동호회</a>
 			<a class="menu" id="findClub" href="">동호회 찾기</a>
 			<a class="menu" id="makeClub" href="">동호회 만들기</a>
-			<a class="menu" id="comunity" href="">커뮤니티</a>
+			<a class="menu" id="comunity" href="freeBbsList">커뮤니티</a>
 		</div>
 	</div>
 </body>

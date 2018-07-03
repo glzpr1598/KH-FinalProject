@@ -1,39 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" 
+	src="<%=request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
-	#menu{
+/* 	#menu{
 		width : 200px;
 		height: 170px;
 		border: 3px solid #ffbf00;
 		background-color: #FDF5DC;
+		border-radius:20px;
 		position: absolute;
 		left: 480px;
 		top: 245px;
-	}
+	} */
 	#frm{
 		position: absolute;
 		left: 730px;
 		top: 245px;
 	}
+	#divBtn{
+		width:200px;
+		height:100px;
+	 	position:absolute;
+		left: 330px;
+		top: 520px;
+
+	}
+	input[type='button']{
+		border:none;
+	 	background-color:#FFBF00 ;
+	 	color: white;
+		margin:4px;
+		padding:3px;
+	}
 </style>
 <body>
 	<%@ include file="./main-header.jsp" %>
-	<div id="menu">
-		<a id="menu1" href="#"><img id="list3" src="./resources/image/list.png" />&nbsp;&nbsp;&nbsp;&nbsp;자유게시판</a>
-		<a id="menu2" href="#"><img id="list4" src="./resources/image/list.png" />&nbsp;&nbsp;&nbsp;&nbsp;동호회 친목</a>
-	</div>
-	<form action="home" name="frm" id="frm">
-	    <b>|자유게시판|<b></br>
+	<%@ include file="./main-community_menu.jsp" %>
+<!-- 	<div id="menu">
+		<a id="menu1" href="#"><img class="list" src="./resources/image/list.png" />자유게시판</a>
+		<a id="menu2" href="#"><img class="list" src="./resources/image/list.png" />동호회 친목</a>
+	</div> -->
+	<form action="freeBbsWrite" name="frm" id="frm">
+	    <b>|자유게시판|<b><br/>
 		<input type="text" placeholder="포스트 제목을 입력해주세요." style="width:766px;">
 	    <textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
-	    <input type="button" id="savebutton" value="저장" />
+	    <div id="divBtn">
+		    <input type="button" id="cancelbutton" style="width:60px; height:25px;" value="취소" />
+		    <input type="button" id="savebutton" style="width:60px; height:25px;" value="저장" />
+	    </div>
 	</form>
 </body>
 <script>
@@ -59,11 +81,21 @@ $(function(){
     $("#savebutton").click(function(){
         //id가 smarteditor인 textarea에 에디터에서 대입
         editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
-         
-
+        
         //폼 submit
-        $("#frm").submit();
-    })
+        if(confirm("글쓰기를 등록하시겠습니까?")){
+        	   $("#frm").submit();
+        	 //true 일 경우 자유게시판 리스트로 이동
+        	   location.href="./freeBbsList";
+        }
+     
+    });
+    $("#cancelbutton").click(function(){
+    	if(confirm("작성을 취소하시겠습니까?")){ 
+    		//true 일 경우 자유게시판 리스트로 이동
+    		location.href="./freeBbsList";
+    	}
+    });
 })
 </script>
 </html>
