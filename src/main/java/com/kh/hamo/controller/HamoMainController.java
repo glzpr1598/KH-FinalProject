@@ -43,7 +43,7 @@ public class HamoMainController {
 		return service.totalClubSearch(map);
 	}
 	
-	//동호회 페이지로 이동
+	//내 동호회 페이지로 이동
 	@RequestMapping(value = "/m09move")
 	public String m09move(Model model) {
 		logger.info("동호회페이지 이동");
