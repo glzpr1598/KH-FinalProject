@@ -3,6 +3,8 @@ package com.kh.hamo.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,24 @@ public class HamoMainService {
 		ArrayList<HamoMainDTO> totalClubSearch = inter.totalClubSearch(map);
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("list", totalClubSearch);
+		return result;
+	}
+	//설립한 동호회 리스트
+	public HashMap<String, Object> myClubList(String id) {
+		logger.info("설립한 동호회 리스트 서비스 실행 : "+id);
+		inter = sqlSession.getMapper(HamoMainInter.class);
+		ArrayList<HamoMainDTO> myClubList = inter.myClubList(id);
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("myClubList", myClubList);
+		return result;
+	}
+	//가입한 동호회 리스트
+	public HashMap<String, Object> myClubJoin(String id) {
+		logger.info("가입한 동호회 리스트 서비스 실행 : "+id);
+		inter = sqlSession.getMapper(HamoMainInter.class);
+		ArrayList<HamoMainDTO> myClubJoin = inter.myClubJoin(id);
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("myClubJoin", myClubJoin);
 		return result;
 	}
 

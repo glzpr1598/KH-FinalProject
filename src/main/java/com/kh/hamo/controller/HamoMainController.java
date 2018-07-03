@@ -2,10 +2,13 @@ package com.kh.hamo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,5 +43,24 @@ public class HamoMainController {
 		return service.totalClubSearch(map);
 	}
 	
-	
+	//동호회 페이지로 이동
+	@RequestMapping(value = "/m09move")
+	public String m09move(Model model) {
+		logger.info("동호회페이지 이동");
+		return "m09";
+	}
+	//설립한 동호회 리스트 
+	@RequestMapping(value = "/myClubList")
+	public @ResponseBody HashMap<String, Object> myClubList(String id) {
+		logger.info("설립한 동회 리스트");
+		id="tester";
+		return service.myClubList(id);
+	}
+	//가입한 동호회 리스트
+	@RequestMapping(value = "/myClubJoin")
+	public @ResponseBody HashMap<String, Object> myClubJoin(String id) {
+		logger.info("설립한 동회 리스트");
+		id="tester";
+		return service.myClubJoin(id);
+	}
 }

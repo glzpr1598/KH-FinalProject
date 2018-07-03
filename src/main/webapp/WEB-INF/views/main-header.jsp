@@ -127,7 +127,7 @@
 	</div>
 	<div id="menuBar">
 		<div id="container">
-			<a class="menu" id="myClub" href="">내 동호회</a>
+			<a class="menu" id="myClub" href="m09move">내 동호회</a>
 			<a class="menu" id="findClub" href="">동호회 찾기</a>
 			<a class="menu" id="makeClub" href="">동호회 만들기</a>
 			<a class="menu" id="comunity" href="">커뮤니티</a>
