@@ -1,8 +1,5 @@
 package com.kh.hamo.controller;
 
-import java.util.HashMap;
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +23,15 @@ public class HamoMainController {
 	public String main() {
 		logger.info("메인페이지 요청");
 		
-		return "main";
+		return "index";
 	}
-	
+	@RequestMapping(value = "/home")
+	public String home(@RequestParam("smarteditor") String text) {
+		logger.info("home 요청");
+		logger.info("text: "+text);
+		
+		return "index";
+	}
 	@RequestMapping(value = "/totalClubSearch")
 	public ModelAndView totalClubSearch(@RequestParam ("search") String search) {
 		logger.info("종합검색 요청");
