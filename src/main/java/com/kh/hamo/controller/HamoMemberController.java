@@ -90,7 +90,7 @@ public class HamoMemberController {
 		
 		String recipient = email; 		//받는 사람의 메일주소
 		String subject = "Hamo에서 인증번호를 안내해드립니다."; 			//메일 제목
-		String body = "인증번호는 [ "+serial+" ] 입니다."; 		//메일 내용
+		String body = "인증번호는 ["+serial+"] 입니다."; 		//메일 내용
 		Properties props = System.getProperties();			// 정보를 담기 위한 객체 생성 
 		
 		// SMTP 서버 정보 설정
