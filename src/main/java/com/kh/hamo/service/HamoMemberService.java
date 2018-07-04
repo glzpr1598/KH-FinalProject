@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 import com.kh.hamo.dao.HamoMemberInter;
 import com.kh.hamo.dto.HamoMemberDTO;
@@ -37,7 +38,7 @@ public class HamoMemberService {
 	}
 
 
-
+	
 	public HashMap<String, Integer> 
 		join(HamoMemberDTO memberdto, String select1, String select2, String select3, String id) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
@@ -54,31 +55,21 @@ public class HamoMemberService {
 		
 		int lastSuccess = 0;
 		
-		try {
-			if(select1 != "소분류") {
-				selectNumber1 = inter.memberSelect(select1);
-				success1 = inter.memberInterest(id,selectNumber1);
-			}	
-		}catch(Exception e){
-			selectNumber1 = 0;
-		}
+		System.out.println(select1);
+		System.out.println(select2);
+		System.out.println(select3);
 		
-		try {
-			if(select2 != "소분류") {
-				selectNumber2 = inter.memberSelect(select2);
-				success2 = inter.memberInterest(id,selectNumber2);
-			}
-		}catch(Exception e){
-			selectNumber2 = 0;
+		if(!select1.equals("소분류")) {
+			selectNumber1 = inter.memberSelect(select1);
+			success1 = inter.memberInterest(id,selectNumber1);
 		}
-		
-		try {
-			if(select3 != "소분류") {
-				selectNumber3 = inter.memberSelect(select3);
-				success3 = inter.memberInterest(id,selectNumber3);
-			}
-		}catch(Exception e){
-			selectNumber3 = 0;
+		if(!select2.equals("소분류")) {
+			selectNumber2 = inter.memberSelect(select2);
+			success2 = inter.memberInterest(id,selectNumber2);
+		}
+		if(!select3.equals("소분류")) {
+			selectNumber3 = inter.memberSelect(select3);
+			success3 = inter.memberInterest(id,selectNumber3);
 		}
 
 		if( ( success1 == 1 || success2 == 1 || success3 == 1 ) && success == 1  ) {
@@ -87,8 +78,6 @@ public class HamoMemberService {
 		
 		HashMap<String, Integer> map = new HashMap<String,Integer>();
 		map.put("success", lastSuccess);
-		
-		
 		
 		return map;
 	}

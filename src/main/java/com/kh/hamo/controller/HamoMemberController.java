@@ -151,34 +151,33 @@ public class HamoMemberController {
 			return service.join(Memberdto, select1, select2, select3, id);
 		}
 	
+	/**로그인 - 김응주 */	
 	@RequestMapping(value="/login")
 	public ModelAndView login(@RequestParam String userId, String userPw, HttpSession session) {
 		logger.info("로그인요청");
 
-		System.out.println("아이디잘받아왔나???"+userId);
-		System.out.println("비번잘받아왔나???"+userPw);
-		
 		String pwSuccess = service.pwlogin(userId);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		ModelAndView mav = new ModelAndView();
 		
-		String msg = "로그인실패";
-		
 		boolean success = encoder.matches(userPw, pwSuccess);
 		if(success){
 			session.setAttribute("userId", userId);
-			msg = "로그인성공";
-			mav.addObject("msg", msg);
 			mav.setViewName("main");
 		}else {
-			mav.addObject("msg", msg);
-			mav.setViewName("main");
+			mav.addObject("msg", "로그인실패");
+			mav.setViewName("m01");
 		}
 
 		return mav;
 	}
 		
-		
+	/**아이디 & 비밀번호 찾기로 이동 - 김응주 */	
+	@RequestMapping(value="/idpwSearchForm")
+	public String idpwSearchForm() {
+		logger.info("아이디 & 비밀번호 찾기로 이동");
+		return "m02";
+	}
 
 
 	// 로그아웃

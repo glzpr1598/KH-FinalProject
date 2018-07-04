@@ -60,7 +60,7 @@
             </tr>
             <tr>
                 <td>
-                   &nbsp<a href="idpwSearch" class="search">아이디 / 비밀번호 찾기</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<a href="hamoJoinForm" class="search">회원가입</a>
+                   &nbsp<a href="idpwSearchForm" class="search">아이디 / 비밀번호 찾기</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<a href="hamoJoinForm" class="search">회원가입</a>
                 </td>
             </tr>      
             <tr>
@@ -73,6 +73,11 @@
 	$("#logo").click(function() {
 		location.href="./"
 	});
+	
+	var msg = "${msg}";
+	if(msg == "로그인실패"){
+		alert(msg);
+	}	
 	</script>
 </html>
 

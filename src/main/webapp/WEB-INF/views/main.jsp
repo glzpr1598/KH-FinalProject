@@ -16,12 +16,5 @@
 	<%@ include file="./main-header.jsp" %>
 </body>
 <script>
-var msg = "${msg}";
-
-if(msg == "로그인성공"){
-	alert(msg);
-}else if(msg == "로그인실패"){
-	alert(msg);
-}	
 </script>
 </html>
