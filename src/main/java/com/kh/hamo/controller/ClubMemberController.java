@@ -18,6 +18,7 @@ public class ClubMemberController {
 	@Autowired
 	ClubMemberService service;
 	
+	// 동호회 회원관리(리스트)
 	@RequestMapping(value = "/clubMemberList")
 	public String clubMemberList(Model model, @RequestParam("club_id") String club_id) {
 		logger.info("동호회 멤버 리스트 요청");
@@ -25,6 +26,19 @@ public class ClubMemberController {
 		service.clubMemberList(model, club_id);
 		
 		return "c25";
+	}
+	
+	// 회원 강퇴
+	@RequestMapping(value = "/clubMemberFire")
+	public String clubMemberFire(Model model, 
+			@RequestParam("clubJoin_id") String clubJoin_id,
+			@RequestParam("club_id") String club_id,
+			@RequestParam("member_id") String member_id) {
+		logger.info("멤버 강퇴 요청");
+		
+		service.clubMemberFire(clubJoin_id, club_id, member_id);
+		
+		return "redirect:/clubMemberList?club_id="+club_id;
 	}
 	
 }
