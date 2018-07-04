@@ -24,6 +24,7 @@
 	/* 동호회 정보 */
 	#left #info{
 		border: medium solid #ffbf00;
+		border-radius: 5px;
 		font-weight: bold;
 		padding: 5px 0px;
 		margin-bottom: 5px;
@@ -37,6 +38,7 @@
 		margin-bottom: 5px;
 		padding: 5px 0px;
 		border: medium solid #ffbf00;
+		border-radius: 5px;
 		background-color: #FDF5DC;
 	}
 	/* 메뉴의 div */
@@ -66,6 +68,7 @@
 		margin-bottom: 5px;
 		background-color: #ffbf00;
 		border: none;
+		border-radius: 5px;
 		color: white;
 		font-weight: bold;
 		font-size: 14px;

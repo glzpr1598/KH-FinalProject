@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.kh.hamo.dao.ClubMemberInter;
@@ -22,6 +23,7 @@ public class ClubMemberService {
     
     ClubMemberInter inter;
 
+    // 회원 리스트
 	public void clubMemberList(Model model, String club_id) {
 		inter = sqlSession.getMapper(ClubMemberInter.class);
 		
@@ -30,6 +32,19 @@ public class ClubMemberService {
 				inter.clubMemberList(Integer.parseInt(club_id));
 		
 		model.addAttribute("list", result);
+	}
+	
+	// 회원 강퇴
+	@Transactional
+	public void clubMemberFire(String clubJoin_id, String club_id, String member_id) {
+		inter = sqlSession.getMapper(ClubMemberInter.class);
+		
+		// clubjoin_id로 동호회 가입 컬럼 삭제
+		inter.clubMemberFire(Integer.parseInt(clubJoin_id));
+		
+		// 블랙리스트 추가
+		inter.clubMemberBlacklist(Integer.parseInt(club_id), member_id);
+		
 	}
 
 }

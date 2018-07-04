@@ -12,7 +12,7 @@
   			    #all{position: absolute; left: 800px; top: 200px;}         
   			    #logo {height: 60px;cursor: pointer; position: absolute; left: 880px; top: 160px;}
   			    input[type='text'], input[type='password']{
-  					border: 3px solid #ffbf00;
+  					border: 2px solid #ffbf00;
   					height: 30px;
 					width: 300px;
   			    }
@@ -45,7 +45,6 @@
 				    font-size: 14px;
 				    margin: 2px;
 				    cursor: pointer;
-				    border-radius:10px;
   			    }
   			    
   			    
@@ -63,12 +62,12 @@
 				font-size: 6px;
 				color:#fff;
 				}
-
+  
+  			    #serialBtn{position: absolute; left: 255px; top: 262px;}          
+  			         
   			    
-  			    
-  			    
-  			    
-		</style>
+  			       
+		</style>    
 	</head>
 	<body>
 	<img id="logo" src="./resources/image/logo.png"/>
@@ -77,7 +76,7 @@
 		    <table>
     			<tr>
     				<td>
-    					<input class="joinCss" id="idtxt" type="text" name="userId" id="userId" placeholder="아이디" maxlength="11" onkeyup="chkword(this, 20)"/>
+    					<input class="inputTxt" id="idtxt" type="text" name="userId" id="userId" placeholder="아이디"  onkeyup="chkword(this, 20)"/>
     					
     					<span id='idChk'></span>
     					
@@ -90,16 +89,16 @@
     				<td><input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)"/><span id='pwdChk'></span></td>
     			</tr>
     			<tr>
-    				<td><input class="inputTxt" type="text" name="userName" placeholder="이름" onkeyup="chkword(this, 5)"/></td>
+    				<td><input id="nameChk" class="inputTxt" type="text" name="userName" placeholder="이름" onkeyup="chkword(this, 5)"/></td>
     			</tr>
     			<tr>
     				<td><input class="idtxt" type="text" name="phone" placeholder="전화번호" id="only_number"/></td>
     			</tr>
     			<tr>
-					<td><input class="inputTxt" type="text" name="email" placeholder="이메일"/><input  type="button" id="emailChk" value="인증"/></td>
+					<td><input class="inputTxt" type="text" name="email" maxlength="30" placeholder="이메일"/></td><div id="serialBtn"><input  type="button" id="emailChk" value="인증"/></div>
     			</tr>
     			<tr>
-    				<td><input class="inputTxt" type="text" name="serial" placeholder="인증번호"/></td>
+    				<td><input class="inputTxt" type="text" name="serial" placeholder="인증번호" id="only_number2"/></td>
     			</tr>
 				
 
@@ -214,6 +213,7 @@
 		ajaxCall(obj);
 	});
 		
+	var pwdCheck = 0;
 	
 	$("#PasswordChk").focusout(function(){	
 	if($("input[name='pwChk']").val().length >= 10 && $("input[name='pwChk']").val().length <= 20){
@@ -221,14 +221,17 @@
 				document.getElementById("pwdChk").innerHTML = " 패스워드가 정상적으로 입력 되지 않았습니다.";
 			}else{
 				document.getElementById("pwdChk").innerHTML = " 패스워드가 정상적으로 입력 되었습니다.";
-				}
+				pwdCheck = 1;
+			}
+			
 	}else{
 		document.getElementById("pwdChk").innerHTML = " 패스워드는 10자 이상 20자 이하로 입력해주세요.";
+		pwdCheck = 0
 	}
 	});
 	
 	
-	var serialNumber = "";
+	var serialNumber = "인증미완료";
 	
 	$("#emailChk").click(function(){
 		obj.url="./emailChk";
@@ -271,7 +274,9 @@
 $("#only_number").keyup(function () { 
     this.value = this.value.replace(/[^0-9]/g,'');
 });
-
+$("#only_number2").keyup(function () { 
+    this.value = this.value.replace(/[^0-9]/g,'');
+});
 	
 	
 	function ajaxCall(obj){
@@ -489,10 +494,10 @@ $("#only_number").keyup(function () {
 			alert("아이디를 올바르게 입력 해주세요");
 			$("").focus();//포커스 이동
 		}else{
-			if($("input[name='userPw']").val()==""){//비밀번호 입력 확인
+			if($( "input[name='userPw']").val()=="" ||  pwdCheck == 0 ){//비밀번호 입력 확인
 				alert("비밀 번호를 확인 해 주세요");
 				$("input[name='userPw']").focus();//포커스 이동
-			}else if($("input[name='pwChk']").val()!=$("input[name='userPw']").val()){//비밀번호가 서로 일치하는지 확인
+			}else if($("input[name='pwChk']").val()!=$("input[name='userPw']").val() || pwdCheck == 0 ){//비밀번호가 서로 일치하는지 확인
 				alert("비밀번호 일치 확인 해주세요");
 				$("input[name='pwChk']").focus();//포커스 이동
 			}else if($("input[name='userName']").val()==""){//이름 입력 확인
@@ -503,8 +508,8 @@ $("#only_number").keyup(function () {
 				$("input[name='phone']").focus();//포커스 이동
 			}else if($("input[name='email']").val()==""){//이메일 입력 확인
 				alert("이메일을 확인 해 주세요");
-				$("input[name='email']").focus();//포커스 이동
-			}else if($("input[name='serial']").val()!=serialNumber){// 인증번호 확인
+				$("input[name='email']").focus();//포커스 이동   
+			}else if( ($("input[name='serial']").val()!=serialNumber) || ( serialNumber == "인증미완료") ){// 인증번호 확인
 				alert("인증번호를 확인해주세요");
 				$("input[name='serial']").focus();//포커스 이동
 			}else if( ($("#select11").val() == "소분류") && ($("#select22").val() == "소분류") && ($("#select33").val() == "소분류") ) {
@@ -539,13 +544,6 @@ $("#only_number").keyup(function () {
 	});
 	
 
-
-	
-	
-	
-	
-	
-	
 	
 	$("#logo").click(function() {
 		location.href="./"
