@@ -90,7 +90,7 @@ public class HamoMemberController {
 		
 		String recipient = email; 		//받는 사람의 메일주소
 		String subject = "Hamo에서 인증번호를 안내해드립니다."; 			//메일 제목
-		String body = "인증번호는 [ "+serial+" ] 입니다."; 		//메일 내용
+		String body = "인증번호는 ["+serial+"] 입니다."; 		//메일 내용
 		Properties props = System.getProperties();			// 정보를 담기 위한 객체 생성 
 		
 		// SMTP 서버 정보 설정
@@ -153,23 +153,21 @@ public class HamoMemberController {
 	
 	/**로그인 - 김응주 */	
 	@RequestMapping(value="/login")
-	public ModelAndView login(@RequestParam String userId, String userPw, HttpSession session) {
+	public @ResponseBody HashMap<String, Object> login(
+			@RequestParam String userId, String userPw, HttpSession session) {
 		logger.info("로그인요청");
 
 		String pwSuccess = service.pwlogin(userId);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		ModelAndView mav = new ModelAndView();
 		
+		// 패스워드 일치 여부
 		boolean success = encoder.matches(userPw, pwSuccess);
-		if(success){
-			session.setAttribute("userId", userId);
-			mav.setViewName("main");
-		}else {
-			mav.addObject("msg", "로그인실패");
-			mav.setViewName("m01");
-		}
+		
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("success", success);
 
-		return mav;
+		return result;
 	}
 		
 	/**아이디 & 비밀번호 찾기로 이동 - 김응주 */	
