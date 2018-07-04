@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.kh.hamo.service.ClubMainService;
+import com.kh.hamo.service.ClubAdminService;
 
 @Controller
 public class ClubAdminController {
@@ -13,7 +13,7 @@ public class ClubAdminController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	ClubMainService service;
+	ClubAdminService service;
 	
 	
 	
