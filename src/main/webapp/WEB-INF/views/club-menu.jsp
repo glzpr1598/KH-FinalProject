@@ -54,6 +54,10 @@
 		text-decoration: none;
 		margin-left: 5px;
 	}
+	/* 메뉴의 텍스트 hover */
+	#left .menu a:hover {
+		text-decoration: underline;
+	}
 	
 	/* 버튼 */
 	#left .btn{

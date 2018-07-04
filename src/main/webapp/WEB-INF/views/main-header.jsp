@@ -151,11 +151,11 @@
 	// 로그인/로그아웃 클릭
 	$("#login").click(function() {
 		if(loginState == "login") {  // 로그인 상태
-			// 로그아웃
+			// 로그아웃   
 			location.href="./logout";
 		} else {  // 로그아웃 상태
 			// 로그인 페이지로 이동
-			location.href="./loginForm";
+			location.href="./loginForm";       
 		}
 	});
 

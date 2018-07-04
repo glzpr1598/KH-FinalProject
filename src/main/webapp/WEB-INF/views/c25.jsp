@@ -36,6 +36,7 @@
 		border: thin solid #FFBF00;
 		background: none;
 		padding: 5px 10px;
+		cursor: pointer;
 	}
 </style>
 </head>
