@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 	<head>
-	
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -53,7 +53,7 @@
 		
 			<div id="myClubList">
 				<h3>| 설립한 동호회 |</h3>
-				<a onclick="day()"><i class="fa fa-check"></i> 설립일순 &nbsp;</a>
+				<a id="day"><i class="fa fa-check"></i> 설립일순 &nbsp;</a>
 				<a onclick="count()"><i class="fa fa-check"></i> 회원수순 </a>
 				<table id="myClubListTable">
 					<tr>
@@ -95,10 +95,14 @@
 		$(document).ready(function(){
 			obj.url="./myClubList";
 			obj.success = function(data){
-				
 				console.log(data);
 				 listPrint1(data.myClubList);
-	
+				 /* 설립일 순 클릭 햇을 때 */
+				$("#day").click(function(){
+					//var club_date="club_date";
+					console.log(data.myClubList);
+						 
+				});
 			}
 			ajaxCall(obj);
 		});
@@ -147,8 +151,6 @@
 		function ajaxCall(param){
 			$.ajax(param);
 		}
-		function day(){
-			
-		}
+		
 	</script>
 </html>
