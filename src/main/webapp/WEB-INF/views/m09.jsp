@@ -53,8 +53,8 @@
 		
 			<div id="myClubList">
 				<h3>| 설립한 동호회 |</h3>
-				<a onclick="day()"><i class="fa fa-check"></i>설립일순</a>
-				<a onclick="count()"><i class="fa fa-check"></i>회원수순</a>
+				<a onclick="day()"><i class="fa fa-check"></i> 설립일순 &nbsp;</a>
+				<a onclick="count()"><i class="fa fa-check"></i> 회원수순 </a>
 				<table id="myClubListTable">
 					<tr>
 						<th>주제</th>
@@ -69,8 +69,8 @@
 			
 			<div >
 				<h3> | 가입한 동호회 | </h3>
-				<a href="#"><i class="fa fa-check"></i>설립일순</a>
-				<a href="#"><i class="fa fa-check"></i>회원수순</a>
+				<a href="#"><i class="fa fa-check"></i> 설립일순&nbsp;</a>
+				<a href="#"><i class="fa fa-check"></i> 회원수순</a>
 				<table id="myClubJoinTable">
 					<tr>
 						<th>주제</th>
@@ -147,6 +147,8 @@
 		function ajaxCall(param){
 			$.ajax(param);
 		}
-		
+		function day(){
+			
+		}
 	</script>
 </html>

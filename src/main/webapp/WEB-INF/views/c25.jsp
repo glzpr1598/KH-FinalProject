@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO - 멤버관리</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 	table {
@@ -60,7 +61,7 @@
 				<tr>
 					<td>${ item.MEMBER_ID }</td>
 					<td>${ item.CLUBJOIN_NICKNAME }</td>
-					<td>${ item.MAMBER_EMAIL }</td>
+					<td>${ item.MEMBER_EMAIL }</td>
 					<td>${ item.MEMBER_PHONE }</td>
 					<td><button class="fire">강퇴</button></td>
 				</tr>
