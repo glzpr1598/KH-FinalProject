@@ -109,6 +109,7 @@
 	<div id="header">
 		<div id="link">
 			<a id="login"></a>
+			|
 			<a href="">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
