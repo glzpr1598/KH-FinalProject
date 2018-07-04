@@ -9,8 +9,45 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
-				div{position: absolute; left: 800px; top: 200px;}
-				.idSearch{
+				div{position: absolute; left: 774px; top: 350px;}
+				#logo {height: 60px;cursor: pointer; position: absolute; left: 880px; top: 130px;}
+				#idSearch{position: absolute; left: 780px; top: 250px;}     
+				#pwSearch{position: absolute; left: 963px; top: 250px;}
+				 input[type='text'], input[type='password']{
+  					border: 2px solid #ffbf00;
+  					height: 30px;
+					width: 366px;
+  			    }
+  			    .btn{
+  			    	width:366px;
+				    background-color: #ffbf00;
+				    border: 2px solid #ffbf00;
+				    color:#fff;
+				    padding: 15px 0;
+				    text-align: center;
+				    text-decoration: none;
+				    display: inline-block;
+				    font-size: 15px;
+				    margin: 4px;
+				    cursor: pointer;
+				    position:absolute;
+				    top:130px;
+  			    }
+  			    input[type='button']{                 
+  			    	width:50px;     
+				    background-color: #ffbf00;
+				    border: none;
+				    color:#fff;
+				    padding: 8px 0;
+				    text-align: center;
+				    text-decoration: none;
+				    display: inline-block;
+				    font-size: 14px;
+				    margin: 2px;
+				    cursor: pointer;
+  			    }
+  			    
+				.idSearch{    
 					width:183px;
 				    background-color: #ffbf00;
 				    border: 2px solid #ffbf00;
@@ -36,14 +73,17 @@
 				    margin: 0px;
 				    cursor: pointer;          
 				}
+				
+				#emailChk{position: absolute; left: 320px; top: 41px;}
 		</style>
+		
 	</head>
 	<body>
+	<img id="logo" src="./resources/image/logo.png"/>
+	<button class="idSearch" id="idSearch">아이디 찾기</button><button class="pwSearch" id="pwSearch">비밀번호 찾기</button>
+	
 		<div id="1">
 			<table>
-				<tr>
-					<td><button class="idSearch" id="idSearch1">아이디 찾기</button><button class="pwSearch" id="pwSearch1">비밀번호 찾기</button></td>
-				</tr>
 				<tr>
 					<td><input type="text" name="userName" placeholder="이름"></td>
 				</tr>
@@ -51,7 +91,7 @@
 					<td><input type="text" name="email" placeholder="이메일"></td>
 				</tr>
 				<tr>
-					<td><button>확인</button></td>
+					<td><button class="btn">확인</button></td>
 				</tr>
 				<span id = spanId></span>
 			</table>
@@ -61,19 +101,16 @@
 		<div id="2">
 			<table>
 				<tr>
-					<td><button class="idSearch" id="idSearch2">아이디 찾기</button><button class="pwSearch"  id="pwSearch2">비밀번호 찾기</button></td>
-				</tr>
-				<tr>
 					<td><input type="text" name="userName" placeholder="아이디"></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="email" placeholder="이메일"><button id="serial">확인</button></td>
+					<td><input type="text" name="email" placeholder="이메일"><input  type="button" id="emailChk" value="인증"/>
 				</tr>
 				<tr>
 					<td><input type="text" name="email" placeholder="인증번호"></td>
 				</tr>
 				<tr>
-					<td><button>확인</button></td>
+					<td><button class="btn">확인</button></td>
 				</tr>
 			</table>
 		</div>
@@ -82,16 +119,13 @@
 		<div id="3">
 			<table>
 				<tr>
-					<td><button class="idSearch">아이디 찾기</button><button class="pwSearch">비밀번호 찾기</button></td>
-				</tr>
-				<tr>
 					<td><input type="text" name="userName" placeholder="변경할 비밀번호"></td>
 				</tr>
 				<tr>
 					<td><input type="text" name="email" placeholder="비밀번호 확인"></td>
 				</tr>
 				<tr>
-					<td><button>확인</button></td>
+					<td><button class="btn">확인</button></td>
 				</tr>
 			</table>
 		</div>
@@ -111,20 +145,34 @@
      });
  
               
-	$("#pwSearch1").click(function(){
-		var x = document.getElementById("idSearch1");
+	$("#pwSearch").click(function(){
+		var x = document.getElementById("idSearch");
 	    x.style.backgroundColor = "white";              
-	    var x2 = document.getElementById("idSearch2");
-/* 	    x.style.backgroundColor = "#ffbf00";
+	    x.style.color = "black";
+	    var x2 = document.getElementById("pwSearch");
+ 	    x2.style.backgroundColor = "#ffbf00";
+ 	    x2.style.color = "#fff";
     	$("#1").hide();
         $("#2").show();
         $("#3").hide();
 	});
 	
-	$(".idSearch").click(function(){
+	
+	
+	$("#idSearch").click(function(){
+		var x = document.getElementById("pwSearch");
+	    x.style.backgroundColor = "white";              
+	    x.style.color = "black";
+	    var x2 = document.getElementById("idSearch");
+ 	    x2.style.backgroundColor = "#ffbf00";
+ 	    x2.style.color = "#fff";
     	$("#1").show();
         $("#2").hide(); 
         $("#3").hide();
+	});
+	
+	$("#logo").click(function() {
+		location.href="./"
 	});
 	</script>
 </html>
