@@ -103,7 +103,7 @@
 		color: #ffffff;
 	}
 	#menuBar .menu:hover {
-		background: #F3E2A9;
+		background: #FDF5DC;
 		color: #848484;
 	}
 </style>
