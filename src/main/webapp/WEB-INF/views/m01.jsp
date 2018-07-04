@@ -9,10 +9,39 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
-
-	</style>
+			#all{position: absolute; left: 800px; top: 350px;}
+			#logo {height: 60px;cursor: pointer; position: absolute; left: 880px; top: 250px;}     
+			
+			input[type='text'], input[type='password']{
+  					border: 2px solid #ffbf00;
+  					height: 30px;
+					width: 300px;
+  			    }
+			
+			 input[type='submit']{
+				    width:297px;
+				    background-color: #ffbf00;
+				    border: none;
+				    color:#fff;
+				    padding: 15px 0;
+				    text-align: center;
+				    text-decoration: none;
+				    display: inline-block;
+				    font-size: 15px;
+				    margin: 4px;
+				    cursor: pointer;
+				    border-radius:10px;
+  			    }
+  			    a{
+  			    	text-decoration: none;
+  			    	color: black;
+  			        font-size: 14px;
+  			    }
+		</style>
 	</head>
 	<body>
+	<img id="logo" src="./resources/image/logo.png"/>
+	<div id="all">
 	<form action="login" method="post">
 		<table>
             <tr>
@@ -31,19 +60,19 @@
             </tr>
             <tr>
                 <td>
-                    <input onclick="join()" class="js"  type="button" value="회원가입"/>
-                    <input onclick="search()" class="js" type="button" value="아이디 /비번 찾기"/>
+                   &nbsp<a href="idpwSearch" class="search">아이디 / 비밀번호 찾기</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<a href="hamoJoinForm" class="search">회원가입</a>
                 </td>
             </tr>      
             <tr>
         </table>
         </form>
+      </div>
 	</body>
 	<script>
-	function join(){
-		location.href="hamoJoinForm";
-	}
-	
+
+	$("#logo").click(function() {
+		location.href="./"
+	});
 	</script>
 </html>
 

@@ -12,7 +12,7 @@
   			    #all{position: absolute; left: 800px; top: 200px;}         
   			    #logo {height: 60px;cursor: pointer; position: absolute; left: 880px; top: 160px;}
   			    input[type='text'], input[type='password']{
-  					border: 3px solid #ffbf00;
+  					border: 2px solid #ffbf00;
   					height: 30px;
 					width: 300px;
   			    }
@@ -45,7 +45,6 @@
 				    font-size: 14px;
 				    margin: 2px;
 				    cursor: pointer;
-				    border-radius:10px;
   			    }
   			    
   			    
@@ -63,12 +62,12 @@
 				font-size: 6px;
 				color:#fff;
 				}
-
+  
+  			    #serialBtn{position: absolute; left: 255px; top: 262px;}          
+  			         
   			    
-  			    
-  			    
-  			    
-		</style>
+  			       
+		</style>    
 	</head>
 	<body>
 	<img id="logo" src="./resources/image/logo.png"/>
@@ -77,7 +76,7 @@
 		    <table>
     			<tr>
     				<td>
-    					<input class="inputTxt" id="idtxt" type="text" name="userId" id="userId" placeholder="아이디" maxlength="11" onkeyup="chkword(this, 20)"/>
+    					<input class="inputTxt" id="idtxt" type="text" name="userId" id="userId" placeholder="아이디"  onkeyup="chkword(this, 20)"/>
     					
     					<span id='idChk'></span>
     					
@@ -96,7 +95,7 @@
     				<td><input class="idtxt" type="text" name="phone" placeholder="전화번호" id="only_number"/></td>
     			</tr>
     			<tr>
-					<td><input class="inputTxt" type="text" name="email" placeholder="이메일"/><input  type="button" id="emailChk" value="인증"/></td>
+					<td><input class="inputTxt" type="text" name="email" maxlength="30" placeholder="이메일"/></td><div id="serialBtn"><input  type="button" id="emailChk" value="인증"/></div>
     			</tr>
     			<tr>
     				<td><input class="inputTxt" type="text" name="serial" placeholder="인증번호" id="only_number2"/></td>
