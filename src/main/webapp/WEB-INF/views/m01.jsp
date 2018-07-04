@@ -13,22 +13,20 @@
 	</style>
 	</head>
 	<body>
-	
-	
-
+	<form action="login" method="post">
 		<table>
             <tr>
                 <td>
-                	<input type="text" class="inputbox" id="userId" placeholder="아이디"/>
+                	<input type="text" class="inputbox" name="userId" placeholder="아이디"/>
                 </td>
             </tr>
             <tr>
                 <td>
-                	<input type="password" class="inputbox" id="userPw" placeholder="비밀번호"/>
+                	<input type="password" class="inputbox" name="userPw" placeholder="비밀번호"/>
                 </td>
             </tr>
             	<td>
-                    <input id="loginBtn" class="inputbox" type="button" value="로그인"/>
+                    <input id="loginBtn" class="inputbox" type="submit" value="로그인"/>
                 </td>
             </tr>
             <tr>
@@ -39,11 +37,13 @@
             </tr>      
             <tr>
         </table>
+        </form>
 	</body>
 	<script>
 	function join(){
 		location.href="hamoJoinForm";
 	}
+	
 	</script>
 </html>
 

@@ -21,4 +21,8 @@
 	INSERT INTO memberinterest(memberinterest_id, member_id, interest_id) 
 		VALUES(seq_memberinterest_id.NEXTVAL, #{param1}, #{param2})
 </insert>
+
+<select id="pwChk" resultType="String">
+	SELECT member_pw FROM member WHERE member_id = #{param1}
+</select>
 </mapper>         

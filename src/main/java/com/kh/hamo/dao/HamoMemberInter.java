@@ -12,5 +12,9 @@ public interface HamoMemberInter {
 
 	int memberInterest(String id, int select);
 
+	boolean login(String userId, String userPw);
+
+	String pwChk(String userId);
+
 	
 }

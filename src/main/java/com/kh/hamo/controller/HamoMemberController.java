@@ -1,6 +1,7 @@
 package com.kh.hamo.controller;
 
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -150,6 +151,32 @@ public class HamoMemberController {
 			return service.join(Memberdto, select1, select2, select3, id);
 		}
 	
+	@RequestMapping(value="/login")
+	public ModelAndView login(@RequestParam String userId, String userPw, HttpSession session) {
+		logger.info("로그인요청");
+
+		System.out.println("아이디잘받아왔나???"+userId);
+		System.out.println("비번잘받아왔나???"+userPw);
+		
+		String pwSuccess = service.pwlogin(userId);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		ModelAndView mav = new ModelAndView();
+		
+		String msg = "로그인실패";
+		
+		boolean success = encoder.matches(userPw, pwSuccess);
+		if(success){
+			session.setAttribute("userId", userId);
+			msg = "로그인성공";
+			mav.addObject("msg", msg);
+			mav.setViewName("main");
+		}else {
+			mav.addObject("msg", msg);
+			mav.setViewName("main");
+		}
+
+		return mav;
+	}
 		
 		
 
