@@ -54,33 +54,44 @@
 			<div id="myClubList">
 				<h3>| 설립한 동호회 |</h3>
 				<a id="day"><i class="fa fa-check"></i> 설립일순 &nbsp;</a>
-				<a onclick="count()"><i class="fa fa-check"></i> 회원수순 </a>
-				<table id="myClubListTable">
-					<tr>
-						<th>주제</th>
-						<th>지역</th>
-						<th>동호회 명</th>
-						<th>소개</th>
-						<th>설립일</th>
-						<th>회원수 </th>
-					</tr>
+				<a id="count"><i class="fa fa-check"></i> 회원수순 </a>
+				<table >
+					<thead>					
+						<tr>
+							<th>주제</th>
+							<th>지역</th>
+							<th>동호회 명</th>
+							<th>소개</th>
+							<th>설립일</th>
+							<th>회원수 </th>
+						</tr>
+					</thead>
+					<tbody id="myClubListTable">
+					<!-- 리스트 보여줄 자리 -->
+					</tbody>
 				</table>
+				
 			</div>
 			
 			<div >
 				<h3> | 가입한 동호회 | </h3>
-				<a href="#"><i class="fa fa-check"></i> 설립일순&nbsp;</a>
-				<a href="#"><i class="fa fa-check"></i> 회원수순</a>
-				<table id="myClubJoinTable">
-					<tr>
-						<th>주제</th>
-						<th>지역</th>
-						<th>동호회 명</th>
-						<th>소개</th>
-						<th>설립일</th>
-						<th>회원수 </th>
-						<th>탈퇴</th>
-					</tr>
+				<a id="joinDay"><i class="fa fa-check"></i> 설립일순&nbsp;</a>
+				<a id="joinCount"><i class="fa fa-check"></i> 회원수순</a>
+				<table >
+					<thead>	
+						<tr>
+							<th>주제</th>
+							<th>지역</th>
+							<th>동호회 명</th>
+							<th>소개</th>
+							<th>설립일</th>
+							<th>회원수 </th>
+							<th>탈퇴</th>
+						</tr>
+					</thead>
+					<tbody id="myClubJoinTable">
+					<!-- 리스트 보여줄 자리 -->
+					</tbody>
 				</table>
 			</div>
 		</div>
@@ -99,9 +110,20 @@
 				 listPrint1(data.myClubList);
 				 /* 설립일 순 클릭 햇을 때 */
 				$("#day").click(function(){
-					//var club_date="club_date";
 					console.log(data.myClubList);
-						 
+					data.myClubList.sort(function(a, b) { // 내림차순
+					    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
+					}); 
+					listPrint1(data.myClubList);
+				});
+				 
+				 /* 회원수 순 클릭 햇을 때 */
+				$("#count").click(function(){
+					console.log(data.myClubList);
+					data.myClubList.sort(function(a, b) { // 내림차순
+					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
+					}); 
+					listPrint1(data.myClubList);
 				});
 			}
 			ajaxCall(obj);
@@ -111,7 +133,24 @@
 			obj.success = function(data){
 				console.log(data);
 				 listPrint2(data.myClubJoin);
-	
+				 
+				 /* 설립일 순 클릭 햇을 때 */
+				 $("#joinDay").click(function(){
+						console.log(data.myClubList);
+						data.myClubJoin.sort(function(a, b) { // 내림차순
+						    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
+						}); 
+						listPrint2(data.myClubJoin);
+					});
+					 
+					 /* 회원수 순 클릭 햇을 때 */
+					$("#joinCount").click(function(){
+						console.log(data.myClubList);
+						data.myClubJoin.sort(function(a, b) { // 내림차순
+						    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
+						}); 
+						listPrint2(data.myClubJoin);
+					});
 			}
 			ajaxCall(obj);
 		});
@@ -129,6 +168,7 @@
 				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
 			});		
+			$("#myClubListTable").empty();
 			$("#myClubListTable").append(content);
 		}
 		function listPrint2(list){
@@ -145,6 +185,7 @@
 				content +="<td><button>탈퇴</button></td>";
 				content += "</tr>";
 			});		
+			$("#myClubJoinTable").empty();
 			$("#myClubJoinTable").append(content);
 		}
 		
