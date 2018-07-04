@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="./resources/js/jquery.paging.js" ></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
@@ -25,19 +26,21 @@
 	</head>
 	<body>
 		<%@ include file="./main-header.jsp" %>
-		<table id="listTable">
-				<tr>
-					<th>주제</th>
-					<th>지역</th>
-					<th>동호회명</th>
-					<th>소개</th>
-					<th>설립일</th>
-					<th>회원수</th>
-				</tr>
-			
-		</table>
+			<table id="listTable">
+					<tr>
+						<th>주제</th>
+						<th>지역</th>
+						<th>동호회명</th>
+						<th>소개</th>
+						<th>설립일</th>
+						<th>회원수</th>
+					</tr>
+			</table>
+		<div id="paging">
+		</div>
 	</body>
 	<script>
+	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
@@ -48,7 +51,12 @@
 			obj.success = function(data){
 				console.log(data);
 				listPrint(data.list);
-
+				$("#paging").paging({
+					current:1,
+					max:50
+					//,
+					//length:5
+				});
 		}
 			ajaxCall(obj);
 		});
@@ -66,6 +74,7 @@
 				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
 			});		
+			
 			$("#listTable").append(content);
 		}
 		
@@ -74,6 +83,10 @@
 			$.ajax(param);
 		}
 	
-	
+		
+		
+		
+		
 	</script>
+		
 </html>
