@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import com.kh.hamo.dao.HamoMemberInter;
@@ -91,4 +92,18 @@ public class HamoMemberService {
 		
 		return map;
 	}
+
+
+	public String pwlogin(String userId) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		String pw = inter.pwChk(userId); // 암호화된 pw를 받아온다.
+		
+		return pw;
+	}
+	
+
+
+
+
+
 }
