@@ -69,6 +69,14 @@ public class HamoMemberController {
 		return service.idOverlay(id,idLength);
 	}
 	
+	/**회원가입 이메일 중복검사 - 김응주 */
+	@RequestMapping(value="/emailOverlay")
+	public @ResponseBody HashMap<String, Integer> emailOverlay(@RequestParam String email) {
+		System.out.println(email+"사용자가 입력한 이메일값은?");
+		logger.info("이메일중복검사(컨트롤러)");
+		return service.emailOverlay(email);
+	}
+	
 	/**회원가입 이메일 본인인증 - 김응주 */
 	@RequestMapping(value = "/emailChk")
 	public @ResponseBody HashMap<String, Object> 
@@ -175,6 +183,25 @@ public class HamoMemberController {
 	public String idpwSearchForm() {
 		logger.info("아이디 & 비밀번호 찾기로 이동");
 		return "m02";
+	}
+
+	/**아이디 찾기 - 김응주 */	
+	@RequestMapping(value="/idSearch")
+	public @ResponseBody HashMap<String, Object> idCheck(
+			@RequestParam String userId, String userPw, HttpSession session) {
+		logger.info("로그인요청");
+
+		String pwSuccess = service.pwlogin(userId);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		ModelAndView mav = new ModelAndView();
+		
+		// 패스워드 일치 여부
+		boolean success = encoder.matches(userPw, pwSuccess);
+		
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("success", success);
+
+		return result;
 	}
 
 

@@ -18,7 +18,7 @@
   			    }
   			    
   			    
-  			    button {
+  			    button {   
 				    width:297px;
 				    background-color: #ffbf00;
 				    border: none;
@@ -95,7 +95,8 @@
     				<td><input class="idtxt" type="text" name="phone" placeholder="전화번호" id="only_number"/></td>
     			</tr>
     			<tr>
-					<td><input class="inputTxt" type="text" name="email" maxlength="30" placeholder="이메일"/></td><div id="serialBtn"><input  type="button" id="emailChk" value="인증"/></div>
+					<td><input class="inputTxt" type="text" name="email" maxlength="30" placeholder="이메일"/><span id='emailMsg'></span></td><div id="serialBtn"><input  type="button" id="emailChk" value="인증"/></div>
+					
     			</tr>
     			<tr>
     				<td><input class="inputTxt" type="text" name="serial" placeholder="인증번호" id="only_number2"/></td>
@@ -233,16 +234,29 @@
 	
 	var serialNumber = "인증미완료";
 	
+	/* ajax  1. 이메일중복검사 통과시 + 2. 메일인증 전송 */
 	$("#emailChk").click(function(){
-		obj.url="./emailChk";
+		obj.url="./emailOverlay";
 		obj.data={email:$("input[name='email']").val()};	
 		obj.success=function(d){
-			serialNumber = d.serialNumber;		
-			alert("입력하신 이메일로 인증번호를 전송하였습니다.");
-			console.log(serialNumber);
+			if(d.success>=1){
+				document.getElementById("emailMsg").innerHTML =" 사용중인 이메일 입니다.";
+			}else{
+					obj.url="./emailChk";
+					obj.data={email:$("input[name='email']").val()};	
+					obj.success=function(d){
+						document.getElementById("emailMsg").innerHTML =" 사용가능한 이메일 입니다. ";
+						serialNumber = d.serialNumber;		
+						alert("입력하신 이메일로 인증번호를 전송하였습니다.");
+						console.log(serialNumber);
+					};
+					ajaxCall(obj);
+			}
 		};
 		ajaxCall(obj);
-	});
+	}); 
+	
+
 	
     function chkword(obj, maxByte) {//글자수 조건 제한
         var strValue = obj.value;

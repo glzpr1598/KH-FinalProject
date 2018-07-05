@@ -9,19 +9,20 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
-				div{position: absolute; left: 774px; top: 350px;}
-				#logo {height: 60px;cursor: pointer; position: absolute; left: 880px; top: 130px;}
+				div{position: absolute; left: 774px; top: 340px;}
+				#logo {height: 70px;cursor: pointer; position: absolute; left: 880px; top: 130px;}
 				#idSearch{position: absolute; left: 780px; top: 250px;}     
 				#pwSearch{position: absolute; left: 963px; top: 250px;}
 				 input[type='text'], input[type='password']{
-  					border: 2px solid #ffbf00;
+  					border: 3px solid #ffbf00;
   					height: 30px;
-					width: 366px;
+					width: 366px;     
+					margin-top:10px;    
   			    }
   			    .btn{
   			    	width:366px;
-				    background-color: #ffbf00;
-				    border: 2px solid #ffbf00;
+				    background-color: #ffbf00;    
+				    border: 3px solid #ffbf00;
 				    color:#fff;
 				    padding: 15px 0;
 				    text-align: center;
@@ -30,8 +31,8 @@
 				    font-size: 15px;
 				    margin: 4px;
 				    cursor: pointer;
-				    position:absolute;
-				    top:130px;
+				    position:absolute;     
+				    top:170px;
   			    }
   			    input[type='button']{                 
   			    	width:50px;     
@@ -50,7 +51,7 @@
 				.idSearch{    
 					width:183px;
 				    background-color: #ffbf00;
-				    border: 2px solid #ffbf00;
+				    border: 3px solid #ffbf00;
 				    color:#fff;
 				    padding: 15px 0;
 				    text-align: center;
@@ -58,23 +59,23 @@
 				    display: inline-block;
 				    font-size: 15px;
 				    margin: 0px;
-				    cursor: pointer;  
+				    cursor: pointer;   
 				}
 				.pwSearch{
 					width:183px;
 				    background-color: white;            
-				    border: 2px solid #ffbf00;  
-				    color:black;
+				    border: 3px solid #ffbf00;  
+				    color:black;      
 				    padding: 15px 0;
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
 				    font-size: 15px;
 				    margin: 0px;
-				    cursor: pointer;          
+				    cursor: pointer;       
 				}
-				
-				#emailChk{position: absolute; left: 320px; top: 41px;}
+				    
+				#emailChk{position: absolute; left: 320px; top: 64px;}                
 		</style>
 		
 	</head>
@@ -91,7 +92,7 @@
 					<td><input type="text" name="email" placeholder="이메일"></td>
 				</tr>
 				<tr>
-					<td><button class="btn">확인</button></td>
+					<td><button class="btn" id="idCheck">확인</button></td>
 				</tr>
 				<span id = spanId></span>
 			</table>
@@ -174,6 +175,41 @@
 	$("#logo").click(function() {
 		location.href="./"
 	});
+	
+	
+	var obj={};//초기화	
+	obj.type="post";
+	obj.dataType="json";
+	obj.error=function(e){console.log(e)};
+	
+	$("#idCheck").click(function(){
+			if($( "input[name='userName']").val()==""){//이름확인
+				alert("이름을 적어주세요");
+				$("input[name='userName']").focus();//포커스 이동
+			}else if($("#email").val()==""){
+				alert("지역을 설정해주세요");
+				$("input[name='email']").focus();//포커스 이동
+			}else{
+				console.log("서버 전송");
+				obj.url="./idSearch";
+				obj.data.userName=$("input[name='userName']").val();
+				obj.data.email=$("input[name='email']").val();
+
+				obj.success = function(data){
+					if(data.success == 1){
+						alert("회원 가입이 정상 처리 되었습니다.");
+						location.href="loginForm"; 
+					}else{
+						alert("회원 가입에 실패 했습니다.");
+						location.href="loginForm"; 
+					}
+				}
+				console.log(obj);
+				ajaxCall(obj);
+			}				
+		}
+	});
+	
 	</script>
 </html>
 

@@ -37,7 +37,14 @@ public class HamoMemberService {
 		return map;
 	}
 
-
+	public HashMap<String, Integer> emailOverlay(String email) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		logger.info("이메일중복검사(서비스)");
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int success = inter.emailOverlay(email);
+		map.put("success", success);
+		return map;
+	}
 	
 	public HashMap<String, Integer> 
 		join(HamoMemberDTO memberdto, String select1, String select2, String select3, String id) {
@@ -89,6 +96,10 @@ public class HamoMemberService {
 		
 		return pw;
 	}
+
+
+
+
 	
 
 

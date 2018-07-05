@@ -5,6 +5,8 @@ import com.kh.hamo.dto.HamoMemberDTO;
 public interface HamoMemberInter {
 
 	int idOverlay(String id);
+	
+	int emailOverlay(String email);
 
 	int memberJoin(HamoMemberDTO memberdto);
 
@@ -15,6 +17,8 @@ public interface HamoMemberInter {
 	boolean login(String userId, String userPw);
 
 	String pwChk(String userId);
+
+	
 
 	
 }
