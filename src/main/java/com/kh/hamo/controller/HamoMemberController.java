@@ -1,11 +1,7 @@
 package com.kh.hamo.controller;
 
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
 
@@ -17,19 +13,14 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpSession;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -129,36 +120,36 @@ public class HamoMemberController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("serialNumber", serial);
 		return map;
-		}
+	}
 
-		/**회원가입 - 김응주 */	
-		@RequestMapping(value="/hamoJoin")
-		public @ResponseBody HashMap<String, Integer>
-			hamoJoin(@RequestParam HashMap<String, String> params) {
-			
-			String hash;
-			
-			HamoMemberDTO Memberdto = new HamoMemberDTO();
-			
-			Memberdto.setMember_id(params.get("id"));
-			//패스워드 암호화
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			hash = encoder.encode(params.get("pw"));
-			Memberdto.setMember_pw(hash);
-			Memberdto.setMember_name(params.get("name"));	
-			Memberdto.setMember_phone(params.get("phone"));
-			Memberdto.setMember_email(params.get("email"));	
-			Memberdto.setMember_location(params.get("select4")); // 지역
-			
-			String id = params.get("id");
-			String select1 = params.get("select1"); //관심사1  선택을 안했을경우 "소분류" 값이 들어온다.
-			String select2 = params.get("select2"); //관심사2
-			String select3 = params.get("select3"); //관심사3
+	/**회원가입 - 김응주 */	
+	@RequestMapping(value="/hamoJoin")
+	public @ResponseBody HashMap<String, Integer>
+	hamoJoin(@RequestParam HashMap<String, String> params) {
 
-			
-			return service.join(Memberdto, select1, select2, select3, id);
-		}
-	
+		String hash;
+
+		HamoMemberDTO Memberdto = new HamoMemberDTO();
+
+		Memberdto.setMember_id(params.get("id"));
+		//패스워드 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		hash = encoder.encode(params.get("pw"));
+		Memberdto.setMember_pw(hash);
+		Memberdto.setMember_name(params.get("name"));	
+		Memberdto.setMember_phone(params.get("phone"));
+		Memberdto.setMember_email(params.get("email"));	
+		Memberdto.setMember_location(params.get("select4")); // 지역
+
+		String id = params.get("id");
+		String select1 = params.get("select1"); //관심사1  선택을 안했을경우 "소분류" 값이 들어온다.
+		String select2 = params.get("select2"); //관심사2
+		String select3 = params.get("select3"); //관심사3
+
+
+		return service.join(Memberdto, select1, select2, select3, id);
+	}
+
 	/**로그인 - 김응주 */	
 	@RequestMapping(value="/login")
 	public @ResponseBody HashMap<String, Object> login(
@@ -167,10 +158,14 @@ public class HamoMemberController {
 
 		String pwSuccess = service.pwlogin(userId);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		ModelAndView mav = new ModelAndView();
 		
 		// 패스워드 일치 여부
 		boolean success = encoder.matches(userPw, pwSuccess);
+		
+		// 로그인 성공 시 세션 등록
+		if(success) {
+			session.setAttribute("userId", userId);
+		}
 		
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("success", success);
