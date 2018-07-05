@@ -1,11 +1,7 @@
 package com.kh.hamo.controller;
 
 
-import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
 
@@ -17,19 +13,14 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpSession;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,6 +60,14 @@ public class HamoMemberController {
 		return service.idOverlay(id,idLength);
 	}
 	
+	/**회원가입 이메일 중복검사 - 김응주 */
+	@RequestMapping(value="/emailOverlay")
+	public @ResponseBody HashMap<String, Integer> emailOverlay(@RequestParam String email) {
+		System.out.println(email+"사용자가 입력한 이메일값은?");
+		logger.info("이메일중복검사(컨트롤러)");
+		return service.emailOverlay(email);
+	}
+	
 	/**회원가입 이메일 본인인증 - 김응주 */
 	@RequestMapping(value = "/emailChk")
 	public @ResponseBody HashMap<String, Object> 
@@ -90,7 +89,7 @@ public class HamoMemberController {
 		
 		String recipient = email; 		//받는 사람의 메일주소
 		String subject = "Hamo에서 인증번호를 안내해드립니다."; 			//메일 제목
-		String body = "인증번호는 [ "+serial+" ] 입니다."; 		//메일 내용
+		String body = "인증번호는 ["+serial+"] 입니다."; 		//메일 내용
 		Properties props = System.getProperties();			// 정보를 담기 위한 객체 생성 
 		
 		// SMTP 서버 정보 설정
@@ -121,64 +120,84 @@ public class HamoMemberController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("serialNumber", serial);
 		return map;
-		}
+	}
 
-		/**회원가입 - 김응주 */	
-		@RequestMapping(value="/hamoJoin")
-		public @ResponseBody HashMap<String, Integer>
-			hamoJoin(@RequestParam HashMap<String, String> params) {
-			
-			String hash;
-			
-			HamoMemberDTO Memberdto = new HamoMemberDTO();
-			
-			Memberdto.setMember_id(params.get("id"));
-			//패스워드 암호화
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			hash = encoder.encode(params.get("pw"));
-			Memberdto.setMember_pw(hash);
-			Memberdto.setMember_name(params.get("name"));	
-			Memberdto.setMember_phone(params.get("phone"));
-			Memberdto.setMember_email(params.get("email"));	
-			Memberdto.setMember_location(params.get("select4")); // 지역
-			
-			String id = params.get("id");
-			String select1 = params.get("select1"); //관심사1  선택을 안했을경우 "소분류" 값이 들어온다.
-			String select2 = params.get("select2"); //관심사2
-			String select3 = params.get("select3"); //관심사3
+	/**회원가입 - 김응주 */	
+	@RequestMapping(value="/hamoJoin")
+	public @ResponseBody HashMap<String, Integer>
+	hamoJoin(@RequestParam HashMap<String, String> params) {
 
-			
-			return service.join(Memberdto, select1, select2, select3, id);
-		}
-	
+		String hash;
+
+		HamoMemberDTO Memberdto = new HamoMemberDTO();
+
+		Memberdto.setMember_id(params.get("id"));
+		//패스워드 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		hash = encoder.encode(params.get("pw"));
+		Memberdto.setMember_pw(hash);
+		Memberdto.setMember_name(params.get("name"));	
+		Memberdto.setMember_phone(params.get("phone"));
+		Memberdto.setMember_email(params.get("email"));	
+		Memberdto.setMember_location(params.get("select4")); // 지역
+
+		String id = params.get("id");
+		String select1 = params.get("select1"); //관심사1  선택을 안했을경우 "소분류" 값이 들어온다.
+		String select2 = params.get("select2"); //관심사2
+		String select3 = params.get("select3"); //관심사3
+
+
+		return service.join(Memberdto, select1, select2, select3, id);
+	}
+
+	/**로그인 - 김응주 */	
 	@RequestMapping(value="/login")
-	public ModelAndView login(@RequestParam String userId, String userPw, HttpSession session) {
+	public @ResponseBody HashMap<String, Object> login(
+			@RequestParam String userId, String userPw, HttpSession session) {
 		logger.info("로그인요청");
 
-		System.out.println("아이디잘받아왔나???"+userId);
-		System.out.println("비번잘받아왔나???"+userPw);
+		String pwSuccess = service.pwlogin(userId);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
+		// 패스워드 일치 여부
+		boolean success = encoder.matches(userPw, pwSuccess);
+		
+		// 로그인 성공 시 세션 등록
+		if(success) {
+			session.setAttribute("userId", userId);
+		}
+		
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("success", success);
+
+		return result;
+	}
+		
+	/**아이디 & 비밀번호 찾기로 이동 - 김응주 */	
+	@RequestMapping(value="/idpwSearchForm")
+	public String idpwSearchForm() {
+		logger.info("아이디 & 비밀번호 찾기로 이동");
+		return "m02";
+	}
+
+	/**아이디 찾기 - 김응주 */	
+	@RequestMapping(value="/idSearch")
+	public @ResponseBody HashMap<String, Object> idCheck(
+			@RequestParam String userId, String userPw, HttpSession session) {
+		logger.info("로그인요청");
+
 		String pwSuccess = service.pwlogin(userId);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		ModelAndView mav = new ModelAndView();
 		
-		String msg = "로그인실패";
-		
+		// 패스워드 일치 여부
 		boolean success = encoder.matches(userPw, pwSuccess);
-		if(success){
-			session.setAttribute("userId", userId);
-			msg = "로그인성공";
-			mav.addObject("msg", msg);
-			mav.setViewName("main");
-		}else {
-			mav.addObject("msg", msg);
-			mav.setViewName("main");
-		}
+		
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("success", success);
 
-		return mav;
+		return result;
 	}
-		
-		
 
 
 	// 로그아웃

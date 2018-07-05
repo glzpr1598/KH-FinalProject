@@ -18,8 +18,8 @@ public class LoginCheck extends HandlerInterceptorAdapter {
 		if(userId == null) {
 			// 로그인 후 보여줄 페이지 지정
 			// 예) /myClub
-			String nextURI = request.getRequestURI().substring(request.getContextPath().length());
-			response.sendRedirect("./loginForm?nextURI=" + nextURI);
+			String next = request.getRequestURI().substring(request.getContextPath().length());
+			response.sendRedirect("./loginForm?next=" + next);
 		} 
 		
 		return true;

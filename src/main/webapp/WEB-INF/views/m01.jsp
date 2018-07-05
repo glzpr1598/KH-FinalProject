@@ -5,75 +5,147 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO - 로그인</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-		<style>
-			#all{position: absolute; left: 800px; top: 350px;}
-			#logo {height: 60px;cursor: pointer; position: absolute; left: 880px; top: 250px;}     
-			
-			input[type='text'], input[type='password']{
-  					border: 2px solid #ffbf00;
-  					height: 30px;
-					width: 300px;
-  			    }
-			
-			 input[type='submit']{
-				    width:297px;
-				    background-color: #ffbf00;
-				    border: none;
-				    color:#fff;
-				    padding: 15px 0;
-				    text-align: center;
-				    text-decoration: none;
-				    display: inline-block;
-				    font-size: 15px;
-				    margin: 4px;
-				    cursor: pointer;
-				    border-radius:10px;
-  			    }
-  			    a{
-  			    	text-decoration: none;
-  			    	color: black;
-  			        font-size: 14px;
-  			    }
-		</style>
-	</head>
-	<body>
-	<img id="logo" src="./resources/image/logo.png"/>
-	<div id="all">
-	<form action="login" method="post">
-		<table>
-            <tr>
-                <td>
-                	<input type="text" class="inputbox" name="userId" placeholder="아이디"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                	<input type="password" class="inputbox" name="userPw" placeholder="비밀번호"/>
-                </td>
-            </tr>
-            	<td>
-                    <input id="loginBtn" class="inputbox" type="submit" value="로그인"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                   &nbsp<a href="idpwSearch" class="search">아이디 / 비밀번호 찾기</a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<a href="hamoJoinForm" class="search">회원가입</a>
-                </td>
-            </tr>      
-            <tr>
-        </table>
-        </form>
-      </div>
-	</body>
-	<script>
+<style>
+	#container {
+		width: 300px;
+		margin: 150px auto;
+		text-align: center;
+	}
+	
+	/* 로고 */
+	#logo {
+		height: 80px;
+		margin-bottom: 20px;
+		cursor: pointer;
+	}
+	
+	/* 입력창 */
+	.inputText {
+		box-sizing: border-box;
+		width: 300px;
+		padding: 10px;
+		margin: 5px 0px;
+		border: medium solid #FFBF00;
+		border-radius: 5px;
+	}
+	
+	/* 확인 메시지 */
+	#msg {
+		margin: 5px;
+		font-size: 13px;
+		text-align: left;
+		color: #ff1616;
+	}
+	
+	/* 로그인 버튼 */
+	#login {
+		box-sizing: border-box;
+		width: 300px;
+		padding: 10px;
+		margin: 5px 0px;
+		border: none;
+		border-radius: 5px;
+		background: #FFBF00;
+		color: #FFFFFF;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	
+	/* 아이디/비밀번호 찾기 */
+	#idPw a {
+		float: left;
+		margin: 5px;
+		color: black;
+		font-size: 13px;
+		text-decoration: none;
+	}
+	#idPw a:hover {
+		text-decoration: underline;
+	}
+	
+	/* 회원가입 */
+	#join a {
+		float: right;
+		margin: 5px;
+		color: black;
+		font-size: 13px;
+		text-decoration: none;
+	}
+	#join a:hover {
+		text-decoration: underline;
+	}
+	
+</style>
+</head>
+<body>
+	<div id="container">
+		<img id="logo" src="./resources/image/logo.png"/>
+		<input type="text" id="userId" class="inputText" placeholder="아이디" />
+		<input type="password" id="userPw" class="inputText" placeholder="비밀번호" />
+		<div id="msg"></div>
+		<input type="button" id="login" value="로그인" />
+		<div id="idPw"><a href="idpwSearchForm">아이디/비밀번호 찾기</a></div>
+		<div id="join"><a href="hamoJoinForm">회원가입</a></div>
+	</div>
+</body>
+<script>
 
+	// 로고 클릭
 	$("#logo").click(function() {
 		location.href="./"
 	});
-	</script>
+	
+	// 로그인 클릭
+	$("#login").click(function() {
+		// 아이디를 입력하지 않은 경우
+		if($("#userId").val() == "") {
+			$("#msg").html("아이디를 입력해주세요.");
+		}
+		// 비밀번호를 입력하지 않은 경우
+		else if($("#userPw").val() == "") {
+			$("#msg").html("비밀번호를 입력해주세요.");
+		}
+		// 정상 입력한 경우
+		else {
+			$.ajax({
+		        url: "./login",
+		        type: "post",
+		        data: {
+		            "userId": $("#userId").val(),
+		            "userPw": $("#userPw").val()
+		        },
+		        dataType: "json",
+		        success: function(data) {
+		            // 로그인 성공
+		            if(data.success == true) {
+		            	// 다음으로 넘어갈 페이지
+		            	var next = "<%= request.getParameter("next") %>";
+		            	
+		            	// 다음으로 넘어갈 페이지가 지정되어 있지 않으면 메인 페이지로
+		            	if(next == "null") {
+		            		location.href="./";
+		            	}
+		            	// 다음으로 넘어갈 페이지가 지정되어 있으면 그 페이지로
+		            	else {
+		            		location.href="."+next;
+		            	}
+		            }
+		            // 로그인 실패
+		            else {
+		            	$("#msg").html("아이디 또는 비밀번호를 확인해주세요.");
+		            }
+		            var next = "<%= request.getParameter("next") %>";
+		        },
+		        error: function(err) {console.log(err);}
+		    });
+		}
+	});
+
+</script>
 </html>
 
 

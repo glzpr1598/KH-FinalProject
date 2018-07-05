@@ -8,6 +8,10 @@
 	SELECT count(*) FROM member WHERE member_id = #{param1}   
 </select>
 
+<select id="emailOverlay" resultType="int">
+	SELECT count(*) FROM member WHERE member_email = #{param1}   
+</select>
+
 <insert id="memberJoin">
 	INSERT INTO member(member_id, member_pw, member_name, member_email, member_phone, member_location) 
 			VALUES(#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_location})
