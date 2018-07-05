@@ -18,6 +18,8 @@ public interface HamoMemberInter {
 
 	String pwChk(String userId);
 
+	String idSearch(String userName, String email);
+
 	
 
 	

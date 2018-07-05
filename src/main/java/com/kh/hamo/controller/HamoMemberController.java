@@ -182,23 +182,31 @@ public class HamoMemberController {
 
 	/**아이디 찾기 - 김응주 */	
 	@RequestMapping(value="/idSearch")
-	public @ResponseBody HashMap<String, Object> idCheck(
-			@RequestParam String userId, String userPw, HttpSession session) {
-		logger.info("로그인요청");
-
-		String pwSuccess = service.pwlogin(userId);
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		ModelAndView mav = new ModelAndView();
+	public @ResponseBody HashMap<String, Object> 
+		idSearch(@RequestParam HashMap<String,String> params) {
 		
-		// 패스워드 일치 여부
-		boolean success = encoder.matches(userPw, pwSuccess);
+		logger.info("아이디찾기요청(컨트롤러)");
+		String userName = params.get("name");
+		String email = params.get("email");
 		
-		HashMap<String, Object> result = new HashMap<>();
-		result.put("success", success);
-
-		return result;
+		String userId = service.idSearch(userName, email);
+		
+		logger.info("userId : " + userId);
+		boolean success=false;
+		
+		HashMap<String, Object> map = new HashMap<>();
+		
+		if(userId == null) {
+			userId = "해당 조건의 아이디를 찾을 수 없습니다.";
+			map.put("success", success);
+			map.put("userId", userId);
+		}else {
+			success = true;
+			map.put("success", success);
+			map.put("userId", userId);
+		}
+		return map;
 	}
-
 
 	// 로그아웃
 	@RequestMapping(value="/logout")

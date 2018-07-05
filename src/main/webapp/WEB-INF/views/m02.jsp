@@ -83,62 +83,66 @@
 	<img id="logo" src="./resources/image/logo.png"/>
 	<button class="idSearch" id="idSearch">아이디 찾기</button><button class="pwSearch" id="pwSearch">비밀번호 찾기</button>
 	
+	
+	
 		<div id="1">
 			<table>
 				<tr>
-					<td><input type="text" name="userName" placeholder="이름"></td>
+					<td><input type="text" name="userName1" id="userName1" placeholder="이름"></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="email" placeholder="이메일"></td>
+					<td><input type="text" name="email1" id="email1" placeholder="이메일"></td>
 				</tr>
 				<tr>
 					<td><button class="btn" id="idCheck">확인</button></td>
 				</tr>
-				<span id = spanId></span>
 			</table>
+			<a href="./" style="display: none;" class="aTag">홈으로</a>   
+			<a href="loginForm" style="display: none;" class="aTag">로그인</a>           
+			<span id = spanId></span>   
 		</div>
 		
 		
 		<div id="2">
 			<table>
 				<tr>
-					<td><input type="text" name="userName" placeholder="아이디"></td>
+					<td><input type="text" name="userName2" placeholder="아이디"></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="email" placeholder="이메일"><input  type="button" id="emailChk" value="인증"/>
+					<td><input type="text" name="email2" placeholder="이메일"><input  type="button" id="emailChk" value="인증"/>
 				</tr>
 				<tr>
-					<td><input type="text" name="email" placeholder="인증번호"></td>
+					<td><input type="text" name="serial" placeholder="인증번호"></td>
 				</tr>
 				<tr>
 					<td><button class="btn">확인</button></td>
 				</tr>
 			</table>
+			
+			
+			
 		</div>
 		
 		
 		<div id="3">
 			<table>
 				<tr>
-					<td><input type="text" name="userName" placeholder="변경할 비밀번호"></td>
+					<td><input type="text" name="userName3" placeholder="변경할 비밀번호"></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="email" placeholder="비밀번호 확인"></td>
+					<td><input type="text" name="email3" placeholder="비밀번호 확인"></td>
 				</tr>
 				<tr>
 					<td><button class="btn">확인</button></td>
 				</tr>
 			</table>
+			
+			
+			
 		</div>
+		
 	</body>
 	<script>
-	    
-	function cssChange() {
-	    var x = document.getElementById("abc");
-	    x.style.fontSize = "25px";           
-	    x.style.color = "blue"; 
-	}
-	
     $(document).ready(function(){
     	$("#1").show();
         $("#2").hide();
@@ -175,41 +179,42 @@
 	$("#logo").click(function() {
 		location.href="./"
 	});
-	
-	
-	var obj={};//초기화	
-	obj.type="post";
-	obj.dataType="json";
-	obj.error=function(e){console.log(e)};
+		
 	
 	$("#idCheck").click(function(){
-			if($( "input[name='userName']").val()==""){//이름확인
+			if($( "input[name='userName1']").val()==""){//이름확인
 				alert("이름을 적어주세요");
-				$("input[name='userName']").focus();//포커스 이동
-			}else if($("#email").val()==""){
-				alert("지역을 설정해주세요");
-				$("input[name='email']").focus();//포커스 이동
+				$("input[name='userName1']").focus();//포커스 이동
+			}else if($("input[name='email1']").val()==""){//이메일확인
+				alert("이메일을 적어주세요");
+				$("input[name='email1']").focus();//포커스 이동
 			}else{
 				console.log("서버 전송");
-				obj.url="./idSearch";
-				obj.data.userName=$("input[name='userName']").val();
-				obj.data.email=$("input[name='email']").val();
-
-				obj.success = function(data){
-					if(data.success == 1){
-						alert("회원 가입이 정상 처리 되었습니다.");
-						location.href="loginForm"; 
-					}else{
-						alert("회원 가입에 실패 했습니다.");
-						location.href="loginForm"; 
-					}
-				}
-				console.log(obj);
-				ajaxCall(obj);
+				$.ajax({
+						url: "./idSearch",
+						type: "post",
+						dataType: "json",
+						data: {
+							"name": $("input[name='userName1']").val(),
+							"email": $("input[name='email1']").val()
+						},
+						success: function(data) {
+							console.log("success");
+							if(data.success){
+								document.getElementById("spanId").innerHTML = "아이디는 : "+data.userId+" 입니다.";
+								$(".aTag").css("display", "inline");      
+							/* <a href="loginForm">로그인</a>    
+							<a href="./">홈으로</a> */
+							}else{
+								alert(data.userId);  
+							}
+						},
+						error: function(e){console.log(e)}
+				});
 			}				
-		}
-	});
-	
+		});
+
+
 	</script>
 </html>
 

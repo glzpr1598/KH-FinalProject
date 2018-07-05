@@ -89,12 +89,19 @@ public class HamoMemberService {
 		return map;
 	}
 
-
+	/**암호화된 비밀번호 받아오기 - 김응주*/
 	public String pwlogin(String userId) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
 		String pw = inter.pwChk(userId); // 암호화된 pw를 받아온다.
 		
 		return pw;
+	}
+
+	/**아이디 찾기 - 김응주*/
+	public String idSearch(String userName, String email) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		String id = inter.idSearch(userName, email); 
+		return id;
 	}
 
 
