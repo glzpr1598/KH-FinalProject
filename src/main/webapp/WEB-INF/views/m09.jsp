@@ -182,16 +182,17 @@
 				content +="<td>"+item.club_introduce+"</td>";
 				content +="<td>"+item.club_date+"</td>";
 				content +="<td>"+item.club_memberCount+"</td>";
-				content +="<td><button>탈퇴</button></td>";
+				content +="<td><button name="+item.clubJoin_id+">탈퇴</button></td>";
 				content += "</tr>";
 			});		
 			$("#myClubJoinTable").empty();
 			$("#myClubJoinTable").append(content);
+			
 		}
 		
 		function ajaxCall(param){
 			$.ajax(param);
 		}
-		
+			
 	</script>
 </html>

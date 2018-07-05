@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="./resources/js/paginathing.js" type="text/javascript"></script>
+	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+   <script src="./resources/js/paginathing.js" type="text/javascript"></script>   -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
@@ -24,9 +25,7 @@
 		td{
 			border-bottom: 1px solid #ffbf00;
 		}
-		.panel-footer{
-			background-color: white;
-		}
+
 	</style>
 	</head>
 	<body>
@@ -42,13 +41,11 @@
 						<th>회원수</th>
 					</tr>
 				</thead>
-				<tbody  >
+				<tbody >
 				</tbody>
 			</table>
-		<ul></ul>
 	</body>
 	<script>
-	
 	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
@@ -60,18 +57,19 @@
 			obj.success = function(data){
 				console.log(data);
 				listPrint(data.list);
-				jQuery(document).ready(function($){
+
+				/*   jQuery(document).ready(function($){
 					$('table tbody').paginathing({
-				    		perPage: 5,
-				    		containerClass: 'panel-footer'
-				    			
+				    		perPage: 10,
+				    		containerClass: 'paging',
+				    		limitPagination: 5,
+
 					})
-				});
+				});   */
 				
 		}
 			ajaxCall(obj);
 		});
-		
 		function listPrint(list){
 			console.log(list);
 			var content ="";
@@ -87,6 +85,7 @@
 			});		
 			
 			$("#listTable").append(content);
+			
 		}
 		
 		
