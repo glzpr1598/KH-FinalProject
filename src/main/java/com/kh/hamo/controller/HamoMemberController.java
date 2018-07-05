@@ -150,10 +150,14 @@ public class HamoMemberController {
 
 		String pwSuccess = service.pwlogin(userId);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		ModelAndView mav = new ModelAndView();
 		
 		// 패스워드 일치 여부
 		boolean success = encoder.matches(userPw, pwSuccess);
+		
+		// 로그인 성공 시 세션 등록
+		if(success) {
+			session.setAttribute("userId", userId);
+		}
 		
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("success", success);
