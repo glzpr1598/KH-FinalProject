@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!--****자유게시판 글쓰기 jsp  ****-->
+<!--****자유게시판 글 수정하기 폼 jsp  ****-->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,6 +10,14 @@
 	src="<%=request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
+	#right {
+		width: 800px;
+		float: left;
+		margin-left: 20px;
+	}
+	#member{
+		font-weight: 800;
+	}
 	input[type='button']{
 		border:none;
 	 	background-color:#FFBF00 ;
@@ -18,12 +26,27 @@
 		padding:10px;
 		cursor: pointer;
 	}
+	#content{
+		background-color: transparent;
+		resize: none;
+		border-color: #FFBF00;
+		border-width: 1px;
+		border-style: solid;
+	}
+	#file{
+		width:500px;
+		height:40px;
+		border-color: #FFBF00;
+		border-width: 1px;
+		border-style: solid;
+		margin-top:-12px;
+	}
+	h4{
+		margin-top:7px;
+	}
 	#menu #freeBbs{
 		font-weight: 900;
 		color:black;
-	}
-	#title{
-		float:left;
 	}
 </style>
 <body>
@@ -31,16 +54,24 @@
 	<div id="container">
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
-			<form action="freeBbsWrite" name="frm" id="frm">
-			 <div id="title">| 자유게시판 |</div>
-				<input type="text" placeholder="포스트 제목을 입력해주세요." name="subject" style="width:766px;">
-			    <textarea name="content" id="smarteditor" rows="10" cols="100" style="width:666px; height:312px;">
+			<form action="freeBbsUpdate" name="frm" id="frm">
+			 	<div id="title">| 자유게시판 |</div>
+			    <h2>${detail.mainBbs_subject }</h2>
+			   <div><span id="member">${detail.member_id }</span> | 조회수 : ${detail.mainBbs_hit } | ${detail.mainBbs_date }</div>
+			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:633px; height:300px;">${detail.mainBbs_content }
 			    </textarea>
+			    <input type="hidden" name="idx" value="${detail.mainBbs_id}">
+			    <h4>첨부파일</h4>
+			    <div id="file">
+			    	dd
+			    </div>
 				    <input type="button" id="cancelbutton" value="취소" />
 				    <input type="button" id="savebutton" value="저장" />
-			</form>
+		    </form>
 		</div>
+		
 	</div>
+		
 </body>
 <script>
 $(function(){
@@ -60,25 +91,25 @@ $(function(){
             bUseModeChanger : true,
         }
     });
-     
-    //전송버튼 클릭이벤트
+ 
+    //수정 하기  클릭 시 
     $("#savebutton").click(function(){
         //id가 smarteditor인 textarea에 에디터에서 대입
         editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
         
         //폼 submit
-        if(confirm("글쓰기를 등록하시겠습니까?")){
+        if(confirm("수정 하시겠습니까?")){
         	   $("#frm").submit();
-        	 //true 일 경우 상세보기 이동
-        }
-     
+        } 
     });
+    
+    //수정 취소  클릭 시 
     $("#cancelbutton").click(function(){
-    	if(confirm("작성을 취소하시겠습니까?")){ 
-    		//true 일 경우 자유게시판 리스트로 이동
-    		location.href="./freeBbsList";
+    	if(confirm("수정 취소하시겠습니까?")){ 
+    		location.href="./freeBbsdetail?idx=${detail.mainBbs_id}&updateAfter=1";
     	}
     });
+    
 })
 </script>
 </html>

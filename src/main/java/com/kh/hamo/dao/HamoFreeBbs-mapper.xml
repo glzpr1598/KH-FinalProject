@@ -7,7 +7,29 @@
 		HashMap 에 값이 들어있음
 		  resultType :  쿼리문 돌린 결과를 담을 클래스명
 	-->
-	<select id="freeBbsList" parameterType="HashMap" resultType="com.kh.hamo.HamoBbsDTO">
-		SELECT * FROM member
+	<!-- ArrayList 에 자동으로 담아줌 -->
+	<select id="freeBbsList" resultType="com.kh.hamo.dto.HamoBbsDTO">
+		SELECT * FROM mainBbs order by mainBbs_idx DESC 
 	</select>
+	
+	<select id="freeBbsdetail" resultType="com.kh.hamo.dto.HamoBbsDTO">
+		SELECT * FROM mainBbs WHERE mainBbs_id=#{param1}	
+	</select>
+	
+	<update id="freeBbsHit">
+		UPDATE mainBbs SET mainBbs_hit=mainBbs_hit+1 WHERE mainBbs_id=#{param1}	
+	</update>
+
+	<insert id="freeBbsWrite">
+		INSERT INTO mainBbs(mainBbs_id,member_id,mainBbs_sort,mainBbs_idx,mainBbs_subject,
+		mainBbs_content,mainBbs_date,mainBbs_replyCount,mainBbs_hit)
+		VALUES(seq_mainbbs_id.NEXTVAL,'yun','자유게시판',seq_freebbs_idx.NEXTVAL,#{param1},#{param2},SYSDATE,0,0)
+	</insert>
+	
+	<update id="freeBbsUpdate">
+		UPDATE mainBbs SET mainBbs_content=#{param2} WHERE mainBbs_id=#{param1}
+	</update>
+	<delete id="freeBbsDelete">
+	 	DELETE FROM mainBbs WHERE mainBbs_id = #{param1}
+	</delete>
 </mapper>
