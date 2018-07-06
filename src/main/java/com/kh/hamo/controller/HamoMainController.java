@@ -66,4 +66,17 @@ public class HamoMainController {
 		id="admin";/**<-임의로 설정한거임 */
 		return service.myClubJoin(id);
 	}
+	//가입한 동호회 탈퇴
+	@RequestMapping(value = "/myClubRemove")
+	public ModelAndView myClubRemove(@RequestParam ("myClubRemove") String myClubRemove) {
+		logger.info("가입한 동호회 탈퇴 리스트");
+		return service.myClubRemove(myClubRemove);
+	}
+	//동호회 찾기
+	@RequestMapping(value = "/m10move")
+	public String m10move(Model model) {
+		logger.info("동호회 찾기 ");
+		return "m10";
+	}
+	
 }

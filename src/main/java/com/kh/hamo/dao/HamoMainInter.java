@@ -13,4 +13,6 @@ public interface HamoMainInter {
 
 	ArrayList<HamoMainDTO> myClubJoin(String id);//가입한 동호회 리스트
 
+	int myClubDel(String myClubRemove);//가입한 동호회 탈퇴
+
 }
