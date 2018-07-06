@@ -12,7 +12,8 @@
 	
 	<select id="freeBbsList" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT * FROM mainBbs order by mainBbs_idx DESC 
-
+	</select>
+	
 	<select id="freeBbsdetail" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT * FROM mainBbs WHERE mainBbs_id=#{param1}	
 	</select>
@@ -30,7 +31,11 @@
 	<update id="freeBbsUpdate">
 		UPDATE mainBbs SET mainBbs_content=#{param2} WHERE mainBbs_id=#{param1}
 	</update>
+	
 	<delete id="freeBbsDelete">
 	 	DELETE FROM mainBbs WHERE mainBbs_id = #{param1}
 	</delete>
+	
+	
+	
 </mapper>
