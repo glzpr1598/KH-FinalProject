@@ -247,6 +247,15 @@ public class HamoMemberController {
 		map.put("success", success);
 		return map;
 	}
+	
+	/**수정폼 - 김응주*/
+	@RequestMapping(value="/updateForm")
+	public ModelAndView pwUpdate(HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+		logger.info("멤버 수정폼 요청");
+		return service.updateForm(userId);
+	}
+	
 	// 로그아웃
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {

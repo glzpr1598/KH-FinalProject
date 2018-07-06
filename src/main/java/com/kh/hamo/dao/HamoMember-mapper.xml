@@ -41,6 +41,11 @@
 <update id="pwUpdate">
 		UPDATE member SET member_pw=#{param2} WHERE member_id=#{param1}	 
 </update>
+
+<select id="updateForm" resultType="com.kh.hamo.dto.HamoMemberDTO">
+	SELECT * FROM member WHERE member_id=#{param1}
+</select>
+
 </mapper>         
 
 

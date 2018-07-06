@@ -184,10 +184,10 @@
 	
 	$("#idCheck").click(function(){
 			if($( "input[name='userName1']").val()==""){//이름확인
-				alert("이름을 적어주세요");
+				alert("이름을 확인해주세요");
 				$("input[name='userName1']").focus();//포커스 이동
 			}else if($("input[name='email1']").val()==""){//이메일확인
-				alert("이메일을 적어주세요");
+				alert("이메일을 확인해주세요");
 				$("input[name='email1']").focus();//포커스 이동
 			}else{
 				console.log("서버 전송");
