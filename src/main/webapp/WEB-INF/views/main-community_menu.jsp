@@ -11,43 +11,56 @@
 	body {
 		margin: 0px;
 	}
+	/*가운데 정렬*/
+	#container {
+		width: 1000px;
+		margin: auto;
+	}
+	/* 제목 */
+	#title {
+		font-size: 20px;
+		font-weight: bold;
+	}
 	.list{
 		width: 20px;
 		height: 20px;
 	}
+	#left {
+		width : 180px;
+		float: left;
+	}
 	#menu{
-		width : 200px;
 		height: 170px;
 		border: 3px solid #ffbf00;
 		background-color: #FDF5DC;
 		border-radius:20px;
-		position: absolute;
-		left: 480px;
-		top: 245px;
+		
 	}
-	#menu #menu1{
+	#menu .menu1{
 		text-decoration: none;
 		color: #5a5a5a;
 		font-weight: 600;
-		position: absolute;
-		top: 10px;
-		left: 10px;
 	}
-	#menu #menu2{
-	text-decoration: none;
-	color: #5a5a5a;
-	font-weight: 600;
-	position: absolute;
-	top: 60px;
-	left: 10px;
-}
+	.margin{
+		margin:10px;
+		padding:2px;
+	}
 </style>
 </head>
 <body>
+	<div id="left">
 		<div id="menu">
-			<a id="menu1" href="freeBbsList"><img class="list" src="./resources/image/list.png" />&nbsp;&nbsp;자유게시판</a>
-			<a id="menu2" href="#"><img class="list" src="./resources/image/list.png" />&nbsp;&nbsp;동호회 친목</a>
+			<div class="margin">
+				<img class="list" src="./resources/image/list.png" />
+				<a class="menu1" id="freeBbs" href="./freeBbsList">자유게시판</a>
+			</div>
+			<div class="margin">
+				<img class="list" src="./resources/image/list.png" />
+				<a class="menu1" id="friendBbs"  href="./friendShipBbsList">동호회 친목</a>
+			</div>
+			
 		</div>
+	</div>
 </body>
 <script>
 

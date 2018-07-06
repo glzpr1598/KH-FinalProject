@@ -37,7 +37,14 @@ public class HamoMemberService {
 		return map;
 	}
 
-
+	public HashMap<String, Integer> emailOverlay(String email) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		logger.info("이메일중복검사(서비스)");
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int success = inter.emailOverlay(email);
+		map.put("success", success);
+		return map;
+	}
 	
 	public HashMap<String, Integer> 
 		join(HamoMemberDTO memberdto, String select1, String select2, String select3, String id) {
@@ -82,13 +89,36 @@ public class HamoMemberService {
 		return map;
 	}
 
-
+	/**암호화된 비밀번호 받아오기 - 김응주*/
 	public String pwlogin(String userId) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
 		String pw = inter.pwChk(userId); // 암호화된 pw를 받아온다.
 		
 		return pw;
 	}
+
+	/**아이디 찾기 - 김응주*/
+	public String idSearch(String userName, String email) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		String id = inter.idSearch(userName, email); 
+		return id;
+	}
+
+	public String pwSearch(String userId, String email) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		String success = inter.pwSearch(userId, email);
+		return success;
+	}
+
+	public boolean pwUpdate(String id, String pw) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		boolean success = inter.pwUpdate(id,pw);
+		return success;
+	}
+
+
+
+
 	
 
 

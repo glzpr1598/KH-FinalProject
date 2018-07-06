@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +32,6 @@ public class HamoMainController {
 		return "main";
 	}
 	
-
 	// 검색 값 가져오는 컨트롤러
 	@RequestMapping(value = "/m08move")
 	public ModelAndView m08move(@RequestParam ("search") String search) {

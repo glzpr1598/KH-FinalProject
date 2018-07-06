@@ -60,7 +60,15 @@ public class HamoMemberController {
 		return service.idOverlay(id,idLength);
 	}
 	
-	/**회원가입 이메일 본인인증 - 김응주 */
+	/**회원가입 이메일 중복검사 - 김응주 */
+	@RequestMapping(value="/emailOverlay")
+	public @ResponseBody HashMap<String, Integer> emailOverlay(@RequestParam String email) {
+		System.out.println(email+"사용자가 입력한 이메일값은?");
+		logger.info("이메일중복검사(컨트롤러)");
+		return service.emailOverlay(email);
+	}
+	
+	/**회원가입&비밀번호찾기 이메일 본인인증 - 김응주 */
 	@RequestMapping(value = "/emailChk")
 	public @ResponseBody HashMap<String, Object> 
 		emailChk(@RequestParam String email, HttpServletRequest request, ModelMap mo) throws AddressException, MessagingException { 
@@ -172,7 +180,73 @@ public class HamoMemberController {
 		return "m02";
 	}
 
+	/**아이디 찾기 - 김응주 */	
+	@RequestMapping(value="/idSearch")
+	public @ResponseBody HashMap<String, Object> 
+		idSearch(@RequestParam HashMap<String,String> params) {
+		
+		logger.info("아이디찾기요청(컨트롤러)");
+		String userName = params.get("name");
+		String email = params.get("email");
+		
+		String userId = service.idSearch(userName, email);
+		
+		logger.info("userId : " + userId);
+		boolean success=false;
+		
+		HashMap<String, Object> map = new HashMap<>();
+		
+		if(userId == null) {
+			userId = "해당 조건의 아이디를 찾을 수 없습니다.";
+			map.put("success", success);
+			map.put("userId", userId);
+		}else {
+			success = true;
+			map.put("success", success);
+			map.put("userId", userId);
+		}
+		return map;
+	}
+	
+	/**비밀번호 찾기 페이지로 이동 - 김응주 */	
+	@RequestMapping(value="/pwSearch")
+	public @ResponseBody HashMap<String, Object> 
+		pwSearch(@RequestParam HashMap<String,String> params) {
+		
+		logger.info("비밀번호찾기페이지로 이동(컨트롤러)");
+		String userId = params.get("userId");
+		String email = params.get("email");
+		
+		String pw = service.pwSearch(userId, email);
+		boolean success = false;
+		logger.info("비밀번호 찾기 여부 : " + success);
 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(pw != null) {
+		success = true;
+		map.put("success", success);
+		}
+		return map;
+	}
+
+	/**비밀번호 수정 - 김응주*/
+	@RequestMapping(value="/pwUpdate")
+	public @ResponseBody HashMap<String, Object> 
+		pwUpdate(@RequestParam HashMap<String,String> params) {
+	
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		logger.info("비밀번호 수정(컨트롤러)");
+		String pw = encoder.encode(params.get("pw"));
+		String id = params.get("id");
+		
+		boolean success = false;
+		success = service.pwUpdate(id, pw);
+		logger.info("비밀번호 찾기 여부 : " + success);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("success", success);
+		return map;
+	}
 	// 로그아웃
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<!--****자유게시판 글 리스트 jsp  ****-->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,10 +9,10 @@
 </head>
 <style>
 	table{
-		width:700px;
-		position:absolute;
-		left: 730px;
-		top: 245px;
+		width:800px;
+	}
+	#right{
+	float:left;
 	}
 	table,th,td{
 		text-align: center;
@@ -27,37 +27,51 @@
 		background-color: #FDF5DC;
 	}
 	#writeBtn{
-		position:absolute;
-		top:480px;
-		right:500px;
 		border:none;
 		background-color: #FFBF00;
 		color:white;
 		padding:5px;
+		cursor: pointer;
+	}
+	td a{
+		text-decoration: none;
+		color: black;
+	}
+	td a:hover{
+		color:red;
+	}
+	#menu #freeBbs{
+		font-weight: 900;
+		color:black;
 	}
 </style>
 <body>
 	<%@ include file="./main-header.jsp" %>
-	<%@ include file="./main-community_menu.jsp" %>
-	<form>
-		<table>
-			<tr>
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-			<tr>
-				<td>글번호</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>작성일</td>
-				<td>조회수</td>
-			</tr>
-		</table>
-		<input id="writeBtn" type="button" value="글쓰기">
-	</form>
+	<div id="container">
+		<%@ include file="./main-community_menu.jsp" %>
+		<div id="right">
+			<div id="title">| 자유게시판 |</div>
+				<table>
+					<tr>
+						<th>글번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+					<c:forEach items="${freeList}" var="bbs">
+						<tr>
+							<td>${bbs.mainBbs_idx }</td>
+							<td><a href="freeBbsdetail?idx=${bbs.mainBbs_id}&updateAfter=0">${bbs.mainBbs_subject }</a></td>
+							<td><a href="freeBbsdetail?idx=${bbs.mainBbs_id}&updateAfter=0">${bbs.member_id}</a></td>
+							<td>${bbs.mainBbs_date }</td>
+							<td>${bbs.mainBbs_hit }</td>
+						</tr>
+					</c:forEach>
+				</table>
+				<input id="writeBtn" type="button" value="글쓰기">
+			</div>
+	</div>
 </body>
 <script>
 	$("#writeBtn").click(function(){

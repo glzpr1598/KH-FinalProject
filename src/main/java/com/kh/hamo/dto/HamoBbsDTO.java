@@ -10,13 +10,13 @@ public class HamoBbsDTO {
 	private String mainBbs_subject;
 	private String mainBbs_content;
 	private Date mainBbs_date;
-	private int mainBbs_ReplyCount;
+	private int mainBbs_replyCount;
 	private int mainBbs_hit;
 	private int mainBbsFile_id;
 	private String mainBbsFile_oldName;
 	private String mainBbsFile_newName;
 	private int mainBbsReply_id;
-	private String mainBbsReply_content;
+	private String mainBbs_ReplyContent;
 	private Date mainBbsReply_date;
 	public int getMainBbs_id() {
 		return mainBbs_id;
@@ -60,11 +60,11 @@ public class HamoBbsDTO {
 	public void setMainBbs_date(Date mainBbs_date) {
 		this.mainBbs_date = mainBbs_date;
 	}
-	public int getMainBbs_ReplyCount() {
-		return mainBbs_ReplyCount;
+	public int getMainBbs_replyCount() {
+		return mainBbs_replyCount;
 	}
-	public void setMainBbs_ReplyCount(int mainBbs_ReplyCount) {
-		this.mainBbs_ReplyCount = mainBbs_ReplyCount;
+	public void setMainBbs_replyCount(int mainBbs_replyCount) {
+		this.mainBbs_replyCount = mainBbs_replyCount;
 	}
 	public int getMainBbs_hit() {
 		return mainBbs_hit;
@@ -96,11 +96,11 @@ public class HamoBbsDTO {
 	public void setMainBbsReply_id(int mainBbsReply_id) {
 		this.mainBbsReply_id = mainBbsReply_id;
 	}
-	public String getMainBbsReply_content() {
-		return mainBbsReply_content;
+	public String getMainBbs_ReplyContent() {
+		return mainBbs_ReplyContent;
 	}
-	public void setMainBbsReply_content(String mainBbsReply_content) {
-		this.mainBbsReply_content = mainBbsReply_content;
+	public void setMainBbs_ReplyContent(String mainBbs_ReplyContent) {
+		this.mainBbs_ReplyContent = mainBbs_ReplyContent;
 	}
 	public Date getMainBbsReply_date() {
 		return mainBbsReply_date;
@@ -108,6 +108,5 @@ public class HamoBbsDTO {
 	public void setMainBbsReply_date(Date mainBbsReply_date) {
 		this.mainBbsReply_date = mainBbsReply_date;
 	}
-	
 	
 }

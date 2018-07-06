@@ -9,6 +9,8 @@
 		WHERE C.club_name LIKE '%'||#{search}||'%' OR C.club_location LIKE '%'||#{search}||'%' OR I.interest_interest LIKE '%'||#{search}||'%'
 	</select>
 	
+	
+	
 	<select id="myClubList" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
 		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest
 		FROM member M Join club C ON M.member_id=C.member_id
