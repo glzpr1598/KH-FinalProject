@@ -6,15 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" href="./resources/image/icon-32.png" />
-<title>HAMO</title>
+<title>HAMO - 동호회 폐쇄</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<style>
-	
-</style>
+<style></style>
 </head>
 <body>
-	<%@ include file="./main-header.jsp" %>
 </body>
 <script>
+	window.close();
 </script>
 </html>
