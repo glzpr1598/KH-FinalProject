@@ -68,7 +68,7 @@ public class HamoMemberController {
 		return service.emailOverlay(email);
 	}
 	
-	/**회원가입 이메일 본인인증 - 김응주 */
+	/**회원가입&비밀번호찾기 이메일 본인인증 - 김응주 */
 	@RequestMapping(value = "/emailChk")
 	public @ResponseBody HashMap<String, Object> 
 		emailChk(@RequestParam String email, HttpServletRequest request, ModelMap mo) throws AddressException, MessagingException { 
@@ -207,7 +207,46 @@ public class HamoMemberController {
 		}
 		return map;
 	}
+	
+	/**비밀번호 찾기 페이지로 이동 - 김응주 */	
+	@RequestMapping(value="/pwSearch")
+	public @ResponseBody HashMap<String, Object> 
+		pwSearch(@RequestParam HashMap<String,String> params) {
+		
+		logger.info("비밀번호찾기페이지로 이동(컨트롤러)");
+		String userId = params.get("userId");
+		String email = params.get("email");
+		
+		String pw = service.pwSearch(userId, email);
+		boolean success = false;
+		logger.info("비밀번호 찾기 여부 : " + success);
 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(pw != null) {
+		success = true;
+		map.put("success", success);
+		}
+		return map;
+	}
+
+	/**비밀번호 수정 - 김응주*/
+	@RequestMapping(value="/pwUpdate")
+	public @ResponseBody HashMap<String, Object> 
+		pwUpdate(@RequestParam HashMap<String,String> params) {
+	
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		logger.info("비밀번호 수정(컨트롤러)");
+		String pw = encoder.encode(params.get("pw"));
+		String id = params.get("id");
+		
+		boolean success = false;
+		success = service.pwUpdate(id, pw);
+		logger.info("비밀번호 찾기 여부 : " + success);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("success", success);
+		return map;
+	}
 	// 로그아웃
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {

@@ -104,6 +104,18 @@ public class HamoMemberService {
 		return id;
 	}
 
+	public String pwSearch(String userId, String email) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		String success = inter.pwSearch(userId, email);
+		return success;
+	}
+
+	public boolean pwUpdate(String id, String pw) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		boolean success = inter.pwUpdate(id,pw);
+		return success;
+	}
+
 
 
 
