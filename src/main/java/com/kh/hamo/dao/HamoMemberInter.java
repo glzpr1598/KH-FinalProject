@@ -20,6 +20,10 @@ public interface HamoMemberInter {
 
 	String idSearch(String userName, String email);
 
+	String pwSearch(String userId, String email);
+
+	boolean pwUpdate(String id, String pw);
+
 	
 
 	

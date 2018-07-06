@@ -33,4 +33,26 @@
 <select id="idSearch" resultType="String">
 	SELECT member_id FROM member WHERE member_name=#{param1} AND member_email=#{param2}
 </select>
+
+<select id="pwSearch" resultType="String">
+	SELECT member_pw FROM member WHERE member_id=#{param1} AND member_email=#{param2}
+</select>
+
+<update id="pwUpdate">
+		UPDATE member SET member_pw=#{param2} WHERE member_id=#{param1}	 
+</update>
 </mapper>         
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -52,7 +52,6 @@
 	/* 메뉴의 텍스트 */
 	#left .menu a {
 		color: #5a5a5a;
-		font-weight: bold;
 		text-decoration: none;
 		margin-left: 5px;
 	}
@@ -123,5 +122,13 @@
 	</div>
 </body>
 <script>
+
+	// 동호회 폐쇄 클릭
+	$("#btn4").click(function() {
+		var club_id = "<%= request.getParameter("club_id") %>";
+		window.open("./clubCloseForm?club_id=" + club_id, 
+				"_blank", "width=450px, height=230px left=200px top=100px");
+	});
+	
 </script>
 </html>
