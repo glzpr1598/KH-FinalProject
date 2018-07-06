@@ -79,11 +79,11 @@
 <body>
 	<div id="left">
 		<div id="info">
-			<div>회장: <span></span></div>
-			<div>회원수: <span></span></div>
-			<div>설립일: <span></span></div>
-			<div>주제: <span></span></div>
-			<div>지역: <span></span></div>
+			<div>회장: <span id="master"></span></div>
+			<div>회원수: <span id="memberCount"></span></div>
+			<div>설립일: <span id="createDate"></span></div>
+			<div>주제: <span id="subject"></span></div>
+			<div>지역: <span id="location"></span></div>
 		</div> 
 		<input type="button" value="가입하기" class="btn" />
 		<div id="menu" class="menu">
