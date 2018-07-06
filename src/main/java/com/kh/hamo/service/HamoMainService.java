@@ -60,4 +60,12 @@ public class HamoMainService {
 		result.put("myClubJoin", myClubJoin);
 		return result;
 	}
+	//가입한 동호회 탈퇴
+	public ModelAndView myClubRemove(String myClubRemove) {
+		inter = sqlSession.getMapper(HamoMainInter.class);
+		int success = inter.myClubDel(myClubRemove);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("m09");
+		return mav;
+	}
 }

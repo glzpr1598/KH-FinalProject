@@ -67,10 +67,16 @@ public class HamoMainController {
 		return service.myClubJoin(id);
 	}
 	//가입한 동호회 탈퇴
-	@RequestMapping(value = "/myClubList")
-	public @ResponseBody HashMap<String, Object> myClubRemove(String id) {
-		logger.info("설립한 동회 리스트");
-		id="admin";/**<-임의로 설정한거임 */
-		return service.myClubList(id);
+	@RequestMapping(value = "/myClubRemove")
+	public ModelAndView myClubRemove(@RequestParam ("myClubRemove") String myClubRemove) {
+		logger.info("가입한 동호회 탈퇴 리스트");
+		return service.myClubRemove(myClubRemove);
 	}
+	//동호회 찾기
+	@RequestMapping(value = "/m10move")
+	public String m10move(Model model) {
+		logger.info("동호회 찾기 ");
+		return "m10";
+	}
+	
 }

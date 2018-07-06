@@ -25,7 +25,9 @@
 		WHERE CJ.member_id=#{param1}
 	</select>
 	
-	
+	<delete id="myClubDel">
+		DELETE FROM clubJoin WHERE clubJoin_id = #{param1}
+	</delete>
 	
 	
 	

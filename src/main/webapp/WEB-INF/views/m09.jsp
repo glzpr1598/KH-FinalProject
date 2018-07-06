@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 	<head>
+	<link rel="icon" href="./resources/image/icon-32.png" />
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -39,10 +40,14 @@
 			color: black;
 			text-decoration: none;
 		}
-		button{
+		input[type=submit]{
 			background-color:white; 
 			border: 1px solid #FFBF00;
-			/* border-radius: 5px; */
+			
+			/* border-radius: 5px;  모서리 둥굴게*/
+		}
+		form{
+			margin: 0;
 		}
 	</style>
 		
@@ -77,22 +82,24 @@
 				<h3> | 가입한 동호회 | </h3>
 				<a id="joinDay"><i class="fa fa-check"></i> 설립일순&nbsp;</a>
 				<a id="joinCount"><i class="fa fa-check"></i> 회원수순</a>
-				<table >
-					<thead>	
-						<tr>
-							<th>주제</th>
-							<th>지역</th>
-							<th>동호회 명</th>
-							<th>소개</th>
-							<th>설립일</th>
-							<th>회원수 </th>
-							<th>탈퇴</th>
-						</tr>
-					</thead>
-					<tbody id="myClubJoinTable">
-					<!-- 리스트 보여줄 자리 -->
-					</tbody>
-				</table>
+				
+					<table >
+						<thead>	
+							<tr>
+								<th>주제</th>
+								<th>지역</th>
+								<th>동호회 명</th>
+								<th>소개</th>
+								<th>설립일</th>
+								<th>회원수 </th>
+								<th>탈퇴</th>
+							</tr>
+						</thead>
+						<tbody id="myClubJoinTable">
+						<!-- 리스트 보여줄 자리 -->
+						</tbody>
+					</table>
+				
 			</div>
 		</div>
 	</body>
@@ -167,6 +174,8 @@
 				content +="<td>"+item.club_date+"</td>";
 				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
+				;
+				
 			});		
 			$("#myClubListTable").empty();
 			$("#myClubListTable").append(content);
@@ -176,18 +185,26 @@
 			var content ="";
 			list.forEach(function(item, idx){
 				content +="<tr>";
-				content +="<td>"+item.interest_interest+"</td>";
+				content +="<td>"+item.interest_interest+"<input type='hidden' name='myClubRemove' value='"+item.clubJoin_id+"'/></td>";
 				content +="<td>"+item.club_location+"</td>";
 				content +="<td>"+item.club_name+"</td>";
 				content +="<td>"+item.club_introduce+"</td>";
 				content +="<td>"+item.club_date+"</td>";
 				content +="<td>"+item.club_memberCount+"</td>";
-				content +="<td><button name="+item.clubJoin_id+">탈퇴</button></td>";
+				content +="<td><form action='myClubRemove'><input type='hidden' name='myClubRemove' value='"+item.clubJoin_id+"'/><input type='submit' onclick='clubDel()' value='탈퇴'/></form></td>";
 				content += "</tr>";
 			});		
 			$("#myClubJoinTable").empty();
 			$("#myClubJoinTable").append(content);
 			
+		}
+		function clubDel(){
+			var del=confirm('동호회 탈퇴 하시겠습니까?')
+			if(del){
+				alert("탈퇴 되었습니다.");
+			}else{
+				$("form").attr("action","m09move");
+			}
 		}
 		
 		function ajaxCall(param){
