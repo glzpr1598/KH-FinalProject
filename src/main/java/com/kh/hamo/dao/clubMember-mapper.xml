@@ -6,11 +6,25 @@
 
 	<!-- 특정 동호회의 멤버 리스트 가져오기 -->
 	<select id="clubMemberList" resultType="HashMap">
-		SELECT M.member_id, cj.clubjoin_nickname, M.mamber_email, M.member_phone FROM club C
+		SELECT M.member_id, cj.clubjoin_nickname, M.member_email, M.member_phone, cj.clubjoin_id, C.club_id 
+			FROM club C
 		    JOIN clubjoin cj
 		    ON C.club_id = cj.club_id
 		    JOIN MEMBER M
 		    ON cj.member_id = M.member_id
-		    WHERE C.club_id = #{club_id}
+		    WHERE C.club_id = #{param1}
+		    ORDER BY cj.clubjoin_id DESC
 	</select>
+	
+	<!-- 특정 동호회가입 아이디로 멤버 강퇴 -->
+	<delete id="clubMemberFire">
+		DELETE FROM clubjoin WHERE clubjoin_id = #{param1}
+	</delete>
+	
+	<!-- 블랙리스트 추가 -->
+	<insert id="clubMemberBlacklist">
+		INSERT INTO blacklist(blacklist_id, club_id, member_id)
+    		VALUES(seq_blacklist_id.NEXTVAL, #{param1}, #{param2})
+	</insert>
+	
 </mapper>

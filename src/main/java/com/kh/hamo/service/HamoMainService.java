@@ -32,6 +32,10 @@ public class HamoMainService {
 	public HashMap<String, Object> totalClubSearch(HashMap<String, String> map) {
 		logger.info("종합검색 서비스 실행");
 		inter = sqlSession.getMapper(HamoMainInter.class);
+		
+		
+		
+		
 		ArrayList<HamoMainDTO> totalClubSearch = inter.totalClubSearch(map);
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("list", totalClubSearch);
@@ -56,5 +60,4 @@ public class HamoMainService {
 		result.put("myClubJoin", myClubJoin);
 		return result;
 	}
-
 }

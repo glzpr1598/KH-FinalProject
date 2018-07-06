@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO - 멤버관리</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 	table {
@@ -35,6 +36,7 @@
 		border: thin solid #FFBF00;
 		background: none;
 		padding: 5px 10px;
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -49,7 +51,7 @@
 			<br />
 			<table>
 				<tr>
-					<th>글번호</th>
+					<th>아이디</th>
 					<th>닉네임</th>
 					<th>이메일</th>
 					<th>전화번호</th>
@@ -59,9 +61,12 @@
 				<tr>
 					<td>${ item.MEMBER_ID }</td>
 					<td>${ item.CLUBJOIN_NICKNAME }</td>
-					<td>${ item.MAMBER_EMAIL }</td>
+					<td>${ item.MEMBER_EMAIL }</td>
 					<td>${ item.MEMBER_PHONE }</td>
-					<td><button class="fire">강퇴</button></td>
+					<td>
+						<!-- 클래스 : fire, clubJoin_id, club_id, member_id -->
+						<button class="fire ${ item.CLUBJOIN_ID } ${ item.CLUB_ID } ${ item.MEMBER_ID }">강퇴</button>
+					</td>
 				</tr>
 				</c:forEach>
 			</table>
@@ -71,6 +76,18 @@
 	<!------------------- 양식 ------------------->
 </body>
 <script>
-	
+	// 강퇴 버튼 클릭
+	$(".fire").click(function() {
+		// 회원 강퇴 uri(clubJoin_id, club_id, member_id를 파라미터로 보냄)
+		var uri = './clubMemberFire' +
+		'?clubJoin_id=' + $(this)[0].classList[1] +
+		'&club_id=' + $(this)[0].classList[2] + 
+		'&member_id=' + $(this)[0].classList[3];
+		
+		// 확인 버튼 누를 경우
+		if(confirm('강퇴한 회원은 이 동호회에 다시 가입할 수 없습니다. \n정말로 강퇴시키시겠습니까?')) {
+			location.href = uri;
+		}
+	});
 </script>
 </html>

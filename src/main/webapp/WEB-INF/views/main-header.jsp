@@ -4,8 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
 	body {
@@ -81,17 +79,17 @@
 	}
 	
 	/* 메뉴 div */
-	#menuBar {
+	#naviBar {
 		margin: 20px 0px;
 		background: #ffbf00;
 	}
 	/* 메뉴 container */
-	#menuBar #container {
+	#naviBar #container {
 		width: 1000px;
 		margin: auto;
 	}
 	/* 메뉴 */
-	#menuBar .menu {
+	.navi {
 		display: inline-block;
 		padding: 12px 15px;
 		margin: 0px 15px;
@@ -101,8 +99,8 @@
 		font-size: 14px;
 		color: #ffffff;
 	}
-	#menuBar .menu:hover {
-		background: #F3E2A9;
+	.navi:hover {
+		background: #FDF5DC;
 		color: #848484;
 	}
 </style>
@@ -111,10 +109,11 @@
 	<div id="header">
 		<div id="link">
 			<a id="login"></a>
+			|
 			<a href="">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
-			<img id="logo" src="./resources/image/logo.png" />
+			<a href="./"><img id="logo" src="./resources/image/logo.png" /></a>
 			<div id="divSearch">
 				<form action="m08move">
 					<input name="search" id="inputSearch" type="text" placeholder="검색어 입력">
@@ -123,12 +122,12 @@
 			</div>
 		</div>
 	</div>
-	<div id="menuBar">
+	<div id="naviBar">
 		<div id="container">
-			<a class="menu" id="myClub" href="m09move">내 동호회</a>
-			<a class="menu" id="findClub" href="">동호회 찾기</a>
-			<a class="menu" id="makeClub" href="">동호회 만들기</a>
-			<a class="menu" id="comunity" href="freeBbsList">커뮤니티</a>
+			<a class="navi" id="myClub" href="m09move">내 동호회</a>
+			<a class="navi" id="findClub" href="">동호회 찾기</a>
+			<a class="navi" id="makeClub" href="">동호회 만들기</a>
+			<a class="navi" id="comunity" href="freeBbsList">커뮤니티</a>
 		</div>
 	</div>
 </body>
@@ -153,11 +152,11 @@
 	// 로그인/로그아웃 클릭
 	$("#login").click(function() {
 		if(loginState == "login") {  // 로그인 상태
-			// 로그아웃
+			// 로그아웃   
 			location.href="./logout";
 		} else {  // 로그아웃 상태
 			// 로그인 페이지로 이동
-			location.href="./loginForm";
+			location.href="./loginForm";       
 		}
 	});
 

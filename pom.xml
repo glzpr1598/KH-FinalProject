@@ -42,6 +42,13 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- 자꾸 오류 뜨는거  -->
+		<!-- <dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		 </dependency> -->
+
 		
 		<!-- Oracle JDBC Driver -->
 		<!-- version뒤에 .0 지움 -->
@@ -201,7 +208,17 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-				
+		
+	
+	<!-- 메일확인용 메일발송 - 김응주 -->
+		
+	<dependency> 
+		<groupId>javax.mail</groupId>
+		 <artifactId>mail</artifactId>
+		  <version>1.4.7</version> 
+	</dependency>
+	
+	
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -229,6 +246,8 @@
 			<scope>test</scope>
 		</dependency>        
 	</dependencies>
+		
+	
     <build>
         <plugins>
             <plugin>

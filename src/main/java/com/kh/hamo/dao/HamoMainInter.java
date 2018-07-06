@@ -3,8 +3,6 @@ package com.kh.hamo.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
-
 import com.kh.hamo.dto.HamoMainDTO;
 
 public interface HamoMainInter {

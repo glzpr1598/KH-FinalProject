@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="./resources/js/paginathing.js" type="text/javascript"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
@@ -21,23 +24,32 @@
 		td{
 			border-bottom: 1px solid #ffbf00;
 		}
+		.panel-footer{
+			background-color: white;
+		}
 	</style>
 	</head>
 	<body>
 		<%@ include file="./main-header.jsp" %>
-		<table id="listTable">
-				<tr>
-					<th>주제</th>
-					<th>지역</th>
-					<th>동호회명</th>
-					<th>소개</th>
-					<th>설립일</th>
-					<th>회원수</th>
-				</tr>
-			
-		</table>
+			<table id="listTable">
+				<thead>
+					<tr>
+						<th>주제</th>
+						<th>지역</th>
+						<th>동호회명</th>
+						<th>소개</th>
+						<th>설립일</th>
+						<th>회원수</th>
+					</tr>
+				</thead>
+				<tbody  >
+				</tbody>
+			</table>
+		<ul></ul>
 	</body>
 	<script>
+	
+	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
@@ -48,7 +60,14 @@
 			obj.success = function(data){
 				console.log(data);
 				listPrint(data.list);
-
+				jQuery(document).ready(function($){
+					$('table tbody').paginathing({
+				    		perPage: 5,
+				    		containerClass: 'panel-footer'
+				    			
+					})
+				});
+				
 		}
 			ajaxCall(obj);
 		});
@@ -66,6 +85,7 @@
 				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
 			});		
+			
 			$("#listTable").append(content);
 		}
 		
@@ -74,6 +94,8 @@
 			$.ajax(param);
 		}
 	
-	
+		
+		
 	</script>
+		
 </html>

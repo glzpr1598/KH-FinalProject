@@ -8,10 +8,11 @@
 		  resultType :  쿼리문 돌린 결과를 담을 클래스명
 	-->
 	<!-- ArrayList 에 자동으로 담아줌 -->
+	
+	
 	<select id="freeBbsList" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT * FROM mainBbs order by mainBbs_idx DESC 
-	</select>
-	
+
 	<select id="freeBbsdetail" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT * FROM mainBbs WHERE mainBbs_id=#{param1}	
 	</select>
