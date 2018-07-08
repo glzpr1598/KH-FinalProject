@@ -43,6 +43,12 @@ public class ClubBbsController {
 		return clubBbsService.clubNoticeList(member_id,club_id,sort);
 	}
 	
-	
+	//공지사항 글쓰기
+	@RequestMapping(value="/clubNoticeWrite")
+	public ModelAndView clubNoticeWrite(@RequestParam HashMap<String, String> params, HttpSession session) {
+		logger.info("공지사항 글쓰기 호출");
+		String member_id = (String) session.getAttribute("member_id");
+		return clubBbsService.clubNoticeWrite(params,member_id);
+	}
 	
 }
