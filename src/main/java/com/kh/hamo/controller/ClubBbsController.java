@@ -43,12 +43,26 @@ public class ClubBbsController {
 		return clubBbsService.clubNoticeList(member_id,club_id,sort);
 	}
 	
+	//공지사항 폼
+	@RequestMapping(value="/clubNoticeWriteForm")
+	public String clubNoticeForm() {
+		logger.info("공지사항 글쓰기 폼");
+		return "c06";
+	}
+	
 	//공지사항 글쓰기
 	@RequestMapping(value="/clubNoticeWrite")
 	public ModelAndView clubNoticeWrite(@RequestParam HashMap<String, String> params, HttpSession session) {
 		logger.info("공지사항 글쓰기 호출");
 		String member_id = (String) session.getAttribute("member_id");
 		return clubBbsService.clubNoticeWrite(params,member_id);
+	}
+	
+	//공지사항 상세보기
+	@RequestMapping(value="/clubNoticeDetail")
+	public ModelAndView clubNoticeDetail(@RequestParam HashMap<String, String> params) {
+		logger.info("공지사항 상세보기");
+		return clubBbsService.clubNoticeDetail(params);
 	}
 	
 }

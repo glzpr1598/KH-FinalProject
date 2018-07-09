@@ -61,5 +61,21 @@ public class ClubBbsService {
 		mav.setViewName(page);
 		return mav;
 	}
+	
+	//공지사항 상세보기
+	@Transactional
+	public ModelAndView clubNoticeDetail(HashMap<String, String> params) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		
+		String clubBbs_id = params.get("clubBbs_id");
+		
+		//조회수 올리기
+		clubBbsInter.clubBbsHit(clubBbs_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("info", clubBbsInter.clubNoticeDetail(clubBbs_id));
+		mav.setViewName("c07");
+		return mav;
+	}
 
 }

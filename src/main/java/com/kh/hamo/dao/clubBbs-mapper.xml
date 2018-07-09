@@ -19,5 +19,15 @@
 		INSERT INTO clubBbs(clubBbs_id, club_id, member_id,clubBbs_sort, clubBbs_idx,clubBbs_subject,clubBbs_date, clubBbs_content,clubBbs_replyCount, clubBbs_hit) 
 		VALUES(seq_clubbbs_id.NEXTVAL, #{club_id}, #{member_id},#{clubBbs_sort},#{clubBbs_idx},#{clubBbs_subject},SYSDATE,#{clubBbs_content},0,0)
 	</insert>
+	
+	<!-- 조회수 올리기 -->
+	<update id="clubBbsHit">
+		UPDATE clubBbs SET clubBbs_hit = clubBbs_hit+1 WHERE clubBbs_id=#{param1}
+	</update>
+	
+	<!-- 공지사항 상세보기 -->
+	<select id="clubNoticeDetail" resultType="com.test.dto.ClubBbsDTO">
+		SELECT cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
+	</select>
 
 </mapper>
