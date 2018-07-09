@@ -34,7 +34,7 @@ public class ClubAdminService {
 	
 	// 동호회 폐쇄 날짜 확인 후 동호회 삭제
 	@Scheduled(cron = "0 0 0 * * *")  // 매일 0시마다
-	public void clubCloseCheck() {
+	public void clubCloseSchedule() {
 		inter = sqlSession.getMapper(ClubAdminInter.class);
 		
 		// 폐쇄 날짜 가져오기
@@ -51,6 +51,17 @@ public class ClubAdminService {
 				inter.clubCloseDelete(item.get("CLUBCLOSE_ID"));
 			}
 		}
+	}
+
+	// 동호회 폐쇄 검사
+	public HashMap<String, Object> clubCloseCheck(String club_id) {
+		inter = sqlSession.getMapper(ClubAdminInter.class);
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		String clubClose_date = inter.clubCloseCheck(club_id);
+		result.put("clubClose_date", clubClose_date);
+		
+		return result;
 	}
 
 }
