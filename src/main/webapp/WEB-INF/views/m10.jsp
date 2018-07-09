@@ -15,7 +15,7 @@
 
 		.container {
 			text-align: center;
-			width:1200px;
+			width:1050px;
 			margin: 0 auto;
 			padding: 20px 0;
 		}
@@ -172,9 +172,46 @@
 			 font-family: FontAwesome;
 			 color: #fff;
 		}
-		text{
+		#text {
 			position: relative;
-			top: 300px;
+			left: 17%;
+		}
+		
+		
+		
+		table{
+			margin-top: 10px;
+			width : 1050px;
+			text-align: center;
+			border-collapse: collapse;
+		}
+		th{
+			background-color:#FDF5DC;
+		}
+		td{
+			border-bottom: 1px solid #ffbf00;
+		}
+		#div1{
+			position: absolute;
+			left: 17%;
+			top: 67%;
+		}
+		i{
+			color: #FFBF00;
+		}
+		a{
+			cursor:pointer;
+			color: black;
+			text-decoration: none;
+		}
+		input[type=submit]{
+			background-color:white; 
+			border: 1px solid #FFBF00;
+			
+			/* border-radius: 5px;  모서리 둥굴게*/
+		}
+		form{
+			margin: 0;
 		}
 	</style>
 
@@ -370,6 +407,28 @@
 		<div id="text">
 			<h5 id="interest">선택한 주제 : 전체</h5>
 			<h5 id="location">선택한 지역 : 전체</h5>
+		</div>
+		
+		<div id="div1">
+			<div id="myClubList">
+				<a id="day"><i class="fa fa-check"></i> 설립일순 &nbsp;</a>
+				<a id="count"><i class="fa fa-check"></i> 회원수순 </a>
+				<table >
+					<thead>					
+						<tr>
+							<th>주제</th>
+							<th>지역</th>
+							<th>동호회 명</th>
+							<th>소개</th>
+							<th>설립일</th>
+							<th>회원수 </th>
+						</tr>
+					</thead>
+					<tbody id="myClubListTable">
+					<!-- 리스트 보여줄 자리 -->
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</body>
 	<script>
