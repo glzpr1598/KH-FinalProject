@@ -25,12 +25,16 @@
 	#left #info{
 		border: medium solid #ffbf00;
 		border-radius: 5px;
-		font-weight: bold;
 		padding: 5px 0px;
 		margin-bottom: 5px;
 	}
 	#left #info div {
 		padding: 5px 10px;
+	}
+	#left #info .infoText1 {
+		display: inline-block;
+		width: 50px;
+		font-weight: bold;
 	}
 	
 	/* 메뉴 */
@@ -79,11 +83,11 @@
 <body>
 	<div id="left">
 		<div id="info">
-			<div>회장: <span id="master"></span></div>
-			<div>회원수: <span id="memberCount"></span></div>
-			<div>설립일: <span id="createDate"></span></div>
-			<div>주제: <span id="subject"></span></div>
-			<div>지역: <span id="location"></span></div>
+			<div><span class="infoText1">회장</span><span id="master"></span></div>
+			<div><span class="infoText1">회원수</span><span id="memberCount"></span></div>
+			<div><span class="infoText1">설립일</span><span id="createDate"></span></div>
+			<div><span class="infoText1">주제</span><span id="subject"></span></div>
+			<div><span class="infoText1">지역</span><span id="location"></span></div>
 		</div> 
 		<input type="button" value="가입하기" class="btn" />
 		<div id="menu" class="menu">
@@ -122,6 +126,12 @@
 	</div>
 </body>
 <script>
+
+	// 멤버관리 클릭
+	$("#btn3").click(function(){
+		club_id = "<%= request.getParameter("club_id") %>";
+		location.href="./clubMemberList?club_id=" + club_id;
+	});
 
 	// 동호회 폐쇄 클릭
 	$("#btn4").click(function() {
