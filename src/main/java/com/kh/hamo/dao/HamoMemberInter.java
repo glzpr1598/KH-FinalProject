@@ -24,6 +24,10 @@ public interface HamoMemberInter {
 
 	boolean pwUpdate(String id, String pw);
 
+	HamoMemberDTO updateForm(String userId);
+
+
+
 	
 
 	

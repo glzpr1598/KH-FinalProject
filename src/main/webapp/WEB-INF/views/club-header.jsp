@@ -60,7 +60,7 @@
 		</div>
 	</div>
 	<div id="first">
-		<span id="clubName">::노란 자전거를 사랑하는 모임::</span>
+		<span id="clubName"></span>
 	</div>
 </body>
 <script>
@@ -85,6 +85,25 @@
 			// 로그인 페이지로 이동
 			location.href="./loginForm";
 		}
+	});
+	
+	// 동호회 정보 가져오기
+	// 동호회명, 회장, 회원수, 설립일, 주제, 지역
+	$(document).ready(function() {
+		var club_id = "<%= request.getParameter("club_id") %>";
+		
+		$.ajax({
+	        url: "./clubInfo",
+	        type: "post",
+	        data: {
+	            "club_id": club_id,
+	        },
+	        dataType: "json",
+	        success: function(data) {
+	            console.log(data);
+	        },
+	        error: function(err) {console.log(err);}
+	    });
 	});
 
 </script>

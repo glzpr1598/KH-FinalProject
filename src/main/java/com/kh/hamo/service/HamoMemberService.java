@@ -104,16 +104,31 @@ public class HamoMemberService {
 		return id;
 	}
 
+	/**비밀번호 찾기 - 김응주*/
 	public String pwSearch(String userId, String email) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
 		String success = inter.pwSearch(userId, email);
 		return success;
 	}
-
+	
+	/**비밀번호 수정 - 김응주*/
 	public boolean pwUpdate(String id, String pw) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
 		boolean success = inter.pwUpdate(id,pw);
 		return success;
+	}
+	
+	/**수정폼 - 김응주*/
+	public ModelAndView updateForm(String userId) {
+		inter = sqlSession.getMapper(HamoMemberInter.class);
+		ModelAndView mav = new ModelAndView();
+		if(userId != null) {
+		mav.addObject("bbs", inter.updateForm(userId));
+		mav.setViewName("m05");
+		}else {
+			mav.setViewName("m01");	
+		}
+		return mav;
 	}
 
 

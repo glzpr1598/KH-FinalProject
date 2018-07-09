@@ -110,7 +110,7 @@
 		<div id="link">
 			<a id="login"></a>
 			|
-			<a href="">회원정보수정</a>
+			<a href="./updateForm" id="update">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
 			<a href="./"><img id="logo" src="./resources/image/logo.png" /></a>
@@ -139,7 +139,7 @@
 	
 	// 로그인 상태 변수
 	var loginState = "logout";  
-	
+
 	// 로그인 체크
 	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";
