@@ -93,12 +93,12 @@
 		<div id="menu" class="menu">
 			<div>
 				<img id="list" src="./resources/image/list.png" />
-				<a id="menu1" href="">전체글보기</a>
+				<a id="menu1" href="./clubAllList?club_id=<%= request.getParameter("club_id") %>">전체글보기</a>
 			</div>	
 			
 			<div>
 				<img id="list2" src="./resources/image/list.png" />
-				<a id="menu2" href="./clubNoticeList?sort=공지사항">공지사항</a>
+				<a id="menu2" href="./clubNoticeList?club_id=<%= request.getParameter("club_id") %>&sort=공지사항">공지사항</a>
 			</div>
 			
 			<div>
