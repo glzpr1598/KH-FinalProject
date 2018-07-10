@@ -35,7 +35,7 @@
 	</select>
 	
 	<!-- 댓글 작성 -->
-	<insert id="clubReply" parameterType="com.test.dto.ClubBbsDTO">
+	<insert id="clubReply" parameterType="com.kh.hamo.dto.ClubBbsDTO">
 		INSERT INTO clubBbsReply VALUES (seq_clubbbsreply_id.NEXTVAL,#{clubBbs_id},#{member_id},#{clubBbsReply_content},SYSDATE)
 	</insert>
 	
