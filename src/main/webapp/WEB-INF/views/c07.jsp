@@ -54,8 +54,6 @@
 		left: 565px;
 		top:1000px;
 		width: 1000px;
-	}
-	#reply{
 		font-size:small;
 		font-weight: 600;
 	}
@@ -175,7 +173,7 @@
 	var clubBbs_id = "${info.clubBbs_id}";
 	
 	$("#del").click(function(){
-		var nickName = "노랑노랑"; //${sessionScope.nickName}
+		var nickName = "${sessionScope.nickName}";
 		if(nickName != "${info.club_masterNickname}"){
 			alert("삭제 권한이 없습니다.");
 			return;
@@ -185,7 +183,7 @@
 		}
 	});
 	$("#update").click(function(){
-		var nickName = "노랑노랑"; //${sessionScope.nickName}
+		var nickName = "${sessionScope.nickName}";
 		if(nickName != "${info.club_masterNickname}"){
 			alert("수정 권한이 없습니다.");
 			return;
@@ -200,7 +198,7 @@
 	$(document).ready(function(){
 		$.ajax({
 			type : "get",
-			url: "./clubNoticeReplyList",
+			url: "./clubReplyList",
 			dataType:"json",
 			data:{
 				"clubBbs_id":clubBbs_id
@@ -222,7 +220,7 @@
 	$("#save").click(function(){
 		$.ajax({
 			type : "get",
-			url: "./clubNoticeReply",
+			url: "./clubReply",
 			dataType:"json",
 			data:{
 				"replyContent":$("#replyContent").val(),
@@ -241,23 +239,28 @@
 	});
 	
  	$(document).on("click",".replyDel",function(){
- 		$.ajax({
-			type : "get",
-			url: "./clubNoticeReplyDelete",
-			dataType:"json",
-			data:{
-				"clubBbs_id":clubBbs_id,
-				"clubBbsReply_id":$("#reply_id").val()
-			},
-			success:function(data){
-				console.log(data);
-				listPrint(data.list);
-				replyCount(data.replyCount);
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});
+ 		var nick = "${sessionScope.nickName}";
+ 		if(nick != "${info.club_masterNickname}"){
+ 			alert("댓글을 삭제할 수 없습니다.");
+ 		}else{
+			$.ajax({
+				type : "get",
+				url: "./clubReplyDelete",
+				dataType:"json",
+				data:{
+					"clubBbs_id":clubBbs_id,
+					"clubBbsReply_id":$("#reply_id").val()
+				},
+				success:function(data){
+					console.log(data);
+					listPrint(data.list);
+					replyCount(data.replyCount);
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});
+ 		}
  	});
  	
 	function listPrint(list){
