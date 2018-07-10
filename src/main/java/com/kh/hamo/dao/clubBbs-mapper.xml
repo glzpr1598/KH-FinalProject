@@ -4,6 +4,11 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
 <mapper namespace="com.kh.hamo.dao.ClubBbsInter">
 
+	<!-- 회장 닉네임 찾기 -->
+	<select id="findMaster" resultType="String" parameterType="HashMap">
+		SELECT club_masterNickname FROM club WHERE club_id=#{club_id} AND member_id=#{member_id}
+	</select>
+
 	<!-- 공지사항 리스트 -->
 	<select id="clubNoticeList" resultType="com.kh.hamo.dto.ClubBbsDTO">
 		SELECT c.club_id, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_sort=#{param2} AND c.club_id=#{param1} ORDER BY clubBbs_idx DESC 

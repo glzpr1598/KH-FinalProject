@@ -28,6 +28,15 @@ public class ClubBbsService {
     
     ClubBbsInter clubBbsInter = null;
     
+	//회장 아이디 찾기
+	public HashMap<String, Object> findMaster(HashMap<String, String> params) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		String nick = clubBbsInter.findMaster(params);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("nick", nick);
+		return map;
+	}
+    
 	//공지사항 리스트
 	public HashMap<String, Object> clubNoticeList(int club_id,String sort) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
