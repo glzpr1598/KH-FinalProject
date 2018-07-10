@@ -18,7 +18,7 @@
   			    }
   			    
   			      
-  			    #join {   
+  			    #update {   
 				    width:297px;
 				    background-color: #ffbf00;
 				    border: none;
@@ -90,17 +90,18 @@
 		    <table>              
 		        <tr>
 		        	<hr size="1" color="#ffbf00">           
-    				<td><strong>이름&emsp;&emsp;&emsp;&emsp;&emsp;</strong><input id="nameChk" class="inputTxt" type="text" name="userName" placeholder="이름" value="${bbs.member_id}" onkeyup="chkword(this, 5)"/></td>
+    				<td><strong>이름&emsp;&emsp;&emsp;&emsp;&emsp;</strong><input id="nameChk" class="inputTxt" type="text" name="userName" placeholder="이름" value="${bbs.member_name}" onkeyup="chkword(this, 5)"/></td>
     			</tr>
     			<tr>
     				
-    				<td><hr size="1" color="#ffbf00">   <strong>전화번호&emsp;&emsp;&emsp;</a><input class="idtxt" type="text" name="phone" placeholder="전화번호" value="${bbs.member_phone}"  id="only_number"/></td>
+    				<td><hr size="1" color="#ffbf00">   <strong>전화번호&emsp;&emsp;&emsp;</strong><input class="idtxt" type="text" name="phone" placeholder="전화번호" value="${bbs.member_phone}"  id="only_number"/></td>
     			</tr>
 
 				<tr>
 					 
 					<td><hr size="1" color="#ffbf00">   <strong>관심사&emsp;&emsp;&emsp;&nbsp;&nbsp;</strong>    
 							<select id="select1" onchange="itemChange()">
+								<option>변경 전</option>
 								<option>관심사1</option>
 								<option>운동/스포츠</option>
 								<option>아웃도어/여행</option>
@@ -112,7 +113,7 @@
 								<option>차/오토바이</option>
 							</select>
 							<select name="choice11" id="select11">
-								<option>소분류</option>        
+								<option>${inter1}</option>        
 							</select>
 					</td>
 				</tr>
@@ -120,7 +121,8 @@
     			<tr>
 					<td><strong>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</strong>   
 							<select id="select2" onchange="itemChange2()">
-								<option>관심사2</option>        
+								<option>변경 전</option>        
+								<option>관심사2</option>
 								<option>운동/스포츠</option>
 								<option>아웃도어/여행</option>
 								<option>공연/문화</option>
@@ -131,7 +133,7 @@
 								<option>차/오토바이</option>
 							</select>
 							<select name="choice22" id="select22">
-								<option>소분류</option>        
+								<option>${inter2}</option>        
 							</select>
 					</td>
 				</tr>
@@ -139,7 +141,8 @@
     			<tr>
 					<td><strong>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</strong>
 							<select  id="select3" onchange="itemChange3()">
-								<option>관심사3</option>  
+								<option>변경 전</option>  
+								<option>관심사3</option>
 								<option>운동/스포츠</option>
 								<option>아웃도어/여행</option>
 								<option>공연/문화</option>
@@ -150,7 +153,7 @@
 								<option>차/오토바이</option>
 							</select>
 							<select name="choice33" id="select33">
-								<option>소분류</option>        
+								<option>${inter3}</option>        
 							</select>
 					</td>
 				</tr>
@@ -158,48 +161,42 @@
     			<tr>
 					<td><hr size="1" color="#ffbf00">   <strong>지역&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</strong>     
 							<select  id="select4" onchange="itemChange4()">
-								<option>지역</option>        
+								<option>변경 전</option>        
 								<option>강남</option>
 								<option>강동</option>
 								<option>강서</option>
 								<option>강북</option>
 							</select>
 							<select name="choice44" id="select44">
-								<option>소분류</option>        
+								<option>${bbs.member_location}</option>        
 							</select>
 					</td>
 				</tr>
 				
 				<tr>
 					<td><hr size="1" color="#ffbf00">   <strong>비밀번호&emsp;&emsp;&emsp;</strong>
-						<button id="pwUpdate" class="updateBtn">수정</button>
+						<button id="pwUpdate" class="updateBtn"  onclick="pwPopup()">수정</button>
 					</td>
 				</tr>
 				
 				<tr>
 					<td><hr size="1" color="#ffbf00">   <strong>이메일&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;</strong> 
-						<button id="emailUpdate"class="updateBtn">수정</button>
+						<button id="emailUpdate"class="updateBtn" onclick="emailPopup()">수정</button>
 					</td>
 				</tr>
 
     			<tr>
     				<td ><hr size="1" color="#ffbf00">   <strong>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;</strong>           
-    					<button id="join">수정완료</button>
+    					<button id="update">수정완료</button>
     				</td>
     			</tr>
     		</table>
     		</div>
 	</body>
 	<script>
-	var obj={};//초기화	
-	obj.type="post";
-	obj.dataType="json";
-	obj.error=function(e){console.log(e)};
 	
-
-	var serialNumber = "인증미완료";
+	var member_id = "${bbs.member_id}";     // 아이디를 기준으로 수정하기 때문에 필요
 	
-
 	
     function chkword(obj, maxByte) {//글자수 조건 제한
         var strValue = obj.value;
@@ -227,25 +224,14 @@
 
      }
        
-   /*숫자만 넣기*/
-$("#only_number").keyup(function () { 
-    this.value = this.value.replace(/[^0-9]/g,'');
-});
-$("#only_number2").keyup(function () { 
-    this.value = this.value.replace(/[^0-9]/g,'');
-});
-	
-	
-	function ajaxCall(obj){
-		$.ajax(obj);
-	}
-	
+  
 	
 	
 
 	function itemChange(){
 	
-		var first = ["소분류"];
+		var first = ["${inter1}"];
+		var choice = ["소분류"];
 		var sports = ["축구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
 		var tour = ["등산","캠핑","국내여행","해외여행","낚시"];
 		var show = ["뮤지컬/오페라","공연/연극","영화","전시회","고궁/문화재"];
@@ -259,8 +245,11 @@ $("#only_number2").keyup(function () {
 		 
 		var changeItem;
 		
-		if(selectItem == "관심사1"){
+		if(selectItem == "변경 전"){
 		  changeItem = first;
+		}
+		else if(selectItem == "관심사1"){
+			  changeItem = choice;
 		}
 		else if(selectItem == "운동/스포츠"){
 			  changeItem = sports;
@@ -299,7 +288,8 @@ $("#only_number2").keyup(function () {
 	
 	function itemChange2(){
 		
-		var first = ["소분류"];
+		var first = ["${inter2}"];
+		var choice = ["소분류"];
 		var sports = ["축구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
 		var tour = ["등산","캠핑","국내여행","해외여행","낚시"];
 		var show = ["뮤지컬/오페라","공연/연극","영화","전시회","고궁/문화재"];
@@ -314,8 +304,11 @@ $("#only_number2").keyup(function () {
 		var changeItem;
 		
 		
-		if(selectItem == "관심사2"){
+		if(selectItem == "변경 전"){
 		  changeItem = first;
+		}
+		else if(selectItem == "관심사2"){
+			  changeItem = choice;
 		}
 		else if(selectItem == "운동/스포츠"){
 			  changeItem = sports;
@@ -354,7 +347,8 @@ $("#only_number2").keyup(function () {
 	
 	function itemChange3(){
 		
-		var first = ["소분류"];
+		var first = ["${inter3}"];
+		var choice = ["소분류"];
 		var sports = ["축구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
 		var tour = ["등산","캠핑","국내여행","해외여행","낚시"];
 		var show = ["뮤지컬/오페라","공연/연극","영화","전시회","고궁/문화재"];
@@ -368,8 +362,11 @@ $("#only_number2").keyup(function () {
 		 
 		var changeItem;
 		
-		if(selectItem == "관심사3"){
+		if(selectItem == "변경 전"){
 		  changeItem = first;
+		}
+		else if(selectItem == "관심사3"){
+			  changeItem = choice;
 		}
 		else if(selectItem == "운동/스포츠"){
 			  changeItem = sports;
@@ -409,17 +406,17 @@ $("#only_number2").keyup(function () {
 	
 	function itemChange4(){
 		
-		var first = ["소분류"];
+		var first = ["${bbs.member_location}"];
 		var nam = ["강남/역삼","논현/학동","대치/도곡/양재","방배/반포","삼성/선릉","서초/교대","압구정/청담/신사"];
 		var dong = ["강동/천호","광진/구의/건대","송파/가락/방이","신천/잠실"];
 		var buk = ["강북/수유/미아","노원/도봉","대학로/성북","동대문/신당","시청/명동/을지로","왕십리/성동","용산/한남/이태원","인사동/삼청동","종로/광화문","중랑/상봉"];
 		var seo = ["강서/양천","여의도/영등포/당산","신촌/이대/서대문","홍대/합정/상수","마포역/공덕","삼암/망원","신림/관악","신도림/구로/금천","노량진/사당/동작","연신내/불광/은평"];
 		 
 		var selectItem = $("#select4").val();
-		 
+		    
 		var changeItem;
 		
-		if(selectItem == "지역"){
+		if(selectItem == "변경 전"){
 		  changeItem = first;
 		}
 		else if(selectItem == "강남"){
@@ -446,48 +443,41 @@ $("#only_number2").keyup(function () {
 
 }
 	
-	$("#join").click(function(){
+	$("#update").click(function(){
 
 			if($("input[name='userName']").val()==""){//이름 입력 확인
 				alert("이름을 확인 해 주세요");
-				$("input[name='userName']").focus();//포커스 이동
+				$("input[name='phone']").focus();//포커스 이동
 			}else if($("input[name='phone']").val()==""){//전화번호 입력 확인
 				alert("전화번호를 확인 해 주세요");
 				$("input[name='phone']").focus();//포커스 이동
-			}else if($("input[name='email']").val()==""){//이메일 입력 확인
-				alert("이메일을 확인 해 주세요");
-				$("input[name='email']").focus();//포커스 이동   
-			}else if( ($("input[name='serial']").val()!=serialNumber) || ( serialNumber == "인증미완료") ){// 인증번호 확인
-				alert("인증번호를 확인해주세요");
-				$("input[name='serial']").focus();//포커스 이동
 			}else if( ($("#select11").val() == "소분류") && ($("#select22").val() == "소분류") && ($("#select33").val() == "소분류") ) {
 				alert("관심사를 1가지 이상 선택해주세요");
-			}else if($("#select44").val()=="소분류"){
-				alert("지역을 설정해주세요");
 			}else{
-				console.log("서버 전송");
-				obj.url="./hamoJoin";
-				obj.data.name=$("input[name='userName']").val();
-				obj.data.phone=$("input[name='phone']").val();
-				obj.data.email=$("input[name='email']").val();
-				obj.data.select1=$("#select11").val();
-				obj.data.select2=$("#select22").val();
-				obj.data.select3=$("#select33").val();
-				obj.data.select4=$("#select44").val();
-				obj.success = function(data){
-					if(data.success == 1){
-						alert("회원 가입이 정상 처리 되었습니다.");
-						location.href="loginForm"; 
-					}else{
-						alert("회원 가입에 실패 했습니다.");
-						location.href="loginForm"; 
+				$.ajax({
+					url:"./userUpdate",
+					type:"post",
+					dataType:"json",
+					data:{
+						"id":member_id,
+						"name":$("input[name='userName']").val(),
+						"phone":$("input[name='phone']").val(),
+						"select1":$("#select11").val(),
+						"select2":$("#select22").val(),
+						"select3":$("#select33").val(),
+						"select4":$("#select44").val()
+					},
+					success:function(d){
+						if(d.success>0){
+							alert("회원정보 수정이 완료되었습니다.");
+							location.href="./";
+						}else{
+							alert("회원정보 수정 실패");
+						}
 					}
-				
-				console.log(obj);
-				ajaxCall(obj);
-			}				
-		}
-	});
+				});
+			}
+		});
 	
 
 	
@@ -495,9 +485,18 @@ $("#only_number2").keyup(function () {
 		location.href="./"
 	});
 	
+
+	     
+	function pwPopup(){
+		window.open('./pwUpdate2?userId='+member_id,  'windowpopup', 'width=330px , height=330px, scrollbars=no, resizable=no, left=580 , top=270');       
+	}
+	function emailPopup(){
+		window.open('./emailUpdate2?userId='+member_id,  'windowpopup', 'width=330px , height=330px, scrollbars=no, resizable=no, left=580 , top=270');     
+	}
 	
-	
-	
+	$("#only_number").keyup(function () { 
+	    this.value = this.value.replace(/[^0-9]/g,'');
+	});
 	
 	</script>
 </html>
