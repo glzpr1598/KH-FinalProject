@@ -406,14 +406,6 @@
 	</body>
 	<script>
 		// ajax
-		/* var interest = [];
-		$("input[name='interest']:checked").each(function(i) {
-			interest.push($(this).val());
-			console.log($("input[name='interest']:checked").val());
-	    });
-		 $("input[name='location']:checked").each(function(i) {
-			 interest.push($(this).val());
-	    });  */
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
@@ -423,6 +415,23 @@
 			obj.success = function(data){
 				console.log(data);
 				 listPrint(data.list);
+				 /* 설립일 순 클릭 햇을 때 */
+				$("#day").click(function(){
+					console.log(data.list);
+		 			data.list.sort(function(a, b) { // 내림차순
+					    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
+					}); 
+					listPrint(data.list);
+				});
+				 
+				 /* 회원수 순 클릭 햇을 때 */
+				$("#count").click(function(){
+					console.log(data.list);
+					data.list.sort(function(a, b) { // 내림차순
+					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
+					}); 
+					listPrint(data.list);
+				});
 			}
 			ajaxCall(obj);
 		});
@@ -487,6 +496,7 @@
 			obj.success = function(data){
 				console.log(data);
 				 listPrint(data.list);
+				
 			}
 			console.log(interest);
 			console.log(location);
