@@ -93,7 +93,6 @@
 	</div>
 </body>
 <script>
-
 	// 로고 클릭
 	$("#logo").click(function() {
 		location.href="./"
