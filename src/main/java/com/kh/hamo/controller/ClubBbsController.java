@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.service.ClubBbsService;
@@ -26,43 +27,28 @@ public class ClubBbsController {
 	@Autowired
 	ClubFileService clubFileService;
 	
-	//공지사항 게시판 리스트 보기
-	@RequestMapping(value = "/clubNoticeList", method = RequestMethod.GET)
-	public ModelAndView clubNoticeList(@RequestParam HashMap<String, String> params ,HttpSession session) {
-		logger.info("게시판 리스트 보기");
-		//값 체크
-		session.setAttribute("member_id", "test");
-		session.setAttribute("nickname", "노랑노랑");
-		int club_id = Integer.parseInt(params.get("club_id"));
-		logger.info("동호회 아이디 : "+club_id);
-		String sort = params.get("sort");
-		//세션 이용
-		String member_id = (String) session.getAttribute("member_id");
+	//공지사항 이동 폼
+		@RequestMapping(value="/clubNoticeList")
+		public String clubFreeBbsList() {
+			logger.info("공지사항 리스트 폼");
+			return "c05";
+		}
 		
-		//회장 닉네임을 조회하기 위해서 회원 아이디 값 사용
-		return clubBbsService.clubNoticeList(member_id,club_id,sort);
-	}
-	
-	//공지사항 폼
-	@RequestMapping(value="/clubNoticeWriteForm")
-	public String clubNoticeForm() {
-		logger.info("공지사항 글쓰기 폼");
-		return "c06";
-	}
-	
-	//공지사항 글쓰기
-	@RequestMapping(value="/clubNoticeWrite")
-	public ModelAndView clubNoticeWrite(@RequestParam HashMap<String, String> params, HttpSession session) {
-		logger.info("공지사항 글쓰기 호출");
-		String member_id = (String) session.getAttribute("member_id");
-		return clubBbsService.clubNoticeWrite(params,member_id);
-	}
-	
-	//공지사항 상세보기
-	@RequestMapping(value="/clubNoticeDetail")
-	public ModelAndView clubNoticeDetail(@RequestParam HashMap<String, String> params) {
-		logger.info("공지사항 상세보기");
-		return clubBbsService.clubNoticeDetail(params);
-	}
+		//공지사항 게시판 리스트 보기
+		@RequestMapping(value = "/clubNoticeListForm", method = RequestMethod.GET)
+		public @ResponseBody HashMap<String, Object> clubNoticeListForm(@RequestParam HashMap<String, String> params ,HttpSession session) {
+			logger.info("공지사항 게시판 리스트 보기");
+			//값 체크
+			session.setAttribute("member_id", "admin");
+			session.setAttribute("nickname", "노랑노랑");
+			int club_id = Integer.parseInt(params.get("club_id"));
+			logger.info("동호회 아이디 : "+club_id);
+			String sort = params.get("sort");
+			//세션 이용
+			String member_id = (String) session.getAttribute("member_id");
+			
+			//회장 닉네임을 조회하기 위해서 회원 아이디 값 사용
+			return clubBbsService.clubNoticeList(club_id,sort);
+		}
 	
 }

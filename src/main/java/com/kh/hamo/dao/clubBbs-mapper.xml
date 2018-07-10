@@ -6,28 +6,7 @@
 
 	<!-- 공지사항 리스트 -->
 	<select id="clubNoticeList" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT c.club_id, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_sort=#{param2} AND c.club_id=#{param1} AND c.member_id=#{param3} ORDER BY clubBbs_idx DESC 
-	</select>
-	
-	<!-- 최근 게시글 글번호 조회 -->
-	<select id="findIdx" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT clubBbs_idx FROM clubBbs WHERE club_id=#{param1} ORDER BY clubBbs_idx DESC
-	</select>
-	
-	<!-- 공지사항 글쓰기 -->
-	<insert id="clubNoticeWrite" parameterType="com.kh.hamo.dto.ClubBbsDTO" useGeneratedKeys="true" keyProperty="clubBbs_id" keyColumn="clubBbs_id">
-		INSERT INTO clubBbs(clubBbs_id, club_id, member_id,clubBbs_sort, clubBbs_idx,clubBbs_subject,clubBbs_date, clubBbs_content,clubBbs_replyCount, clubBbs_hit) 
-		VALUES(seq_clubbbs_id.NEXTVAL, #{club_id}, #{member_id},#{clubBbs_sort},#{clubBbs_idx},#{clubBbs_subject},SYSDATE,#{clubBbs_content},0,0)
-	</insert>
-	
-	<!-- 조회수 올리기 -->
-	<update id="clubBbsHit">
-		UPDATE clubBbs SET clubBbs_hit = clubBbs_hit+1 WHERE clubBbs_id=#{param1}
-	</update>
-	
-	<!-- 공지사항 상세보기 -->
-	<select id="clubNoticeDetail" resultType="com.test.dto.ClubBbsDTO">
-		SELECT cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
+		SELECT c.club_id, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_sort=#{param2} AND c.club_id=#{param1} ORDER BY clubBbs_idx DESC 
 	</select>
 
 </mapper>
