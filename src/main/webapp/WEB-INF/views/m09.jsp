@@ -7,7 +7,6 @@
 	<link rel="icon" href="./resources/image/icon-32.png" />
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
