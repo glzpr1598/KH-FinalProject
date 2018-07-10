@@ -18,5 +18,23 @@ public interface ClubBbsInter {
 	
 	//공지사항 상세보기
 	ClubBbsDTO clubNoticeDetail(String clubBbs_id);
+	
+	//댓글 찾기
+	ClubBbsDTO findReply(String clubBbs_id);
+	
+	//댓글 리스트
+	ArrayList<ClubBbsDTO> clubReplyList(String clubBbs_id);
+	
+	//댓글작성
+	int clubReply(ClubBbsDTO dto);
+	
+	//댓글 수 증가
+	void replyUp(String clubBbs_id);
+	
+	//댓글 삭제
+	void replyDelete(String clubBbs_id);
+
+	//댓글 수 감소
+	void replyDown(String clubBbs_id);
 
 }

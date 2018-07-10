@@ -69,4 +69,28 @@ public class ClubBbsController {
 		return clubBbsService.clubNoticeDetail(params);
 	}
 	
+	/*************************************댓글***************************************/
+	
+	//댓글 리스트
+	@RequestMapping(value="/clubReplyList")
+	public @ResponseBody HashMap<String, Object>  clubNoticeReplyList(@RequestParam("clubBbs_id") String clubBbs_id) {
+		logger.info("댓글 리스트");
+		return clubBbsService.clubReplyList(clubBbs_id);
+	}
+	
+	//댓글 작성
+	@RequestMapping(value="/clubReply")
+	public @ResponseBody HashMap<String, Object>  clubReply(@RequestParam HashMap<String, String> params,HttpSession session) {
+		logger.info("댓글 작성");
+		String member_id = (String)session.getAttribute("member_id");
+		return clubBbsService.clubReply(params,member_id);
+	}
+	
+	//댓글 삭제
+	@RequestMapping(value="/clubReplyDelete")
+	public @ResponseBody HashMap<String, Object>  clubNoticeReplyDelete(@RequestParam("clubBbs_id") String clubBbs_id,@RequestParam("clubBbsReply_id") String clubBbsReply_id) {
+		logger.info("댓글 삭제");
+		return clubBbsService.clubReplyDelete(clubBbs_id,clubBbsReply_id);
+	}
+	
 }

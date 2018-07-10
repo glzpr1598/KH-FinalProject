@@ -28,6 +28,8 @@ public class ClubBbsService {
     
     ClubBbsInter clubBbsInter = null;
     
+    /*************************************공지사항***************************************/
+    
 	//회장 아이디 찾기
 	public HashMap<String, Object> findMaster(HashMap<String, String> params) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
@@ -61,6 +63,70 @@ public class ClubBbsService {
 		mav.addObject("info", clubBbsInter.clubNoticeDetail(clubBbs_id));
 		mav.setViewName("c07");
 		return mav;
+	}
+	
+	/*************************************댓글***************************************/
+	
+	//댓글 리스트
+	public HashMap<String, Object> clubReplyList(String clubBbs_id) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		
+		//댓글 수 조회
+		ClubBbsDTO replyCount = clubBbsInter.findReply(clubBbs_id);
+		logger.info("댓글 수"+replyCount.getClubBbs_replyCount());
+		
+		//리스트 조회
+		ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("replyCount", replyCount);
+		return map;
+	}
+	
+	//댓글 작성
+	@Transactional
+	public HashMap<String, Object> clubReply(HashMap<String, String> params, String member_id) {
+		logger.info("게시글 댓글 작성 서비스 호출");
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		HashMap<String, Object> map = new HashMap<>();
+		
+		ClubBbsDTO dto = new ClubBbsDTO();
+		dto.setClubBbsReply_content(params.get("replyContent"));
+		dto.setClubBbs_id(Integer.parseInt(params.get("clubBbs_id")));
+		dto.setMember_id(member_id);
+		System.out.println("회원 아이디 : "+dto.getMember_id());
+		
+		//댓글 작성
+		if(clubBbsInter.clubReply(dto) == 1) {
+			//댓글 수 증가
+			String clubBbs_id = params.get("clubBbs_id");
+			clubBbsInter.replyUp(clubBbs_id);
+			//리스트 reload
+			ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id);
+			//댓글 수 조회
+			ClubBbsDTO replyCount = clubBbsInter.findReply(clubBbs_id);
+			map.put("list", list);
+			map.put("replyCount", replyCount);
+		}
+		return map;
+	}
+	
+	//댓글 삭제
+	@Transactional
+	public HashMap<String, Object> clubReplyDelete(String clubBbs_id, String clubBbsReply_id) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		//댓글 삭제
+		clubBbsInter.replyDelete(clubBbsReply_id);
+		//댓글 수 감소
+		clubBbsInter.replyDown(clubBbs_id);
+		//댓글 리스트 조회
+		ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id);
+		//댓글 수 조회
+		ClubBbsDTO replyCount = clubBbsInter.findReply(clubBbs_id);
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("replyCount", replyCount);
+		return map;
 	}
 
 
