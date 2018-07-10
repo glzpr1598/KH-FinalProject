@@ -27,13 +27,14 @@
 		border-radius: 5px;
 		padding: 5px 0px;
 		margin-bottom: 5px;
+		font-size: 12px;
 	}
 	#left #info div {
 		padding: 5px 10px;
 	}
 	#left #info .infoText1 {
 		display: inline-block;
-		width: 50px;
+		width: 45px;
 		font-weight: bold;
 	}
 	
@@ -126,19 +127,29 @@
 	</div>
 </body>
 <script>
-
-	// 멤버관리 클릭
-	$("#btn3").click(function(){
-		club_id = "<%= request.getParameter("club_id") %>";
-		location.href="./clubMemberList?club_id=" + club_id;
-	});
-
-	// 동호회 폐쇄 클릭
-	$("#btn4").click(function() {
+	$(document).ready(function() {
+		// 동호회 아이디
 		var club_id = "<%= request.getParameter("club_id") %>";
-		window.open("./clubCloseForm?club_id=" + club_id, 
-				"_blank", "width=450px, height=230px left=200px top=100px");
-	});
+		
+		// 멤버관리 클릭
+		$("#btn3").click(function(){
+			location.href="./clubMemberList?club_id=" + club_id;
+		});
 	
+		// 동호회 폐쇄 클릭
+		$("#btn4").click(function() {
+			var url = "./clubCloseForm?club_id=" + club_id;
+			var option = "width=450px, height=230px left=200px top=100px";
+			window.open(url, "_blank", option);
+		});
+		
+		// 폐쇄 취소 클릭
+		$("#btn5").click(function() {
+			var url = "./clubCloseCancelForm?club_id=" + club_id;
+			var option = "width=350px, height=160px left=200px top=100px";
+			window.open(url, "_blank", option);
+		});
+		
+	});
 </script>
 </html>

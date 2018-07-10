@@ -32,5 +32,10 @@
 		    FROM clubclose
 		    WHERE club_id=#{param1}
 	</select>
+	
+	<!-- 동호회 폐쇄 취소 -->
+	<delete id="clubCloseCancel">
+		DELETE FROM clubclose WHERE club_id=#{param1}
+	</delete>
 
 </mapper>
