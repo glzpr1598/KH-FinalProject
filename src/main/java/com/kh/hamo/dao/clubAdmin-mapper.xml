@@ -25,5 +25,12 @@
 	<delete id="clubCloseDelete">
 		DELETE FROM clubclose WHERE clubclose_id = #{param1}
 	</delete>
+	
+	<!-- 돟호회 폐쇄 검사 -->
+	<select id="clubCloseCheck" resultType="String">
+		SELECT to_char(clubclose_date, 'YYYY"년" MM"월" DD"일"') AS clubclose_date 
+		    FROM clubclose
+		    WHERE club_id=#{param1}
+	</select>
 
 </mapper>

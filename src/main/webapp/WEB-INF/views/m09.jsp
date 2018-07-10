@@ -17,7 +17,7 @@
 		}
 		table{
 			margin-top: 10px;
-			width : 900px;
+			width : 1050px;
 			text-align: center;
 			border-collapse: collapse;
 		}
@@ -29,7 +29,7 @@
 		}
 		#div1{
 			position: absolute;
-			left: 20%;
+			left: 17%;
 			top: 30%;
 		}
 		i{

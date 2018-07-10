@@ -144,6 +144,14 @@
 		    });
 		}
 	});
+	
+	// 엔터 키 눌렀을 때 로그인
+	$('.inputText').keypress(function(event){
+		if(event.which == 13) {
+		    $('#login').click();
+		    return false;
+		}
+	});
 
 </script>
 </html>

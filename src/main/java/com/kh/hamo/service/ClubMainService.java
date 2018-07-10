@@ -1,5 +1,7 @@
 package com.kh.hamo.service;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,5 +19,14 @@ public class ClubMainService {
 	private SqlSession sqlSession;
     
     ClubMainInter inter;
+
+    // 동호회 정보
+	public HashMap<String, Object> clubInfo(String club_id) {
+		inter = sqlSession.getMapper(ClubMainInter.class);
+		
+		return inter.clubInfo(Integer.parseInt(club_id));
+	}
+    
+    
 
 }

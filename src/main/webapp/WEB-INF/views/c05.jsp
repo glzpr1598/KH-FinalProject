@@ -70,9 +70,11 @@
 			<th>조회수</th>
 		</tr>
 		<c:forEach items="${list}" var="notice">
+			<input id="nick" type="hidden" value="${notice.club_masterNickname}"/>
 			<tr>
 				<td>${notice.clubBbs_idx}</td>
-				<td><a href="#" class="board">${notice.clubBbs_subject}</a></td>
+				<td><a href="./clubNoticeDetail?club_id=${notice.club_id}&clubBbs_id=${notice.clubBbs_id}" class="board">${notice.clubBbs_subject}</a></td>
+
 				<td>${notice.club_masterNickname}</td>
 				<td>${notice.clubBbs_date}</td>
 				<td>${notice.clubBbs_hit}</td>
@@ -83,13 +85,15 @@
 	</div>
 </body>
 <script>
-	var nick = "${nick.club_masterNickname}"; 
+	var club_id=<%=request.getParameter("club_id")%>
+	console.log("동호회 아이디 :"+club_id);
+	var nick = $("#nick").val(); 
 	console.log("현재 회장 닉네임은 : "+nick);
 	 if(nick != ""){
 		document.getElementById("write").style.display='inline';
 	}
 	$("#write").click(function(){
-		location.href="./clubNoticeForm";
+		location.href="./clubNoticeWriteForm?club_id="+club_id;
 	});
 </script>
 </html>
