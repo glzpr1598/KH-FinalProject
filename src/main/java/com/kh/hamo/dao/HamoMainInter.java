@@ -15,4 +15,6 @@ public interface HamoMainInter {
 
 	int myClubDel(String myClubRemove);//가입한 동호회 탈퇴
 
+	ArrayList<HamoMainDTO> clubSearch(HashMap<String, String> map);//동호회 찾기
+
 }

@@ -174,7 +174,6 @@
 				content +="<td>"+item.club_date+"</td>";
 				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
-				;
 				
 			});		
 			$("#myClubListTable").empty();
