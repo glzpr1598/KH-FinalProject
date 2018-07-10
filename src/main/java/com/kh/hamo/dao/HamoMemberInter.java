@@ -1,5 +1,7 @@
 package com.kh.hamo.dao;
 
+import java.util.ArrayList;
+
 import com.kh.hamo.dto.HamoMemberDTO;
 
 public interface HamoMemberInter {
@@ -25,6 +27,18 @@ public interface HamoMemberInter {
 	boolean pwUpdate(String id, String pw);
 
 	HamoMemberDTO updateForm(String userId);
+
+	ArrayList<Integer> updateFormInterest(String userId);
+
+	String interest(int interest);
+
+	int userUpdate(HamoMemberDTO memberdto);
+
+	void interestDel(int interest);
+
+	ArrayList<Integer> updateInterest(String id);
+
+	int emailUpdate(String id, String email);
 
 
 

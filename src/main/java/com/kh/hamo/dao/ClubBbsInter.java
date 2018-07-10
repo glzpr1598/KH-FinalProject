@@ -14,5 +14,11 @@ public interface ClubBbsInter {
 	
 	//공지사항 글쓰기
 	int clubNoticeWrite(ClubBbsDTO dto);
+	
+	//조회수 올리기
+	void clubBbsHit(String clubBbs_id);
+	
+	//공지사항 상세보기
+	ClubBbsDTO clubNoticeDetail(String clubBbs_id);
 
 }

@@ -14,7 +14,7 @@
 				#idSearch{position: absolute; left: 780px; top: 250px;}     
 				#pwSearch{position: absolute; left: 963px; top: 250px;}
 				 input[type='text'], input[type='password']{
-  					border: 3px solid #ffbf00;
+  					border: 2px solid #ffbf00;    
   					height: 30px;
 					width: 366px;     
 					margin-top:10px;    
@@ -22,7 +22,7 @@
   			    .btn{
   			    	width:366px;
 				    background-color: #ffbf00;    
-				    border: 3px solid #ffbf00;
+				    border: 2px solid #ffbf00;
 				    color:#fff;
 				    padding: 15px 0;
 				    text-align: center;
@@ -51,7 +51,7 @@
 				.idSearch{    
 					width:183px;
 				    background-color: #ffbf00;
-				    border: 3px solid #ffbf00;
+				    border: 2px solid #ffbf00;
 				    color:#fff;
 				    padding: 15px 0;
 				    text-align: center;
@@ -64,7 +64,7 @@
 				.pwSearch{
 					width:183px;
 				    background-color: white;            
-				    border: 3px solid #ffbf00;  
+				    border: 2px solid #ffbf00;  
 				    color:black;      
 				    padding: 15px 0;
 				    text-align: center;
@@ -74,8 +74,32 @@
 				    margin: 0px;
 				    cursor: pointer;       
 				}
-				    
-				#emailChk{position: absolute; left: 320px; top: 64px;}                
+				  #pwdChk{
+  			    			margin: 5px;
+							font-size: 13px;
+							text-align: left;
+							color: #ff1616;
+  			    }
+  			      
+  			    #msgChk{          
+  			    	position: absolute; top: 125px; left: 0px; float: left;       
+  			    	text-decoration: none;        
+  			    	font-weight: bold;   
+  			    	font-size: 15px;
+  			    }
+  			    
+  			    
+  			    #spanId{
+  				    font-weight: bold;   
+  			    	font-size: 15px;
+  			    }
+  			    
+  			    
+  			    .aTag:link { color: red; text-decoration: none;}
+				.aTag:visited { color: black; text-decoration: none;}
+ 				.aTag:hover { color: blue; text-decoration: underline;}
+				.aTag{display: none;}    
+				#emailChk{position: absolute; left: 320px; top: 63px;}                
 		</style>
 		
 	</head>
@@ -97,11 +121,14 @@
 					<td><button class="btn" id="idCheck">확인</button></td>
 				</tr>
 			</table>
-			<a href="./" style="display: none;" class="aTag">홈으로</a>   
-			<a href="loginForm" style="display: none;" class="aTag">로그인</a>           
-			<span id = spanId></span>   
+			<div id="msgChk">
+				<a href="./" class="aTag">홈으로</a>   
+				<a  class="aTag"> | </a>
+				<a href="loginForm"  class="aTag">로그인</a>&nbsp;&nbsp;
+				<span id = spanId></span>   
+			</div>
 		</div>
-		
+		     
 		
 		<div id="2">
 			<table>
@@ -130,7 +157,8 @@
 					<td><input type="password" name="userPw" placeholder="변경할 비밀번호" onkeyup="chkword(this, 20)"></td>
 				</tr>
 				<tr>
-					<td><input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)"><span id='pwdChk'></span></td>
+					<td><input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)"></td>
+					<span id='pwdChk'></span>
 				</tr>
 				<tr>
 					<td><button class="btn" id="pwUpdate">확인</button></td>
@@ -202,16 +230,15 @@
 						success: function(data) {
 							console.log("success");
 							if(data.success){
-								document.getElementById("spanId").innerHTML = "아이디는 : "+data.userId+" 입니다.";
-								$(".aTag").css("display", "inline");      
-							/* <a href="loginForm">로그인</a>    
-							<a href="./">홈으로</a> */
+								document.getElementById("spanId").innerHTML = "요청하신 아이디는 : "+data.userId+" 입니다.";
+								/* $("#msgChk").show();     */
+								$(".aTag").css("display","inline");
 							}else{
 								alert(data.userId);  
 							}
 						},
 						error: function(e){console.log(e)}
-				});
+				});      
 			}				
 		});
 

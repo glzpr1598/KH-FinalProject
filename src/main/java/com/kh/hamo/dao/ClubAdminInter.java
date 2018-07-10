@@ -13,5 +13,9 @@ public interface ClubAdminInter {
 	void clubDelete(Object club_id);
 	// 동호회 폐쇄 삭제
 	void clubCloseDelete(Object clubClose_id);
+	// 동호회 폐쇄 검사
+	String clubCloseCheck(String club_id);
+	// 동호회 폐쇄 취소
+	void clubCloseCancel(String club_id);
 
 }

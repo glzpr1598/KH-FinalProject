@@ -36,16 +36,23 @@
 	#header #link a:hover {
 		text-decoration: underline;
 	}
-	#first{
+	
+	/* 동호회 이름 */
+	#clubNameArea {
 		width: 1000px;
 		height: 120px;
 		margin: auto;
 		position: relative;
 		text-align: center;
 	}
-	#first span{
+	#clubNameArea #clubName {
 		font-size: 35px;
 		font-weight: bold;
+		color: black;
+		text-decoration: none;
+	}
+	#clubNameArea #clubName:hover {
+		text-decoration: underline;
 	}
 </style>
 </head>
@@ -56,11 +63,11 @@
 			|
 			<a id="login"></a>
 			|
-			<a href="">회원정보수정</a>
+			<a href="./updateForm">회원정보수정</a>
 		</div>
 	</div>
-	<div id="first">
-		<span id="clubName"></span>
+	<div id="clubNameArea">
+		<a href="./clubMain?club_id=<%= request.getParameter("club_id") %>" id="clubName"></a>
 	</div>
 </body>
 <script>
@@ -100,7 +107,12 @@
 	        },
 	        dataType: "json",
 	        success: function(data) {
-	            console.log(data);
+	            $("#clubName").html(data.CLUB_NAME);
+	            $("#master").html(data.CLUB_MASTERNICKNAME);
+	            $("#memberCount").html(data.CLUB_MEMBERCOUNT + "명");
+	            $("#createDate").html(data.CLUB_DATE);
+	            $("#subject").html(data.INTEREST_INTEREST);
+	            $("#location").html(data.CLUB_LOCATION);
 	        },
 	        error: function(err) {console.log(err);}
 	    });

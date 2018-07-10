@@ -25,12 +25,17 @@
 	#left #info{
 		border: medium solid #ffbf00;
 		border-radius: 5px;
-		font-weight: bold;
 		padding: 5px 0px;
 		margin-bottom: 5px;
+		font-size: 12px;
 	}
 	#left #info div {
 		padding: 5px 10px;
+	}
+	#left #info .infoText1 {
+		display: inline-block;
+		width: 45px;
+		font-weight: bold;
 	}
 	
 	/* 메뉴 */
@@ -79,22 +84,22 @@
 <body>
 	<div id="left">
 		<div id="info">
-			<div>회장: <span id="master"></span></div>
-			<div>회원수: <span id="memberCount"></span></div>
-			<div>설립일: <span id="createDate"></span></div>
-			<div>주제: <span id="subject"></span></div>
-			<div>지역: <span id="location"></span></div>
+			<div><span class="infoText1">회장</span><span id="master"></span></div>
+			<div><span class="infoText1">회원수</span><span id="memberCount"></span></div>
+			<div><span class="infoText1">설립일</span><span id="createDate"></span></div>
+			<div><span class="infoText1">주제</span><span id="subject"></span></div>
+			<div><span class="infoText1">지역</span><span id="location"></span></div>
 		</div> 
 		<input type="button" value="가입하기" class="btn" />
 		<div id="menu" class="menu">
 			<div>
 				<img id="list" src="./resources/image/list.png" />
-				<a id="menu1" href="">전체글보기</a>
+				<a id="menu1" href="./clubAllList?club_id=<%= request.getParameter("club_id") %>">전체글보기</a>
 			</div>	
 			
 			<div>
 				<img id="list2" src="./resources/image/list.png" />
-				<a id="menu2" href="./clubNoticeList?sort=공지사항">공지사항</a>
+				<a id="menu2" href="./clubNoticeList?club_id=<%= request.getParameter("club_id") %>&sort=공지사항">공지사항</a>
 			</div>
 			
 			<div>
@@ -122,13 +127,29 @@
 	</div>
 </body>
 <script>
-
-	// 동호회 폐쇄 클릭
-	$("#btn4").click(function() {
+	$(document).ready(function() {
+		// 동호회 아이디
 		var club_id = "<%= request.getParameter("club_id") %>";
-		window.open("./clubCloseForm?club_id=" + club_id, 
-				"_blank", "width=450px, height=230px left=200px top=100px");
-	});
+		
+		// 멤버관리 클릭
+		$("#btn3").click(function(){
+			location.href="./clubMemberList?club_id=" + club_id;
+		});
 	
+		// 동호회 폐쇄 클릭
+		$("#btn4").click(function() {
+			var url = "./clubCloseForm?club_id=" + club_id;
+			var option = "width=450px, height=230px left=200px top=100px";
+			window.open(url, "_blank", option);
+		});
+		
+		// 폐쇄 취소 클릭
+		$("#btn5").click(function() {
+			var url = "./clubCloseCancelForm?club_id=" + club_id;
+			var option = "width=350px, height=160px left=200px top=100px";
+			window.open(url, "_blank", option);
+		});
+		
+	});
 </script>
 </html>
