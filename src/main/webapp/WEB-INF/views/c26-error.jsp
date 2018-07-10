@@ -9,27 +9,17 @@
 <title>HAMO - 동호회 폐쇄</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-	/* 제목 */
-	#title {
-		margin: 15px 10px;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	
 	/* 내용 */
-	#content1 {
-		margin-top: 40px;
-	}
-	.content {
-		margin: 5px 0px;
+	#content {
+		margin-top: 70px;
 		text-align: center;
-		font-size: 14px;
+		font-size: 15px;
 		font-weight: bold;
 	}
 	
 	/* 버튼 */
 	#btn {
-		margin-top: 30px;
+		margin-top: 50px;
 		text-align: center;
 	}
 	#btn1 {
@@ -46,19 +36,15 @@
 </style>
 </head>
 <body>
-	<div id="title">동호회 폐쇄</div>
-	<div class="content" id="content1">동호회를 폐쇄하시면 7일간의 보류 기간을 거치며</div>
-	<div class="content" id="content2">그 이후에는 동호회의 모든 정보가 삭제됩니다.</div>
-	<div class="content" id="content3">보류 기간 중에는 동호회 폐쇄를 취소하실 수 있습니다.</div>
+	<div id="content">이미 폐쇄 신청되어있습니다.</div>
 	<div id="btn">
-		<button id="btn1">폐쇄하기</button>
+		<button id="btn1">닫기</button>
 	</div>
 </body>
 <script>
-	/* 폐쇄하기 클릭 */
+	/* 닫기 클릭 */
 	$("#btn1").click(function() {
-		var club_id = "<%= request.getParameter("club_id") %>";
-		location.href="clubClose?club_id=" + club_id;
+		window.close();
 	});
 </script>
 </html>

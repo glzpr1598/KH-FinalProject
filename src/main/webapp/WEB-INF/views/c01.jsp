@@ -27,9 +27,11 @@
 </body>
 <script>
 
-	// 동호회가 폐쇄 예정인지 검사
 	$(document).ready(function() {
+		// 동호회 아이디
 		var club_id = "<%= request.getParameter("club_id") %>"; 
+	
+		// 동호회가 폐쇄 예정인지 검사
 	    $.ajax({
 	        url: "./clubCloseCheck",
 	        type: "post",

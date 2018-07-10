@@ -64,4 +64,11 @@ public class ClubAdminService {
 		return result;
 	}
 
+	// 동호회 폐쇄 취소
+	public void clubCloseCancel(String club_id) {
+		inter = sqlSession.getMapper(ClubAdminInter.class);
+		
+		inter.clubCloseCancel(club_id);
+	}
+
 }
