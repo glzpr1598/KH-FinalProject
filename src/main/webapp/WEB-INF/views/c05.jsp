@@ -25,7 +25,7 @@
 	#title{
 	position: absolute;
 	left: 560px;
-	top: 345px;
+	top: 190px;
 	font-weight: 600;
 	font-size: large;
 	}

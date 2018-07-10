@@ -9,14 +9,15 @@
 <style>
 	#title{
 	position: absolute;
-	left: 565px;
-	top: 345px;
+	left: 400px;
+	top: 215px;
 	font-weight: 600;
 	font-size: large;
 	}
 	#subject{
 		position: absolute;
-		left: 565px;
+		left: 400px;
+		top: 250px;
 	}
 	#s{
 		font-size: x-large;
@@ -28,8 +29,8 @@
 	}
 	#content{
 		position: absolute;
-		left: 565px;
-		top: 460px;
+		left: 400px;
+		top: 330px;
 	}
 	#text{
 		/* border: none; */
@@ -39,20 +40,20 @@
 	#file span{
 		font-size:medium;
 		font-weight: 600;
+	}
+	#file{
 		position: absolute;
-		left: 565px;
-		top: 780px;
+		left: 400px;
+		top: 650px;
 	}
 	#download{
-		position: absolute;
-		left: 565px;
-		top: 820px;
+		border: 3px solid #ffbf00;
 		resize: none;
 	}
 	#reply{
 		position: absolute;
-		left: 565px;
-		top:1000px;
+		left: 400px;
+		top:870px;
 		width: 1000px;
 		font-size:small;
 		font-weight: 600;
@@ -73,7 +74,7 @@
 		text-align: center;
 		position: absolute;
 		top: 1px;
-		left: 660px;
+		left: 663px;
 		font-weight: 600;
 	}
 	#del{
@@ -81,9 +82,9 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: relative;
-		left: 1225px;
-		top: 520px;
+		position: absolute;
+		left: 1063px;
+		top: 830px;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -93,9 +94,9 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: relative;
-		left: 1068px;
-		top: 520px;
+		position: absolute;
+		left: 978px;
+		top: 830px;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -106,9 +107,9 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: relative;
-		left: 910px;
-		top: 520px;
+		position: absolute;
+		left: 893px;
+		top: 830px;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -126,9 +127,9 @@
 		font-weight: 600;
 	}
 	#replyfrm{
-		position: relative;
-		left: 565px;
-		top: 530px;
+		position: absolute;
+		left: 400px;
+		top: 770px;
 	}
 	.last{
 		border-bottom: 1px solid #d2d2d2;
@@ -149,7 +150,7 @@
 			<div id="text">${info.clubBbs_content}</div>
 		</div>
 		<div id="file">
-			<span>첨부파일</span>
+			<span>첨부파일</span><br/>
 			<textarea id="download" rows="5" cols="100" readonly="readonly"></textarea>
 		</div>
 		<form id="replyfrm">
