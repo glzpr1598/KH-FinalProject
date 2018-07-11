@@ -25,10 +25,10 @@ public class ClubMeetingPlanService {
     ClubMeetingPlanInter inter;
     
     //모임 일정 리스트
-	public HashMap<String, Object> clubMeetingList(HashMap<String, String> map) {
+	public HashMap<String, Object> clubMeetingList(String club_id) {
 		logger.info("종합검색 서비스 실행");
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
-		ArrayList<ClubMeetingDTO> clubMeetingList = inter.clubMeetingList(map);
+		ArrayList<ClubMeetingDTO> clubMeetingList = inter.clubMeetingList(Integer.parseInt(club_id));
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("list", clubMeetingList);
 		return result;

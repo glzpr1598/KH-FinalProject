@@ -19,7 +19,19 @@
 		td{
 			border-bottom: 1px solid #ffbf00;
 		}
-	
+		input[type="button"]{
+			width: 50px;
+			padding: 7px 0px;
+			margin-top : 5px;
+			margin-bottom: 5px;
+			background-color: #ffbf00;
+			border: none;
+			border-radius: 5px;
+			color: white;
+			font-weight: bold;
+			font-size: 14px;
+			cursor: pointer;
+		}
 	
 	</style>
 
@@ -31,7 +43,7 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
-			<h1> | 모임일정 | </h1></br></br>
+			<h1> | 모임일정 | </h1>
 			<table id="listTable">
 				<thead>
 					<tr>
@@ -43,8 +55,14 @@
 				</thead>
 				<tbody >
 				</tbody>
+				<tfoot>
+					<tr>
+						<td style="text-align: right; border-color: white;" colspan="4">	
+							<input type="button" value="등록" id='add' onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>'"/>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
-			
 		
 		
 		
@@ -55,12 +73,15 @@
 		<!------------------- 양식 ------------------->
 	</body>
 	<script>
+		
+	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
 		obj.dataType = "JSON";
 		$(document).ready(function(){
-			obj.url="./clubMeetingList";
+			obj.url="./MeetingList";
+			obj.data = {"club_id": "<%= request.getParameter("club_id") %>"};
 			obj.success = function(data){
 				console.log(data);
 				listPrint(data.list);
@@ -72,10 +93,10 @@
 			var content ="";
 			list.forEach(function(item, idx){
 				content +="<tr>";
-				content +="<td>"+item.interest_interest+"</td>";
-				content +="<td>"+item.club_location+"</td>";
-				content +="<td>"+item.club_name+"</td>";
-				content +="<td>"+item.club_introduce+"</td>";
+				content +="<td>"+item.meetingPlan_subject+"</td>";
+				content +="<td>"+item.clubJoin_nickname+"</td>";
+				content +="<td>"+item.meetingPlan_date+"</td>";
+				content +="<td>"+item.meetingPlan_when+"</td>";
 				content += "</tr>";
 			});		
 			

@@ -22,16 +22,20 @@ public class ClubMeetingPlanController {
 	ClubMeetingPlanService service;
 	
 	//모임 일정 리스트 페이지 이동
-	@RequestMapping(value = "/c17move")
-	public String main() {
-		logger.info("c17move 요청");
+	@RequestMapping(value = "/clubMeetingList")
+	public String meetingMain() {
+		logger.info("clubMeetingList 요청");
 		return "c17";
 	}
 	//모임 일정 리스트
-	@RequestMapping(value = "/clubMeetingList")
-	public @ResponseBody HashMap<String, Object> clubMeetingList(@RequestParam HashMap<String, String> map) {
+	@RequestMapping(value = "/MeetingList")
+	public @ResponseBody HashMap<String, Object> clubMeetingList(@RequestParam String club_id) {
 		logger.info("모임 일정 리스트 요청");
-		return service.clubMeetingList(map);
+		return service.clubMeetingList(club_id);
 	}
-	
+	@RequestMapping(value = "/clubMeetingWriteForm")
+	public String clubMeetingWriteForm() {
+		logger.info("clubMeetingWriteForm 요청");
+		return "c18";
+	}
 }
