@@ -150,8 +150,6 @@
 			left: 17%;
 		}
 		
-		
-		
 		table{
 			margin-top: 10px;
 			width : 1050px;
