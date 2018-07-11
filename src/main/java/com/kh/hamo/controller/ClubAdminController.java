@@ -95,4 +95,17 @@ public class ClubAdminController {
 		return "close";
 	}
 	
+	// 동호회 사진 업로드 창
+	@RequestMapping(value = "/clubPictureUploadForm")
+	public String clubPictureUploadForm() {
+		logger.info("동호회 사진 업로드 창 요청");
+		return "c21";
+	}
+	// 동호회 사진 업로드
+	@RequestMapping(value = "/clubPictureUpload")
+	public String clubPictureUpload() {
+		logger.info("동호회 사진 업로드 요청");
+		
+		return "close";
+	}
 }

@@ -26,6 +26,7 @@ public class ClubMainController {
 	@RequestMapping(value = "/clubMain")
 	public String clubMain(@RequestParam String club_id) {
 		logger.info("동호회 메인 페이지 요청");
+		
 		return "c01";
 	}
 	

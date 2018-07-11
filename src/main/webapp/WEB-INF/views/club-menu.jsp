@@ -127,7 +127,6 @@
 	</div>
 </body>
 <script>
-	//$(".btn").attr("type", "button");
 	$(document).ready(function() {
 		// 동호회 아이디
 		var club_id = "<%= request.getParameter("club_id") %>";
@@ -163,6 +162,8 @@
 		        		$("#btn3").attr("type", "button");
 		        		$("#btn4").attr("type", "button");
 		        		$("#btn5").attr("type", "button");
+		        		// 메인화면의 사진 수정, 글 수정 활성화
+		        		$(".masterBtn").attr("type", "button");
 		        	}
 		        },
 		        error: function(err) {console.log(err);}

@@ -9,7 +9,38 @@
 <title>HAMO - 동호회</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-
+	/* 사진 */
+	#picture {
+		box-sizing: border-box;
+		width: 600px;
+		height: 400px;
+		border: thin solid #FFBF00;
+	}
+	
+	/* 소개글 */
+	#introduce {
+		box-sizing: border-box;
+		margin-top: 10px;
+		width: 600px;
+		border: thin solid #FFBF00;
+	}
+	
+	/* 버튼 */
+	#buttons {
+		width: 600px;
+		margin-top: 10px;
+		text-align: right;
+	}
+	.masterBtn {
+		padding: 5px;
+		background-color: #ffbf00;
+		border: none;
+		border-radius: 5px;
+		color: white;
+		font-weight: bold;
+		font-size: 13px;
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -19,7 +50,12 @@
 		<%@ include file="./club-menu.jsp" %>
 		<div id="right"> <!-- width: 800px -->
 	<!------------------- 양식 ------------------->
-			
+			<div id="picture"></div>
+			<div id="introduce"></div>
+			<div id="buttons">
+				<input class="masterBtn" id="pictureEdit" type="hidden" value="사진 수정" />
+				<input class="masterBtn" id="introduceEdit" type="hidden" value="글 수정" />
+			</div>
 	<!------------------- 양식 ------------------->
 		</div>
 	</div>
@@ -29,6 +65,13 @@
 	$(document).ready(function() {
 		// 동호회 아이디
 		var club_id = "<%= request.getParameter("club_id") %>"; 
+		
+		// 사진 수정 클릭
+		$("#pictureEdit").click(function() {
+			var url = "./clubPictureUploadForm?club_id=" + club_id;
+			var option = "width=360, height=160, left=200, top=100";
+			window.open(url, "_blank", option);
+		});
 	
 		// 동호회가 폐쇄 예정인지 검사
 	    $.ajax({
