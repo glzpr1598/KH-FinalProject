@@ -65,7 +65,10 @@ public class HamoMainService {
 		mav.setViewName("m09");
 		return mav;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1ec034ef1525039cad711760c9d86624e1f0cf75
 	
 	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
 	public ModelAndView home() {
@@ -106,7 +109,10 @@ public class HamoMainService {
 		
 	     
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1ec034ef1525039cad711760c9d86624e1f0cf75
 	//동호회 찾기
 	public HashMap<String, Object> clubSearch(HashMap<String, String> map) {
 		logger.info("동호회 찾기 서비스 실행");
@@ -118,4 +124,7 @@ public class HamoMainService {
 		return result;
 	}
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1ec034ef1525039cad711760c9d86624e1f0cf75
