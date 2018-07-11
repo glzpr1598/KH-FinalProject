@@ -58,7 +58,7 @@
 			 	<div id="title">| 자유게시판 |</div>
 			    <h2>${detail.mainBbs_subject }</h2>
 			   <div><span id="member">${detail.member_id }</span> | 조회수 : ${detail.mainBbs_hit } | ${detail.mainBbs_date }</div>
-			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:633px; height:300px;">${detail.mainBbs_content }
+			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:633px; height:300px;">
 			    </textarea>
 			    <input type="hidden" name="idx" value="${detail.mainBbs_id}">
 			    <h4>첨부파일</h4>
@@ -75,6 +75,11 @@
 </body>
 <script>
 $(function(){
+	//textarea에 값 넣기
+	$("#smarteditor").val("${detail.mainBbs_content }");
+	console.log("초기 content: "+$("#smarteditor").val());
+	
+	
     //전역변수선언
     var editor_object = [];
      
@@ -99,7 +104,12 @@ $(function(){
         
         //폼 submit
         if(confirm("수정 하시겠습니까?")){
-        	   $("#frm").submit();
+        	console.log("content:"+$("#smarteditor").val());
+        	if($("#smarteditor").val()=="<p>&nbsp;</p>" || $("#smarteditor").val()==""){
+        		alert("내용을 입력 해 주세요.");
+        	}else{
+        		$("#frm").submit();	
+        	}
         } 
     });
     

@@ -9,33 +9,66 @@
 	-->
 	<!-- ArrayList 에 자동으로 담아줌 -->
 	
-	
+	<!--자유게시판 글 리스트 조회  -->
 	<select id="freeBbsList" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT * FROM mainBbs order by mainBbs_idx DESC 
 	</select>
-	
+	<!--자유게시판 글 상세보기  -->
 	<select id="freeBbsdetail" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT * FROM mainBbs WHERE mainBbs_id=#{param1}	
 	</select>
-	
+	<!-- 자유게시판 조회 수 update -->
 	<update id="freeBbsHit">
 		UPDATE mainBbs SET mainBbs_hit=mainBbs_hit+1 WHERE mainBbs_id=#{param1}	
 	</update>
 
-	<insert id="freeBbsWrite">
-		INSERT INTO mainBbs(mainBbs_id,member_id,mainBbs_sort,mainBbs_idx,mainBbs_subject,
-		mainBbs_content,mainBbs_date,mainBbs_replyCount,mainBbs_hit)
-		VALUES(seq_mainbbs_id.NEXTVAL,'yun','자유게시판',seq_freebbs_idx.NEXTVAL,#{param1},#{param2},SYSDATE,0,0)
+	<!-- 자유게시판 글쓰기 -->
+	<insert id="freeBbsWrite" parameterType="com.kh.hamo.dto.HamoBbsDTO" useGeneratedKeys="true" keyProperty="mainBbs_id" keyColumn="mainBbs_id" >
+			INSERT INTO mainBbs(mainBbs_id,member_id,mainBbs_sort,mainBbs_idx,mainBbs_subject,
+			mainBbs_content,mainBbs_date,mainBbs_replyCount,mainBbs_hit)
+			VALUES(seq_mainbbs_id.NEXTVAL,'yun','자유게시판',seq_freebbs_idx.NEXTVAL,#{mainBbs_subject},#{mainBbs_content},SYSDATE,0,0)
 	</insert>
-	
+	<!-- 자유게시판 글 수정하기 -->
 	<update id="freeBbsUpdate">
 		UPDATE mainBbs SET mainBbs_content=#{param2} WHERE mainBbs_id=#{param1}
 	</update>
-	
+	<!-- 자유게시판 글 삭제  -->
 	<delete id="freeBbsDelete">
 	 	DELETE FROM mainBbs WHERE mainBbs_id = #{param1}
 	</delete>
-	
-	
-	
+	<!-- 자유게시판 댓글 등록 -->
+	<insert id="freeBbsReply" parameterType="com.kh.hamo.dto.HamoBbsDTO" useGeneratedKeys="true" keyProperty="mainBbsReply_id" keyColumn="mainBbsReply_id">
+		INSERT INTO mainBbsReply(mainBbsReply_id,mainBbs_id,member_id,mainBbsReply_content,mainBbsReply_date)
+		VALUES(seq_mainbbsreply_id.NEXTVAL,#{mainBbs_id},#{member_id},#{mainBbsReply_content},SYSDATE)
+	</insert>
+	<!-- 자유게시판  댓글 달린 날짜 조회 why?쿼리문에 자동으로 SYSDATE해줬기 떄문에 날짜는 따로 조회해와야함-->
+	<select id="reply_date" resultType="String">
+		SELECT TO_CHAR(mainBbsReply_date,'yyyy.mm.dd. hh24:mi') as mainBbsReply_date FROM mainBbsReply WHERE mainBbsReply_id =#{param1}
+	</select>
+	<!-- 자유게시판 댓글 리스트  -->
+	<select id="freeBbsReplyList" resultType="com.kh.hamo.dto.HamoBbsDTO">
+		SELECT mainBbsReply_id,mainBbs_id,member_id,mainBbsReply_content,
+		TO_CHAR(mainBbsReply_date,'yyyy.mm.dd. hh24:mi') as mainBbsReply_date FROM mainBbsReply WHERE mainBbs_id =#{param1}
+	</select>
+	<!-- 자유게시판 댓글 삭제 -->
+	<delete id="freBbsReplyDel">
+		DELETE FROM mainBbsReply WHERE mainBbsReply_id = #{param1}
+	</delete>
+	<!-- 댓글 수 update -->
+	<update id="reply_countUpdate">
+		UPDATE mainBbs 
+			<choose>
+				<when test="param2.equals('plus')">
+					SET mainBbs_replyCount = mainBbs_replyCount +1 
+				</when>
+				<otherwise>
+					SET mainBbs_replyCount = mainBbs_replyCount -1
+				</otherwise>
+			</choose> 
+		WHERE mainBbs_id =#{param1}
+	</update>
+	<!-- 댓글 수 조회 -->
+	<select id="reply_count" resultType="int">
+		SELECT mainBbs_replyCount FROM mainBbs WHERE mainBbs_id =#{param1}
+	</select>
 </mapper>

@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" 
 	src="<%=request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
@@ -14,7 +15,7 @@
 		border:none;
 	 	background-color:#FFBF00 ;
 	 	color: white;
-		margin:4px;
+	 	margin:7px;
 		padding:10px;
 		cursor: pointer;
 	}
@@ -25,6 +26,15 @@
 	#title{
 		float:left;
 	}
+	#right {
+		width: 800px;
+		float: left;
+		margin-left: 20px;
+	}
+	#btn{
+		margin-left: 300px;
+		margin-top:25px;
+	}
 </style>
 <body>
 	<%@ include file="./main-header.jsp" %>
@@ -33,16 +43,24 @@
 		<div id="right">
 			<form action="freeBbsWrite" name="frm" id="frm">
 			 <div id="title">| 자유게시판 |</div>
-				<input type="text" placeholder="포스트 제목을 입력해주세요." name="subject" style="width:766px;">
-			    <textarea name="content" id="smarteditor" rows="10" cols="100" style="width:666px; height:312px;">
+				<input type="text" id="subject" placeholder="포스트 제목을 입력해주세요." name="subject" style="width:766px;"maxlength="20">
+			    <textarea name="content" id="smarteditor" onkeyup="check_Length()"  placeholder="10" cols="100" style="width:766px; height:312px;">
 			    </textarea>
+			    <div id="btn">
 				    <input type="button" id="cancelbutton" value="취소" />
 				    <input type="button" id="savebutton" value="저장" />
+				 </div>
 			</form>
 		</div>
 	</div>
 </body>
 <script>
+$(document).ready(function(){
+	function checkLength(obj){
+		console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+	}
+
+});
 $(function(){
     //전역변수선언
     var editor_object = [];
@@ -68,10 +86,16 @@ $(function(){
         
         //폼 submit
         if(confirm("글쓰기를 등록하시겠습니까?")){
-        	   $("#frm").submit();
-        	 //true 일 경우 상세보기 이동
-        }
-     
+        	console.log("subject: "+$("#subject").val());
+        	console.log("content: "+$("#smarteditor").val());
+        	if($("#subject").val()==""){
+        		alert("제목을 입력 해 주세요.");
+        	}else if($("#smarteditor").val()=="<p>&nbsp;</p>" ||$("#smarteditor").val()==""){
+        		alert("내용을 입력 해 주세요.");
+        	}else{
+      			$("#frm").submit();	
+        	}
+        } 
     });
     $("#cancelbutton").click(function(){
     	if(confirm("작성을 취소하시겠습니까?")){ 
@@ -79,6 +103,18 @@ $(function(){
     		location.href="./freeBbsList";
     	}
     });
-})
+	$("#subject").keyup(function(){
+		console.log("제목 keyup");
+		console.log($("#subject").val().length);
+		if($("#subject").val().length>"20"){
+			alert("제목은 최대 20자까지만 입력 가능합니다.");
+		}
+	});
+	//textarea 글자수 제한
+/* 	function check_Length(){
+		console.log("길이는 ? "+$("#smarteditor").val().length);
+	} */
+});
+
 </script>
 </html>

@@ -167,7 +167,7 @@ public class HamoMemberController {
 			session.setAttribute("userId", userId);
 		}
 		
-		HashMap<String, Object> result = new HashMap<>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("success", success);
 
 		return result;
@@ -194,7 +194,7 @@ public class HamoMemberController {
 		logger.info("userId : " + userId);
 		boolean success=false;
 		
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		if(userId == null) {
 			userId = "해당 조건의 아이디를 찾을 수 없습니다.";

@@ -32,12 +32,8 @@ public class HamoMainService {
 	public HashMap<String, Object> totalClubSearch(HashMap<String, String> map) {
 		logger.info("종합검색 서비스 실행");
 		inter = sqlSession.getMapper(HamoMainInter.class);
-		
-		
-		
-		
 		ArrayList<HamoMainDTO> totalClubSearch = inter.totalClubSearch(map);
-		HashMap<String, Object> result = new HashMap<>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", totalClubSearch);
 		return result;
 	}
@@ -46,7 +42,7 @@ public class HamoMainService {
 		logger.info("설립한 동호회 리스트 서비스 실행 : "+id);
 		inter = sqlSession.getMapper(HamoMainInter.class);
 		ArrayList<HamoMainDTO> myClubList = inter.myClubList(id);
-		HashMap<String, Object> result = new HashMap<>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("myClubList", myClubList);
 		return result;
 	}
@@ -56,7 +52,7 @@ public class HamoMainService {
 		inter = sqlSession.getMapper(HamoMainInter.class);
 		ArrayList<HamoMainDTO> myClubJoin = inter.myClubJoin(id);
 		System.out.println(myClubJoin.get(0).getClub_date());
-		HashMap<String, Object> result = new HashMap<>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("myClubJoin", myClubJoin);
 		return result;
 	}
