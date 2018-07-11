@@ -29,6 +29,16 @@
 		DELETE FROM clubJoin WHERE clubJoin_id = #{param1}
 	</delete>
 	
+	<select id="home" resultType="com.kh.hamo.dto.HamoMainDTO">
+		SELECT club_id, club_name, club_introduce, TO_CHAR(club_date, 'yyyy.mm.dd.') as club_date, club_memberCount, club_location, club_masterNickname, interest_id, member_id FROM club
+	</select>
 	
+	<select id="SearchPicture" resultType="String">
+		SELECT clubPicture_newName FROM clubPicture WHERE club_id = #{param1}
+	</select>
+	
+	<select id="SearchInterest" resultType="String">
+		SELECT interest_interest FROM interest WHERE interest_id = #{param1}
+	</select>
 	
 </mapper>

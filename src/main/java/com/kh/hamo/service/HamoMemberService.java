@@ -27,7 +27,7 @@ public class HamoMemberService {
 	HamoMemberInter inter = null;
 
 	
-	/**아이디 중복검사*/
+	/**아이디 중복검사 - 김응주*/
 	public HashMap<String, Integer> idOverlay(String id, int idLength) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
 		logger.info("아이디중복검사(서비스)");
@@ -38,7 +38,7 @@ public class HamoMemberService {
 		return map;
 	}
 
-	/**이메일 중복검사*/
+	/**이메일 중복검사 - 김응주*/
 	public HashMap<String, Integer> emailOverlay(String email) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
 		logger.info("이메일중복검사(서비스)");
@@ -48,7 +48,7 @@ public class HamoMemberService {
 		return map;
 	}
 	
-	/**회원가입*/
+	/**회원가입 - 김응주*/
 	public HashMap<String, Integer> 
 		join(HamoMemberDTO memberdto, String select1, String select2, String select3, String id) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
@@ -168,7 +168,7 @@ public class HamoMemberService {
 		return mav;
 	}
 
-	/**회원정보 수정*/
+	/**회원정보 수정 - 김응주*/
 	public HashMap<String, Integer> 
 		userUpdate(HamoMemberDTO memberdto, String select1, String select2, String select3, String id) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);		

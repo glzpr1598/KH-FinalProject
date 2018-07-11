@@ -26,10 +26,11 @@ public class HamoMainController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
 	@RequestMapping(value = "/")
-	public String main() {
-		logger.info("메인페이지 요청");
-		return "main";
+	public ModelAndView main() {
+		logger.info("메인페이지에 동호회 소개");
+		return service.home();
 	}
 	
 	// 검색 값 가져오는 컨트롤러
