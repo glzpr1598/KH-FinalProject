@@ -12,6 +12,7 @@ public class HamoMainDTO {
 	private String club_location;
 	private int clubPicture_id;
 	private String clubPicture_oldName;
+
 	private int interest_id;
 	private String interest_interest;
 	private String member_id;
@@ -95,4 +96,5 @@ public class HamoMainDTO {
 		this.clubPicture_newName = clubPicture_newName;
 	}
 	private String clubPicture_newName;
+	
 }

@@ -337,7 +337,7 @@ public class HamoMemberController {
 		
 		session.removeAttribute("userId");
 		
-		return "main";
+		return "redirect:/";
 	}
 	
 

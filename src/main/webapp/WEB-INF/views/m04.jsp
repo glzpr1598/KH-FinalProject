@@ -204,6 +204,7 @@
 					if(d.success==1){
 						document.getElementById("idChk").innerHTML =" 사용중인 아이디 입니다.";
 						$("input[name='userId']").val("");
+						$("#idChk").css("color","red");
 						overChk = false;
 					}else{
 						document.getElementById("idChk").innerHTML =" 사용 가능한 아이디 입니다.";
@@ -226,6 +227,7 @@
 	if($("input[name='pwChk']").val().length >= 10 && $("input[name='pwChk']").val().length <= 20){
 			if($("input[name='pwChk']").val()!=$("input[name='userPw']").val()){
 				document.getElementById("pwdChk").innerHTML = " 패스워드가 정상적으로 입력 되지 않았습니다.";
+				$("#pwdChk").css("color","red");
 			}else{
 				document.getElementById("pwdChk").innerHTML = " 패스워드가 정상적으로 입력 되었습니다.";
 				$("#pwdChk").css("color","green");
@@ -234,6 +236,7 @@
 			
 	}else{
 		document.getElementById("pwdChk").innerHTML = " 패스워드는 10자 이상 20자 이하로 입력해주세요.";
+		$("#pwdChk").css("color","red");
 		pwdCheck = 0
 	}
 	});
