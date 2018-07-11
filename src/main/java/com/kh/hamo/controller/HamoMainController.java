@@ -1,17 +1,13 @@
 package com.kh.hamo.controller;
 
 
-import java.awt.List;
 import java.util.HashMap;
-
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,13 +25,9 @@ public class HamoMainController {
 	
 	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
 	@RequestMapping(value = "/")
-//	public ModelAndView main() {
-//		logger.info("메인페이지에 동호회 소개");
-//		return service.home();
-//	}
-	public String main() {
+	public ModelAndView main() {
 		logger.info("메인페이지에 동호회 소개");
-		return "main";
+		return service.home();
 	}
 	
 	// 검색 값 가져오는 컨트롤러
