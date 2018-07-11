@@ -29,9 +29,13 @@ public class HamoMainController {
 	
 	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
 	@RequestMapping(value = "/")
-	public ModelAndView main() {
+//	public ModelAndView main() {
+//		logger.info("메인페이지에 동호회 소개");
+//		return service.home();
+//	}
+	public String main() {
 		logger.info("메인페이지에 동호회 소개");
-		return service.home();
+		return "main";
 	}
 	
 	// 검색 값 가져오는 컨트롤러

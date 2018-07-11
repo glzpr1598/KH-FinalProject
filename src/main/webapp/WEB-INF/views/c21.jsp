@@ -17,8 +17,9 @@
 	}
 	
 	/* 첨부파일 */
-	#btnFile {
+	#inputFile {
 		margin: 5px 10px;
+	    width: 320px;
 	}
 	
 	/* 메시지 */
@@ -49,6 +50,7 @@
 <body>
 	<div id="title">사진 수정</div>
 	<form id="form" action="./clubPictureUpload" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>" />
 		<input type="file" name="file" id="inputFile" accept="image/*" />
 		<div id="msg"></div>
 		<div id="btnArea">
@@ -81,7 +83,6 @@
 	$("#btnEdit").click(function() {
 		// 이미지 파일이면
 		if(fileCheck == true) {
-			opener.parent.location.reload();
 			$("#form").submit();
 		}
 	});

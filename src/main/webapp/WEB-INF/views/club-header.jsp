@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <style>
 	body {
@@ -46,13 +47,10 @@
 		text-align: center;
 	}
 	#clubNameArea #clubName {
-		font-size: 35px;
-		font-weight: bold;
+		font-size: 40px;
 		color: black;
 		text-decoration: none;
-	}
-	#clubNameArea #clubName:hover {
-		text-decoration: underline;
+		font-family: 'Jua'
 	}
 </style>
 </head>
