@@ -39,12 +39,8 @@
 	
 	<select id="SearchInterest" resultType="String">
 		SELECT interest_interest FROM interest WHERE interest_id = #{param1}
-<<<<<<< HEAD
-		</select>
-=======
 	</select>
 
->>>>>>> 1ec034ef1525039cad711760c9d86624e1f0cf75
 	<select id="clubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
 		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
 		FROM club C JOIN interest I ON C.interest_id=I.interest_id
