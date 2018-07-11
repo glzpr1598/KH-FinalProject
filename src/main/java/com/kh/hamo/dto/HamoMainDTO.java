@@ -8,12 +8,6 @@ public class HamoMainDTO {
 	private String club_introduce;
 	private String club_date;
 	private int clubJoin_id;
-	public int getClubJoin_id() {
-		return clubJoin_id;
-	}
-	public void setClubJoin_id(int clubJoin_id) {
-		this.clubJoin_id = clubJoin_id;
-	}
 	private int club_memberCount;
 	private String club_location;
 	private int clubPicture_id;
@@ -22,6 +16,12 @@ public class HamoMainDTO {
 	private String interest_interest;
 	private String member_id;
 	
+	public int getClubJoin_id() {
+		return clubJoin_id;
+	}
+	public void setClubJoin_id(int clubJoin_id) {
+		this.clubJoin_id = clubJoin_id;
+	}
 	public void setClub_date(String club_date) {
 		this.club_date = club_date;
 	}

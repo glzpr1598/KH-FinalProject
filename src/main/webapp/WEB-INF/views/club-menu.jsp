@@ -99,7 +99,7 @@
 			
 			<div>
 				<img id="list2" src="./resources/image/list.png" />
-				<a id="menu2" href="./clubNoticeList?club_id=<%= request.getParameter("club_id") %>&sort=공지사항">공지사항</a>
+				<a id="menu2" href="./clubNoticeList=<%= request.getParameter("club_id") %>&sort=공지사항">공지사항</a>
 			</div>
 			
 			<div>
@@ -116,7 +116,7 @@
 		<div id="meeting" class="menu">
 			<div>
 				<img id="list5" src="./resources/image/list.png" />
-				<a id="menu4" href="">모임일정</a>
+				<a id="menu4" href="./clubMeetingList?club_id=<%= request.getParameter("club_id") %>">모임일정</a>
 			</div>
 		</div>
 		

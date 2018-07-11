@@ -7,6 +7,6 @@ import com.kh.hamo.dto.ClubMeetingDTO;
 
 public interface ClubMeetingPlanInter {
 
-	ArrayList<ClubMeetingDTO> clubMeetingList(HashMap<String, String> map);//모임 일정 리스트
+	ArrayList<ClubMeetingDTO> clubMeetingList(int club_id);//모임 일정 리스트
 
 }
