@@ -27,4 +27,16 @@
     		VALUES(seq_blacklist_id.NEXTVAL, #{param1}, #{param2})
 	</insert>
 	
+	<!-- 동호회 가입 여부 확인 -->
+	<select id="memberCheck" resultType="int">
+		SELECT COUNT(*) FROM clubjoin
+    		WHERE member_id = #{param1} AND club_id = #{param2} 
+	</select>
+	
+	<!-- 회장 여부 확인 -->
+	<select id="masterCheck" resultType="int">
+		SELECT COUNT(*) FROM club
+   			WHERE member_id = #{param1} AND club_id = #{param2}
+	</select>
+	
 </mapper>
