@@ -1,5 +1,7 @@
 package com.kh.hamo.controller;
 
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.hamo.service.ClubMemberService;
 
@@ -39,6 +42,15 @@ public class ClubMemberController {
 		service.clubMemberFire(clubJoin_id, club_id, member_id);
 		
 		return "redirect:/clubMemberList?club_id="+club_id;
+	}
+	
+	// 회원 확인(동호회 가입 여부, 회장 여부)
+	@RequestMapping(value = "/memberCheck")
+	public @ResponseBody HashMap<String, Object> memberCheck(
+			@RequestParam String userId, String club_id) {
+		logger.info("회원 확인 요청");
+
+		return service.memberCheck(userId, club_id);
 	}
 	
 }

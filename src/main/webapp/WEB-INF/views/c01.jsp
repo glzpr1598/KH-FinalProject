@@ -26,7 +26,6 @@
 	<!------------------- 양식 ------------------->
 </body>
 <script>
-
 	$(document).ready(function() {
 		// 동호회 아이디
 		var club_id = "<%= request.getParameter("club_id") %>"; 

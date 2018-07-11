@@ -90,7 +90,7 @@
 			<div><span class="infoText1">주제</span><span id="subject"></span></div>
 			<div><span class="infoText1">지역</span><span id="location"></span></div>
 		</div> 
-		<input type="button" value="가입하기" class="btn" />
+		<input type="hidden" value="가입하기" id="btn1" class="btn" />
 		<div id="menu" class="menu">
 			<div>
 				<img id="list" src="./resources/image/list.png" />
@@ -120,16 +120,54 @@
 			</div>
 		</div>
 		
-		<input type="button" value="탈퇴하기" id="btn2" class="btn" /><br>
-		<input type="button" value="멤버관리" id="btn3" class="btn" /><br>
-		<input type="button" value="동호회 폐쇄" id="btn4" class="btn" /><br>
-		<input type="button" value="페쇄 취소" id="btn5" class="btn" />
+		<input type="hidden" value="탈퇴하기" id="btn2" class="btn" />
+		<input type="hidden" value="멤버관리" id="btn3" class="btn" />
+		<input type="hidden" value="동호회 폐쇄" id="btn4" class="btn" />
+		<input type="hidden" value="폐쇄 취소" id="btn5" class="btn" />
 	</div>
 </body>
 <script>
+	//$(".btn").attr("type", "button");
 	$(document).ready(function() {
 		// 동호회 아이디
 		var club_id = "<%= request.getParameter("club_id") %>";
+		
+		/* 권한에 따라 버튼 보여주기 */
+		var userId = "<%= session.getAttribute("userId") %>";
+		if(userId == "null") {  
+			// 로그인 하지 않은 경우 가입하기 버튼만 활성화
+			$("#btn1").attr("type", "button");
+		} else {  
+			// 로그인 한 경우
+			$.ajax({
+		        url: "./memberCheck",
+		        type: "post",
+		        data: {
+		            "userId": userId,
+		            "club_id": club_id
+		        },
+		        dataType: "json",
+		        success: function(data) {
+		        	// 동호회 회원이 아닌 경우
+		        	if(data.isMember == 0) {
+		        		// 가입하기 활성화
+		        		$("#btn1").attr("type", "button");
+		        	}
+		        	// 동호회 회원인 경우
+		        	else if(data.isMember > 0 && data.isMaster == 0) {
+		        		// 탈퇴하기 활성화
+		        		$("#btn2").attr("type", "button");
+		        	}
+		        	else if(data.isMaster > 0) {
+		        		// 멤버관리, 동호회 폐쇄, 폐쇄 취소 활성화
+		        		$("#btn3").attr("type", "button");
+		        		$("#btn4").attr("type", "button");
+		        		$("#btn5").attr("type", "button");
+		        	}
+		        },
+		        error: function(err) {console.log(err);}
+		    });
+		}
 		
 		// 멤버관리 클릭
 		$("#btn3").click(function(){

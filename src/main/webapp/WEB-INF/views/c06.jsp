@@ -65,9 +65,9 @@
 	</div>
 	<form name="writefrm" id="writefrm" method="post">
 		<h3>제목 : <input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/></h3>
-    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"><div></div></textarea>
+    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea>
     	<button id="save">저장</button>
-    	<div id="cancel"><a href="./clubNoticeList?club_id=<%=request.getParameter("club_id") %>&sort=공지사항">취소</a></div>
+    	<div id="cancel"><a href="./clubNoticeList?club_id=<%=request.getParameter("club_id") %>&sort=notice">취소</a></div>
 	</form>
 </body>
 <script>
@@ -77,13 +77,6 @@
 		oAppRef : oEditors,
 		elPlaceHolder: "editor",
 		sSkinURI: "<%= request.getContextPath() %>/resources/smarteditor/SmartEditor2Skin.html",
-		/* fOnAppLoad: function () { //수정시 필요한 코드
-	         var title = localStorage.getItem("title");                      
-	         var contents = localStorage.getItem("contents"); 
-	         //DB에서 불러온 값을 채워 넣음
-	         document.getElementById("title").value = title;     
-	         oEditors.getById["txtContent"].exec("PASTE_HTML", [contents]); //로딩이 끝나면 contents를 txtContent에 넣습니다.
-	     }, */
 	     htParams : {
 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseToolbar : true,             
@@ -93,30 +86,6 @@
 			bUseModeChanger : true,
 	     }
 	});
-	
-<%-- 	// textArea에 이미지 첨부
-	function pasteHTML(filepath){
-	    var sHTML = '<img src="<%=request.getContextPath()%>/resources/multiuploder/'+filepath+'">';
-	    oEditors.getById["editor"].exec("PASTE_HTML", [sHTML]);
-	} --%>
-	
-/* 		window.onload=function(){
-		var btn = document.getElementById("save");
-		btn.onclick = function(){
-			submitContents(btn);
-		}
-	}
-	function submitContents(elClickedObj){
-		oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-		if(validation()){
-			$("#writefrm").submit();
-		}
-		try{
-			
-		}catch(e){
-			elClickedObj.form.submit();
-		}
-	} */
 	
 	$("#save").click(function(){
 		oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);

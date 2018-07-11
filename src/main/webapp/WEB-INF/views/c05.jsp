@@ -22,10 +22,10 @@
 		width: 780px;
 		height: 50px;
 	}
-	#name{
+	#title{
 	position: absolute;
 	left: 560px;
-	top: 345px;
+	top: 190px;
 	font-weight: 600;
 	font-size: large;
 	}
@@ -42,44 +42,35 @@
 		text-align: center;
 		display: none;
 	}
-	.board{
-		text-decoration: none;
-		color: black;
-	}
 	#listTable{
 		text-align: center;
 	}
 	td{
 		border-bottom: 1px solid #ffbf00;
 	}
+	td a{
+		text-decoration: none;
+		color: black;
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="club-header.jsp"/>
 	<jsp:include page="club-menu.jsp"/>
-	<div id="name">
-		| 공지사항 |
-	</div>
+	<div id="title">| 공지사항 |</div>
 	<div id="table">
 	<table id="listTable">
-		<tr id="head">
-			<th>글번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
-		</tr>
-		<c:forEach items="${list}" var="notice">
-			<input id="nick" type="hidden" value="${notice.club_masterNickname}"/>
-			<tr>
-				<td>${notice.clubBbs_idx}</td>
-				<td><a href="./clubNoticeDetail?club_id=${notice.club_id}&clubBbs_id=${notice.clubBbs_id}" class="board">${notice.clubBbs_subject}</a></td>
-
-				<td>${notice.club_masterNickname}</td>
-				<td>${notice.clubBbs_date}</td>
-				<td>${notice.clubBbs_hit}</td>
+		<thead>
+			<tr id="head">
+				<th>글번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
 			</tr>
-		</c:forEach>
+		</thead>
+		<tbody id="body">
+		</tbody>
 	</table>
 	<input id="write" type="button" value="글쓰기"/>
 	</div>
@@ -87,11 +78,69 @@
 <script>
 	var club_id=<%=request.getParameter("club_id")%>
 	console.log("동호회 아이디 :"+club_id);
-	var nick = $("#nick").val(); 
-	console.log("현재 회장 닉네임은 : "+nick);
-	 if(nick != ""){
-		document.getElementById("write").style.display='inline';
-	}
+	 
+	 $(document).ready(function(){
+			$.ajax({
+				type : "get",
+				url: "./findMater",
+				dataType:"json",
+				data:{
+					"club_id":"<%=request.getParameter("club_id")%>",
+					"member_id": "${sessionScope.userId}"
+				},
+				success:function(data){
+					if(data.nick != null){
+						console.log("동호회 회장 : "+data.nick);
+						document.getElementById("write").style.display='inline';
+					}else{
+						console.log("동호회 회장 : "+data.nick);
+						document.getElementById("write").style.display='none';
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});
+		});
+	 
+	 $(document).ready(function(){
+			$.ajax({
+				type : "get",
+				url: "./clubNoticeListForm",
+				dataType:"json",
+				data:{
+					"club_id":"<%=request.getParameter("club_id")%>",
+					"sort": "<%=request.getParameter("sort")%>"
+				},
+				success:function(data){
+					if(data){
+						console.log(data.list);
+						listPrint(data.list);
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});
+		});
+
+		function listPrint(list){
+			var content = "";
+			console.log(list);
+			$("#body").empty();
+			list.forEach(function(item){
+				content += "<tr>";
+				content += "<td>"+item.clubBbs_idx+"</td>";
+				content += "<td><a href='./clubNoticeDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
+				content += "<td>"+item.club_masterNickname+"</td>";
+				var date = new Date(item.clubBbs_date);
+				content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+				content += "<td>"+item.clubBbs_hit+"</td>";
+				content += "</tr>";
+			});
+			$("#body").append(content);
+		} 
+	 
 	$("#write").click(function(){
 		location.href="./clubNoticeWriteForm?club_id="+club_id;
 	});

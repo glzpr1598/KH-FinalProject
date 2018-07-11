@@ -1,6 +1,7 @@
 package com.kh.hamo.controller;
 
 
+import java.awt.List;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -73,11 +74,19 @@ public class HamoMainController {
 		logger.info("가입한 동호회 탈퇴 리스트");
 		return service.myClubRemove(myClubRemove);
 	}
-	//동호회 찾기
+	//동호회 찾기 페이지 이동
 	@RequestMapping(value = "/m10move")
 	public String m10move(Model model) {
-		logger.info("동호회 찾기 ");
+		logger.info("동호회 찾기 페이지 요청 ");
 		return "m10";
+	}
+	//동호회 찾기
+	@RequestMapping(value = "/clubSearch")
+	public @ResponseBody HashMap<String, Object> clubSearch(@RequestParam HashMap<String, String> map) {
+		logger.info("동호회 찾기 요청");
+		System.out.println("interest : " + map.get("interest"));
+		System.out.println("location : " + map.get("location"));
+		return service.clubSearch(map);
 	}
 	
 }
