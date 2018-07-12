@@ -14,6 +14,14 @@
 			font-size: 20px;
 			border: 0px;
 		}
+		p{
+			font-size: 20px;
+		}
+		textarea{
+			font-size: 20px;
+			width: 100%;
+			resize: none;
+		}
 	</style>
 		
 	</head>
@@ -30,7 +38,8 @@
 				<input type="text" class="meeting" placeholder="일시"/></br>
 				<input type="text" class="meeting" placeholder="회비"/>
 				<P>내용</P>
-				<textarea rows="5" cols="50"></textarea>
+				<textarea rows="10" cols="70"></textarea>
+				<P>지역</P>
 			</form>
 		
 		
