@@ -15,7 +15,8 @@
 		 #back{position: absolute; left: 285px; top: 390px; font-size: 20px; border: 2px solid #ffbf00;}             
          #next{position: absolute; left: 1403px; top: 390px; font-size: 20px;border: 2px solid #ffbf00;}       
          
-         #we{position: absolute; left: 380px; top: 260px; font-weight: bold;  font-size: 24px; background: white;}     
+         #we{position: absolute; left: 380px; top: 260px; font-weight: bold;  font-size: 24px; background: white;}    
+         .club_default{position: absolute; left: 700px; top: 370px; font-weight: bold;  font-size: 40px; background: white; }    
          .club_name{position: absolute; left: 840px; top: 300px; font-weight: bold;  font-size: 35px; background: white; }   
          .club_interest{position: absolute; left: 840px; top: 370px; font-weight: normal;  font-size: 15px; background: white; }   
          .club_date{position: absolute; left: 840px; top: 390px; font-weight: normal;  font-size: 15px; background: white; }      
@@ -40,76 +41,114 @@
 	<a id='we'>우리 동호회를 소개합니다.</a>
 	<div id='all'>
 	</div>
+<c:if test="${size == 0}">
+	<div class='club_default'><a>동호회를 준비중입니다.</a></div>
+</c:if>	
 
+<c:if test="${size >= 1}">
 	<div id='d1'>
 		<c:if test="${list0.clubPicture_newName != null}">
 			<div class='picture' id='p1'><a><img id="img" src="./resources/image/${list0.clubPicture_newName}"/></a></div>
 		</c:if>
-
-
+		<c:if test="${list0.clubPicture_newName == null}">
+			<div class='picture' id='p1'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
+		
+		<c:if test="${list0.club_name != null}">
 			<div class='club_name'><a>${list0.club_name}</a></div>
 			<div class='club_interest'><a>${list0.interest_interest}  |  ${list0.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list0.club_memberCount} 명  |  SINCE ${list0.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list0.club_introduce}</a></div><!-- 소개 -->
-
-
+		</c:if>
 	</div>
+</c:if>		
 		
+		
+		
+<c:if test="${size >= 2}">		
 	<div id='d2'>
 		<c:if test="${list1.clubPicture_newName != null}">
 			<div class='picture' id='p2'><a><img id="img" src="./resources/image/${list1.clubPicture_newName}"/></a></div>
 		</c:if>     
+		<c:if test="${list1.clubPicture_newName == null}">
+			<div class='picture' id='p2'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
 
-
+		<c:if test="${list1.club_name != null}">
 			<div class='club_name'><a>${list1.club_name}</a></div>
 			<div class='club_interest'><a>${list1.interest_interest}  |  ${list1.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list1.club_memberCount} 명  |  SINCE ${list1.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list1.club_introduce}</a></div><!-- 소개 -->
-
-
+		</c:if>
 	</div>
+</c:if>			
 		
+		
+		
+		
+<c:if test="${size >= 3}">			
 	<div id='d3'>
 		<c:if test="${list2.clubPicture_newName != null}">
 			<div class='picture' id='p3'><a><img id="img" src="./resources/image/${list2.clubPicture_newName}"/></a></div>
 		</c:if>
+		<c:if test="${list2.clubPicture_newName == null}">
+			<div class='picture' id='p3'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
 
-
+		<c:if test="${list2.club_name != null}">
 			<div class='club_name'><a>${list2.club_name}</a></div>
 			<div class='club_interest'><a>${list2.interest_interest}  |  ${list2.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list2.club_memberCount} 명  |  SINCE ${list2.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list2.club_introduce}</a></div><!-- 소개 -->
-
-
+		</c:if>
 	</div>
+</c:if>		
 		
+		
+		
+
+<c:if test="${size >= 4}">				
 	<div id='d4'>
 		<c:if test="${list3.clubPicture_newName != null}">      
 			<div class='picture' id='p4'><a><img id="img" src="./resources/image/${list3.clubPicture_newName}"/></a></div>
 		</c:if>
+		<c:if test="${list3.clubPicture_newName == null}">
+			<div class='picture' id='p4'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
 
-
+		<c:if test="${list3.club_name != null}">
 			<div class='club_name'><a>${list3.club_name}</a></div>
 			<div class='club_interest'><a>${list3.interest_interest}  |  ${list3.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list3.club_memberCount} 명  |  SINCE ${list3.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list3.club_introduce}</a></div><!-- 소개 -->
-
-
+		</c:if>
 	</div>
+</c:if>			
 		
+		
+		
+		
+<c:if test="${size >= 5}">			
 	<div id='d5'>
 		<c:if test="${list4.clubPicture_newName != null}">
 			<div class='picture' id='p5'><a><img id="img" src="./resources/image/${list4.clubPicture_newName}"/></a></div>
 		</c:if>
+		<c:if test="${list4.clubPicture_newName == null}">
+			<div class='picture' id='p5'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
 
-
+		<c:if test="${list4.club_name != null}">
 			<div class='club_name'><a>${list4.club_name}</a></div>
 			<div class='club_interest'><a>${list4.interest_interest}  |  ${list4.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list4.club_memberCount} 명  |  SINCE ${list4.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list4.club_introduce}</a></div><!-- 소개 -->
-
-
+		</c:if>
 	</div>
+</c:if>		
+	
+	
+	
+	
 	
 		
 		
@@ -120,6 +159,12 @@
 </body>
 <script>
 
+var size = "${size}";
+
+/* 동호회가 5개 이상일때 */
+
+if(size>=5){
+	
 
 $(document).ready(function(){
 	$("#d1").show();
@@ -206,11 +251,230 @@ if(a==5){
 		}
    }
  
+}   
+   /* 동호회가 4개 일때 */
+if(size==4){   
+   
+	
+	   $(document).ready(function(){
+			$("#d1").show();
+			$("#d2").hide();
+			$("#d3").hide();
+			$("#d4").hide();
+		 });
+	   
+	   var a = 4;
+	   
+	   playAlert = setInterval(function() {
+		 	$("#d1").hide();
+			$("#d2").hide();
+			$("#d3").hide();
+			$("#d4").hide();
+
+		if(a==4){
+			a=3;
+			$("#d2").show();
+		}else if(a==3){
+			a=2;
+			$("#d3").show();
+		}else if(a==2){
+			a=1;
+			$("#d4").show();
+		}else if(a==1){
+			a=4;
+			$("#d1").show();
+		}
+}, 5000);
+   
+	   
+	   function next(){
+	     	$("#d1").hide();
+			$("#d2").hide();
+			$("#d3").hide();
+			$("#d4").hide();
+
+			console.log(a);
+			if(a==4){
+				a=3;
+				$("#d2").show();
+			}else if(a==3){
+				a=2;
+				$("#d3").show();
+			}else if(a==2){
+				a=1;
+				$("#d4").show();
+			}else if(a==1){
+				a=4;
+				$("#d1").show();
+			}
+	   }
+	   
+	   function back(){     
+	     	$("#d1").hide();
+			$("#d2").hide();
+			$("#d3").hide();
+			$("#d4").hide();
+
+		   console.log(a);
+			if(a==4){
+				a=1;
+				$("#d2").show();
+			}else if(a==3){
+				a=4;
+				$("#d3").show();
+			}else if(a==2){
+				a=3;
+				$("#d4").show();
+			}else if(a==1){
+				a=2;
+				$("#d1").show();
+			}
+	   }
+}   
+   
+   
+   
+   /* 동호회가 3개 일때 */
+if(size==3){
+	
+	
+
+   $(document).ready(function(){
+	$("#d1").show();
+	$("#d2").hide();
+	$("#d3").hide();
+ });
+   var a = 3;
+
+playAlert = setInterval(function() {
+ 	$("#d1").hide();
+	$("#d2").hide();
+	$("#d3").hide();
+
+if(a==3){
+	a=2;
+	$("#d2").show();
+}else if(a==2){
+	a=1;
+	$("#d3").show();
+}else if(a==1){
+	a=3;
+	$("#d1").show();
+}
+}, 5000);
+
+
+	function next(){
+     	$("#d1").hide();
+		$("#d2").hide();
+		$("#d3").hide();
+
+		console.log(a);
+		if(a==3){
+			a=2;
+			$("#d2").show();
+		}else if(a==2){
+			a=1;
+			$("#d3").show();
+		}else if(a==1){
+			a=3;
+			$("#d1").show();
+		}
+   }
+        
+   function back(){     
+     	$("#d1").hide();
+		$("#d2").hide();
+		$("#d3").hide();
+
+	   console.log(a);
+		if(a==3){
+			a=1;
+			$("#d2").show();
+		}else if(a==2){
+			a=3;
+			$("#d3").show();
+		}else if(a==1){
+			a=2;
+			$("#d1").show();
+		}
+   }
+   
+}   
+   
+   
+   
+   
+   
+   /* 동호회가 2개 일때 */
+if(size==2){
+	
+	
+
+  $(document).ready(function(){
+	$("#d1").show();
+	$("#d2").hide();
+ });
+   var a = 2;
+
+playAlert = setInterval(function() {
+ 	$("#d1").hide();
+	$("#d2").hide();
+
+if(a==2){
+	a=1;
+	$("#d2").show();
+}else if(a==1){
+	a=2;
+	$("#d1").show();
+}
+}, 5000);
+
+
+	function next(){
+     	$("#d1").hide();
+		$("#d2").hide();
+
+		console.log(a);
+		if(a==2){
+			a=1;
+			$("#d1").show();
+		}else if(a==1){
+			a=2;
+			$("#d2").show();
+		}
+   }
+        
+   function back(){     
+     	$("#d1").hide();
+		$("#d2").hide();
+
+	   console.log(a);
+		if(a==2){
+			a=1;
+			$("#d1").show();
+		}else if(a==1){
+			a=2;
+			$("#d2").show();
+		}
+   }
+   
+   
+}   
+   /* 동호회가 1개 일때 */
+if(size==1){
+  $(document).ready(function(){
+	$("#d1").show();
+ });
+ function next(){ $("#d1").show();}
+ function back(){ $("#d1").show();}
+}
  
- 
- 
- 
- 
+   
+if(size==0){
+	 function next(){ console.log("동호회없음");}
+	 function back(){ console.log("동호회없음");}
+}
  
  
 </script>
