@@ -23,5 +23,7 @@ public interface ClubAdminInter {
 	void clubPictureDelete(String club_id);
 	// 동호회 사진 등록
 	void clubPictureUpload(String oldName, String newName, String club_id);
+	// 동호회 소개글 수정
+	void clubIntroduceUpdate(String club_id, String introduce);
 
 }
