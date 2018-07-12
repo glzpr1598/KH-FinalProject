@@ -37,5 +37,21 @@
 	<delete id="clubCloseCancel">
 		DELETE FROM clubclose WHERE club_id=#{param1}
 	</delete>
+	
+	<!-- 동호회 사진 이름 가져오기 -->
+	<select id="clubPictureName" resultType="String">
+		SELECT clubpicture_newname FROM clubpicture WHERE club_id=#{param1}
+	</select>
+	
+	<!-- 동호회 사진 삭제 -->
+	<delete id="clubPictureDelete">
+		DELETE FROM clubpicture WHERE club_id=#{param1}
+	</delete>
+	
+	<!-- 동호회 사진 등록 -->
+	<insert id="clubPictureUpload">
+		INSERT INTO clubpicture(clubpicture_id, club_id, clubpicture_oldname, clubpicture_newname)
+    		VALUES(seq_clubpicture_id.NEXTVAL, #{param3}, #{param1}, #{param2})
+	</insert>
 
 </mapper>

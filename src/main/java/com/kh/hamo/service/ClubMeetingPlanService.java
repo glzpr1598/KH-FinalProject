@@ -26,7 +26,7 @@ public class ClubMeetingPlanService {
     
     //모임 일정 리스트
 	public HashMap<String, Object> clubMeetingList(String club_id) {
-		logger.info("종합검색 서비스 실행");
+		logger.info("모임 일정 리스트 서비스");
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ArrayList<ClubMeetingDTO> clubMeetingList = inter.clubMeetingList(Integer.parseInt(club_id));
 		HashMap<String, Object> result = new HashMap<>();

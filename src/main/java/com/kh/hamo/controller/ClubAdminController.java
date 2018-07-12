@@ -2,14 +2,17 @@ package com.kh.hamo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.service.ClubAdminService;
@@ -95,4 +98,30 @@ public class ClubAdminController {
 		return "close";
 	}
 	
+	// 동호회 사진 업로드 창
+	@RequestMapping(value = "/clubPictureUploadForm")
+	public String clubPictureUploadForm() {
+		logger.info("동호회 사진 업로드 창 요청");
+		return "c21";
+	}
+	// 동호회 사진 업로드
+	@Transactional
+	@RequestMapping(value = "/clubPictureUpload")
+	public String clubPictureUpload(MultipartFile file, HttpSession session,
+			@RequestParam String club_id) {
+		logger.info("동호회 사진 업로드 요청");
+		
+		// 실제로 이미지가 저장되는 디렉토리 경로
+		// C:\...\apache-tomcat-8.5.30\wtpwebapps\KH-FinalProject\
+		String dirPath = session.getServletContext().getRealPath("/");
+		dirPath += "resources/club-picture/";
+		
+		// 기존 동호회 사진 삭제 서비스
+		service.clubPictureDelete(dirPath, club_id);
+		
+		// 사진 업로드 서비스
+		service.clubPictureUpload(file, dirPath, club_id);
+		
+		return "close-reload";
+	}
 }

@@ -17,5 +17,11 @@ public interface ClubAdminInter {
 	String clubCloseCheck(String club_id);
 	// 동호회 폐쇄 취소
 	void clubCloseCancel(String club_id);
+	// 동호회 사진 이름 가져오기
+	ArrayList<String> clubPictureName(String club_id);
+	// 동호회 사진 삭제
+	void clubPictureDelete(String club_id);
+	// 동호회 사진 등록
+	void clubPictureUpload(String oldName, String newName, String club_id);
 
 }

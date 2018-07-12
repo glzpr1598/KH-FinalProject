@@ -39,8 +39,8 @@
 	
 	<select id="SearchInterest" resultType="String">
 		SELECT interest_interest FROM interest WHERE interest_id = #{param1}
+	</select>
 
-		</select>
 
 
 

@@ -22,6 +22,7 @@ public interface HamoMainInter {
 
 	String SearchInterest(int interest_id);
 
+
 	ArrayList<HamoMainDTO> clubSearch(HashMap<String, String> map);//동호회 찾기
 
 

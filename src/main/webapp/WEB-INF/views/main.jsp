@@ -45,13 +45,20 @@
 		<c:if test="${list0.clubPicture_newName != null}">
 			<div class='picture' id='p1'><a><img id="img" src="./resources/image/${list0.clubPicture_newName}"/></a></div>
 		</c:if>
-
-
+		<c:if test="${list0.clubPicture_newName == null}">
+			<div class='picture' id='p1'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
+		
+		<c:if test="${list0.club_name != null}">
 			<div class='club_name'><a>${list0.club_name}</a></div>
 			<div class='club_interest'><a>${list0.interest_interest}  |  ${list0.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list0.club_memberCount} 명  |  SINCE ${list0.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list0.club_introduce}</a></div><!-- 소개 -->
-
+		</c:if>
+		
+		<c:if test="${list0.club_name == null}">
+			<div class='club_name'><a>동호회 준비중입니다.</a></div>
+		</c:if>
 
 	</div>
 		
@@ -59,13 +66,20 @@
 		<c:if test="${list1.clubPicture_newName != null}">
 			<div class='picture' id='p2'><a><img id="img" src="./resources/image/${list1.clubPicture_newName}"/></a></div>
 		</c:if>     
+		<c:if test="${list1.clubPicture_newName == null}">
+			<div class='picture' id='p2'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
 
-
+		<c:if test="${list1.club_name != null}">
 			<div class='club_name'><a>${list1.club_name}</a></div>
 			<div class='club_interest'><a>${list1.interest_interest}  |  ${list1.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list1.club_memberCount} 명  |  SINCE ${list1.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list1.club_introduce}</a></div><!-- 소개 -->
-
+		</c:if>
+	
+		<c:if test="${list1.club_name == null}">
+			<div class='club_name'><a>동호회 준비중입니다.</a></div>
+		</c:if>
 
 	</div>
 		
@@ -73,13 +87,20 @@
 		<c:if test="${list2.clubPicture_newName != null}">
 			<div class='picture' id='p3'><a><img id="img" src="./resources/image/${list2.clubPicture_newName}"/></a></div>
 		</c:if>
+		<c:if test="${list2.clubPicture_newName == null}">
+			<div class='picture' id='p3'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
 
-
+		<c:if test="${list2.club_name != null}">
 			<div class='club_name'><a>${list2.club_name}</a></div>
 			<div class='club_interest'><a>${list2.interest_interest}  |  ${list2.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list2.club_memberCount} 명  |  SINCE ${list2.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list2.club_introduce}</a></div><!-- 소개 -->
-
+		</c:if>
+	
+		<c:if test="${list2.club_name == null}">
+			<div class='club_name'><a>동호회 준비중입니다.</a></div>
+		</c:if>
 
 	</div>
 		
@@ -87,28 +108,41 @@
 		<c:if test="${list3.clubPicture_newName != null}">      
 			<div class='picture' id='p4'><a><img id="img" src="./resources/image/${list3.clubPicture_newName}"/></a></div>
 		</c:if>
+		<c:if test="${list3.clubPicture_newName == null}">
+			<div class='picture' id='p4'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
 
-
+		<c:if test="${list3.club_name != null}">
 			<div class='club_name'><a>${list3.club_name}</a></div>
 			<div class='club_interest'><a>${list3.interest_interest}  |  ${list3.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list3.club_memberCount} 명  |  SINCE ${list3.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list3.club_introduce}</a></div><!-- 소개 -->
+		</c:if>
 
-
+		<c:if test="${list3.club_name == null}">
+			<div class='club_name'><a>동호회 준비중입니다.</a></div>
+		</c:if>
+		
 	</div>
 		
 	<div id='d5'>
 		<c:if test="${list4.clubPicture_newName != null}">
 			<div class='picture' id='p5'><a><img id="img" src="./resources/image/${list4.clubPicture_newName}"/></a></div>
 		</c:if>
+		<c:if test="${list4.clubPicture_newName == null}">
+			<div class='picture' id='p5'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
 
-
+		<c:if test="${list4.club_name != null}">
 			<div class='club_name'><a>${list4.club_name}</a></div>
 			<div class='club_interest'><a>${list4.interest_interest}  |  ${list4.club_location} </a></div><!-- 주제 | 지역 -->
 			<div class='club_date'><a>${list4.club_memberCount} 명  |  SINCE ${list4.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list4.club_introduce}</a></div><!-- 소개 -->
+		</c:if>
 
-
+		<c:if test="${list4.club_name == null}">
+			<div class='club_name'><a>동호회 준비중입니다.</a></div>
+		</c:if>
 	</div>
 	
 		
