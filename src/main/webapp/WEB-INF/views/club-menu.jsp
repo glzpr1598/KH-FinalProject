@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<title>Insert title here</title>
 <style>
 	#container {
 		width: 1000px;
@@ -127,7 +126,6 @@
 	</div>
 </body>
 <script>
-	//$(".btn").attr("type", "button");
 	$(document).ready(function() {
 		// 동호회 아이디
 		var club_id = "<%= request.getParameter("club_id") %>";
@@ -163,6 +161,8 @@
 		        		$("#btn3").attr("type", "button");
 		        		$("#btn4").attr("type", "button");
 		        		$("#btn5").attr("type", "button");
+		        		// 메인화면의 사진 수정, 글 수정 활성화
+		        		$(".masterBtn").attr("type", "button");
 		        	}
 		        },
 		        error: function(err) {console.log(err);}
