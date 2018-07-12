@@ -16,6 +16,11 @@
 		    ORDER BY cj.clubjoin_id DESC
 	</select>
 	
+	<!-- 회장 아이디 가져오기 -->
+	<select id="clubMasterId" resultType="String">
+		SELECT member_id FROM club WHERE club_id = #{param1}
+	</select>
+	
 	<!-- 특정 동호회가입 아이디로 멤버 강퇴 -->
 	<delete id="clubMemberFire">
 		DELETE FROM clubjoin WHERE clubjoin_id = #{param1}
@@ -26,6 +31,11 @@
 		INSERT INTO blacklist(blacklist_id, club_id, member_id)
     		VALUES(seq_blacklist_id.NEXTVAL, #{param1}, #{param2})
 	</insert>
+	
+	<!-- 회원수 업데이트 -->
+	<update id="clubMemberCountUpdate">
+		UPDATE club SET club_memberCount = (SELECT count(*) from clubjoin WHERE club_id=#{param1})
+	</update>
 	
 	<!-- 동호회 가입 여부 확인 -->
 	<select id="memberCheck" resultType="int">
