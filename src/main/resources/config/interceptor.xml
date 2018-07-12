@@ -6,6 +6,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<mvc:interceptors>
+		<!-- 로그인 여부 체크 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/updateForm" />
 			<bean class="com.kh.hamo.interceptor.LoginCheck" />

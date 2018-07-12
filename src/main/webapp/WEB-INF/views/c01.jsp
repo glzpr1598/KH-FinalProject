@@ -54,10 +54,11 @@
 		<div id="right"> <!-- width: 800px -->
 	<!------------------- 양식 ------------------->
 			<img id="picture" src="./resources/club-picture/default.png"></img>
-			<div id="introduce"></div>
+			<div id="introduce">${ introduce }</div>
 			<div id="buttons">
+				<input class="masterBtn" id="pictureDelete" type="hidden" value="사진 삭제" />
 				<input class="masterBtn" id="pictureEdit" type="hidden" value="사진 수정" />
-				<input class="masterBtn" id="introduceEdit" type="hidden" value="글 수정" />
+				<input class="masterBtn" id="introduceEdit" type="hidden" value="소개글 수정" />
 			</div>
 	<!------------------- 양식 ------------------->
 		</div>
@@ -68,10 +69,31 @@
 	// 동호회 아이디
 	var club_id = "<%= request.getParameter("club_id") %>"; 
 	
+	// 사진 보여주기
+	var picture = "${picture}";
+	var picturePath = "./resources/club-picture/" + picture;
+	if(picture != "") {  // 사진이 있으면
+		$("#picture").attr("src", picturePath);
+	}
+	
+	// 사진 삭제 클릭
+	$("#pictureDelete").click(function() {
+		if(confirm("동호회 사진을 삭제하시겠습니까?")) {
+			location.href="./clubPictureDelete?club_id="+club_id;
+		}
+	});
+	
 	// 사진 수정 클릭
 	$("#pictureEdit").click(function() {
 		var url = "./clubPictureUploadForm?club_id=" + club_id;
 		var option = "width=360, height=160, left=200, top=100";
+		window.open(url, "_blank", option);
+	});
+	
+	// 소개글 수정 클릭
+	$("#introduceEdit").click(function() {
+		var url = "./clubIntroduceUpdateForm?club_id=" + club_id;
+		var option = "width=400, height=200, left=200, top=100";
 		window.open(url, "_blank", option);
 	});
 

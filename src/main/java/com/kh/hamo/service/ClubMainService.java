@@ -32,6 +32,15 @@ public class ClubMainService {
 	public void clubMain(Model model, String club_id) {
 		inter = sqlSession.getMapper(ClubMainInter.class);
 		
+		// 사진 이름 가져오기
+		String picture = inter.clubPicture(club_id);
+		
+		// 동호회 소개글 가져오기
+		String introduce = inter.clubIntroduce(club_id);
+		
+		// 모델에 담기
+		model.addAttribute("picture", picture);
+		model.addAttribute("introduce", introduce);
 		
 	}
     

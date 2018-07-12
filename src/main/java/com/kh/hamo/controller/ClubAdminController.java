@@ -104,6 +104,7 @@ public class ClubAdminController {
 		logger.info("동호회 사진 업로드 창 요청");
 		return "c21";
 	}
+	
 	// 동호회 사진 업로드
 	@Transactional
 	@RequestMapping(value = "/clubPictureUpload")
@@ -112,11 +113,12 @@ public class ClubAdminController {
 		logger.info("동호회 사진 업로드 요청");
 		
 		// 실제로 이미지가 저장되는 디렉토리 경로
-		// C:\...\apache-tomcat-8.5.30\wtpwebapps\KH-FinalProject\
+		// C:\...\wtpwebapps\KH-FinalProject\
 		String dirPath = session.getServletContext().getRealPath("/");
 		dirPath += "resources/club-picture/";
+		logger.info("dirPath : " + dirPath);
 		
-		// 기존 동호회 사진 삭제 서비스
+		// 동호회 사진 삭제 서비스
 		service.clubPictureDelete(dirPath, club_id);
 		
 		// 사진 업로드 서비스
@@ -124,4 +126,40 @@ public class ClubAdminController {
 		
 		return "close-reload";
 	}
+	
+	// 동호회 사진 삭제
+	@RequestMapping(value = "/clubPictureDelete")
+	public String clubPictureDelete(HttpSession session, @RequestParam String club_id) {
+		logger.info("동호회 사진 삭제 요청");
+		
+		// 실제로 이미지가 저장되는 디렉토리 경로
+		// C:\...\wtpwebapps\KH-FinalProject\
+		String dirPath = session.getServletContext().getRealPath("/");
+		dirPath += "resources/club-picture/";
+		logger.info("dirPath : " + dirPath);
+		
+		// 동호회 사진 삭제 서비스
+		service.clubPictureDelete(dirPath, club_id);
+		
+		return "redirect:/clubMain?club_id="+club_id;
+	}
+	
+	// 동호회 소개글 수정 창
+	@RequestMapping(value = "/clubIntroduceUpdateForm")
+	public String clubIntroduceUpdateForm() {
+		logger.info("동호회 소개글 수정 창 요청");
+		return "c22";
+	}
+	
+	// 동호회 소개글 수정
+	@RequestMapping(value = "/clubIntroduceUpdate")
+	public String clubIntroduceUpdate(@RequestParam String club_id, String introduce) {
+		logger.info("동호회 소개글 수정 요청");
+		
+		// 소개글 수정 서비스
+		service.clubIntroduceUpdate(club_id, introduce);
+		
+		return "close-reload";
+	}
+	
 }

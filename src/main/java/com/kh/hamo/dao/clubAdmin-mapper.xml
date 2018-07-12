@@ -53,5 +53,11 @@
 		INSERT INTO clubpicture(clubpicture_id, club_id, clubpicture_oldname, clubpicture_newname)
     		VALUES(seq_clubpicture_id.NEXTVAL, #{param3}, #{param1}, #{param2})
 	</insert>
+	
+	<!-- 동호회 소개글 수정 -->
+	<update id="clubIntroduceUpdate">
+		UPDATE club SET club_introduce = #{param2}
+			WHERE club_id = #{param1}
+	</update>
 
 </mapper>
