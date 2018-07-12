@@ -165,9 +165,8 @@
 			border-bottom: 1px solid #ffbf00;
 		}
 		#div1{
-			position: absolute;
+			position: relative;
 			left: 17%;
-			top: 67%;
 		}
 		i{
 			color: #FFBF00;
