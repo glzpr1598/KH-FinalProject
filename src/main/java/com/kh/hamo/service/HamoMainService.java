@@ -65,10 +65,7 @@ public class HamoMainService {
 		mav.setViewName("m09");
 		return mav;
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> 1ec034ef1525039cad711760c9d86624e1f0cf75
 	
 	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
 	public ModelAndView home() {
@@ -98,21 +95,25 @@ public class HamoMainService {
 	        
 /*	        관심사와 동호회 사진을 가져오려면 별도의 쿼리문이 필요하기때문에 랜덤으로 뽑힌 
 	        5개의 dto 만 골라서 관심사와 동호회 사진값을 뽑아오는 쿼리문 실행 후 저장				*/
-	        for(int i=0; i<5; i++) {
-	            list.get(a[i]).setClubPicture_newName(inter.SearchPicture(list.get(a[i]).getClub_id()));
-	            list.get(a[i]).setInterest_interest(inter.SearchInterest(list.get(a[i]).getInterest_id()));
-	            mav.addObject("list"+i ,list.get(a[i]));
-	        }
-		mav.setViewName("main");
+	        if(list.size()!=0) {
+		        for(int i=0; i<5; i++) {
+		            list.get(a[i]).setClubPicture_newName(inter.SearchPicture(list.get(a[i]).getClub_id()));
+		            list.get(a[i]).setInterest_interest(inter.SearchInterest(list.get(a[i]).getInterest_id()));
+		            mav.addObject("list"+i ,list.get(a[i]));
+		        }
 		
+	        }else {
+		        for(int i=0; i<5; i++) {
+		        	
+		        }
+	        	
+	        }
+	        mav.setViewName("main");
 		return mav;
 		
 	     
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> 1ec034ef1525039cad711760c9d86624e1f0cf75
 	//동호회 찾기
 	public HashMap<String, Object> clubSearch(HashMap<String, String> map) {
 		logger.info("동호회 찾기 서비스 실행");
@@ -124,7 +125,4 @@ public class HamoMainService {
 		return result;
 	}
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 1ec034ef1525039cad711760c9d86624e1f0cf75
