@@ -44,7 +44,7 @@ public class ClubMemberController {
 		return "redirect:/clubMemberList?club_id="+club_id;
 	}
 	
-	// 회원 확인(동호회 가입 여부, 회장 여부)
+	// 회원 확인(동호회 가입 여부, 회장 여부, 동호회 폐쇄 여부)
 	@RequestMapping(value = "/memberCheck")
 	public @ResponseBody HashMap<String, Object> memberCheck(
 			@RequestParam String userId, String club_id) {

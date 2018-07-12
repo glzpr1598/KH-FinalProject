@@ -25,7 +25,7 @@
 	#title{
 	position: absolute;
 	left: 560px;
-	top: 345px;
+	top: 190px;
 	font-weight: 600;
 	font-size: large;
 	}
@@ -86,7 +86,7 @@
 				dataType:"json",
 				data:{
 					"club_id":"<%=request.getParameter("club_id")%>",
-					"member_id": "${sessionScope.member_id}"
+					"member_id": "${sessionScope.userId}"
 				},
 				success:function(data){
 					if(data.nick != null){
