@@ -48,7 +48,7 @@
 <c:if test="${size >= 1}">
 	<div id='d1'>
 		<c:if test="${list0.clubPicture_newName != null}">
-			<div class='picture' id='p1'><a><img id="img" src="./resources/image/${list0.clubPicture_newName}"/></a></div>
+			<div class='picture' id='p1'><a><img id="img" src="./resources/club-picture/${list0.clubPicture_newName}"/></a></div>
 		</c:if>
 		<c:if test="${list0.clubPicture_newName == null}">
 			<div class='picture' id='p1'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
@@ -68,7 +68,7 @@
 <c:if test="${size >= 2}">		
 	<div id='d2'>
 		<c:if test="${list1.clubPicture_newName != null}">
-			<div class='picture' id='p2'><a><img id="img" src="./resources/image/${list1.clubPicture_newName}"/></a></div>
+			<div class='picture' id='p2'><a><img id="img" src="./resources/club-picture/${list1.clubPicture_newName}"/></a></div>
 		</c:if>     
 		<c:if test="${list1.clubPicture_newName == null}">
 			<div class='picture' id='p2'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
@@ -89,7 +89,7 @@
 <c:if test="${size >= 3}">			
 	<div id='d3'>
 		<c:if test="${list2.clubPicture_newName != null}">
-			<div class='picture' id='p3'><a><img id="img" src="./resources/image/${list2.clubPicture_newName}"/></a></div>
+			<div class='picture' id='p3'><a><img id="img" src="./resources/club-picture/${list2.clubPicture_newName}"/></a></div>
 		</c:if>
 		<c:if test="${list2.clubPicture_newName == null}">
 			<div class='picture' id='p3'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
@@ -110,7 +110,7 @@
 <c:if test="${size >= 4}">				
 	<div id='d4'>
 		<c:if test="${list3.clubPicture_newName != null}">      
-			<div class='picture' id='p4'><a><img id="img" src="./resources/image/${list3.clubPicture_newName}"/></a></div>
+			<div class='picture' id='p4'><a><img id="img" src="./resources/club-picture/${list3.clubPicture_newName}"/></a></div>
 		</c:if>
 		<c:if test="${list3.clubPicture_newName == null}">
 			<div class='picture' id='p4'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
@@ -131,7 +131,7 @@
 <c:if test="${size >= 5}">			
 	<div id='d5'>
 		<c:if test="${list4.clubPicture_newName != null}">
-			<div class='picture' id='p5'><a><img id="img" src="./resources/image/${list4.clubPicture_newName}"/></a></div>
+			<div class='picture' id='p5'><a><img id="img" src="./resources/club-picture/${list4.clubPicture_newName}"/></a></div>
 		</c:if>
 		<c:if test="${list4.clubPicture_newName == null}">
 			<div class='picture' id='p5'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
