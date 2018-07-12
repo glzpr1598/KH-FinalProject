@@ -48,7 +48,7 @@
 <c:if test="${size >= 1}">
 	<div id='d1'>
 		<c:if test="${list0.clubPicture_newName != null}">
-			<div class='picture' id='p1'><a><img id="img" src="./resources/image/${list0.clubPicture_newName}"/></a></div>
+			<div class='picture' id='p1'><a><img id="img" src="./resources/club-picture/${list0.clubPicture_newName}"/></a></div>
 		</c:if>
 		<c:if test="${list0.clubPicture_newName == null}">
 			<div class='picture' id='p1'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
