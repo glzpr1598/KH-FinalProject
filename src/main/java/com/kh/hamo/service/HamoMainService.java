@@ -108,12 +108,10 @@ public class HamoMainService {
 		            list.get(a[i]).setClubPicture_newName(inter.SearchPicture(list.get(a[i]).getClub_id()));
 		            list.get(a[i]).setInterest_interest(inter.SearchInterest(list.get(a[i]).getInterest_id()));
 		            mav.addObject("list"+i ,list.get(a[i]));
+		            mav.addObject("size",list.size());
 		        }
 		}else {
-				for(int i=0; i<5; i++) {
-					HamoMainDTO dto = new HamoMainDTO();
-					mav.addObject("list"+i ,dto);
-				}
+					mav.addObject("size",0);
 		}
 
 	        
