@@ -49,4 +49,9 @@
    			WHERE member_id = #{param1} AND club_id = #{param2}
 	</select>
 	
+	<!-- 동호회 폐쇄 여부 확인 -->
+	<select id="clubCloseCheck" resultType="int">
+		SELECT COUNT(*) FROM clubclose WHERE club_id = #{param1}
+	</select>
+	
 </mapper>

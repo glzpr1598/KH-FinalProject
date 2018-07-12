@@ -19,5 +19,7 @@ public interface ClubMemberInter {
 	int memberCheck(String userId, String club_id);
 	// 회장 여부 확인
 	int masterCheck(String userId, String club_id);
+	// 동호회 폐쇄 여부 확인
+	int clubCloseCheck(String club_id);
 
 }

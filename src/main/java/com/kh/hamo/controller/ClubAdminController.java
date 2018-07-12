@@ -25,22 +25,11 @@ public class ClubAdminController {
 	@Autowired
 	ClubAdminService service;
 	
-	// 폐쇄하기 페이지 이동
+	// 동호회 폐쇄 페이지 이동
 	@RequestMapping(value = "/clubCloseForm")
-	public ModelAndView clubCloseForm(@RequestParam String club_id) {
+	public String clubCloseForm() {
 		logger.info("폐쇄하기 페이지 요청");
-		ModelAndView mav = new ModelAndView();
-		
-		// 폐쇄 신청이 되지 않은 경우
-		if(service.clubCloseCheck(club_id).get("clubClose_date") == null) {
-			mav.setViewName("c26");
-		}
-		// 이미 폐쇄 신청된 경우
-		else {
-			mav.setViewName("c26-error");
-		}
-		
-		return mav;
+		return "c26";
 	}
 	// 동호회 폐쇄 등록
 	@RequestMapping(value = "/clubClose")
@@ -50,7 +39,7 @@ public class ClubAdminController {
 		// 폐쇄 테이블에 추가
 		service.clubClose(club_id);
 		
-		return "close";
+		return "close-reload";
 	}
 	
 	// 동호회 폐쇄 검사
@@ -72,20 +61,9 @@ public class ClubAdminController {
 	
 	// 동호회 폐쇄 취소 페이지
 	@RequestMapping(value = "/clubCloseCancelForm")
-	public ModelAndView clubCloseCancelForm(@RequestParam String club_id) {
+	public String clubCloseCancelForm() {
 		logger.info("동호회 폐쇄 취소창 요청");
-		ModelAndView mav = new ModelAndView();
-		
-		// 폐쇄 신청 중인 경우
-		if(service.clubCloseCheck(club_id).get("clubClose_date") != null) {
-			mav.setViewName("c27");
-		}
-		// 폐쇄 신청 하지 않은 경우
-		else {
-			mav.setViewName("c27-error");
-		}
-		
-		return mav;
+		return "c27";
 	}
 	// 동호회 폐쇄 취소
 	@RequestMapping(value = "/clubCloseCancel")
@@ -95,7 +73,7 @@ public class ClubAdminController {
 		// 동호회 폐쇄 DB 삭제
 		service.clubCloseCancel(club_id);
 		
-		return "close";
+		return "close-reload";
 	}
 	
 	// 동호회 사진 업로드 창

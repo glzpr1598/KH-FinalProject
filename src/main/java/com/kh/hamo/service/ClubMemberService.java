@@ -53,16 +53,18 @@ public class ClubMemberService {
 		
 	}
 	
-	// 회원 확인(동호회 가입 여부, 회장 여부)
+	// 회원 확인(동호회 가입 여부, 회장 여부, 동호회 폐쇄 여부)
 	public HashMap<String, Object> memberCheck(String userId, String club_id) {
 		inter = sqlSession.getMapper(ClubMemberInter.class);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		
 		int isMember = inter.memberCheck(userId, club_id);
 		int isMaster = inter.masterCheck(userId, club_id);
+		int isClose = inter.clubCloseCheck(club_id);
 		
 		result.put("isMember", isMember);
 		result.put("isMaster", isMaster);
+		result.put("isClose", isClose);
 		
 		return result;
 	}
