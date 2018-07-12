@@ -19,7 +19,7 @@
 	/* 첨부파일 */
 	#inputFile {
 		margin: 5px 10px;
-	    width: 320px;
+	    width: 420px;
 	}
 	
 	/* 메시지 */
@@ -84,6 +84,8 @@
 		// 이미지 파일이면
 		if(fileCheck == true) {
 			$("#form").submit();
+		} else {
+			alert('이미지 파일(jpg, png, gif, bmp)만 선택 가능합니다.');
 		}
 	});
 	

@@ -86,14 +86,14 @@
 	// 사진 수정 클릭
 	$("#pictureEdit").click(function() {
 		var url = "./clubPictureUploadForm?club_id=" + club_id;
-		var option = "width=360, height=160, left=200, top=100";
+		var option = "width=460, height=160, left=200, top=100";
 		window.open(url, "_blank", option);
 	});
 	
 	// 소개글 수정 클릭
 	$("#introduceEdit").click(function() {
 		var url = "./clubIntroduceUpdateForm?club_id=" + club_id;
-		var option = "width=400, height=200, left=200, top=100";
+		var option = "width=460, height=200, left=200, top=100";
 		window.open(url, "_blank", option);
 	});
 
