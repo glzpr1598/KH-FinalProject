@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.service.ClubMeetingPlanService;
 
@@ -33,9 +34,21 @@ public class ClubMeetingPlanController {
 		logger.info("모임 일정 리스트 요청");
 		return service.clubMeetingList(club_id);
 	}
+	//모임 일정 등록페이지 이동  
 	@RequestMapping(value = "/clubMeetingWriteForm")
 	public String clubMeetingWriteForm() {
 		logger.info("clubMeetingWriteForm 요청");
 		return "c18";
 	}
+	//모임 일정 등록 
+	@RequestMapping(value = "/clubMeetingWrite")
+	public String clubMeetingWrite(@RequestParam HashMap<String, String> list) {
+		logger.info("clubMeetingWriteForm 요청");
+		String club_id=  list.get("club_id");
+		
+		service.clubMeetingWrite(list);
+		
+		return "redirect:/clubMeetingList?club_id="+club_id;
+	}
+
 }

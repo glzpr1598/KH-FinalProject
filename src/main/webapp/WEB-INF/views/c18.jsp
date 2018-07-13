@@ -23,15 +23,12 @@
 			resize: none;
 		}
 		
-		#mapdiv{
-			margin-bottom:50px; 
-		}
 		#ok{
 			position: relative; 
-			top: 610px;
-			
+			top: 640px;
+			margin-bottom: 25px;			
 		}
-		input[type="submit"]{
+		.bottomBtn{
 			width: 50px;
 			padding: 7px 0px;
 			margin-top : 5px;
@@ -43,8 +40,9 @@
 			font-weight: bold;
 			font-size: 14px;
 			cursor: pointer;
+			position: relative;
+			left: 40%;
 		}
-		
 		.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 		.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 		.map_wrap {position:relative;width:100%;height:500px;}
@@ -92,16 +90,19 @@
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
 			<h1> | 모임일정 | </h1>
-			<form action="">
+			<form action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>">
 				<input type="text" class="meeting" name="subject" placeholder="제목"/></br>
-				<input type="text" class="meeting" name="day" placeholder="일시"/></br>
+				<input type="text" class="meeting" name="day" placeholder="모임 일시 "/></br>
 				<input type="text" class="meeting" name="money" placeholder="회비"/>
 				<P>내용</P>
 				<textarea name="content" rows="10" cols="70"></textarea>
 				<div  id="ok">
+					<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>"/>
+					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
 					<input id="locationX" type="hidden" name="locationX" value=""/>
 					<input id="locationY" type="hidden" name="locationY" value=""/>
-					<input type="submit" value="저장">
+					<input type="submit" value="저장" class="bottomBtn"/>
+					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'"/>
 				</div>
 			</form>
 			<P>지역</P>
@@ -130,7 +131,7 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>
-	
+		$("#exit").click(function(){alert("모임일정 작성 취소");});
 	
 		var markers = [];
 	

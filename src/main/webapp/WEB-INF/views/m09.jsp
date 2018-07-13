@@ -15,38 +15,66 @@
 			color: #848484;
 		}
 		table{
-			margin-top: 10px;
-			width : 1050px;
+			margin: 10px 0px 40px 0px;
+			width : 1000px;
 			text-align: center;
 			border-collapse: collapse;
+			font-size: 13px;
 		}
 		th{
 			background-color:#FDF5DC;
+			height: 35px;
 		}
 		td{
 			border-bottom: 1px solid #ffbf00;
+			height: 35px;
 		}
 		#div1{
-			position: absolute;
-			left: 17%;
-			top: 30%;
+			width: 1000px;
+			margin: auto;
 		}
 		i{
 			color: #FFBF00;
 		}
-		a{
-			cursor:pointer;
-			color: black;
-			text-decoration: none;
-		}
 		input[type=submit]{
 			background-color:white; 
 			border: 1px solid #FFBF00;
-			
-			/* border-radius: 5px;  모서리 둥굴게*/
+			border-radius: 5px;
+			padding: 3px 7px;
+			font-size: 13px;
 		}
 		form{
 			margin: 0;
+		}
+		.sort {
+			cursor:pointer;
+			color: black;
+			text-decoration: none;
+			font-size: 12px;
+		}
+		.sort:hover {
+			text-decoration: underline;
+		}
+		.title {
+			font-size: 20px;
+			font-weight: bold;
+			margin: 5px 0px;
+		}
+		#day {
+			font-weight: bold;
+		}
+		#joinDay {
+			font-weight: bold;
+		}
+		.club {
+			color: black;
+			text-decoration: none;
+		}
+		.club:hover {
+			text-decoration: underline;
+		}
+		.clubName {
+			width: 500px;
 		}
 	</style>
 		
@@ -54,18 +82,17 @@
 	<body>
 		<%@ include file="./main-header.jsp" %>
 		<div id="div1">
-		
 			<div id="myClubList">
-				<h3>| 설립한 동호회 |</h3>
-				<a id="day"><i class="fa fa-check"></i> 설립일순 &nbsp;</a>
-				<a id="count"><i class="fa fa-check"></i> 회원수순 </a>
-				<table >
+				<div class="title">| 설립한 동호회 |</div>
+				<a id="day" class="sort"><i class="fa fa-check"></i> 설립일순</a>
+				&nbsp;
+				<a id="count" class="sort"><i class="fa fa-check"></i> 회원수순 </a>
+				<table>
 					<thead>					
 						<tr>
+							<th class="clubName">동호회명</th>
 							<th>주제</th>
 							<th>지역</th>
-							<th>동호회 명</th>
-							<th>소개</th>
 							<th>설립일</th>
 							<th>회원수 </th>
 						</tr>
@@ -74,31 +101,27 @@
 					<!-- 리스트 보여줄 자리 -->
 					</tbody>
 				</table>
-				
 			</div>
-			
 			<div >
-				<h3> | 가입한 동호회 | </h3>
-				<a id="joinDay"><i class="fa fa-check"></i> 설립일순&nbsp;</a>
-				<a id="joinCount"><i class="fa fa-check"></i> 회원수순</a>
-				
-					<table >
-						<thead>	
-							<tr>
-								<th>주제</th>
-								<th>지역</th>
-								<th>동호회 명</th>
-								<th>소개</th>
-								<th>설립일</th>
-								<th>회원수 </th>
-								<th>탈퇴</th>
-							</tr>
-						</thead>
-						<tbody id="myClubJoinTable">
-						<!-- 리스트 보여줄 자리 -->
-						</tbody>
-					</table>
-				
+				<div class="title">| 가입한 동호회 |</div>
+				<a id="joinDay" class="sort"><i class="fa fa-check"></i> 설립일순</a>
+				&nbsp;
+				<a id="joinCount" class="sort"><i class="fa fa-check"></i> 회원수순</a>
+				<table >
+					<thead>	
+						<tr>
+							<th class="clubName">동호회명</th>
+							<th>주제</th>
+							<th>지역</th>
+							<th>설립일</th>
+							<th>회원수 </th>
+							<th>탈퇴</th>
+						</tr>
+					</thead>
+					<tbody id="myClubJoinTable">
+					<!-- 리스트 보여줄 자리 -->
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</body>
@@ -111,12 +134,15 @@
 		obj.dataType = "JSON";
 		$(document).ready(function(){
 			obj.url="./myClubList";
+			obj.data = {"id": "<%= session.getAttribute("userId") %>"};
 			obj.success = function(data){
-				console.log(data);
+				//console.log(data);
 				 listPrint1(data.myClubList);
 				 /* 설립일 순 클릭 햇을 때 */
 				$("#day").click(function(){
-					console.log(data.myClubList);
+					$("#day").css("font-weight", "bold");
+					$("#count").css("font-weight", "normal");
+					
 					data.myClubList.sort(function(a, b) { // 내림차순
 					    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
 					}); 
@@ -125,7 +151,9 @@
 				 
 				 /* 회원수 순 클릭 햇을 때 */
 				$("#count").click(function(){
-					console.log(data.myClubList);
+					$("#day").css("font-weight", "normal");
+					$("#count").css("font-weight", "bold");
+					
 					data.myClubList.sort(function(a, b) { // 내림차순
 					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
 					}); 
@@ -136,40 +164,44 @@
 		});
 		$(document).ready(function(){
 			obj.url="./myClubJoin";
+			obj.data = {"id": "<%= session.getAttribute("userId") %>"};
 			obj.success = function(data){
-				console.log(data);
+				//console.log(data);
 				 listPrint2(data.myClubJoin);
 				 
 				 /* 설립일 순 클릭 햇을 때 */
 				 $("#joinDay").click(function(){
-						console.log(data.myClubList);
-						data.myClubJoin.sort(function(a, b) { // 내림차순
-						    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
-						}); 
-						listPrint2(data.myClubJoin);
-					});
-					 
-					 /* 회원수 순 클릭 햇을 때 */
-					$("#joinCount").click(function(){
-						console.log(data.myClubList);
-						data.myClubJoin.sort(function(a, b) { // 내림차순
-						    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
-						}); 
-						listPrint2(data.myClubJoin);
-					});
+					 $("#joinDay").css("font-weight", "bold");
+					 $("#joinCount").css("font-weight", "normal");
+				 
+					 data.myClubJoin.sort(function(a, b) { // 내림차순
+					     return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
+					 }); 
+					 listPrint2(data.myClubJoin);
+				});
+				 
+				 /* 회원수 순 클릭 햇을 때 */
+				$("#joinCount").click(function(){
+					$("#joinDay").css("font-weight", "normal");
+					$("#joinCount").css("font-weight", "bold");
+					
+					data.myClubJoin.sort(function(a, b) { // 내림차순
+					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
+					}); 
+					listPrint2(data.myClubJoin);
+				});
 			}
 			ajaxCall(obj);
 		});
 		
 		function listPrint1(list){
-			console.log(list);
+			//console.log(list);
 			var content ="";
 			list.forEach(function(item, idx){
 				content +="<tr>";
+				content +="<td><a class='club' href='./clubMain?club_id="+item.club_id+"'>"+item.club_name+"</a></td>";
 				content +="<td>"+item.interest_interest+"</td>";
 				content +="<td>"+item.club_location+"</td>";
-				content +="<td>"+item.club_name+"</td>";
-				content +="<td>"+item.club_introduce+"</td>";
 				content +="<td>"+item.club_date+"</td>";
 				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
@@ -179,18 +211,20 @@
 			$("#myClubListTable").append(content);
 		}
 		function listPrint2(list){
-			console.log(list);
+			//console.log(list);
 			var content ="";
 			list.forEach(function(item, idx){
-				content +="<tr>";
-				content +="<td>"+item.interest_interest+"<input type='hidden' name='myClubRemove' value='"+item.clubJoin_id+"'/></td>";
-				content +="<td>"+item.club_location+"</td>";
-				content +="<td>"+item.club_name+"</td>";
-				content +="<td>"+item.club_introduce+"</td>";
-				content +="<td>"+item.club_date+"</td>";
-				content +="<td>"+item.club_memberCount+"</td>";
-				content +="<td><form action='myClubRemove'><input type='hidden' name='myClubRemove' value='"+item.clubJoin_id+"'/><input type='submit' onclick='clubDel()' value='탈퇴'/></form></td>";
-				content += "</tr>";
+				// 회장이 아닐 경우에만 출력
+				if(item.member_id != "<%= session.getAttribute("userId") %>") {
+					content +="<tr>";
+					content +="<td><a class='club' href='./clubMain?club_id="+item.club_id+"'>"+item.club_name+"</a></td>";
+					content +="<td>"+item.interest_interest+"</td>";
+					content +="<td>"+item.club_location+"</td>";
+					content +="<td>"+item.club_date+"</td>";
+					content +="<td>"+item.club_memberCount+"</td>";
+					content +="<td><form action='myClubRemove'><input type='hidden' name='myClubRemove' value='"+item.clubJoin_id+"'/><input type='submit' onclick='clubDel()' value='탈퇴'/></form></td>";
+					content += "</tr>";
+				}
 			});		
 			$("#myClubJoinTable").empty();
 			$("#myClubJoinTable").append(content);

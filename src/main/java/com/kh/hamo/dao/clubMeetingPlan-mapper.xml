@@ -7,5 +7,9 @@
 		SELECT mp.meetingPlan_subject,cj.clubJoin_nickname,to_char(mp.meetingPlan_date, 'YYYY-MM-DD') as meetingPlan_date ,mp.meetingPlan_when FROM MEETINGPLAN mp JOIN clubJoin cj ON mp.club_id=cj.club_id
  		WHERE mp.club_id=#{param1}
 	</select>
+	<insert id="clubMeetingWrite">
+		INSERT INTO meetingPlan VALUES(SEQ_MEETINGPLAN_ID.NEXTVAL,#{param1},#{param2},(SELECT MAX(meetingPlan_idx)+1  FROM meetingPlan WHERE club_id=#{param1}),#{param3},SYSDATE,#{param4},#{param5},#{param6},#{param7},#{param8})
+	</insert>
+	
 	
 </mapper>
