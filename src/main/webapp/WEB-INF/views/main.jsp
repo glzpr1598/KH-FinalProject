@@ -83,7 +83,9 @@
 </head>   
 <body>               
 
+
 	<%@ include file="./main-header.jsp" %>
+	<!-- 랜덤동호회  5개 -->
 	<a id='we'>우리 동호회를 소개합니다.</a>
 	<div id='all'>
 	</div>
