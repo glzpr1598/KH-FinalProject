@@ -68,10 +68,13 @@ public class HamoMainService {
 
 	
 	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
-	public ModelAndView home() {
+	public ModelAndView home(String userId) {
 		inter = sqlSession.getMapper(HamoMainInter.class);
-		ArrayList<HamoMainDTO> list = inter.home();
 		ModelAndView mav = new ModelAndView();
+		
+		/*메인화면 가운데*/
+		ArrayList<HamoMainDTO> list = inter.home();
+		
 		int n = 0;
 		if(list.size()==1) {n=1;};
 		if(list.size()==2) {n=2;};
@@ -113,8 +116,49 @@ public class HamoMainService {
 		}else {
 					mav.addObject("size",0);
 		}
-
-	        
+		/*인기동호회 3개*/
+	    ArrayList<HamoMainDTO> list2 = inter.interestTop3();
+	    mav.addObject("size2",list2.size());
+	   
+	    if(list2.size()>=1) {
+			list2.get(0).setClubPicture_newName(inter.SearchPicture(list2.get(0).getClub_id()));
+			mav.addObject("inter",list2.get(0));
+		}
+		if(list2.size()>=2) {
+			list2.get(1).setClubPicture_newName(inter.SearchPicture(list2.get(1).getClub_id()));
+			mav.addObject("inter2",list2.get(1));
+		}
+		if(list2.size()==3) {
+			list2.get(2).setClubPicture_newName(inter.SearchPicture(list2.get(2).getClub_id()));   
+			mav.addObject("inter3",list2.get(2));
+		}
+		
+		/*맞춤동호회 3개*/
+		if(userId != null) {
+			String location = inter.searchLocation(userId);
+			ArrayList<Integer> best = inter.searchBest(userId);
+			int best1 = best.get(0);
+			int best2 = best.get(1);
+			int best3 = best.get(2);
+			
+			ArrayList<HamoMainDTO> bestClub = inter.bestClub(location,best1,best2,best3);
+			
+			mav.addObject("size3",bestClub.size());
+			mav.addObject("userId",userId);
+			
+		    if(bestClub.size()>=1) {
+		    	bestClub.get(0).setClubPicture_newName(inter.SearchPicture(bestClub.get(0).getClub_id()));
+				mav.addObject("best1",bestClub.get(0));
+			}
+			if(bestClub.size()>=2) {
+				bestClub.get(1).setClubPicture_newName(inter.SearchPicture(bestClub.get(1).getClub_id()));
+				mav.addObject("best2",bestClub.get(1));
+			}
+			if(bestClub.size()>=3) {
+				bestClub.get(2).setClubPicture_newName(inter.SearchPicture(bestClub.get(2).getClub_id()));   
+				mav.addObject("best3",bestClub.get(2));
+			}
+		}
 	        mav.setViewName("main");
 
 		return mav;

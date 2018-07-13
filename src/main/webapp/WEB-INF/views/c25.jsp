@@ -13,11 +13,12 @@
 		width: 800px;
 	}
 	table, th, td {
+		height: 40px;
 		border-style: solid;
 		border-color: #FFBF00;
 		border-width: thin 0px;
 		border-collapse: collapse;
-		padding: 10px;
+		padding: 0px 10px;
 		font-size: 13px;
 		text-align: center;
 	}
@@ -34,6 +35,7 @@
 	/* 강퇴 버튼 */
 	button.fire {
 		border: thin solid #FFBF00;
+		border-radius: 5px;
 		background: none;
 		padding: 5px 10px;
 		cursor: pointer;
@@ -58,16 +60,25 @@
 					<th>강퇴</th>
 				</tr>
 				<c:forEach var="item" items="${ list }">
-				<tr>
-					<td>${ item.MEMBER_ID }</td>
-					<td>${ item.CLUBJOIN_NICKNAME }</td>
-					<td>${ item.MEMBER_EMAIL }</td>
-					<td>${ item.MEMBER_PHONE }</td>
-					<td>
-						<!-- 클래스 : fire, clubJoin_id, club_id, member_id -->
-						<button class="fire ${ item.CLUBJOIN_ID } ${ item.CLUB_ID } ${ item.MEMBER_ID }">강퇴</button>
-					</td>
-				</tr>
+					<tr>
+						<td>${ item.MEMBER_ID }</td>
+						<td>${ item.CLUBJOIN_NICKNAME }</td>
+						<td>${ item.MEMBER_EMAIL }</td>
+						<td>${ item.MEMBER_PHONE }</td>
+						<td>
+							<!-- 회장이 아닌 경우 강퇴 버튼 -->
+							<c:if test="${ item.MEMBER_ID != masterId }">	
+								<!-- 클래스 : fire, clubJoin_id, club_id, member_id -->
+								<button class="fire ${ item.CLUBJOIN_ID } ${ item.CLUB_ID } ${ item.MEMBER_ID }">강퇴</button>
+							</c:if>
+							
+							<!-- 회장인 경우 '회장' 표시 -->
+							<c:if test="${ item.MEMBER_ID == masterId }">	
+								회장
+							</c:if>
+						</td>
+					</tr>
+					
 				</c:forEach>
 			</table>
 	<!------------------- 양식 ------------------->
@@ -80,9 +91,9 @@
 	$(".fire").click(function() {
 		// 회원 강퇴 uri(clubJoin_id, club_id, member_id를 파라미터로 보냄)
 		var uri = './clubMemberFire' +
-		'?clubJoin_id=' + $(this)[0].classList[1] +
-		'&club_id=' + $(this)[0].classList[2] + 
-		'&member_id=' + $(this)[0].classList[3];
+			'?clubJoin_id=' + $(this)[0].classList[1] +
+			'&club_id=' + $(this)[0].classList[2] + 
+			'&member_id=' + $(this)[0].classList[3];
 		
 		// 확인 버튼 누를 경우
 		if(confirm('강퇴한 회원은 이 동호회에 다시 가입할 수 없습니다. \n정말로 강퇴시키시겠습니까?')) {

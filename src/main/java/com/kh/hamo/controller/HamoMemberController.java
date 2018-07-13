@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,8 +40,15 @@ public class HamoMemberController {
 	
 	/**로그인페이지이동 - 김응주 */	
 	@RequestMapping(value="/loginForm")
-	public String loginForm() {
+	public String loginForm(Model model, HttpServletRequest request) {
 		logger.info("로그인페이지이동");
+		
+		// 이전 주소
+		String referer = request.getHeader("Referer");
+		
+		// 모델에 담아서 보냄
+		model.addAttribute("referer", referer);
+		
 		return "m01";
 	}
 	
@@ -169,7 +177,7 @@ public class HamoMemberController {
 		
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("success", success);
-
+		
 		return result;
 	}
 		
@@ -332,12 +340,16 @@ public class HamoMemberController {
 	
 	// 로그아웃
 	@RequestMapping(value="/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletRequest request) {
 		logger.info("로그아웃 요청");
 		
+		// 세션 삭제
 		session.removeAttribute("userId");
 		
-		return "redirect:/";
+		// 이전 주소
+		String referer = request.getHeader("Referer");
+		
+		return "redirect:"+referer;
 	}
 	
 

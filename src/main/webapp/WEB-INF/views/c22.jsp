@@ -58,9 +58,9 @@
 		<div id="textLengthArea">
 			<span id="textLength">0</span> / 100 자
 		</div>
-		<textarea id="introduce" name="introduce" rows="5" cols="48"></textarea>
+		<textarea id="introduce" name="introduce" rows="5" cols="57"></textarea>
 		<div id="btnArea">
-			<input type="submit" class="btn" id="btnEdit" value="수정" />
+			<input type="button" class="btn" id="btnEdit" value="수정" />
 		</div>
 	</form>
 </body>
@@ -84,5 +84,17 @@
             $(this).val($(this).val().substr(0, limit));
         }
     });
+	
+	/* 수정 클릭 */
+	$("#btnEdit").click(function() {
+		// 소개글을 입력하지 않은 경우
+		if($("#introduce").val() == "") {
+			alert("소개글을 입력해주세요.")
+		}
+		// 소개글을 입력한 경우
+		else {
+			$("#form").submit();
+		}
+	});
 </script>
 </html>
