@@ -8,6 +8,7 @@
 	<mvc:interceptors>
 		<!-- 로그인 여부 체크 -->
 		<mvc:interceptor>
+			<mvc:mapping path="/m09move" />
 			<mvc:mapping path="/updateForm" />
 			<bean class="com.kh.hamo.interceptor.LoginCheck" />
 		</mvc:interceptor>

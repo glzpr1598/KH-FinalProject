@@ -89,6 +89,9 @@
 		margin: auto;
 	}
 	/* 메뉴 */
+	#naviBar #myClub {
+		margin: 0px 15px 0px 0px;
+	}
 	.navi {
 		display: inline-block;
 		padding: 12px 15px;

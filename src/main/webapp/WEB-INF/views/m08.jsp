@@ -11,32 +11,50 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
+		#container {
+			width: 1000px;
+			margin: auto;
+		}
+		#search {
+			font-size: 13px;
+		}
 		table{
-			width : 900px;
+			width : 1000px;
+			margin: 15px 0px;
 			text-align: center;
 			border-collapse: collapse;
-			position: absolute;
-			left: 20%;
-			top: 40%;
+			font-size: 13px;
 		}
 		th{
-			background-color:#F8F3D4;
+			background-color:#FDF5DC;
+			height: 35px;
 		}
 		td{
 			border-bottom: 1px solid #ffbf00;
+			height: 35px;
 		}
-
+		.clubName {
+			width: 500px;
+		}
+		.club {
+			color: black;
+			text-decoration: none;
+		}
+		.club:hover {
+			text-decoration: underline;
+		}
 	</style>
 	</head>
 	<body>
 		<%@ include file="./main-header.jsp" %>
+		<div id="container">
+			<div id="search"><b>'${ search }'</b>에 대한 검색결과입니다.</div>
 			<table id="listTable">
 				<thead>
 					<tr>
+						<th class="clubName">동호회명</th>
 						<th>주제</th>
 						<th>지역</th>
-						<th>동호회명</th>
-						<th>소개</th>
 						<th>설립일</th>
 						<th>회원수</th>
 					</tr>
@@ -44,6 +62,7 @@
 				<tbody >
 				</tbody>
 			</table>
+		</div>
 	</body>
 	<script>
 	
@@ -75,10 +94,9 @@
 			var content ="";
 			list.forEach(function(item, idx){
 				content +="<tr>";
+				content +="<td><a class='club' href='./clubMain?club_id="+item.club_id+"'>"+item.club_name+"</a></td>";
 				content +="<td>"+item.interest_interest+"</td>";
 				content +="<td>"+item.club_location+"</td>";
-				content +="<td>"+item.club_name+"</td>";
-				content +="<td>"+item.club_introduce+"</td>";
 				content +="<td>"+item.club_date+"</td>";
 				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
