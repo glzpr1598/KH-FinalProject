@@ -206,19 +206,34 @@
 </c:if>
 
 <c:if test="${size2 >= 1}">
-	<div class='intPicture' id='int1'><a><img class="interImg" src="./resources/club-picture/${inter.clubPicture_newName}"/></a></div>
+		<c:if test="${inter.clubPicture_newName == null}">
+			<div class='intPicture' id='int1'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
+		<c:if test="${inter.clubPicture_newName != null}">
+			<div class='intPicture' id='int1'><a><img class="interImg" src="./resources/club-picture/${inter.clubPicture_newName}"/></a></div>
+		</c:if>
 	<div id='ip1'><a>${inter.club_name}</a></div><!-- 이름 -->
 	<div id='ipp1'><a>회원수 : ${inter.club_memberCount}명</a></div>
 </c:if>
 
 <c:if test="${size2 >= 2}">
-	<div class='intPicture' id='int2'><a><img class="interImg" src="./resources/club-picture/${inter2.clubPicture_newName}"/></a></div>
+		<c:if test="${inter2.clubPicture_newName == null}">
+			<div class='intPicture' id='int2'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
+		<c:if test="${inter2.clubPicture_newName != null}">
+			<div class='intPicture' id='int2'><a><img class="interImg" src="./resources/club-picture/${inter2.clubPicture_newName}"/></a></div>	
+		</c:if>
 	<div id='ip2'><a>${inter2.club_name}</a></div><!-- 이름  -->
 	<div id='ipp2'><a>회원수 : ${inter2.club_memberCount}명</a></div>
 </c:if>
 
 <c:if test="${size2 == 3}">
-	<div class='intPicture' id='int3'><a><img class="interImg" src="./resources/club-picture/${inter3.clubPicture_newName}"/></a></div>
+		<c:if test="${inter3.clubPicture_newName == null}">
+			<div class='intPicture' id='int3'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
+		<c:if test="${inter3.clubPicture_newName != null}">
+			<div class='intPicture' id='int3'><a><img class="interImg" src="./resources/club-picture/${inter3.clubPicture_newName}"/></a></div>
+		</c:if>
 	<div id='ip3'><a>${inter3.club_name}</a></div><!-- 이름 -->
 	<div id='ipp3'><a>회원수 : ${inter3.club_memberCount}명</a></div>
 </c:if>   
