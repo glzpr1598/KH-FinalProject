@@ -44,7 +44,23 @@
 	</select>
 
 
+<select id="interestTop3" resultType="com.kh.hamo.dto.HamoMainDTO">
+<![CDATA[ 
+		SELECT * FROM (select * from club ORDER BY club_membercount desc)where rownum <= 3
+]]> 
+</select>
 
+<select id="searchLocation" resultType="String">
+		SELECT member_location FROM member WHERE member_id = #{param1}
+</select>
+
+<select id="searchBest" resultType="Integer">
+		SELECT interest_id FROM memberInterest WHERE member_id = #{param1}
+</select>
+
+<select id="bestClub" resultType="com.kh.hamo.dto.HamoMainDTO">
+		SELECT * FROM club WHERE club_location = #{param1} AND (INTEREST_ID = #{param2} OR INTEREST_ID = #{param3} OR interest_id = #{param4}) ORDER BY club_membercount DESC
+</select>
 
 	<select id="clubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
 		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
@@ -54,7 +70,7 @@
 				I.interest_interest=#{interest}
 			</if>
 			<if test="location !='전체'" >
-				I.interest_interest=#{interest}
+				C.club_location=#{location}
 			</if>
 			<if test="interest !='전체' and location!='전체'">
 				I.interest_interest=#{interest} AND C.club_location=#{location}
