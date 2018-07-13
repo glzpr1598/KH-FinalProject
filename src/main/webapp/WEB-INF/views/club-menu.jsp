@@ -159,8 +159,17 @@
 		        	else if(data.isMaster > 0) {
 		        		// 멤버관리, 동호회 폐쇄, 폐쇄 취소 활성화
 		        		$("#btn3").attr("type", "button");
-		        		$("#btn4").attr("type", "button");
-		        		$("#btn5").attr("type", "button");
+		        		
+		        		// 동호회가 폐쇄 중인 경우
+		        		if (data.isClose > 0) {
+		        			// 폐쇄 취소 활성화
+			        		$("#btn5").attr("type", "button");
+		        		}
+		        		// 동호회가 폐쇄 중이 아닌 경우
+		        		else {
+		        			// 동호회 폐쇄 활성화
+		        			$("#btn4").attr("type", "button");
+		        		}
 		        		// 메인화면의 사진 수정, 글 수정 활성화
 		        		$(".masterBtn").attr("type", "button");
 		        	}
