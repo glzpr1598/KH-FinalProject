@@ -52,16 +52,14 @@ public class HamoMainController {
 	}
 	//설립한 동호회 리스트 
 	@RequestMapping(value = "/myClubList")
-	public @ResponseBody HashMap<String, Object> myClubList(String id) {
+	public @ResponseBody HashMap<String, Object> myClubList(@RequestParam String id) {
 		logger.info("설립한 동회 리스트");
-		id="admin";/**<-임의로 설정한거임 */
 		return service.myClubList(id);
 	}
 	//가입한 동호회 리스트
 	@RequestMapping(value = "/myClubJoin")
-	public @ResponseBody HashMap<String, Object> myClubJoin(String id) {
+	public @ResponseBody HashMap<String, Object> myClubJoin(@RequestParam String id) {
 		logger.info("설립한 동회 리스트");
-		id="admin";/**<-임의로 설정한거임 */
 		return service.myClubJoin(id);
 	}
 	//가입한 동호회 탈퇴
