@@ -3,6 +3,8 @@ package com.kh.hamo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,10 @@ public class HamoMainController {
 	
 	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
 	@RequestMapping(value = "/")
-	public ModelAndView main() {
+	public ModelAndView main(HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
 		logger.info("메인페이지에 동호회 소개");
-		return service.home();
+		return service.home(userId);
 	}
 	
 	// 검색 값 가져오는 컨트롤러
