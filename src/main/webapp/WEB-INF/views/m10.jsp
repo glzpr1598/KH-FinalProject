@@ -14,9 +14,9 @@
 		}
 		.container {
 			text-align: center;
-			width:1050px;
+			width:1000px;
 			margin: 0 auto;
-			padding: 20px 0;
+			padding: 10px 0;
 		}
 
 		.nav {
@@ -190,119 +190,117 @@
 		<%@ include file="./main-header.jsp" %>
 	
 		<div class="container">
-			<div>
-            	<ul class="nav">
-            		<li  class="dropdown"><a >전체 보기</a>     
-                  
-              			<div class="fulldrop" >              
-               				<div class="column">
-			                    	<input type="radio" name="interest" value="전체" checked="checked"/>전체
-			                </div>
-                
-           			    </div>
-           			</li>
-              		<li class="dropdown"><a>운동/스포츠</a>     
-              			<div class="fulldrop">              
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="전체"/>전체</div>
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="축구"/>축구</div>
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="농구"/>농구</div>
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="야구"/>야구</div>
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="배구"/>배구</div>
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="자전거"/>자전거</div>
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="배드민턴"/>배드민턴</div>
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="볼링"/>볼링</div>
-            				  <div class="column"><input type="radio" name="interest" class="sports" value="테니스/스쿼시"/>테니스/스쿼시</div>
-     	       				  <div class="column"><input type="radio" name="interest" class="sports" value="수영"/>수영</div>
- 							  <div class="column"><input type="radio" name="interest" class="sports" value="족구"/>족구</div>
-						</div>
-             		</li>
-              		<li class="dropdown"><a>아웃도어/여행</a>     
-                  
-              			<div class="fulldrop">              
-            				  <div class="column"><input type="radio" name="interest" class="travel" value="전체" />전체</div>
-            				  <div class="column"><input type="radio" name="interest" class="travel" value="등산" />등산</div>
-            				  <div class="column"><input type="radio" name="interest" class="travel" value="캠핑" />캠핑</div>
-            				  <div class="column"><input type="radio" name="interest" class="travel" value="국내여행" />국내여행</div>
-            				  <div class="column"><input type="radio" name="interest" class="travel" value="해외여행" />해외여행</div>
-            				  <div class="column"><input type="radio" name="interest" class="travel" value="낚시" />낚시</div>
-						</div>
-             		</li>
-             		<li class="dropdown"><a>공연/문화</a>     
-                  
-              			<div class="fulldrop">              
-            				  <div class="column"><input type="radio" name="interest" class="culture"  value="전체"/>전체</div>
-            				  <div class="column"><input type="radio" name="interest" class="culture"  value="뮤지컬/오페라"/>뮤지컬/오페라</div>
-            				  <div class="column"><input type="radio" name="interest" class="culture"  value="공연/연극"/>공연/연극</div>
-            				  <div class="column"><input type="radio" name="interest" class="culture"  value="영화"/>영화</div>
-            				  <div class="column"><input type="radio" name="interest" class="culture"  value="전시회"/>전시회</div>
-            				  <div class="column"><input type="radio" name="interest" class="culture"  value="고궁/문화재"/>고궁/문화재</div>
-						</div>
-             		</li>
-             		<li class="dropdown"><a>음악/악기</a>     
-                  
-              			<div class="fulldrop">              
-            				  <div class="column"><input type="radio" name="interest" class="music" value="전체"/>전체</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="노래/보컬"/>노래/보컬</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="기타/베이스"/>기타/베이스</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="드럼"/>드럼</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="피아노"/>피아노</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="밴드"/>밴드</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="작사/작곡"/>작사/작곡</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="클래식"/>클래식</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="재즈"/>재즈</div>
-            				  <div class="column"><input type="radio" name="interest" class="music" value="락/메탈"/>락/메탈</div>
-						</div>
-             		</li>
-             		<li class="dropdown"><a>인문학/책/글</a>     
-                  
-              			<div class="fulldrop">              
-            				  <div class="column"><input type="radio" name="interest" class="book"  value="전체"/>전체</div>
-            				  <div class="column"><input type="radio" name="interest"  class="book" value="책/독서"/>책/독서</div>
-            				  <div class="column"><input type="radio" name="interest" class="book"  value="인문학"/>인문학</div>
-            				  <div class="column"><input type="radio" name="interest" class="book"  value="심리학"/>심리학</div>
-            				  <div class="column"><input type="radio" name="interest" class="book"  value="철학"/>철학</div>
-            				  <div class="column"><input type="radio" name="interest" class="book"  value="역사"/>역사</div>
-            				  <div class="column"><input type="radio" name="interest" class="book"  value="시사/경제" />시사/경제</div>
-						</div>
-             		</li>
-             		<li class="dropdown"><a>봉사활동</a>     
-                  
-              			<div class="fulldrop">              
-            				  <div class="column"><input type="radio" name="interest" class="service" value="전체"/>전체</div>
-            				  <div class="column"><input type="radio" name="interest" class="service" value="양로원"/>양로원</div>
-            				  <div class="column"><input type="radio" name="interest" class="service" value="보육원"/>보육원</div>
-            				  <div class="column"><input type="radio" name="interest" class="service" value="환경봉사"/>환경봉사</div>
-            				  <div class="column"><input type="radio" name="interest" class="service" value="사회봉사"/>사회봉사</div>
-            				  <div class="column"><input type="radio" name="interest" class="service" value="교육/재능나눔"/>교육/재능나눔</div>
-            				  <div class="column"><input type="radio" name="interest" class="service" value="유기동물보호"/>유기동물보호</div>
-						</div>
-             		</li>
-             		<li class="dropdown"><a>공예/만들기</a>     
-              			<div class="fulldrop">              
-            				  <div class="column"><input type="radio" name="interest" class="crafts" value="전체"/>전체</div>
-            				  <div class="column"><input type="radio" name="interest" class="crafts" value="미술/그림"/>미술/그림</div>
-            				  <div class="column"><input type="radio" name="interest" class="crafts" value="캘리그라피"/>캘리그라피</div>
-            				  <div class="column"><input type="radio" name="interest" class="crafts" value="천연비누"/>천연비누</div>
-            				  <div class="column"><input type="radio" name="interest" class="crafts" value="소품공예"/>소품공예</div>
-            				  <div class="column"><input type="radio" name="interest" class="crafts" value="가죽공예"/>가죽공예</div>
-            				  <div class="column"><input type="radio" name="interest" class="crafts" value="목공예"/>목공예</div>
-            				  <div class="column"><input type="radio" name="interest" class="crafts" value="도자/점토공예"/>도자/점토공예</div>
-						</div>
-             		</li>
-             		<li class="dropdown"><a>차/오토바이</a>     
-                  
-					<div class="fulldrop">              
-						<div class="column"><input type="radio" name="interest" class="car" value="전체" />전체</div>
-						<div class="column"><input type="radio" name="interest" class="car" value="국내차" />국내차</div>
-						<div class="column"><input type="radio" name="interest" class="car" value="일본차" />일본차</div>
-						<div class="column"><input type="radio" name="interest" class="car" value="미국차" />미국차</div>
-						<div class="column"><input type="radio" name="interest" class="car" value="유럽차" />유럽차</div>
-						<div class="column"><input type="radio" name="interest" class="car" value="바이크" />바이크</div>
-            				  
-						</div>
-             		</li>
-				</ul> 
-			</div>
+           	<ul class="nav">
+           		<li  class="dropdown"><a >전체 보기</a>     
+                 
+             			<div class="fulldrop" >              
+              				<div class="column">
+		                    	<input type="radio" name="interest" value="전체" checked="checked"/>전체
+		                </div>
+               
+          			    </div>
+          			</li>
+             		<li class="dropdown"><a>운동/스포츠</a>     
+             			<div class="fulldrop">              
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="전체"/>전체</div>
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="축구"/>축구</div>
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="농구"/>농구</div>
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="야구"/>야구</div>
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="배구"/>배구</div>
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="자전거"/>자전거</div>
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="배드민턴"/>배드민턴</div>
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="볼링"/>볼링</div>
+           				  <div class="column"><input type="radio" name="interest" class="sports" value="테니스/스쿼시"/>테니스/스쿼시</div>
+    	       				  <div class="column"><input type="radio" name="interest" class="sports" value="수영"/>수영</div>
+							  <div class="column"><input type="radio" name="interest" class="sports" value="족구"/>족구</div>
+					</div>
+            		</li>
+             		<li class="dropdown"><a>아웃도어/여행</a>     
+                 
+             			<div class="fulldrop">              
+           				  <div class="column"><input type="radio" name="interest" class="travel" value="전체" />전체</div>
+           				  <div class="column"><input type="radio" name="interest" class="travel" value="등산" />등산</div>
+           				  <div class="column"><input type="radio" name="interest" class="travel" value="캠핑" />캠핑</div>
+           				  <div class="column"><input type="radio" name="interest" class="travel" value="국내여행" />국내여행</div>
+           				  <div class="column"><input type="radio" name="interest" class="travel" value="해외여행" />해외여행</div>
+           				  <div class="column"><input type="radio" name="interest" class="travel" value="낚시" />낚시</div>
+					</div>
+            		</li>
+            		<li class="dropdown"><a>공연/문화</a>     
+                 
+             			<div class="fulldrop">              
+           				  <div class="column"><input type="radio" name="interest" class="culture"  value="전체"/>전체</div>
+           				  <div class="column"><input type="radio" name="interest" class="culture"  value="뮤지컬/오페라"/>뮤지컬/오페라</div>
+           				  <div class="column"><input type="radio" name="interest" class="culture"  value="공연/연극"/>공연/연극</div>
+           				  <div class="column"><input type="radio" name="interest" class="culture"  value="영화"/>영화</div>
+           				  <div class="column"><input type="radio" name="interest" class="culture"  value="전시회"/>전시회</div>
+           				  <div class="column"><input type="radio" name="interest" class="culture"  value="고궁/문화재"/>고궁/문화재</div>
+					</div>
+            		</li>
+            		<li class="dropdown"><a>음악/악기</a>     
+                 
+             			<div class="fulldrop">              
+           				  <div class="column"><input type="radio" name="interest" class="music" value="전체"/>전체</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="노래/보컬"/>노래/보컬</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="기타/베이스"/>기타/베이스</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="드럼"/>드럼</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="피아노"/>피아노</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="밴드"/>밴드</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="작사/작곡"/>작사/작곡</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="클래식"/>클래식</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="재즈"/>재즈</div>
+           				  <div class="column"><input type="radio" name="interest" class="music" value="락/메탈"/>락/메탈</div>
+					</div>
+            		</li>
+            		<li class="dropdown"><a>인문학/책/글</a>     
+                 
+             			<div class="fulldrop">              
+           				  <div class="column"><input type="radio" name="interest" class="book"  value="전체"/>전체</div>
+           				  <div class="column"><input type="radio" name="interest"  class="book" value="책/독서"/>책/독서</div>
+           				  <div class="column"><input type="radio" name="interest" class="book"  value="인문학"/>인문학</div>
+           				  <div class="column"><input type="radio" name="interest" class="book"  value="심리학"/>심리학</div>
+           				  <div class="column"><input type="radio" name="interest" class="book"  value="철학"/>철학</div>
+           				  <div class="column"><input type="radio" name="interest" class="book"  value="역사"/>역사</div>
+           				  <div class="column"><input type="radio" name="interest" class="book"  value="시사/경제" />시사/경제</div>
+					</div>
+            		</li>
+            		<li class="dropdown"><a>봉사활동</a>     
+                 
+             			<div class="fulldrop">              
+           				  <div class="column"><input type="radio" name="interest" class="service" value="전체"/>전체</div>
+           				  <div class="column"><input type="radio" name="interest" class="service" value="양로원"/>양로원</div>
+           				  <div class="column"><input type="radio" name="interest" class="service" value="보육원"/>보육원</div>
+           				  <div class="column"><input type="radio" name="interest" class="service" value="환경봉사"/>환경봉사</div>
+           				  <div class="column"><input type="radio" name="interest" class="service" value="사회봉사"/>사회봉사</div>
+           				  <div class="column"><input type="radio" name="interest" class="service" value="교육/재능나눔"/>교육/재능나눔</div>
+           				  <div class="column"><input type="radio" name="interest" class="service" value="유기동물보호"/>유기동물보호</div>
+					</div>
+            		</li>
+            		<li class="dropdown"><a>공예/만들기</a>     
+             			<div class="fulldrop">              
+           				  <div class="column"><input type="radio" name="interest" class="crafts" value="전체"/>전체</div>
+           				  <div class="column"><input type="radio" name="interest" class="crafts" value="미술/그림"/>미술/그림</div>
+           				  <div class="column"><input type="radio" name="interest" class="crafts" value="캘리그라피"/>캘리그라피</div>
+           				  <div class="column"><input type="radio" name="interest" class="crafts" value="천연비누"/>천연비누</div>
+           				  <div class="column"><input type="radio" name="interest" class="crafts" value="소품공예"/>소품공예</div>
+           				  <div class="column"><input type="radio" name="interest" class="crafts" value="가죽공예"/>가죽공예</div>
+           				  <div class="column"><input type="radio" name="interest" class="crafts" value="목공예"/>목공예</div>
+           				  <div class="column"><input type="radio" name="interest" class="crafts" value="도자/점토공예"/>도자/점토공예</div>
+					</div>
+            		</li>
+            		<li class="dropdown"><a>차/오토바이</a>     
+                 
+				<div class="fulldrop">              
+					<div class="column"><input type="radio" name="interest" class="car" value="전체" />전체</div>
+					<div class="column"><input type="radio" name="interest" class="car" value="국내차" />국내차</div>
+					<div class="column"><input type="radio" name="interest" class="car" value="일본차" />일본차</div>
+					<div class="column"><input type="radio" name="interest" class="car" value="미국차" />미국차</div>
+					<div class="column"><input type="radio" name="interest" class="car" value="유럽차" />유럽차</div>
+					<div class="column"><input type="radio" name="interest" class="car" value="바이크" />바이크</div>
+           				  
+					</div>
+            		</li>
+			</ul> 
 		</div>
 		
 		<div class="container">
