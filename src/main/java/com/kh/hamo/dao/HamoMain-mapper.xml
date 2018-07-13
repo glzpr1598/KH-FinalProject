@@ -52,7 +52,7 @@
 				I.interest_interest=#{interest}
 			</if>
 			<if test="location !='전체'" >
-				I.interest_interest=#{interest}
+				C.club_location=#{location}
 			</if>
 			<if test="interest !='전체' and location!='전체'">
 				I.interest_interest=#{interest} AND C.club_location=#{location}

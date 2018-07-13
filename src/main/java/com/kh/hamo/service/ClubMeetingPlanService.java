@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.ClubMeetingPlanInter;
 import com.kh.hamo.dao.HamoMainInter;
@@ -34,6 +35,27 @@ public class ClubMeetingPlanService {
 		return result;
 		
 		
+	}
+	//모임 일정 등록 
+	public ModelAndView clubMeetingWrite(HashMap<String, String> list) {
+		logger.info("모임 일정 등록  서비스");
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		String club_id=  list.get("club_id");
+		String member_id=list.get("member_id");
+		//글번호
+		String meetingPlan_subject =(String) list.get("subject");
+		String meetingPlan_locationX = (String) list.get("locationX");
+		String meetingPlan_locationY= (String) list.get("locationY");
+		String meetingPlan_when = (String) list.get("day");
+		String meetingPlan_money = (String) list.get("money");
+		String meetingPlan_content = (String) list.get("content");
+		int clubMeetingWrite = inter.clubMeetingWrite(
+				Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
+				meetingPlan_when,meetingPlan_money,meetingPlan_content);
+		ModelAndView mav =new ModelAndView();
+		mav.addObject("clubMeetingWrite",clubMeetingWrite);
+		mav.setViewName("c17");
+		return mav;
 	}
 
 }
