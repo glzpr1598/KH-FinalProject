@@ -14,9 +14,9 @@
 		}
 		.container {
 			text-align: center;
-			width:1000px;
+			width:1050px;
 			margin: 0 auto;
-			padding: 10px 0;
+			padding: 20px 0;
 		}
 
 		.nav {
