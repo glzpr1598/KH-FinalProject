@@ -46,6 +46,12 @@ public class HamoMemberController {
 		// 이전 주소
 		String referer = request.getHeader("Referer");
 		
+		// 이전 주소가 회원가입 페이지면 메인 페이지로
+		String command = referer.substring(referer.lastIndexOf('/'));
+		if(command.equals("/hamoJoinForm")) {
+			referer = referer.replace("/hamoJoinForm", "/");
+		}
+		
 		// 모델에 담아서 보냄
 		model.addAttribute("referer", referer);
 		

@@ -136,9 +136,15 @@ public class HamoMainService {
 		if(userId != null) {
 			String location = inter.searchLocation(userId);
 			ArrayList<Integer> best = inter.searchBest(userId);
-			int best1 = best.get(0);
-			int best2 = best.get(1);
-			int best3 = best.get(2);
+		
+			int best1 = 0;
+			int best2 = 0;
+			int best3 = 0;
+			
+			if(best.size()>=1) {best1 = best.get(0);}
+			if(best.size()>=2) {best2 = best.get(1);}
+			if(best.size()>=3) {best3 = best.get(2);}
+			
 			
 			ArrayList<HamoMainDTO> bestClub = inter.bestClub(location,best1,best2,best3);
 			
