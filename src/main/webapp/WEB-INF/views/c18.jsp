@@ -102,7 +102,7 @@
 					<input id="locationX" type="hidden" name="locationX" value=""/>
 					<input id="locationY" type="hidden" name="locationY" value=""/>
 					<input type="submit" value="저장" class="bottomBtn"/>
-					<input type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'"/>
+					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'"/>
 				</div>
 			</form>
 			<P>지역</P>
@@ -131,10 +131,7 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>
-		function exit(){
-			alert("모임 일정 작성이 취소 되었습니다");
-			
-		}
+		$("#exit").click(function(){alert("모임일정 작성 취소");});
 	
 		var markers = [];
 	

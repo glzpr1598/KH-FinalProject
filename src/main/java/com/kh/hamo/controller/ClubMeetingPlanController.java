@@ -42,9 +42,13 @@ public class ClubMeetingPlanController {
 	}
 	//모임 일정 등록 
 	@RequestMapping(value = "/clubMeetingWrite")
-	public ModelAndView clubMeetingWrite(@RequestParam HashMap<String, String> list) {
+	public String clubMeetingWrite(@RequestParam HashMap<String, String> list) {
 		logger.info("clubMeetingWriteForm 요청");
-		return service.clubMeetingWrite(list);
+		String club_id=  list.get("club_id");
+		
+		service.clubMeetingWrite(list);
+		
+		return "redirect:/clubMeetingList?club_id="+club_id;
 	}
 
 }

@@ -37,7 +37,7 @@ public class ClubMeetingPlanService {
 		
 	}
 	//모임 일정 등록 
-	public ModelAndView clubMeetingWrite(HashMap<String, String> list) {
+	public void clubMeetingWrite(HashMap<String, String> list) {
 		logger.info("모임 일정 등록  서비스");
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		String club_id=  list.get("club_id");
@@ -49,13 +49,9 @@ public class ClubMeetingPlanService {
 		String meetingPlan_when = (String) list.get("day");
 		String meetingPlan_money = (String) list.get("money");
 		String meetingPlan_content = (String) list.get("content");
-		int clubMeetingWrite = inter.clubMeetingWrite(
+		inter.clubMeetingWrite(
 				Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
 				meetingPlan_when,meetingPlan_money,meetingPlan_content);
-		ModelAndView mav =new ModelAndView();
-		mav.addObject("clubMeetingWrite",clubMeetingWrite);
-		mav.setViewName("c17");
-		return mav;
 	}
 
 }

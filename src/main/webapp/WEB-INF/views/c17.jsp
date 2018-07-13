@@ -58,12 +58,11 @@
 				<tfoot>
 					<tr>
 						<td style="text-align: right; border-color: white;" colspan="4">	
-							<input type="button" value="등록" id='add' onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>'"/>
+							<input type="button" value="등록" id="add" onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>'"/>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
-		
 		
 		
 		
@@ -73,7 +72,6 @@
 		<!------------------- 양식 ------------------->
 	</body>
 	<script>
-		
 	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
@@ -93,7 +91,7 @@
 			var content ="";
 			list.forEach(function(item, idx){
 				content +="<tr>";
-				content +="<td>"+item.meetingPlan_subject+"</td>";
+				content +="<td><a href='#'>"+item.meetingPlan_subject+"</a></td>";
 				content +="<td>"+item.clubJoin_nickname+"</td>";
 				content +="<td>"+item.meetingPlan_date+"</td>";
 				content +="<td>"+item.meetingPlan_when+"</td>";
