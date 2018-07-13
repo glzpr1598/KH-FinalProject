@@ -126,4 +126,13 @@ public class ClubAdminService {
 		}
 	}
 
+	// 동호회 소개글 수정
+	public void clubIntroduceUpdate(String club_id, String introduce) {
+		inter = sqlSession.getMapper(ClubAdminInter.class);
+		
+		// 동호회 소개글 수정
+		inter.clubIntroduceUpdate(club_id, introduce);
+		
+	}
+
 }

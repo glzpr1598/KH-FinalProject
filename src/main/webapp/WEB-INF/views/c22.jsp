@@ -11,28 +11,32 @@
 <style>
 	/* 제목 */
 	#title {
-		margin: 15px 10px;
+		margin: 15px 10px 0px 10px;
 		font-size: 20px;
 		font-weight: bold;
 	}
 	
-	/* 첨부파일 */
-	#inputFile {
-		margin: 5px 10px;
-	    width: 420px;
+	/* 글자수 */
+	#textLengthArea {
+		margin: 0px 10px;
+    	text-align: right;
+    	font-size: 14px;
+    	color: gray;
 	}
 	
-	/* 메시지 */
-	#msg {
+	/* 텍스트 입력창 */
+	#introduce {
 		margin: 0px 10px;
-		font-size: 12px;
-		color: red;
+		resize: none;
+		border: medium solid #ffbf00;
+   		border-radius: 5px;
 	}
 	
 	/* 버튼 */
 	#btnArea {
 		margin-top: 15px;
-		text-align: center;
+		margin-right: 10px;
+		text-align: right;
 	}
 	.btn {
 		width: 80px;
@@ -48,14 +52,15 @@
 </style>
 </head>
 <body>
-	<div id="title">사진 수정</div>
-	<form id="form" action="./clubPictureUpload" method="post" enctype="multipart/form-data">
+	<div id="title">소개글 수정</div>
+	<form id="form" action="./clubIntroduceUpdate" method="post">
 		<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>" />
-		<input type="file" name="file" id="inputFile" accept="image/*" />
-		<div id="msg"></div>
+		<div id="textLengthArea">
+			<span id="textLength">0</span> / 100 자
+		</div>
+		<textarea id="introduce" name="introduce" rows="5" cols="57"></textarea>
 		<div id="btnArea">
 			<input type="button" class="btn" id="btnEdit" value="수정" />
-			<input type="button" class="btn" id="btnCancel" value="취소" />
 		</div>
 	</form>
 </body>
@@ -63,35 +68,33 @@
 	/* 동호회 아이디 */
 	var club_id = "<%= request.getParameter("club_id") %>";
 	
-	/* 파일 선택 */
-	var fileCheck = false;
-	$("#inputFile").change(function() {
-		var ext = $(this).val().split('.').pop().toLowerCase();
-		// 이미지가 아닌 경우
-		if($.inArray(ext, ['jpg','png','gif','bmp']) == -1) {
-			fileCheck = false;
-			$("#msg").html('이미지 파일(jpg, png, gif, bmp)만 선택 가능합니다.');
-		}
-		// 이미지인 경우
-		else {
-			fileCheck = true;
-			$("#msg").html('');
-		}
-	});
+	/* textarea 글자수 제한 */
+	$("#introduce").keyup(function() {
+		// 제한 글자수
+		var limit = 100;
+		
+        // 텍스트 길이
+        var textLength = $(this).val().length;
+        
+        // 텍스트 길이 표시
+        $("#textLength").html(textLength);
+ 
+        // 제한된 길이보다 입력된 길이가 큰 경우 제한 길이만큼만 자르고 텍스트영역에 넣음
+        if (textLength > limit) {
+            $(this).val($(this).val().substr(0, limit));
+        }
+    });
 	
 	/* 수정 클릭 */
 	$("#btnEdit").click(function() {
-		// 이미지 파일이면
-		if(fileCheck == true) {
-			$("#form").submit();
-		} else {
-			alert('이미지 파일(jpg, png, gif, bmp)만 선택 가능합니다.');
+		// 소개글을 입력하지 않은 경우
+		if($("#introduce").val() == "") {
+			alert("소개글을 입력해주세요.")
 		}
-	});
-	
-	/* 취소 클릭 */
-	$("#btnCancel").click(function() {
-		self.close();
+		// 소개글을 입력한 경우
+		else {
+			$("#form").submit();
+		}
 	});
 </script>
 </html>
