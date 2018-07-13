@@ -83,7 +83,9 @@
 </head>   
 <body>               
 
+
 	<%@ include file="./main-header.jsp" %>
+	<!-- 랜덤동호회  5개 -->
 	<a id='we'>우리 동호회를 소개합니다.</a>
 	<div id='all'>
 	</div>
@@ -194,29 +196,43 @@
 	
 <!-- 인기동호회 3개 -->
 <div id='intTitle'><a>인기동호회</a></div>
-<div id='interDiv1'></div>
-<div id='interDiv2'></div>
-<div id='interDiv3'></div>
-
 
 <c:if test="${size2 == 0}">
 	<div class='club_default2'><a>동호회를 준비중입니다.</a></div>
 </c:if>
 
 <c:if test="${size2 >= 1}">
-	<div class='intPicture' id='int1'><a><img class="interImg" src="./resources/club-picture/${inter.clubPicture_newName}"/></a></div>
+<div id='interDiv1'></div>
+		<c:if test="${inter.clubPicture_newName == null}">
+			<div class='intPicture' id='int1'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
+		<c:if test="${inter.clubPicture_newName != null}">
+			<div class='intPicture' id='int1'><a><img class="interImg" src="./resources/club-picture/${inter.clubPicture_newName}"/></a></div>
+		</c:if>
 	<div id='ip1'><a>${inter.club_name}</a></div><!-- 이름 -->
 	<div id='ipp1'><a>회원수 : ${inter.club_memberCount}명</a></div>
 </c:if>
 
 <c:if test="${size2 >= 2}">
-	<div class='intPicture' id='int2'><a><img class="interImg" src="./resources/club-picture/${inter2.clubPicture_newName}"/></a></div>
+<div id='interDiv2'></div>
+		<c:if test="${inter2.clubPicture_newName == null}">
+			<div class='intPicture' id='int2'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
+		<c:if test="${inter2.clubPicture_newName != null}">
+			<div class='intPicture' id='int2'><a><img class="interImg" src="./resources/club-picture/${inter2.clubPicture_newName}"/></a></div>	
+		</c:if>
 	<div id='ip2'><a>${inter2.club_name}</a></div><!-- 이름  -->
 	<div id='ipp2'><a>회원수 : ${inter2.club_memberCount}명</a></div>
 </c:if>
 
 <c:if test="${size2 == 3}">
-	<div class='intPicture' id='int3'><a><img class="interImg" src="./resources/club-picture/${inter3.clubPicture_newName}"/></a></div>
+<div id='interDiv3'></div>
+		<c:if test="${inter3.clubPicture_newName == null}">
+			<div class='intPicture' id='int3'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+		</c:if>
+		<c:if test="${inter3.clubPicture_newName != null}">
+			<div class='intPicture' id='int3'><a><img class="interImg" src="./resources/club-picture/${inter3.clubPicture_newName}"/></a></div>
+		</c:if>
 	<div id='ip3'><a>${inter3.club_name}</a></div><!-- 이름 -->
 	<div id='ipp3'><a>회원수 : ${inter3.club_memberCount}명</a></div>
 </c:if>   
@@ -230,9 +246,6 @@
 <c:if test="${userId != null}">
 
 <div id='bestTitle'><a>맞춤동호회</a></div>
-<div id='bestDiv1'></div>
-<div id='bestDiv2'></div>
-<div id='bestDiv3'></div>
 
 
 <c:if test="${size3 == 0}">
@@ -240,19 +253,37 @@
 </c:if>
 
 <c:if test="${size3 >= 1}">
-	<div class='intPicture' id='bp1'><a><img class="interImg" src="./resources/club-picture/${best1.clubPicture_newName}"/></a></div>
+<div id='bestDiv1'></div>
+<c:if test="${best1.clubPicture_newName == null}">
+	<div class='intPicture' id='bp1'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+</c:if>
+<c:if test="${best1.clubPicture_newName != null}">
+<div class='intPicture' id='bp1'><a><img class="interImg" src="./resources/club-picture/${best1.clubPicture_newName}"/></a></div>
+</c:if>
 	<div id='b1'><a>${best1.club_name}</a></div><!-- 이름 -->
 	<div id='bb1'><a>회원수 : ${best1.club_memberCount}명</a></div>
 </c:if>
 
 <c:if test="${size3 >= 2}">
-	<div class='intPicture' id='bp2'><a><img class="interImg" src="./resources/club-picture/${best2.clubPicture_newName}"/></a></div>
+<div id='bestDiv2'></div>
+<c:if test="${best2.clubPicture_newName == null}">
+	<div class='intPicture' id='bp2'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+</c:if>
+<c:if test="${best2.clubPicture_newName != null}">
+<div class='intPicture' id='bp2'><a><img class="interImg" src="./resources/club-picture/${best2.clubPicture_newName}"/></a></div>
+</c:if>
 	<div id='b2'><a>${best2.club_name}</a></div><!-- 이름  -->
 	<div id='bb2'><a>회원수 : ${best2.club_memberCount}명</a></div>
 </c:if>
 
 <c:if test="${size3 >= 3}">
-	<div class='intPicture' id='bp3'><a><img class="interImg" src="./resources/club-picture/${best3.clubPicture_newName}"/></a></div>
+<div id='bestDiv3'></div>
+<c:if test="${best3.clubPicture_newName == null}">
+	<div class='intPicture' id='bp3'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+</c:if>
+<c:if test="${best3.clubPicture_newName != null}">
+<div class='intPicture' id='bp3'><a><img class="interImg" src="./resources/club-picture/${best3.clubPicture_newName}"/></a></div>
+</c:if>
 	<div id='b3'><a>${best3.club_name}</a></div><!-- 이름 -->
 	<div id='bb3'><a>회원수 : ${best3.club_memberCount}명</a></div>
 </c:if>   
