@@ -49,9 +49,16 @@ public class ClubMeetingPlanService {
 		String meetingPlan_when = (String) list.get("day");
 		String meetingPlan_money = (String) list.get("money");
 		String meetingPlan_content = (String) list.get("content");
-		inter.clubMeetingWrite(
-				Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
-				meetingPlan_when,meetingPlan_money,meetingPlan_content);
+		
+		int meetingCount = inter.clubMeetingCount(club_id);
+		if(meetingCount == 0) {
+			inter.clubMeetingWriteFirst(Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
+					meetingPlan_when,meetingPlan_money,meetingPlan_content);
+		} else {
+			inter.clubMeetingWrite(
+					Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
+					meetingPlan_when,meetingPlan_money,meetingPlan_content);
+		}
 	}
 
 }

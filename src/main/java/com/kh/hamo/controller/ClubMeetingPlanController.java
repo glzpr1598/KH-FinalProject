@@ -45,7 +45,6 @@ public class ClubMeetingPlanController {
 	public String clubMeetingWrite(@RequestParam HashMap<String, String> list) {
 		logger.info("clubMeetingWriteForm 요청");
 		String club_id=  list.get("club_id");
-		
 		service.clubMeetingWrite(list);
 		
 		return "redirect:/clubMeetingList?club_id="+club_id;
