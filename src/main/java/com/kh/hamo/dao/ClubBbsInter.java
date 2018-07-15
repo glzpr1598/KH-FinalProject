@@ -19,6 +19,18 @@ public interface ClubBbsInter {
 	//공지사항 상세보기
 	ClubBbsDTO clubNoticeDetail(String clubBbs_id);
 	
+	//게시글 수 가져오기
+	int findCount(int club_id);
+	
+	//글번호 가져오기
+	ArrayList<ClubBbsDTO> findIdx(String club_id);
+	
+	//글쓰기
+	int clubWrite(ClubBbsDTO dto);
+	
+	//DB에 파일 저장
+	int writeFile(String newFile, String oldFile, int clubBbs_id);
+	
 	//댓글 찾기
 	ClubBbsDTO findReply(String clubBbs_id);
 	
