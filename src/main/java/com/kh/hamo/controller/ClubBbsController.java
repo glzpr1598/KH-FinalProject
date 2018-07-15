@@ -107,6 +107,23 @@ public class ClubBbsController {
 	}
 	
 	
+	/*************************************전체글보기***************************************/
+	
+	//전체글보기 리스트 페이지 
+	@RequestMapping(value="/clubAllList")
+	public String clubAllListForm() {
+		logger.info("전체글보기 리스트 폼");
+		return "c02";
+	}
+	
+	//전체글보기 리스트 보기
+	@RequestMapping(value = "/clubAllListForm")
+	public @ResponseBody HashMap<String, Object> clubAllListForm(@RequestParam("club_id") String club_id) {
+		logger.info("전체글보기 게시판 리스트");
+		return clubBbsService.clubAllList(club_id);
+	}
+	
+	
 	/*************************************파일업로드***************************************/
 	
 	//파일업로드

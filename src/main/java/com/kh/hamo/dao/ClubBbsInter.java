@@ -46,6 +46,9 @@ public interface ClubBbsInter {
 	//게시글 삭제
 	void clubDelete(int clubBbs_id);
 	
+	//전체글보기 리스트
+	ArrayList<ClubBbsDTO> clubAllList(String club_id);
+	
 	//댓글 찾기
 	ClubBbsDTO findReply(String clubBbs_id);
 	

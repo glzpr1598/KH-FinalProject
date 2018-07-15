@@ -192,6 +192,17 @@ public class ClubBbsService {
 		}
 		clubBbsInter.clubDelete(clubBbs_id);
 	}
+	
+	/*************************************전체글보기***************************************/
+
+	//전제글보기 리스트
+	public HashMap<String, Object> clubAllList(String club_id) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		HashMap<String, Object> map = new HashMap<>();
+		ArrayList<ClubBbsDTO> list = clubBbsInter.clubAllList(club_id);
+		map.put("list", list);
+		return map;
+	}
 		
 	/*************************************파일업로드***************************************/
 
