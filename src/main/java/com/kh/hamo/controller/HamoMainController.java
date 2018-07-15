@@ -32,20 +32,20 @@ public class HamoMainController {
 		logger.info("메인페이지에 동호회 소개");
 		return service.home();
 	}*/
-/*	
+	
 	@RequestMapping(value = "/")
 	public String main() {
 		logger.info("메인페이지에 동호회 소개");
-		return "main";*/
-
-	@RequestMapping(value = "/")
+		return "main";
+	}
+/*	@RequestMapping(value = "/")
 	public ModelAndView main(HttpSession session) {
 		String userId = (String) session.getAttribute("userId");
 		logger.info("메인페이지에 동호회 소개");
 		return service.home(userId);
 
 	}
-	
+	*/
 	// 검색 값 가져오는 컨트롤러
 	@RequestMapping(value = "/m08move")
 	public ModelAndView m08move(@RequestParam ("search") String search) {
