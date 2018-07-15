@@ -62,18 +62,146 @@
 		SELECT * FROM club WHERE club_location = #{param1} AND (INTEREST_ID = #{param2} OR INTEREST_ID = #{param3} OR interest_id = #{param4}) ORDER BY club_membercount DESC
 </select>
 
-	<select id="clubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
-		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
-		FROM club C JOIN interest I ON C.interest_id=I.interest_id
-		<where>
-			<if test="interest !='전체'" >
-				I.interest_interest=#{interest}
-			</if>
-			<if test="location !='전체'" >
-				AND C.club_location=#{location}
-			</if>
-			
-		</where>
-	</select>
+<!-- <select id="clubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
+	SELECT C.club_id, C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
+	FROM club C JOIN interest I ON C.interest_id=I.interest_id
+	<where>
+		<if test="interest !='전체'" >
+			I.interest_interest=#{interest}
+		</if>
+		<if test="location !='전체'" >
+			AND C.club_location=#{location}
+		</if>
+	</where>
+</select> -->
+<select id="clubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
+	SELECT C.club_id, C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
+	FROM club C JOIN interest I ON C.interest_id=I.interest_id
+	<where>
+		<choose>
+			<when test="interest =='전체'">
+			</when>
+			<when test="interest == '운동/스포츠'">
+				(I.interest_interest = '축구' OR
+				I.interest_interest = '농구' OR
+				I.interest_interest = '야구' OR
+				I.interest_interest = '배구' OR
+				I.interest_interest = '자전거' OR
+				I.interest_interest = '배드민턴' OR
+				I.interest_interest = '볼링' OR
+				I.interest_interest = '테니스/스쿼시' OR
+				I.interest_interest = '수영' OR
+				I.interest_interest = '족구')
+			</when>
+			<when test="interest == '아웃도어/여행'">
+				(I.interest_interest = '등산' OR
+				I.interest_interest = '캠핑' OR
+				I.interest_interest = '국내여행' OR
+				I.interest_interest = '해외여행' OR
+				I.interest_interest = '낚시')
+			</when>
+			<when test="interest == '공연/문화'">
+				(I.interest_interest = '뮤지컬/오페라' OR
+				I.interest_interest = '공연/연극' OR
+				I.interest_interest = '영화' OR
+				I.interest_interest = '전시회' OR
+				I.interest_interest = '고궁/문화재')
+			</when>
+			<when test="interest == '음악/악기'">
+				(I.interest_interest = '노래/보컬' OR
+				I.interest_interest = '기타/베이스' OR
+				I.interest_interest = '드럼' OR
+				I.interest_interest = '피아노' OR
+				I.interest_interest = '밴드' OR
+				I.interest_interest = '작사/작곡' OR
+				I.interest_interest = '클래식' OR
+				I.interest_interest = '재즈' OR
+				I.interest_interest = '락/메탈')
+			</when>
+			<when test="interest == '인문학/책/글'">
+				(I.interest_interest = '책/독서' OR
+				I.interest_interest = '인문학' OR
+				I.interest_interest = '심리학' OR
+				I.interest_interest = '철학' OR
+				I.interest_interest = '역사' OR
+				I.interest_interest = '시사/경제')
+			</when>
+			<when test="interest == '봉사활동'">
+				(I.interest_interest = '양로원' OR
+				I.interest_interest = '보육원' OR
+				I.interest_interest = '환경봉사' OR
+				I.interest_interest = '사회봉사' OR
+				I.interest_interest = '교육/재능나눔' OR
+				I.interest_interest = '유기동물보호')
+			</when>
+			<when test="interest == '공예/만들기'">
+				(I.interest_interest = '미술/그림' OR
+				I.interest_interest = '캘리그라피' OR
+				I.interest_interest = '천연비누' OR
+				I.interest_interest = '소품공예' OR
+				I.interest_interest = '가죽공예' OR
+				I.interest_interest = '목공예' OR
+				I.interest_interest = '도자/점토공예')
+			</when>
+			<when test="interest == '차/오토바이'">
+				(I.interest_interest = '국내차' OR
+				I.interest_interest = '일본차' OR
+				I.interest_interest = '미국차' OR
+				I.interest_interest = '유럽차' OR
+				I.interest_interest = '바이크')
+			</when>
+			<otherwise>
+				I.interest_interest = #{interest}
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="location =='전체'">
+			</when>
+			<when test="location == '강남'">
+				AND (C.club_location = '강남/역삼' OR
+				C.club_location = '논현/학동' OR
+				C.club_location = '대치/도곡/양재' OR
+				C.club_location = '방배/반포' OR
+				C.club_location = '삼성/선릉' OR
+				C.club_location = '서초/교대' OR
+				C.club_location = '압구정/청담/신사')
+			</when>
+			<when test="location == '강동'">
+				AND (C.club_location = '강동/천호' OR
+				C.club_location = '광진/구의/건대' OR
+				C.club_location = '송파/가락/방이' OR
+				C.club_location = '신천/잠실')
+			</when>
+			<when test="location == '강북'">
+				AND (C.club_location = '강북/수유/미아' OR
+				C.club_location = '노원/도봉' OR
+				C.club_location = '대학로/성북' OR
+				C.club_location = '동대문/신당' OR
+				C.club_location = '시청/명동/을지로' OR
+				C.club_location = '왕십리/성동' OR
+				C.club_location = '용산/한남/이태원' OR
+				C.club_location = '인사동/삼청동' OR
+				C.club_location = '종로/광화문' OR
+				C.club_location = '중랑/상봉')
+			</when>
+			<when test="location == '강서'">
+				AND (C.club_location = '강서/양천' OR
+				C.club_location = '영의도/영등포/당산' OR
+				C.club_location = '신촌/이대/서대문' OR
+				C.club_location = '홍대/합정/상수' OR
+				C.club_location = '마포역/공덕' OR
+				C.club_location = '삼암/망원' OR
+				C.club_location = '신림/관악' OR
+				C.club_location = '신도림/구로/금천' OR
+				C.club_location = '노량진/사당/동작' OR
+				C.club_location = '연신내/불광/은평')
+			</when>
+			<otherwise>
+				AND C.club_location = #{location}
+			</otherwise>
+		</choose>
+	</where>
+	ORDER BY club_date DESC
+</select>
 	
 </mapper>
