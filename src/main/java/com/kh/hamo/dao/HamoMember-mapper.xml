@@ -33,4 +33,56 @@
 <select id="idSearch" resultType="String">
 	SELECT member_id FROM member WHERE member_name=#{param1} AND member_email=#{param2}
 </select>
+
+<select id="pwSearch" resultType="String">
+	SELECT member_pw FROM member WHERE member_id=#{param1} AND member_email=#{param2}
+</select>
+
+<update id="pwUpdate">
+		UPDATE member SET member_pw=#{param2} WHERE member_id=#{param1}	 
+</update>
+
+<select id="updateForm" resultType="com.kh.hamo.dto.HamoMemberDTO">
+	SELECT * FROM member WHERE member_id=#{param1}
+</select>
+
+<select id="updateFormInterest" resultType="int">
+	SELECT interest_id FROM memberinterest WHERE member_id=#{param1}
+</select>
+
+<select id="interest" resultType="String">
+	SELECT interest_interest FROM interest WHERE interest_id=#{param1}
+</select>
+
+<delete id="interestDel">
+	DELETE memberinterest WHERE memberInterest_id=#{param1}   
+</delete>
+
+<update id="userUpdate" parameterType="com.kh.hamo.dto.HamoMemberDTO" >  
+	UPDATE member SET member_name=#{member_name}, member_phone=#{member_phone}, member_location=#{member_location} 
+			WHERE member_id=#{member_id}
+</update>
+
+<select id="updateInterest" resultType="int">
+	SELECT memberInterest_id FROM memberInterest WHERE member_id=#{param1}
+</select>
+
+<update id="emailUpdate">
+		UPDATE member SET member_email=#{param2} WHERE member_id=#{param1}	 
+</update>
+
 </mapper>         
+
+
+  
+
+
+
+
+
+
+
+
+
+
+

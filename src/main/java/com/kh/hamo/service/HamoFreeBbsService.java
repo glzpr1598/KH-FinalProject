@@ -37,7 +37,7 @@ public class HamoFreeBbsService {
 	//자유게시판 글 상세보기 
 	public void freeBbsdetail(String idx, int flag, Model model) {
 		inter = sqlSession.getMapper(HamoFreeBbsInter.class);
-		if(flag==0) { //flag가 0인 경우에만 조회수 +1
+		if(flag==1) { //flag가 1인 경우에만 조회수 +1
 			inter.freeBbsHit(idx);
 		}
 		HamoBbsDTO freeBbsdetail = inter.freeBbsdetail(idx);
@@ -56,6 +56,8 @@ public class HamoFreeBbsService {
 	public int freeBbsWrite(HashMap<String, String> map) {
 		inter = sqlSession.getMapper(HamoFreeBbsInter.class);
 		HamoBbsDTO dto = new HamoBbsDTO();
+		logger.info("글쓰기를 요청한 회원 : "+map.get("userId"));
+		dto.setMember_id(map.get("userId"));
 		dto.setMainBbs_subject(map.get("subject"));
 		dto.setMainBbs_content(map.get("content"));
 		int success = inter.freeBbsWrite(dto);	
@@ -122,13 +124,22 @@ public class HamoFreeBbsService {
 	public HashMap<String, Object> freBbsReplyDel(HashMap<String, String> params) {
 		inter = sqlSession.getMapper(HamoFreeBbsInter.class);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int success = inter.freBbsReplyDel(Integer.parseInt(params.get("reply_id")));
-		if(success>0) { //댓글삭제에 성공 하였다면
-			//댓글을 삭제 해당 글의 댓글 수를 -1 해줘야함.(반환값은 필요 없음)
-			String flag ="minus"; 
-			inter.reply_countUpdate(Integer.parseInt(params.get("mainBbs_id")),flag);
-			//댓글 수가 update 되고 조회해 오기
-			map.put("reply", inter.reply_count(Integer.parseInt(params.get("mainBbs_id"))));
+		//(1)댓글id를 기준으로 등록한 회원의 id와 삭제를 하려는 회원의 id가 맞는지 비교하고 맞을 경우 삭제 요청
+		String id = inter.freeBbsReply_IdCheck(Integer.parseInt(params.get("reply_id")));
+		boolean aaa = params.get("member_id").equals(id);
+		logger.info("맞냐??? "+aaa);
+		//(1)번 조건에 충족한다면 댓글 삭제 요청
+		if(params.get("member_id").equals(id)) {
+			map.put("reply_request","ok");
+			
+			int success = inter.freBbsReplyDel(Integer.parseInt(params.get("reply_id")));
+			if(success>0) { //댓글삭제에 성공 하였다면
+				//댓글을 삭제 해당 글의 댓글 수를 -1 해줘야함.(반환값은 필요 없음)
+				String flag ="minus"; 
+				inter.reply_countUpdate(Integer.parseInt(params.get("mainBbs_id")),flag);
+				//댓글 수가 update 되고 조회해 오기
+				map.put("reply", inter.reply_count(Integer.parseInt(params.get("mainBbs_id"))));
+			}
 		}
 		return map;
 	}

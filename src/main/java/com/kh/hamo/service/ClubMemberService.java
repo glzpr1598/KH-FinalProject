@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.kh.hamo.dao.ClubMemberInter;
+import com.kh.hamo.dao.HamoMemberInter;
 
 @Service
 public class ClubMemberService {
@@ -45,6 +46,19 @@ public class ClubMemberService {
 		// 블랙리스트 추가
 		inter.clubMemberBlacklist(Integer.parseInt(club_id), member_id);
 		
+	}
+	
+	public HashMap<String, Object> memberCheck(String userId, String club_id) {
+		inter = sqlSession.getMapper(ClubMemberInter.class);
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		
+		int isMember = inter.memberCheck(userId, club_id);
+		int isMaster = inter.masterCheck(userId, club_id);
+		
+		result.put("isMember", isMember);
+		result.put("isMaster", isMaster);
+		
+		return result;
 	}
 
 }

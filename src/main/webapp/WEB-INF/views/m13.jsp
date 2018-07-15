@@ -44,7 +44,7 @@
 			<form action="freeBbsWrite" name="frm" id="frm">
 			 <div id="title">| 자유게시판 |</div>
 				<input type="text" id="subject" placeholder="포스트 제목을 입력해주세요." name="subject" style="width:766px;"maxlength="20">
-			    <textarea name="content" id="smarteditor" onkeyup="check_Length()"  placeholder="10" cols="100" style="width:766px; height:312px;">
+			    <textarea  name="content" id="smarteditor"  placeholder="10" cols="100" style="width:766px; height:312px;">
 			    </textarea>
 			    <div id="btn">
 				    <input type="button" id="cancelbutton" value="취소" />
@@ -56,11 +56,11 @@
 </body>
 <script>
 $(document).ready(function(){
-	function checkLength(obj){
-		console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
-	}
-
+	console.log(document.frm.content);
 });
+
+
+
 $(function(){
     //전역변수선언
     var editor_object = [];
@@ -75,34 +75,41 @@ $(function(){
             // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
             bUseVerticalResizer : true,    
             // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseModeChanger : true,
+            bUseModeChanger : true
         }
+
     });
      
-    //전송버튼 클릭이벤트
-    $("#savebutton").click(function(){
-        //id가 smarteditor인 textarea에 에디터에서 대입
-        editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
-        
-        //폼 submit
-        if(confirm("글쓰기를 등록하시겠습니까?")){
-        	console.log("subject: "+$("#subject").val());
-        	console.log("content: "+$("#smarteditor").val());
-        	if($("#subject").val()==""){
-        		alert("제목을 입력 해 주세요.");
-        	}else if($("#smarteditor").val()=="<p>&nbsp;</p>" ||$("#smarteditor").val()==""){
-        		alert("내용을 입력 해 주세요.");
-        	}else{
-      			$("#frm").submit();	
-        	}
-        } 
-    });
+     //전송버튼 클릭이벤트
+     $("#savebutton").click(function(){
+         //id가 smarteditor인 textarea에 에디터에서 대입
+         editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
+         
+         //폼 submit
+         	console.log("subject: "+$("#subject").val());
+         	console.log("content: "+$("#smarteditor").val());
+         	if($("#subject").val()==""){
+         		alert("제목을 입력 해 주세요.");
+         	}else if($("#smarteditor").val()=="<p>&nbsp;</p>" || $("#smarteditor").val()==""){
+         		alert("내용을 입력 해 주세요.");
+         	}else{
+         		console.log($("#smarteditor").val());
+         		//글쓰기 내용 입력 제한
+         		if($("#smarteditor").val().length > 2000){
+         			alert("최대 2000자 까지 입력 가능합니다");
+         		}else{
+         			$("#frm").submit();	
+         		}
+         	}
+     });
+     
     $("#cancelbutton").click(function(){
     	if(confirm("작성을 취소하시겠습니까?")){ 
     		//true 일 경우 자유게시판 리스트로 이동
     		location.href="./freeBbsList";
     	}
     });
+    
 	$("#subject").keyup(function(){
 		console.log("제목 keyup");
 		console.log($("#subject").val().length);
@@ -110,11 +117,7 @@ $(function(){
 			alert("제목은 최대 20자까지만 입력 가능합니다.");
 		}
 	});
-	//textarea 글자수 제한
-/* 	function check_Length(){
-		console.log("길이는 ? "+$("#smarteditor").val().length);
-	} */
+	
 });
-
 </script>
 </html>

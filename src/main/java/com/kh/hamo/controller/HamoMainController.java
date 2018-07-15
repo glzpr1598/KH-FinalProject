@@ -1,6 +1,7 @@
 package com.kh.hamo.controller;
 
 
+import java.awt.List;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -26,9 +27,16 @@ public class HamoMainController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
+/*	@RequestMapping(value = "/")
+	public ModelAndView main() {
+		logger.info("메인페이지에 동호회 소개");
+		return service.home();
+	}*/
+	
 	@RequestMapping(value = "/")
 	public String main() {
-		logger.info("메인페이지 요청");
+		logger.info("메인페이지에 동호회 소개");
 		return "main";
 	}
 	
@@ -66,4 +74,25 @@ public class HamoMainController {
 		id="admin";/**<-임의로 설정한거임 */
 		return service.myClubJoin(id);
 	}
+	//가입한 동호회 탈퇴
+	@RequestMapping(value = "/myClubRemove")
+	public ModelAndView myClubRemove(@RequestParam ("myClubRemove") String myClubRemove) {
+		logger.info("가입한 동호회 탈퇴 리스트");
+		return service.myClubRemove(myClubRemove);
+	}
+	//동호회 찾기 페이지 이동
+	@RequestMapping(value = "/m10move")
+	public String m10move(Model model) {
+		logger.info("동호회 찾기 페이지 요청 ");
+		return "m10";
+	}
+	//동호회 찾기
+	@RequestMapping(value = "/clubSearch")
+	public @ResponseBody HashMap<String, Object> clubSearch(@RequestParam HashMap<String, String> map) {
+		logger.info("동호회 찾기 요청");
+		System.out.println("interest : " + map.get("interest"));
+		System.out.println("location : " + map.get("location"));
+		return service.clubSearch(map);
+	}
+	
 }

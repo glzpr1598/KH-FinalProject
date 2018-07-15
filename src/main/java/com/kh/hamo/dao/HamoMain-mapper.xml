@@ -19,14 +19,44 @@
 	</select>
 	
 	<select id="myClubJoin" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
-		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
+		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest,CJ.clubJoin_id 
 		FROM clubJoin CJ JOIN club C ON C.club_id=CJ.club_id 
 		JOIN interest I ON I.interest_id=C.interest_id
 		WHERE CJ.member_id=#{param1}
 	</select>
 	
+	<delete id="myClubDel">
+		DELETE FROM clubJoin WHERE clubJoin_id = #{param1}
+	</delete>
 	
+	<select id="home" resultType="com.kh.hamo.dto.HamoMainDTO">
+		SELECT club_id, club_name, club_introduce, TO_CHAR(club_date, 'yyyy.mm.dd.') as club_date, club_memberCount, club_location, club_masterNickname, interest_id, member_id FROM club
+	</select>
 	
+	<select id="SearchPicture" resultType="String">
+		SELECT clubPicture_newName FROM clubPicture WHERE club_id = #{param1}
+	</select>
 	
+	<select id="SearchInterest" resultType="String">
+		SELECT interest_interest FROM interest WHERE interest_id = #{param1}
+
+		</select>
+
+
+	<select id="clubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
+		SELECT C.club_name,C.club_introduce, to_char(C.club_date, 'YYYY-MM-DD') as club_date,C.club_memberCount, C.club_location,I.Interest_interest 
+		FROM club C JOIN interest I ON C.interest_id=I.interest_id
+		<where>
+			<if test="interest !='전체'" >
+				I.interest_interest=#{interest}
+			</if>
+			<if test="location !='전체'" >
+				I.interest_interest=#{interest}
+			</if>
+			<if test="interest !='전체' and location!='전체'">
+				I.interest_interest=#{interest} AND C.club_location=#{location}
+			</if>
+		</where>
+	</select>
 	
 </mapper>

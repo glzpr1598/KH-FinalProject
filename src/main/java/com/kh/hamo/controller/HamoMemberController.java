@@ -68,7 +68,7 @@ public class HamoMemberController {
 		return service.emailOverlay(email);
 	}
 	
-	/**회원가입 이메일 본인인증 - 김응주 */
+	/**회원가입&비밀번호찾기 이메일 본인인증 - 김응주 */
 	@RequestMapping(value = "/emailChk")
 	public @ResponseBody HashMap<String, Object> 
 		emailChk(@RequestParam String email, HttpServletRequest request, ModelMap mo) throws AddressException, MessagingException { 
@@ -207,7 +207,129 @@ public class HamoMemberController {
 		}
 		return map;
 	}
+	
+	/**비밀번호 찾기 페이지로 이동 - 김응주 */	
+	@RequestMapping(value="/pwSearch")
+	public @ResponseBody HashMap<String, Object> 
+		pwSearch(@RequestParam HashMap<String,String> params) {
+		
+		logger.info("비밀번호찾기페이지로 이동(컨트롤러)");
+		String userId = params.get("userId");
+		String email = params.get("email");
+		
+		String pw = service.pwSearch(userId, email);
+		boolean success = false;
+		logger.info("비밀번호 찾기 여부 : " + success);
 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(pw != null) {
+		success = true;
+		map.put("success", success);
+		}
+		return map;
+	}
+
+	/**비밀번호 수정 - 김응주*/
+	@RequestMapping(value="/pwUpdate")
+	public @ResponseBody HashMap<String, Object> 
+		pwUpdate(@RequestParam HashMap<String,String> params) {
+	
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		logger.info("비밀번호 수정(컨트롤러)");
+		String pw = encoder.encode(params.get("pw"));
+		String id = params.get("id");
+		
+		boolean success = false;
+		success = service.pwUpdate(id, pw);
+		logger.info("비밀번호 찾기 여부 : " + success);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("success", success);
+		return map;
+	}
+	
+	/**수정폼 - 김응주*/
+	@RequestMapping(value="/updateForm")
+	public ModelAndView pwUpdate(HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+		logger.info("멤버 수정폼 요청");
+		return service.updateForm(userId);
+	}
+	
+	/**비밀번호 수정 (새창) - 김응주 */
+	@RequestMapping(value="/pwUpdate2")
+	public ModelAndView pwUpdate2(@RequestParam String userId) {
+		logger.info("비밀번호 찾기 (새창)");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("m06");	
+		mav.addObject("userId", userId);
+		return mav;
+	}
+	/**이메일 수정 (새창) - 김응주 */
+	@RequestMapping(value="/emailUpdate2")
+	public ModelAndView emailUpdate2(@RequestParam String userId) {
+		logger.info("이메일 찾기 (새창)");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("m07");	
+		mav.addObject("userId", userId);
+		return mav;
+	}
+	
+	/**회원정보수정 - 김응주 */	
+	@RequestMapping(value="/userUpdate")
+	public @ResponseBody HashMap<String, Integer>
+	userUpdate(@RequestParam HashMap<String, String> params) {
+
+		HamoMemberDTO Memberdto = new HamoMemberDTO();
+		Memberdto.setMember_id(params.get("id"));
+		Memberdto.setMember_name(params.get("name"));	
+		Memberdto.setMember_phone(params.get("phone"));
+		Memberdto.setMember_location(params.get("select4")); // 지역
+
+		String select1 = params.get("select1"); //관심사1  선택을 안했을경우 "소분류" 값이 들어온다.
+		String select2 = params.get("select2"); //관심사2
+		String select3 = params.get("select3"); //관심사3
+
+
+		return service.userUpdate(Memberdto, select1, select2, select3, params.get("id"));
+	}
+	
+	/**회원정보수정(현재비밀번호 확인) - 김응주 */	
+	@RequestMapping(value="/passwordChk")
+	public @ResponseBody HashMap<String, Object> 
+		passwordChk(@RequestParam String id, String pw) {
+		
+		logger.info("회원정보수정(현재비밀번호 확인)");
+
+		String pwSuccess = service.pwlogin(id);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		// 패스워드 일치 여부
+		boolean success = encoder.matches(pw, pwSuccess);
+		
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("success", success);
+
+		return result;
+	}
+	
+	/**회원정보수정(이메일 업데이트) - 김응주 */	
+	@RequestMapping(value="/emailUpdate")
+	public @ResponseBody HashMap<String, Object> 
+		emailUpdate(@RequestParam String id, String email) {
+		
+		logger.info("회원정보수정(이메일 업데이트)");
+
+		int success = service.emailUpdate(id,email);
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("success", success);
+
+		return result;
+	}
+	
+	
 	// 로그아웃
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session) {
@@ -215,7 +337,7 @@ public class HamoMemberController {
 		
 		session.removeAttribute("userId");
 		
-		return "main";
+		return "redirect:/";
 	}
 	
 

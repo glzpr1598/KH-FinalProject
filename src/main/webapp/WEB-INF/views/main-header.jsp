@@ -110,7 +110,7 @@
 		<div id="link">
 			<a id="login"></a>
 			|
-			<a href="">회원정보수정</a>
+			<a href="./updateForm" id="update">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
 			<a href="./"><img id="logo" src="./resources/image/logo.png" /></a>
@@ -125,7 +125,7 @@
 	<div id="naviBar">
 		<div id="container">
 			<a class="navi" id="myClub" href="m09move">내 동호회</a>
-			<a class="navi" id="findClub" href="">동호회 찾기</a>
+			<a class="navi" id="findClub" href="m10move">동호회 찾기</a>
 			<a class="navi" id="makeClub" href="">동호회 만들기</a>
 			<a class="navi" id="comunity" href="freeBbsList">커뮤니티</a>
 		</div>
@@ -139,7 +139,7 @@
 	
 	// 로그인 상태 변수
 	var loginState = "logout";  
-	
+
 	// 로그인 체크
 	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";

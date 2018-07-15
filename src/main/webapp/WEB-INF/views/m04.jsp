@@ -17,7 +17,12 @@
 					width: 300px;
   			    }
   			    
-  			    
+  			    #idChk, #pwdChk, #emailMsg{
+  			    			margin: 5px;
+							font-size: 13px;
+							text-align: left;
+							color: #ff1616;
+  			    }
   			    button {   
 				    width:297px;
 				    background-color: #ffbf00;
@@ -63,7 +68,7 @@
 				color:#fff;
 				}
   
-  			    #serialBtn{position: absolute; left: 255px; top: 262px;}          
+  			    #serialBtn{position: absolute; left: 255px; top: 262px;position: absolute;}          
   			         
   			    
   			       
@@ -199,34 +204,39 @@
 					if(d.success==1){
 						document.getElementById("idChk").innerHTML =" 사용중인 아이디 입니다.";
 						$("input[name='userId']").val("");
-						$("input[name='userId']").css("color","");	
+						$("#idChk").css("color","red");
 						overChk = false;
 					}else{
 						document.getElementById("idChk").innerHTML =" 사용 가능한 아이디 입니다.";
-						$("input[name='userId']").css("color","green");	
+						 $("input[name='userId']").css("color","green");	 
+						 $("#idChk").css("color","green");
 						overChk = true;
 					}
 			}else{
-				document.getElementById("idChk").innerHTML = " 아이디는 4자 이상 20자 이하로 입력해주세요.";
+				/* document.getElementById("idChk").innerHTML = " 아이디는 4자 이상 20자 이하로 입력해주세요."; */
+				$("#idChk").html(" 아이디는 4자 이상 20자 이하로 입력해주세요.");
 			}
 		};		
 		console.log(obj);
 		ajaxCall(obj);
 	});
-		
+	
 	var pwdCheck = 0;
 	
 	$("#PasswordChk").focusout(function(){	
 	if($("input[name='pwChk']").val().length >= 10 && $("input[name='pwChk']").val().length <= 20){
 			if($("input[name='pwChk']").val()!=$("input[name='userPw']").val()){
 				document.getElementById("pwdChk").innerHTML = " 패스워드가 정상적으로 입력 되지 않았습니다.";
+				$("#pwdChk").css("color","red");
 			}else{
 				document.getElementById("pwdChk").innerHTML = " 패스워드가 정상적으로 입력 되었습니다.";
+				$("#pwdChk").css("color","green");
 				pwdCheck = 1;
 			}
 			
 	}else{
 		document.getElementById("pwdChk").innerHTML = " 패스워드는 10자 이상 20자 이하로 입력해주세요.";
+		$("#pwdChk").css("color","red");
 		pwdCheck = 0
 	}
 	});
@@ -246,6 +256,7 @@
 					obj.data={email:$("input[name='email']").val()};	
 					obj.success=function(d){
 						document.getElementById("emailMsg").innerHTML =" 사용가능한 이메일 입니다. ";
+						$("#emailMsg").css("color","green");
 						serialNumber = d.serialNumber;		
 						alert("입력하신 이메일로 인증번호를 전송하였습니다.");
 						console.log(serialNumber);

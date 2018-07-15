@@ -93,7 +93,6 @@
 	</div>
 </body>
 <script>
-
 	// 로고 클릭
 	$("#logo").click(function() {
 		location.href="./"
@@ -142,6 +141,14 @@
 		        },
 		        error: function(err) {console.log(err);}
 		    });
+		}
+	});
+	
+	// 엔터 키 눌렀을 때 로그인
+	$('.inputText').keypress(function(event){
+		if(event.which == 13) {
+		    $('#login').click();
+		    return false;
 		}
 	});
 

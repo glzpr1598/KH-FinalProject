@@ -4,4 +4,38 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
 <mapper namespace="com.kh.hamo.dao.ClubAdminInter">
 
+	<!-- 동호회 폐쇄 등록 -->
+	<insert id="clubClose">
+		INSERT INTO clubclose(clubclose_id, club_id, clubclose_date)
+    		VALUES(seq_clubclose_id.NEXTVAL, #{param1}, sysdate+7)
+	</insert>
+	
+	<!-- 폐쇄 날짜 가져오기 -->
+	<select id="clubCloseDate" resultType="HashMap">
+		SELECT clubclose_id, club_id, TO_CHAR(clubclose_date, 'YYYY-MM-DD') as clubclose_date
+			FROM clubclose
+	</select>
+	
+	<!-- 동호회 삭제 -->
+	<delete id="clubDelete">
+		DELETE FROM club WHERE club_id = #{param1}
+	</delete>
+	
+	<!-- 동호회 폐쇄 삭제 -->
+	<delete id="clubCloseDelete">
+		DELETE FROM clubclose WHERE clubclose_id = #{param1}
+	</delete>
+	
+	<!-- 돟호회 폐쇄 검사 -->
+	<select id="clubCloseCheck" resultType="String">
+		SELECT to_char(clubclose_date, 'YYYY"년" MM"월" DD"일"') AS clubclose_date 
+		    FROM clubclose
+		    WHERE club_id=#{param1}
+	</select>
+	
+	<!-- 동호회 폐쇄 취소 -->
+	<delete id="clubCloseCancel">
+		DELETE FROM clubclose WHERE club_id=#{param1}
+	</delete>
+
 </mapper>

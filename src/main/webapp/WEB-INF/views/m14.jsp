@@ -106,17 +106,24 @@
 				<input id="reply_rigist" type="button" value="등록" style="width:75px; height:47px;" >
 			</div>
 			<div id="btn">
-			   	<input id="freeBbsDelete" type="button" value="삭제">
-				<input id="freeBbsUpdateForm" type="button" value="수정">
+			   	<input id="freeBbsDelete" type="hidden" value="삭제">
+				<input id="freeBbsUpdateForm" type="hidden" value="수정">
 				<input id="freeBbsList" type="button" value="목록">
 		    </div>
 		</div>
 	</div>
 </body>
 <script>
+
 	var reply_append = "";
 	$(document).ready(function(){
-		console.log(${detail.mainBbs_date });
+		//로그인 회원 id 와 글작성 회원 id 를 비교 해서 버튼 활성화 여부 
+		if("${sessionScope.userId}" == "${detail.member_id }"){
+			console.log("ㅇㅇㅇ");
+			$("#freeBbsDelete").attr("type","button");
+			$("#freeBbsUpdateForm").attr("type","button");
+		}
+		
 		//상세보기 페이지가 리드되자마자 DB에 접속해 해당 게시글에 달린 댓글 리스트 조회해오기
 		//어떻게? 해당 게시글의 아이디를 기준으로 
 		$.ajax({
@@ -159,7 +166,7 @@
 					type:"GET",
 					data:{
 					"mainBbs_id":"${detail.mainBbs_id }",
-					"member_id":"${detail.member_id}", //추후 개발시 세션에서 가져온 id
+					"member_id":"<%= session.getAttribute("userId")%>",  //추후 개발시 세션에서 가져온 id
 					"mainBbsReply_content":reply,
 					},
 					dataType:"JSON",
@@ -195,27 +202,31 @@
 		var div = $(this).closest("div"); //a태그에서 가장 가까운 div찾기
 		var reply_id = $(this).attr("id");
 		if(confirm("댓글을 삭제하시겠습니까?")){
-			$.ajax({
-				url:"./freBbsReplyDel",
-				type:"GET",
-				data:{
-				"mainBbs_id":"${detail.mainBbs_id}",
-				"reply_id":reply_id,
-				},
-				dataType:"JSON",
-				success:function(data){
-					console.log(data);
-					//하나의 댓글을 감싸고 있는 div 태그 제거
-					div.remove();
-					//댓글 개수 update
-					$("#reply_count").html("댓글 "+data.reply);
-
-				},
-				error:function(error){
-					console.log(error);
-				}
-			});
-	
+				$.ajax({
+					url:"./freBbsReplyDel",
+					type:"GET",
+					data:{
+					"mainBbs_id":"${detail.mainBbs_id }",
+					"member_id":"<%= session.getAttribute("userId")%>",
+					"reply_id":reply_id
+					},
+					dataType:"JSON",
+					success:function(data){
+						console.log(data);
+						if(data.reply_request =="ok"){
+							console.log("안들어오나???");
+							//하나의 댓글을 감싸고 있는 div 태그 제거
+							div.remove();
+							//댓글 개수 update
+							$("#reply_count").html("댓글 "+data.reply);
+						}else{
+							alert("댓글 삭제 권한이 없습니다!");
+						}
+					},
+					error:function(error){
+						console.log(error);
+					}
+				});
 		}
 	});
 	

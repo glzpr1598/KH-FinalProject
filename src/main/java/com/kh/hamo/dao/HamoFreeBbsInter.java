@@ -32,6 +32,8 @@ public interface HamoFreeBbsInter {
 
 	int reply_count(int mainBbs_id); //댓글 개수 가져오기
 
+	String freeBbsReply_IdCheck(int reply_id);
+
 
 
 

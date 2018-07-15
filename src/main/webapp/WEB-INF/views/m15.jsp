@@ -116,7 +116,7 @@ $(function(){
     //수정 취소  클릭 시 
     $("#cancelbutton").click(function(){
     	if(confirm("수정 취소하시겠습니까?")){ 
-    		location.href="./freeBbsdetail?idx=${detail.mainBbs_id}&updateAfter=1";
+    		location.href="./freeBbsdetail?idx=${detail.mainBbs_id}&updateAfter=0";
     	}
     });
     

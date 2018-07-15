@@ -26,7 +26,7 @@
 	<insert id="freeBbsWrite" parameterType="com.kh.hamo.dto.HamoBbsDTO" useGeneratedKeys="true" keyProperty="mainBbs_id" keyColumn="mainBbs_id" >
 			INSERT INTO mainBbs(mainBbs_id,member_id,mainBbs_sort,mainBbs_idx,mainBbs_subject,
 			mainBbs_content,mainBbs_date,mainBbs_replyCount,mainBbs_hit)
-			VALUES(seq_mainbbs_id.NEXTVAL,'yun','자유게시판',seq_freebbs_idx.NEXTVAL,#{mainBbs_subject},#{mainBbs_content},SYSDATE,0,0)
+			VALUES(seq_mainbbs_id.NEXTVAL,#{member_id},'자유게시판',seq_freebbs_idx.NEXTVAL,#{mainBbs_subject},#{mainBbs_content},SYSDATE,0,0)
 	</insert>
 	<!-- 자유게시판 글 수정하기 -->
 	<update id="freeBbsUpdate">
@@ -48,7 +48,12 @@
 	<!-- 자유게시판 댓글 리스트  -->
 	<select id="freeBbsReplyList" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT mainBbsReply_id,mainBbs_id,member_id,mainBbsReply_content,
-		TO_CHAR(mainBbsReply_date,'yyyy.mm.dd. hh24:mi') as mainBbsReply_date FROM mainBbsReply WHERE mainBbs_id =#{param1}
+		TO_CHAR(mainBbsReply_date,'yyyy.mm.dd. hh24:mi') as mainBbsReply_date FROM mainBbsReply WHERE mainBbs_id =#{param1} 
+		ORDER BY mainBbsReply_date ASC
+	</select>
+	<!--자유게시판 삭제 하기 전 댓글을 입력한 회원ID 조회  -->
+	<select id="freeBbsReply_IdCheck" resultType="String">
+		SELECT member_id FROM mainBbsReply WHERE mainBbsReply_id = #{param1}
 	</select>
 	<!-- 자유게시판 댓글 삭제 -->
 	<delete id="freBbsReplyDel">

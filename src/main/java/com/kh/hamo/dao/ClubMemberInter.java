@@ -11,5 +11,9 @@ public interface ClubMemberInter {
 	int clubMemberFire(int clubJoin_id);
 	// 블랙리스트 추가
 	int clubMemberBlacklist(int club_id, String member_id);
+	// 동호회 가입 여부 확인
+	int memberCheck(String userId, String club_id);
+	// 회장 여부 확인
+	int masterCheck(String userId, String club_id);
 
 }
