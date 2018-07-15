@@ -24,6 +24,25 @@
 		SELECT cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
 	</select>
 	
+	<!-- 게시글 수 가져오기 -->
+	<select id="findCount" resultType="Integer" parameterType="Integer">
+		SELECT COUNT(*) FROM clubBbs WHERE club_id=#{param1}
+	</select>
+	
+	<!-- 최근 게시글 글번호 조회 -->
+	<select id="findIdx" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT clubBbs_idx FROM clubBbs WHERE club_id=#{param1} ORDER BY clubBbs_idx DESC
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="clubWrite" parameterType="com.kh.hamo.dto.ClubBbsDTO" useGeneratedKeys="true" keyProperty="clubBbs_id" keyColumn="clubBbs_id">
+		INSERT INTO clubBbs(clubBbs_id, club_id, member_id,clubBbs_sort, clubBbs_idx,clubBbs_subject,clubBbs_date, clubBbs_content,clubBbs_replyCount, clubBbs_hit) 
+		VALUES(seq_clubbbs_id.NEXTVAL, #{club_id}, #{member_id},#{clubBbs_sort},#{clubBbs_idx},#{clubBbs_subject},SYSDATE,#{clubBbs_content},0,0)
+	</insert>
+	<insert id="writeFile">
+		INSERT INTO clubBbsFile VALUES (seq_clubbbsfile_id.NEXTVAL,#{param3},#{param2},#{param1})
+	</insert>
+	
 	<!-- 댓글 수 조회 -->
 	<select id="findReply" resultType="com.kh.hamo.dto.ClubBbsDTO">
 		SELECT clubBbs_replyCount FROM clubBbs WHERE clubBbs_id=#{param1}

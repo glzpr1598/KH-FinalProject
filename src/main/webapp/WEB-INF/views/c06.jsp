@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <title>Insert title here</title>
 <style>
 	#save{
@@ -76,7 +76,7 @@
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef : oEditors,
 		elPlaceHolder: "editor",
-		sSkinURI: "<%= request.getContextPath() %>/resources/smarteditor/SmartEditor2Skin.html",
+		sSkinURI: "<%= request.getContextPath() %>/smarteditor/SmartEditor2Skin.html",
 	     htParams : {
 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseToolbar : true,             
@@ -88,19 +88,28 @@
 	});
 	
 	$("#save").click(function(){
-		oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-		writefrm.action="./clubNoticeWrite?club_id="+<%=request.getParameter("club_id")%>+"&sort=notice";
-	});
-	
-	//textarea 공백 확인
-	function validation(){
-		var contents = $.trim(oEditors[0].getContents());
-		if(contents == ""){
-			alert("내용을 입력하세요");
-			oEditors.getById["editor"].exec("FOCUS");
-			return;
+		if($("#subject").val() == ""){
+			alert("제목을 입력하세요.");
+		}else{
+			oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
+			
+			var str = $("#editor").val();
+
+			var pattern = /src="(.*?)"/g;
+			var list = str.match(pattern);
+			for(var i = 0; i < list.length; i++) {
+			   list[i] = list[i].substring(41);
+			   list[i] = list[i].substring(0, list[i].length - 1);
+			}
+			
+			var param = "";
+			for(var i = 0; i < list.length; i++){
+				param += "&filePath"+i+"="+list[i];
+				count++;
+			}
+			writefrm.action="./clubNoticeWrite?club_id="+<%=request.getParameter("club_id")%>+"&sort=notice"+param+"&count="+count;
 		}
-	}
+	});
 	
 </script>
 </html>

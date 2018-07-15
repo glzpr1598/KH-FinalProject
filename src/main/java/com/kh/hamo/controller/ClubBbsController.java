@@ -2,6 +2,8 @@ package com.kh.hamo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -67,6 +69,25 @@ public class ClubBbsController {
 	public ModelAndView clubNoticeDetail(@RequestParam HashMap<String, String> params) {
 		logger.info("공지사항 상세보기");
 		return clubBbsService.clubNoticeDetail(params);
+	}
+	
+	//공지사항 글쓰기
+	@RequestMapping(value="/clubNoticeWrite")
+	public ModelAndView clubNoticeWrite(@RequestParam HashMap<String, String> params, HttpSession session) {
+		logger.info("공지사항 글쓰기 호출");
+		String member_id = (String) session.getAttribute("userId");
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubNoticeWrite(params,member_id,root);
+	}
+	
+	
+	/*************************************파일업로드***************************************/
+	
+	//파일업로드
+	@RequestMapping(value="/file_uploader_html5.do")
+	public void file_uploader_html5(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("파일 업로드 요청");
+		clubBbsService.clubFileUpload(request,response);
 	}
 	
 	/*************************************댓글***************************************/
