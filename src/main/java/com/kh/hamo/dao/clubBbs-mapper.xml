@@ -43,6 +43,31 @@
 		INSERT INTO clubBbsFile VALUES (seq_clubbbsfile_id.NEXTVAL,#{param3},#{param2},#{param1})
 	</insert>
 	
+	<!-- 수정 폼 -->
+	<select id="clubUpdateForm" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT club_id,clubBbs_subject, clubBbs_content,clubBbs_id FROM clubBbs WHERE clubBbs_id=#{param1}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="clubUpdate" parameterType="com.kh.hamo.dto.ClubBbsDTO">
+		UPDATE clubBbs SET clubBbs_subject=#{clubBbs_subject},clubBbs_content=#{clubBbs_content} WHERE clubBbs_id=#{clubBbs_id}
+	</update>
+	
+	<!-- 파일 삭제 -->
+	<delete id="fileDelete">
+		DELETE FROM clubBbsFile WHERE clubBbsFile_newName=#{param1}
+	</delete>
+	
+	<!-- 파일 찾기 -->
+	<select id="findFile" resultType="String" parameterType="int">
+		SELECT clubBbsFile_newName FROM clubBbsFile WHERE clubBbs_id=#{param1}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="clubDelete">
+		DELETE FROM clubBbs WHERE clubBbs_id=#{param1}
+	</delete>
+	
 	<!-- 댓글 수 조회 -->
 	<select id="findReply" resultType="com.kh.hamo.dto.ClubBbsDTO">
 		SELECT clubBbs_replyCount FROM clubBbs WHERE clubBbs_id=#{param1}

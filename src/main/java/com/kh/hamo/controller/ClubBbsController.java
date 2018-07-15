@@ -80,6 +80,32 @@ public class ClubBbsController {
 		return clubBbsService.clubNoticeWrite(params,member_id,root);
 	}
 	
+	//공지사항 게시글 수정 폼
+	@RequestMapping(value="/clubNoticeUpdateForm")
+	public ModelAndView clubNoticeUpdateForm(@RequestParam("clubBbs_id") String clubBbs_id,HttpSession session) throws Exception {
+		logger.info("공지사항 게시글 수정폼");
+		return clubBbsService.clubNoticeUpdateForm(clubBbs_id);
+	}	
+	
+	//공지사항 게시글 수정
+	@RequestMapping(value="/clubNoticeUpdate")
+	public ModelAndView clubNoticeUpdate(@RequestParam HashMap<String, String> params) throws Exception {
+		logger.info("공지사항 게시글 수정");
+		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
+		return clubBbsService.clubNoticeUpdate(params,clubBbs_id);
+	}
+	
+	//공지사항 게시글 삭제 
+	@RequestMapping(value="/clubNoticeDelete")
+	public String clubNoticeDelete(@RequestParam HashMap<String, String> params,HttpSession session) throws Exception {
+		logger.info("공지사항 게시글 삭제");
+		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
+		String root = session.getServletContext().getRealPath("/");
+		clubBbsService.clubNoticeDelete(clubBbs_id,root);
+		
+		return "redirect:/clubNoticeList?club_id="+params.get("club_id")+"&sort=notice";
+	}
+	
 	
 	/*************************************파일업로드***************************************/
 	
