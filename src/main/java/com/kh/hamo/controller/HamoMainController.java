@@ -1,7 +1,6 @@
 package com.kh.hamo.controller;
 
 
-import java.awt.List;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,16 +26,24 @@ public class HamoMainController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
+
 /*	@RequestMapping(value = "/")
 	public ModelAndView main() {
 		logger.info("메인페이지에 동호회 소개");
 		return service.home();
 	}*/
-	
+/*	
 	@RequestMapping(value = "/")
 	public String main() {
 		logger.info("메인페이지에 동호회 소개");
-		return "main";
+		return "main";*/
+
+	@RequestMapping(value = "/")
+	public ModelAndView main(HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+		logger.info("메인페이지에 동호회 소개");
+		return service.home(userId);
+
 	}
 	
 	// 검색 값 가져오는 컨트롤러
@@ -62,16 +68,14 @@ public class HamoMainController {
 	}
 	//설립한 동호회 리스트 
 	@RequestMapping(value = "/myClubList")
-	public @ResponseBody HashMap<String, Object> myClubList(String id) {
+	public @ResponseBody HashMap<String, Object> myClubList(@RequestParam String id) {
 		logger.info("설립한 동회 리스트");
-		id="admin";/**<-임의로 설정한거임 */
 		return service.myClubList(id);
 	}
 	//가입한 동호회 리스트
 	@RequestMapping(value = "/myClubJoin")
-	public @ResponseBody HashMap<String, Object> myClubJoin(String id) {
+	public @ResponseBody HashMap<String, Object> myClubJoin(@RequestParam String id) {
 		logger.info("설립한 동회 리스트");
-		id="admin";/**<-임의로 설정한거임 */
 		return service.myClubJoin(id);
 	}
 	//가입한 동호회 탈퇴

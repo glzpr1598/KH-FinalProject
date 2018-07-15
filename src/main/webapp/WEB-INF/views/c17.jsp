@@ -32,7 +32,14 @@
 			font-size: 14px;
 			cursor: pointer;
 		}
-	
+		#add{
+			position: relative;
+			left: 172px;
+		}
+		a{
+			color: black;
+			text-decoration: none;
+		}
 	</style>
 
 	</head>
@@ -47,6 +54,7 @@
 			<table id="listTable">
 				<thead>
 					<tr>
+						<th>글번호</th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
@@ -58,12 +66,11 @@
 				<tfoot>
 					<tr>
 						<td style="text-align: right; border-color: white;" colspan="4">	
-							<input type="button" value="등록" id='add' onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>'"/>
+							<input type="button" value="등록" id="add" onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>'"/>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
-		
 		
 		
 		
@@ -73,7 +80,6 @@
 		<!------------------- 양식 ------------------->
 	</body>
 	<script>
-		
 	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
@@ -93,7 +99,8 @@
 			var content ="";
 			list.forEach(function(item, idx){
 				content +="<tr>";
-				content +="<td>"+item.meetingPlan_subject+"</td>";
+				content +="<td>"+item.meetingPlan_idx+"</td>";
+				content +="<td><a href='clubMeetingDetailForm?club_id="+<%= request.getParameter("club_id") %>+"'>"+item.meetingPlan_subject+"</a></td>";
 				content +="<td>"+item.clubJoin_nickname+"</td>";
 				content +="<td>"+item.meetingPlan_date+"</td>";
 				content +="<td>"+item.meetingPlan_when+"</td>";

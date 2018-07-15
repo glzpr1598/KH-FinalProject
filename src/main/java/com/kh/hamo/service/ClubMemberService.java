@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.kh.hamo.dao.ClubMemberInter;
-import com.kh.hamo.dao.HamoMemberInter;
 
 @Service
 public class ClubMemberService {
@@ -31,8 +30,11 @@ public class ClubMemberService {
 		// 특정 동호회의 멤버 리스트 가져오기
 		ArrayList<HashMap<String, Object>> result = 
 				inter.clubMemberList(Integer.parseInt(club_id));
-		
 		model.addAttribute("list", result);
+		
+		// 회장 아이디 가져오기
+		String masterId = inter.clubMasterId(club_id);
+		model.addAttribute("masterId", masterId);
 	}
 	
 	// 회원 강퇴
@@ -46,17 +48,23 @@ public class ClubMemberService {
 		// 블랙리스트 추가
 		inter.clubMemberBlacklist(Integer.parseInt(club_id), member_id);
 		
+		// 회원수 업데이트
+		inter.clubMemberCountUpdate(club_id);
+		
 	}
 	
+	// 회원 확인(동호회 가입 여부, 회장 여부, 동호회 폐쇄 여부)
 	public HashMap<String, Object> memberCheck(String userId, String club_id) {
 		inter = sqlSession.getMapper(ClubMemberInter.class);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		
 		int isMember = inter.memberCheck(userId, club_id);
 		int isMaster = inter.masterCheck(userId, club_id);
+		int isClose = inter.clubCloseCheck(club_id);
 		
 		result.put("isMember", isMember);
 		result.put("isMaster", isMaster);
+		result.put("isClose", isClose);
 		
 		return result;
 	}

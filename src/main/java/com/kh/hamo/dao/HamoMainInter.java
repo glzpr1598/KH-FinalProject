@@ -22,9 +22,16 @@ public interface HamoMainInter {
 
 	String SearchInterest(int interest_id);
 
-
 	ArrayList<HamoMainDTO> clubSearch(HashMap<String, String> map);//동호회 찾기
 
-	
+	ArrayList<HamoMainDTO> interestTop3();
+
+	String searchLocation(String userId);
+
+	ArrayList<Integer> searchBest(String userId);
+
+	ArrayList<HamoMainDTO> bestClub(String location, int best1, int best2, int best3);
+
+
 
 }
