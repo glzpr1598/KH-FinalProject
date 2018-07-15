@@ -49,5 +49,10 @@ public class ClubMeetingPlanController {
 		
 		return "redirect:/clubMeetingList?club_id="+club_id;
 	}
-
+	//모임 일정 상세보기 페이지 이동
+		@RequestMapping(value = "/clubMeetingDetailForm")
+		public String clubMeetingDetailForm() {
+			logger.info("clubMeetingDetailForm 요청");
+			return "c19";
+		}
 }

@@ -100,7 +100,7 @@
 			list.forEach(function(item, idx){
 				content +="<tr>";
 				content +="<td>"+item.meetingPlan_idx+"</td>";
-				content +="<td><a href='#'>"+item.meetingPlan_subject+"</a></td>";
+				content +="<td><a href='clubMeetingDetailForm?club_id="+<%= request.getParameter("club_id") %>+"'>"+item.meetingPlan_subject+"</a></td>";
 				content +="<td>"+item.clubJoin_nickname+"</td>";
 				content +="<td>"+item.meetingPlan_date+"</td>";
 				content +="<td>"+item.meetingPlan_when+"</td>";
