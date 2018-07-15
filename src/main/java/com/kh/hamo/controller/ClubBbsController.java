@@ -129,7 +129,7 @@ public class ClubBbsController {
 	@RequestMapping(value="/clubReply")
 	public @ResponseBody HashMap<String, Object>  clubReply(@RequestParam HashMap<String, String> params,HttpSession session) {
 		logger.info("댓글 작성");
-		String member_id = (String)session.getAttribute("member_id");
+		String member_id = (String)session.getAttribute("userId");
 		return clubBbsService.clubReply(params,member_id);
 	}
 	
