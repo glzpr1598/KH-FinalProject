@@ -12,7 +12,7 @@
 	<style>
 		#myclub{
 			background-color: #FDF5DC;
-			color: #848484;
+			color: black;
 		}
 		table{
 			margin: 10px 0px 40px 0px;
