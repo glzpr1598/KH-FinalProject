@@ -74,10 +74,6 @@
 	/*left:0;*/
 	}
 	
-	.option li:hover ul{
-	display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
-	}
-	
 	/* 선택 안했을 때 */
 	.option li li {
 	background: #FFFFFF;
@@ -102,28 +98,14 @@
 	text-align:left;
 	}
 	
-	/* 선택했을 때 */
-	/* .option li ul a:not(.sort):hover{
-	background: #FFFFFF;
-	color:#000000;
-	text-decoration:underline;
-	cursor: pointer;
-	} */
-	
-
 	
 	.option li a.sort {
 		width: 100px;
-		background: #ffbf00;
-		color: #ffffff;
+		background: #FDF5DC;
+		color: #000000;
 		font-weight: bold;
 		text-decoration: none;
-	}
-	.option li a.sort:hover {
-		background: #ffbf00;
-		color: #ffffff;
-		font-weight: bold;
-		text-decoration: none;
+	    border-right: thin solid #ffbf00;
 	}
 	
 	.option#interest {
@@ -361,8 +343,9 @@
 		<div id="clubSearch">
 				<a class="order" id="day">
 					<i class="fa fa-check"></i>
-					<span>설립일순 &nbsp;</span>
+					<span>설립일순</span>
 				</a>
+				&nbsp;
 				<a class="order" id="count">
 					<i class="fa fa-check"></i>
 					<span>회원수순</span>
@@ -383,10 +366,49 @@
 					</tbody>
 				</table>
 			</div>
+<<<<<<< HEAD
+		</div>
+	</body>
+	<script>
+		// ajax
+		var obj = {};
+		obj.error=function(e){console.log(e)};
+		obj.type="POST";
+		obj.dataType = "JSON";
+		$(document).ready(function(){
+			obj.url="./clubSearch?interest=전체&location=전체";
+			obj.success = function(data){
+				console.log(data);
+				 listPrint(data.list);
+				 /* 설립일 순 클릭 햇을 때 */
+				$("#day").click(function(){
+					console.log(data.list);
+		 			data.list.sort(function(a, b) { // 내림차순
+					    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
+					}); 
+					listPrint(data.list);
+				});
+				 
+				 /* 회원수 순 클릭 햇을 때 */
+				$("#count").click(function(){
+					console.log(data.list);
+					data.list.sort(function(a, b) { // 내림차순
+					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
+					}); 
+					listPrint(data.list);
+=======
 	</div>
 </body>
 <script>
 $(document).ready(function() {
+	
+	/* 옵션 마우스 효과 */
+	$(".option>ul>li").mouseenter(function() {
+		$(this).children("ul").slideDown("fast");
+	});
+	$(".option>ul>li").mouseleave(function() {
+		$(this).children("ul").hide();
+	});
 	
 	/* 선택한 주제, 지역 */
 	var interest = "전체";
@@ -440,6 +462,7 @@ $(document).ready(function() {
 				// 설립일 내림차순
 				data.list.sort(function(a, b) { 
 				    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
+>>>>>>> 778a8705d986902ab961534ea3c5f5ffab18ae61
 				});
 				listPrint(data.list);
 			}

@@ -34,7 +34,7 @@
 	
 	/* 확인 메시지 */
 	#msg {
-		margin: 5px;
+		margin: 0 5px 5px 5px;
 		font-size: 13px;
 		text-align: left;
 		color: #ff1616;

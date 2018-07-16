@@ -4,301 +4,399 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" href="./resources/image/icon-32.png" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Jua|Nanum+Gothic" rel="stylesheet">
 <title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
-		#gongbaeg{position: absolute;  left: 380px; top: 2000px;}         
-      
-		/* 메인화면 */
-		img#img{width: 400px; height: 250px;} 
-		.picture{position: absolute; left: 380px; top: 320px;}
-		#all{position: absolute; left: 280px; top: 250px; border: 5px solid #ffbf00; width: 1150px; height: 350px;}   
-		 #back{position: absolute; left: 295px; top: 410px; font-size: 25px; border: 2px solid #ffbf00;}             
-         #next{position: absolute; left: 1380px; top: 410px; font-size: 25px;border: 2px solid #ffbf00;}       
-            
-         #we{position: absolute; left: 380px; top: 280px; font-weight: bold;  font-size: 24px; background: white;}    
-         .club_default{position: absolute; left: 700px; top: 390px; font-weight: bold;  font-size: 40px; background: white; }    
-         .club_name{position: absolute; left: 840px; top: 320px; font-weight: bold;  font-size: 35px; background: white; }   
-         .club_interest{position: absolute; left: 840px; top: 390px; font-weight: normal;  font-size: 15px; background: white; }   
-         .club_date{position: absolute; left: 840px; top: 410px; font-weight: normal;  font-size: 15px; background: white; }      
-         .club_introduce{position: absolute; left: 840px; top: 450px; font-weight: normal;  font-size: 20px; background: white; width: 500px; height: 120px;} 
-              
-               
-        input[type='button']{                       
-  			    	width:40px;        
-				    background-color: #ffbf00;
-				    color:#fff;
-				    text-align: center;
-				    text-decoration: none;    
-				    display: inline-block;
-				    margin: 2px;
-				    cursor: pointer;
-				    border-radius:10px;
-  			    }
-  			       
-  		/* 인기동호회 3개 */   
-  		 .club_default2{position: absolute; left: 670px; top: 850px; font-weight: bold;  font-size: 30px; background: white; }    /* 동호회가 하나도 없을경우 */
-  		   
-  		.interImg{width: 300px; height: 150px;}          
-  		#intTitle{position: absolute; left: 290px; top: 700px; font-weight: bold;  font-size: 20px;}
-  	
-  		#int1{position: absolute; left: 310px; top: 780px;}     
-  		#ip1{position: absolute; left: 310px; top: 950px; font-weight: bold;  font-size: 15px;} /* 이름 */
-  		#ipp1{position: absolute; left: 310px; top: 970px; font-weight: normal;  font-size: 13px;} /* 회원수 */
-  		#interDiv1{position: absolute; left: 280px; top: 750px; border: 4px solid #ffbf00; width: 350px; height: 250px;} 
-  		
-  		#int2{position: absolute; left: 710px; top: 780px;}     
-  		#ip2{position: absolute; left: 710px; top: 950px; font-weight: bold;  font-size: 15px;} /* 이름 */
-  		#ipp2{position: absolute; left: 710px; top: 970px; font-weight: normal;  font-size: 13px;} /* 회원수 */
-  		#interDiv2{position: absolute; left: 680px; top: 750px; border: 4px solid #ffbf00; width: 350px; height: 250px;} 
-  		
-  		#int3{position: absolute; left: 1110px; top: 780px;}     
-  		#ip3{position: absolute; left: 1110px; top: 950px; font-weight: bold;  font-size: 15px;} /* 이름 */
-  		#ipp3{position: absolute; left: 1110px; top: 970px; font-weight: normal;  font-size: 13px;} /* 회원수 */
-  		#interDiv3{position: absolute; left: 1080px; top: 750px; border: 4px solid #ffbf00; width: 350px; height: 250px;} 
-  		
-  		  /* 맞춤동호회 3개*/   
-  		 .club_default3{position: absolute; left: 670px; top: 1250px; font-weight: bold;  font-size: 30px; background: white; }    /* 동호회가 하나도 없을경우 */
-  		   
-  		.interImg{width: 300px; height: 150px;}          
-  		#bestTitle{position: absolute; left: 290px; top: 1100px; font-weight: bold;  font-size: 20px;}
-  	
-  		#bp1{position: absolute; left: 310px; top: 1180px;}     
-  		#b1{position: absolute; left: 310px; top: 1350px; font-weight: bold;  font-size: 15px;} /* 이름 */
-  		#bb1{position: absolute; left: 310px; top: 1370px; font-weight: normal;  font-size: 13px;} /* 회원수 */
-  		#bestDiv1{position: absolute; left: 280px; top: 1150px; border: 4px solid #ffbf00; width: 350px; height: 250px;} 
-  		
-  		#bp2{position: absolute; left: 710px; top: 1180px;}     
-  		#b2{position: absolute; left: 710px; top: 1350px; font-weight: bold;  font-size: 15px;} /* 이름 */
-  		#bb2{position: absolute; left: 710px; top: 1370px; font-weight: normal;  font-size: 13px;} /* 회원수 */
-  		#bestDiv2{position: absolute; left: 680px; top: 1150px; border: 4px solid #ffbf00; width: 350px; height: 250px;} 
-  		
-  		#bp3{position: absolute; left: 1110px; top: 1180px;}     
-  		#b3{position: absolute; left: 1110px; top: 1350px; font-weight: bold;  font-size: 15px;} /* 이름 */
-  		#bb3{position: absolute; left: 1110px; top: 1370px; font-weight: normal;  font-size: 13px;} /* 회원수 */
-  		#bestDiv3{position: absolute; left: 1080px; top: 1150px; border: 4px solid #ffbf00; width: 350px; height: 250px;} 
+	/* 랜덤 동호회 */
+	#all {
+		box-sizing: border-box;
+		width: 1000px;
+		height: 300px;
+		margin: 0 auto 30px auto;
+		border: medium solid #ffbf00;
+		border-radius: 5px;
+	}
+	.left {
+		float: left;
+	}
+	.right {
+		float: right;
+	}
+	#back, #next {
+	    line-height: 294px;
+	    width: 50px;
+	    font-size: 30px;
+	    text-align: center;
+	    color: #ffbf00;
+	    cursor: pointer;
+	}
+	
+	#we {
+	    font-size: 27px;
+	    margin: 15px 0px 10px 0px;
+	    font-family: 'Jua';
+	}
+	
+	.picture {
+		float: left;
+	}
+	.picture img{
+		height: 215px;
+	}
+	
+	.text {
+		margin-left: 20px;
+		font-size: 13px;
+	}
+	.text .club_name {
+		font-size: 23px;
+		font-family: 'Nanum Gothic';
+		font-weight: bold;
+		margin-bottom: 15px;
+	}
+	.text .club_name a {
+		color: black;
+		text-decoration: none;
+	}
+	.text .club_interest {
+		margin-bottom: 3px;
+	}
+	.text .club_introduce {
+		font-size: 14px;
+		margin-top: 10px;
+	}
+	
+	/* 인기 동호회 */
+	#intContainer {
+		width: 1000px;
+		height: 300px;
+		margin: 0 auto 20px auto;
+	}
+	#intTitle {
+		font-size: 20px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	.interDiv {
+		float: left;
+		margin-right: 50px;
+		box-sizing: border-box;
+		width: 300px;
+		height: 250px;
+		border: medium solid #ffbf00;
+		border-radius: 5px;
+		padding: 15px;
+	}
+	.interDiv#interDiv3 {
+		margin-right: 0px;
+	}
+	.intPicture img {
+	    width: 264px;
+    	height: 170px;
+	}
+	.intText1 {
+		margin-top: 8px;
+		font-size: 13px;
+		font-weight: bold;
+	}
+	.intText1 a {
+		color: black;
+		text-decoration: none;
+	}
+	.intText2 {
+		margin-top: 5px;
+		font-size: 12px;
+	}
+	
+	/* 맞춤 동호회 */
+	#bestContainer {
+		width: 1000px;
+		height: 300px;
+		margin: 0 auto 20px auto;
+	}
+	#bestTitle {
+		font-size: 20px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	.bestDiv {
+		float: left;
+		margin-right: 50px;
+		box-sizing: border-box;
+		width: 300px;
+		height: 250px;
+		border: medium solid #ffbf00;
+		border-radius: 5px;
+		padding: 15px;
+	}
+	.bestDiv#bestDiv3 {
+		margin-right: 0px;
+	}
 </style>                  
 </head>   
 <body>               
-
-
 	<%@ include file="./main-header.jsp" %>
+	
 	<!-- 랜덤동호회  5개 -->
-	<a id='we'>우리 동호회를 소개합니다.</a>
-	<div id='all'>
-	</div>
-<c:if test="${size == 0}">
-	<div class='club_default'><a>동호회를 준비중입니다.</a></div>
-</c:if>	
-
-<c:if test="${size >= 1}">
-	<div id='d1'>
-		<c:if test="${list0.clubPicture_newName != null}">
-			<div class='picture' id='p1'><a><img id="img" src="./resources/club-picture/${list0.clubPicture_newName}"/></a></div>
-		</c:if>
-		<c:if test="${list0.clubPicture_newName == null}">
-			<div class='picture' id='p1'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
-		</c:if>
+	<c:if test="${size >= 1}">
+		<div id='all'>
+			<div class="left">
+				<i id="back" onclick="back()" class="fas fa-angle-left"></i>
+			</div> 
+			<div class="left">
+				<div id='we'>우리 동호회를 소개합니다.</div>
+				
+				<div id='d1'>
+					<c:if test="${list0.clubPicture_newName != null}">
+						<div class='picture left'><a href="./clubMain?club_id=${ list0.club_id }"><img src="./resources/club-picture/${list0.clubPicture_newName}"/></a></div>
+					</c:if>
+					<c:if test="${list0.clubPicture_newName == null}">
+						<div class='picture left'><a href="./clubMain?club_id=${ list0.club_id }"><img src="./resources/club-picture/default.png"/></a></div>
+					</c:if>
+					
+					<c:if test="${list0.club_name != null}">
+						<div class="left text">
+							<div class='club_name'><a href="./clubMain?club_id=${ list0.club_id }">${list0.club_name}</a></div>
+							<div class='club_interest'><a>${list0.interest_interest}  |  ${list0.club_location} </a></div>
+							<div class='club_date'><a><i class="fa fa-user"></i> ${list0.club_memberCount} | since ${list0.club_date} </a></div>
+							<div class='club_introduce'><a>${list0.club_introduce}</a></div>
+						</div>
+					</c:if>
+				</div>
+				
+				<c:if test="${size >= 2}">
+					<div id='d2'>
+						<c:if test="${list1.clubPicture_newName != null}">
+							<div class='picture left'><a href="./clubMain?club_id=${ list1.club_id }"><img src="./resources/club-picture/${list1.clubPicture_newName}"/></a></div>
+						</c:if>
+						<c:if test="${list1.clubPicture_newName == null}">
+							<div class='picture left'><a href="./clubMain?club_id=${ list0.club_id }"><img src="./resources/club-picture/default.png"/></a></div>
+						</c:if>
+						
+						<c:if test="${list1.club_name != null}">
+							<div class="left text">
+								<div class='club_name'><a href="./clubMain?club_id=${ list1.club_id }">${list1.club_name}</a></div>
+								<div class='club_interest'><a>${list1.interest_interest}  |  ${list1.club_location} </a></div>
+								<div class='club_date'><a><i class="fa fa-user"></i> ${list1.club_memberCount} | since ${list1.club_date} </a></div><!-- 회원수 | 설립일 -->
+								<div class='club_introduce'><a>${list1.club_introduce}</a></div>
+							</div>
+						</c:if>
+					</div>
+				</c:if>
+				
+				<c:if test="${size >= 3}">
+					<div id='d3'>
+						<c:if test="${list2.clubPicture_newName != null}">
+							<div class='picture left'><a href="./clubMain?club_id=${ list2.club_id }"><img src="./resources/club-picture/${list2.clubPicture_newName}"/></a></div>
+						</c:if>
+						<c:if test="${list2.clubPicture_newName == null}">
+							<div class='picture left'><a href="./clubMain?club_id=${ list0.club_id }"><img src="./resources/club-picture/default.png"/></a></div>
+						</c:if>
+						
+						<c:if test="${list2.club_name != null}">
+							<div class="left text">
+								<div class='club_name'><a href="./clubMain?club_id=${ list2.club_id }">${list2.club_name}</a></div>
+								<div class='club_interest'><a>${list2.interest_interest}  |  ${list2.club_location} </a></div>
+								<div class='club_date'><a><i class="fa fa-user"></i> ${list2.club_memberCount} | since ${list2.club_date} </a></div><!-- 회원수 | 설립일 -->
+								<div class='club_introduce'><a>${list2.club_introduce}</a></div>
+							</div>
+						</c:if>
+					</div>
+				</c:if>
+				
+				<c:if test="${size >= 4}">
+					<div id='d4'>
+						<c:if test="${list3.clubPicture_newName != null}">
+							<div class='picture left'><a href="./clubMain?club_id=${ list3.club_id }"><img src="./resources/club-picture/${list3.clubPicture_newName}"/></a></div>
+						</c:if>
+						<c:if test="${list3.clubPicture_newName == null}">
+							<div class='picture left'><a href="./clubMain?club_id=${ list0.club_id }"><img src="./resources/club-picture/default.png"/></a></div>
+						</c:if>
+						
+						<c:if test="${list3.club_name != null}">
+							<div class="left text">
+								<div class='club_name'><a href="./clubMain?club_id=${ list3.club_id }">${list3.club_name}</a></div>
+								<div class='club_interest'><a>${list3.interest_interest}  |  ${list3.club_location} </a></div>
+								<div class='club_date'><a><i class="fa fa-user"></i> ${list3.club_memberCount} | since ${list3.club_date} </a></div><!-- 회원수 | 설립일 -->
+								<div class='club_introduce'><a>${list3.club_introduce}</a></div>
+							</div>
+						</c:if>
+					</div>
+				</c:if>
+				
+				<c:if test="${size >= 5}">
+					<div id='d5'>
+						<c:if test="${list4.clubPicture_newName != null}">
+							<div class='picture left'><a href="./clubMain?club_id=${ list4.club_id }"><img src="./resources/club-picture/${list4.clubPicture_newName}"/></a></div>
+						</c:if>
+						<c:if test="${list4.clubPicture_newName == null}">
+							<div class='picture left'><a href="./clubMain?club_id=${ list0.club_id }"><img src="./resources/club-picture/default.png"/></a></div>
+						</c:if>
+						
+						<c:if test="${list4.club_name != null}">
+							<div class="left text">
+								<div class='club_name'><a href="./clubMain?club_id=${ list4.club_id }">${list4.club_name}</a></div>
+								<div class='club_interest'><a>${list4.interest_interest}  |  ${list4.club_location} </a></div>
+								<div class='club_date'><a><i class="fa fa-user"></i> ${list4.club_memberCount} | since ${list4.club_date} </a></div><!-- 회원수 | 설립일 -->
+								<div class='club_introduce'><a>${list4.club_introduce}</a></div>
+							</div>
+						</c:if>
+					</div>
+				</c:if>
+				
+			</div>
+			<div class="right">
+				<i id="next" onclick="next()" class="fas fa-angle-right"></i>
+			</div>
+			
+		</div>
+	</c:if>		
 		
-		<c:if test="${list0.club_name != null}">
-			<div class='club_name'><a>${list0.club_name}</a></div>
-			<div class='club_interest'><a>${list0.interest_interest}  |  ${list0.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a><i class="fa fa-user"></i> ${list0.club_memberCount} 명  | <i class="fa fa-calendar"></i> since ${list0.club_date} </a></div><!-- 회원수 | 설립일 -->
-			<div class='club_introduce'><a>${list0.club_introduce}</a></div><!-- 소개 -->
-		</c:if>
-	</div>
-</c:if>		
-		
-		
-		
-<c:if test="${size >= 2}">		
-	<div id='d2'>
-		<c:if test="${list1.clubPicture_newName != null}">
-			<div class='picture' id='p2'><a><img id="img" src="./resources/club-picture/${list1.clubPicture_newName}"/></a></div>
-		</c:if>     
-		<c:if test="${list1.clubPicture_newName == null}">
-			<div class='picture' id='p2'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
-		</c:if>
-
-		<c:if test="${list1.club_name != null}">
-			<div class='club_name'><a>${list1.club_name}</a></div>
-			<div class='club_interest'><a>${list1.interest_interest}  |  ${list1.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a><i class="fa fa-user"></i> ${list1.club_memberCount} 명  | <i class="fa fa-calendar"></i> since ${list1.club_date} </a></div><!-- 회원수 | 설립일 -->
-			<div class='club_introduce'><a>${list1.club_introduce}</a></div><!-- 소개 -->
-		</c:if>
-	</div>
-</c:if>			
-		
-		
-		
-		
-<c:if test="${size >= 3}">			
-	<div id='d3'>
-		<c:if test="${list2.clubPicture_newName != null}">
-			<div class='picture' id='p3'><a><img id="img" src="./resources/club-picture/${list2.clubPicture_newName}"/></a></div>
-		</c:if>
-		<c:if test="${list2.clubPicture_newName == null}">
-			<div class='picture' id='p3'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
-		</c:if>
-
-		<c:if test="${list2.club_name != null}">
-			<div class='club_name'><a>${list2.club_name}</a></div>
-			<div class='club_interest'><a>${list2.interest_interest}  |  ${list2.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a><i class="fa fa-user"></i> ${list2.club_memberCount} 명  | <i class="fa fa-calendar"></i> since ${list2.club_date} </a></div><!-- 회원수 | 설립일 -->
-			<div class='club_introduce'><a>${list2.club_introduce}</a></div><!-- 소개 -->
-		</c:if>
-	</div>
-</c:if>		
-		
-		
-		
-
-<c:if test="${size >= 4}">				
-	<div id='d4'>
-		<c:if test="${list3.clubPicture_newName != null}">      
-			<div class='picture' id='p4'><a><img id="img" src="./resources/club-picture/${list3.clubPicture_newName}"/></a></div>
-		</c:if>
-		<c:if test="${list3.clubPicture_newName == null}">
-			<div class='picture' id='p4'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
-		</c:if>
-
-		<c:if test="${list3.club_name != null}">
-			<div class='club_name'><a>${list3.club_name}</a></div>
-			<div class='club_interest'><a>${list3.interest_interest}  |  ${list3.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a><i class="fa fa-user"></i> ${list3.club_memberCount} 명  | <i class="fa fa-calendar"></i> since ${list3.club_date} </a></div><!-- 회원수 | 설립일 -->
-			<div class='club_introduce'><a>${list3.club_introduce}</a></div><!-- 소개 -->
-		</c:if>
-	</div>
-</c:if>			
-		
-		
-		
-		
-<c:if test="${size >= 5}">			
-	<div id='d5'>
-		<c:if test="${list4.clubPicture_newName != null}">
-			<div class='picture' id='p5'><a><img id="img" src="./resources/club-picture/${list4.clubPicture_newName}"/></a></div>
-		</c:if>
-		<c:if test="${list4.clubPicture_newName == null}">
-			<div class='picture' id='p5'><a><img id="img" src="./resources/club-picture/default.png"/></a></div>
-		</c:if>
-
-		<c:if test="${list4.club_name != null}">
-			<div class='club_name'><a>${list4.club_name}</a></div>
-			<div class='club_interest'><a>${list4.interest_interest}  |  ${list4.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a><i class="fa fa-user"></i> ${list4.club_memberCount} 명  | <i class="fa fa-calendar"></i>  since ${list4.club_date} </a></div><!-- 회원수 | 설립일 -->
-			<div class='club_introduce'><a>${list4.club_introduce}</a></div><!-- 소개 -->
-		</c:if>
-	</div>
-</c:if>		
+	<!-- 인기동호회 3개 -->
+	<c:if test="${size2 >= 1}">
+		<div id="intContainer">
+			<div id='intTitle'>| 인기 동호회 |</div>
+			
+			<div class="interDiv" id='interDiv1'>
+				<c:if test="${inter.clubPicture_newName == null}">
+					<div class='intPicture' id='int1'>
+						<a href="./clubMain?club_id=${ inter.club_id }">
+							<img class="interImg" src="./resources/club-picture/default.png"/>
+						</a>
+					</div>
+				</c:if>
+				<c:if test="${inter.clubPicture_newName != null}">
+					<div class='intPicture' id='int1'>
+						<a href="./clubMain?club_id=${ inter.club_id }">
+							<img class="interImg" src="./resources/club-picture/${inter.clubPicture_newName}"/>
+						</a>
+					</div>
+				</c:if>
+				<div class="intText">
+					<div class="intText1" id='ip1'>
+						<a href="./clubMain?club_id=${ inter.club_id }">${inter.club_name}</a>
+					</div>
+					<div class="intText2" id='ipp1'>
+						${inter.interest_interest} | ${inter.club_location} | <i class="fa fa-user"></i> ${inter.club_memberCount}
+					</div>
+				</div>
+			</div>
+			
+			<c:if test="${size2 >= 2}">
+				<div class="interDiv" id='interDiv2'>
+					<c:if test="${inter2.clubPicture_newName == null}">
+						<div class='intPicture' id='int2'>
+							<a href="./clubMain?club_id=${ inter2.club_id }">
+								<img class="interImg" src="./resources/club-picture/default.png"/>
+							</a>
+						</div>
+					</c:if>
+					<c:if test="${inter2.clubPicture_newName != null}">
+						<div class='intPicture' id='int2'>
+							<a href="./clubMain?club_id=${ inter2.club_id }">
+								<img class="interImg" src="./resources/club-picture/${inter2.clubPicture_newName}"/>
+							</a>
+						</div>
+					</c:if>
+					<div class="intText">
+						<div class="intText1" id='ip2'>
+							<a href="./clubMain?club_id=${ inter2.club_id }">${inter2.club_name}</a>
+						</div>
+						<div class="intText2" id='ipp2'>
+							${inter2.interest_interest} | ${inter2.club_location} | <i class="fa fa-user"></i> ${inter2.club_memberCount}
+						</div>
+					</div>
+				</div>
+			</c:if>
+			
+			<c:if test="${size2 >= 3}">
+				<div class="interDiv" id='interDiv3'>
+					<c:if test="${inter3.clubPicture_newName == null}">
+						<div class='intPicture' id='int3'>
+							<a href="./clubMain?club_id=${ inter3.club_id }">
+								<img class="interImg" src="./resources/club-picture/default.png"/>
+							</a>
+						</div>
+					</c:if>
+					<c:if test="${inter3.clubPicture_newName != null}">
+						<div class='intPicture' id='int3'>
+							<a href="./clubMain?club_id=${ inter3.club_id }">
+								<img class="interImg" src="./resources/club-picture/${inter3.clubPicture_newName}"/>
+							</a>
+						</div>
+					</c:if>
+					<div class="intText">
+						<div class="intText1" id='ip3'>
+							<a href="./clubMain?club_id=${ inter3.club_id }">${inter3.club_name}</a>
+						</div>
+						<div class="intText2" id='ipp3'>
+							${inter3.interest_interest} | ${inter3.club_location} | <i class="fa fa-user"></i> ${inter3.club_memberCount}
+						</div>
+					</div>
+				</div>
+			</c:if>
+		</div>
+	</c:if>
 	
-<!-- 인기동호회 3개 -->
-<div id='intTitle'><a>인기동호회</a></div>
-
-<c:if test="${size2 == 0}">
-	<div class='club_default2'><a>동호회를 준비중입니다.</a></div>
-</c:if>
-
-<c:if test="${size2 >= 1}">
-<div id='interDiv1'></div>
-		<c:if test="${inter.clubPicture_newName == null}">
-			<div class='intPicture' id='int1'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
-		</c:if>
-		<c:if test="${inter.clubPicture_newName != null}">
-			<div class='intPicture' id='int1'><a><img class="interImg" src="./resources/club-picture/${inter.clubPicture_newName}"/></a></div>
-		</c:if>
-	<div id='ip1'><a>${inter.club_name}</a></div><!-- 이름 -->
-	<div id='ipp1'><a>회원수 : ${inter.club_memberCount}명</a></div>
-</c:if>
-
-<c:if test="${size2 >= 2}">
-<div id='interDiv2'></div>
-		<c:if test="${inter2.clubPicture_newName == null}">
-			<div class='intPicture' id='int2'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
-		</c:if>
-		<c:if test="${inter2.clubPicture_newName != null}">
-			<div class='intPicture' id='int2'><a><img class="interImg" src="./resources/club-picture/${inter2.clubPicture_newName}"/></a></div>	
-		</c:if>
-	<div id='ip2'><a>${inter2.club_name}</a></div><!-- 이름  -->
-	<div id='ipp2'><a>회원수 : ${inter2.club_memberCount}명</a></div>
-</c:if>
-
-<c:if test="${size2 == 3}">
-<div id='interDiv3'></div>
-		<c:if test="${inter3.clubPicture_newName == null}">
-			<div class='intPicture' id='int3'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
-		</c:if>
-		<c:if test="${inter3.clubPicture_newName != null}">
-			<div class='intPicture' id='int3'><a><img class="interImg" src="./resources/club-picture/${inter3.clubPicture_newName}"/></a></div>
-		</c:if>
-	<div id='ip3'><a>${inter3.club_name}</a></div><!-- 이름 -->
-	<div id='ipp3'><a>회원수 : ${inter3.club_memberCount}명</a></div>
-</c:if>   
-	
-	
-	
-	
-	
-	
-<!-- 맞춤동호회 3개  -->
-<c:if test="${userId != null}">
-
-<div id='bestTitle'><a>맞춤동호회</a></div>
-
-
-<c:if test="${size3 == 0}">
-	<div class='club_default3'><a>맞춤 동호회를 준비중입니다.</a></div>
-</c:if>
-
-<c:if test="${size3 >= 1}">
-<div id='bestDiv1'></div>
-<c:if test="${best1.clubPicture_newName == null}">
-	<div class='intPicture' id='bp1'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
-</c:if>
-<c:if test="${best1.clubPicture_newName != null}">
-<div class='intPicture' id='bp1'><a><img class="interImg" src="./resources/club-picture/${best1.clubPicture_newName}"/></a></div>
-</c:if>
-	<div id='b1'><a>${best1.club_name}</a></div><!-- 이름 -->
-	<div id='bb1'><a>회원수 : ${best1.club_memberCount}명</a></div>
-</c:if>
-
-<c:if test="${size3 >= 2}">
-<div id='bestDiv2'></div>
-<c:if test="${best2.clubPicture_newName == null}">
-	<div class='intPicture' id='bp2'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
-</c:if>
-<c:if test="${best2.clubPicture_newName != null}">
-<div class='intPicture' id='bp2'><a><img class="interImg" src="./resources/club-picture/${best2.clubPicture_newName}"/></a></div>
-</c:if>
-	<div id='b2'><a>${best2.club_name}</a></div><!-- 이름  -->
-	<div id='bb2'><a>회원수 : ${best2.club_memberCount}명</a></div>
-</c:if>
-
-<c:if test="${size3 >= 3}">
-<div id='bestDiv3'></div>
-<c:if test="${best3.clubPicture_newName == null}">
-	<div class='intPicture' id='bp3'><a><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
-</c:if>
-<c:if test="${best3.clubPicture_newName != null}">
-<div class='intPicture' id='bp3'><a><img class="interImg" src="./resources/club-picture/${best3.clubPicture_newName}"/></a></div>
-</c:if>
-	<div id='b3'><a>${best3.club_name}</a></div><!-- 이름 -->
-	<div id='bb3'><a>회원수 : ${best3.club_memberCount}명</a></div>
-</c:if>   
-
-</c:if>
-    
-		
-		
-    
-<input id="next" type="button" onclick="next()" value="▶">             
-<input id="back" type="button" onclick="back()" value="◀"> 
-
-
-<div id='gongbaeg'><a>공백ㅋ</a></div>            
+	<!-- 맞춤동호회 3개  -->
+	<c:if test="${size3 >= 1}">
+		<div id="bestContainer">
+			<div id='bestTitle'><a>| 맞춤 동호회 |</a></div>
+			
+			<div class="bestDiv" id='bestDiv1'>
+				<c:if test="${best1.clubPicture_newName == null}">
+					<div class='intPicture' id='bp1'><a href="./clubMain?club_id=${ best1.club_id }"><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+				</c:if>
+				<c:if test="${best1.clubPicture_newName != null}">
+					<div class='intPicture' id='bp1'><a href="./clubMain?club_id=${ best1.club_id }"><img class="interImg" src="./resources/club-picture/${best1.clubPicture_newName}"/></a></div>
+				</c:if>
+				<div class="intText">
+					<div class="intText1" id='b1'><a>${best1.club_name}</a></div><!-- 이름 -->
+					<div class="intText2" id='bb1'>
+						${best1.interest_interest} | ${best1.club_location} | <i class="fa fa-user"></i> ${best1.club_memberCount}
+					</div>
+				</div>
+			</div>
+			
+			<c:if test="${size3 >= 2}">
+				<div class="bestDiv" id='bestDiv2'>
+					<c:if test="${best2.clubPicture_newName == null}">
+						<div class='intPicture' id='bp1'><a href="./clubMain?club_id=${ best2.club_id }"><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+					</c:if>
+					<c:if test="${best2.clubPicture_newName != null}">
+						<div class='intPicture' id='bp1'><a href="./clubMain?club_id=${ best2.club_id }"><img class="interImg" src="./resources/club-picture/${best2.clubPicture_newName}"/></a></div>
+					</c:if>
+					<div class="intText">
+						<div class="intText1" id='b1'><a>${best2.club_name}</a></div><!-- 이름 -->
+						<div class="intText2" id='bb1'>
+							${best2.interest_interest} | ${best2.club_location} | <i class="fa fa-user"></i> ${best2.club_memberCount}
+						</div>
+					</div>
+				</div>
+			</c:if>
+			
+			<c:if test="${size3 >= 3}">
+				<div class="bestDiv" id='bestDiv3'>
+					<c:if test="${best3.clubPicture_newName == null}">
+						<div class='intPicture' id='bp1'><a href="./clubMain?club_id=${ best3.club_id }"><img class="interImg" src="./resources/club-picture/default.png"/></a></div>
+					</c:if>
+					<c:if test="${best3.clubPicture_newName != null}">
+						<div class='intPicture' id='bp1'><a href="./clubMain?club_id=${ best3.club_id }"><img class="interImg" src="./resources/club-picture/${best3.clubPicture_newName}"/></a></div>
+					</c:if>
+					<div class="intText">
+						<div class="intText1" id='b1'><a>${best3.club_name}</a></div><!-- 이름 -->
+						<div class="intText2" id='bb1'>
+							${best3.interest_interest} | ${best3.club_location} | <i class="fa fa-user"></i> ${best3.club_memberCount}
+						</div>
+					</div>
+				</div>
+			</c:if>
+		</div>
+	</c:if>
 </body>
 <script>
 
