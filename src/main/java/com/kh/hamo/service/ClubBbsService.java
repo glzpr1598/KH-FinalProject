@@ -347,6 +347,26 @@ public class ClubBbsService {
 		mav.setViewName(page);
 		return mav;
 	}
+	
+	//전체글보기 삭제
+		@Transactional
+		public void clubAllDelete(int clubBbs_id, String root) {
+			clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+			//글 아이디에 해당하는 파일 찾기
+			ArrayList<String> list = clubBbsInter.findFile(clubBbs_id);
+			for (String newFilename : list) {
+				String fullPath = root+"/resources/multiuploader/"+newFilename;
+				System.out.println("파일의 경로 : "+fullPath);
+				File file = new File(fullPath);
+				if(file.exists()) {//삭제할 파일이 존재 한다면
+					file.delete();//파일 삭제
+					logger.info("파일 삭제");
+				}else {
+					logger.info("이미 삭제된 사진");
+				}
+			}
+			clubBbsInter.clubDelete(clubBbs_id);
+		}
 		
 	/*************************************파일업로드***************************************/
 

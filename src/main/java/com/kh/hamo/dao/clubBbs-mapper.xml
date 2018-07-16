@@ -59,7 +59,7 @@
 	</delete>
 	
 	<!-- 파일 찾기 -->
-	<select id="findFile" resultType="String" parameterType="int">
+	<select id="findFile" resultType="String" parameterType="Integer">
 		SELECT clubBbsFile_newName FROM clubBbsFile WHERE clubBbs_id=#{param1}
 	</select>
 	

@@ -147,6 +147,16 @@ public class ClubBbsController {
 		return clubBbsService.clubAllUpdate(params,clubBbs_id,root);
 	}		
 	
+	//전체글보기 삭제
+	@RequestMapping(value = "/clubAllDelete")
+	public String clubAllDelete(@RequestParam HashMap<String, String> params,HttpSession session) {
+		logger.info("전체글보기 게시판 삭제");
+		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
+		String root = session.getServletContext().getRealPath("/");
+		clubBbsService.clubAllDelete(clubBbs_id,root);
+		return "redirect:/clubAllList?club_id="+params.get("club_id");
+	}
+	
 	
 	/*************************************파일업로드***************************************/
 	
