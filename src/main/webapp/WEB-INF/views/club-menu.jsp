@@ -98,7 +98,7 @@
 			
 			<div>
 				<img id="list2" src="./resources/image/list.png" />
-				<a id="menu2" href="./clubNoticeList=<%= request.getParameter("club_id") %>&sort=notice">공지사항</a>
+				<a id="menu2" href="./clubNoticeList?club_id=<%= request.getParameter("club_id") %>&sort=notice">공지사항</a>
 			</div>
 			
 			<div>

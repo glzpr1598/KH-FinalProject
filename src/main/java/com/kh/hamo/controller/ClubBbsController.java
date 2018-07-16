@@ -131,6 +131,22 @@ public class ClubBbsController {
 		return clubBbsService.clubAllDetail(clubBbs_id);
 	}
 	
+	//전체글보기 수정 폼
+	@RequestMapping(value = "/clubAllUpdateForm")
+	public ModelAndView clubAllUpdateForm(@RequestParam HashMap<String, String> params) {
+		logger.info("전체글보기 게시판 수정 폼");
+		return clubBbsService.clubAllUpdateForm(params);
+	}
+	
+	//전체글보기 수정
+	@RequestMapping(value = "/clubAllUpdate")
+	public ModelAndView clubAllUpdate(@RequestParam HashMap<String, String> params,HttpSession session) {
+		logger.info("전체글보기 게시판 수정");
+		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubAllUpdate(params,clubBbs_id,root);
+	}		
+	
 	
 	/*************************************파일업로드***************************************/
 	

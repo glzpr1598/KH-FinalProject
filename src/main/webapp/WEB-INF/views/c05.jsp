@@ -13,9 +13,7 @@
 		background-color: #FDF5DC;
 	}
 	#table{
-		position: absolute;
-		left: 560px;
-		width: 500px;
+		margin-top: 2%;
 	}
 	table,tr,td,tr {
 		border-collapse: collapse;
@@ -23,9 +21,7 @@
 		height: 50px;
 	}
 	#title{
-	position: absolute;
-	left: 560px;
-	top: 345px;
+	margin-left:0.5%;
 	font-weight: 600;
 	font-size: large;
 	}
