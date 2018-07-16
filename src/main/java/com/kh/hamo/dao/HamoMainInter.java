@@ -34,4 +34,5 @@ public interface HamoMainInter {
 	ArrayList<HamoMainDTO> bestClub(String location, int best1, int best2, int best3);
 
 
+
 }

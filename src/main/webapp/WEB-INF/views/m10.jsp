@@ -392,8 +392,6 @@
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
 		obj.dataType = "JSON";
-		
-		
 		$(document).ready(function(){
 			obj.url="./clubSearch?interest=전체&location=전체";
 			obj.success = function(data){
