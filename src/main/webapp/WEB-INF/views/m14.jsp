@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--****자유게시판 글 상세보기 jsp  ****-->
 <html>
 <head>
@@ -8,108 +8,124 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <style>
-	#right {
-		width: 800px;
-		float: left;
-		margin-left: 20px;
-	}
-	#member{
-		font-weight: 800;
-	}
-	input[type='button']{
-		border:none;
-	 	background-color:#FFBF00 ;
-	 	color: white;
-		margin:4px;
-		padding:12px;
-		cursor: pointer;
-	}
-	#content{
-		width:600px;
-		height:250px;
-		background-color: transparent;
-		resize: none;
-		border-color: #FFBF00;
-		border-width: 1px;
-		border-style: solid;
-	}
-	#file{
-		width:600px;
-		height:30px;
-		border:1px solid #FFBF00;
-		margin-top:-15px;
-	}
-	#reply_div1{
-		width:600px;
-		background-color:#FDCD8C;
-		margin-top:-12px;
-		border-bottom:1px solid #646464;
-		position: relative;
-	}
-	.reply_del{
-		position: absolute;
-		right:0px;
-	}
-	#reply_div2{
-		width:600px;
-		height:47px;
-		margin-top:5px;
-	}
-	#reply_input{
-		width:500px;
-		height:47px;
-		border:1px solid #FFBF00;
-	}
-	h4{
-		margin-top:7px;
-	}
-	#menu #freeBbs{
-		font-weight: 900;
-		color:black;
-	}
-	#btn{
-		margin-left: 430px;
-		margin-top:25px;
-	}
-	#reply_rigist{
-		border:1px solid #FFBF00;
-		color:black;
-	 	background-color: white;
-	}
-	span{
-		padding: 5px;
-	}
-	a{
-		cursor: pointer;
-	}
+#right {
+	width: 800px;
+	float: left;
+	margin-left: 20px;
+}
+
+#member {
+	font-weight: 800;
+}
+
+input[type='button'] {
+	border: none;
+	background-color: #FFBF00;
+	color: white;
+	margin: 4px;
+	padding: 12px;
+	cursor: pointer;
+}
+
+#content {
+	width: 600px;
+	height: 250px;
+	background-color: transparent;
+	resize: none;
+	border-color: #FFBF00;
+	border-width: 1px;
+	border-style: solid;
+}
+
+#file {
+	width: 600px;
+	height: 30px;
+	border: 1px solid #FFBF00;
+	margin-top: -15px;
+}
+
+#reply_div1 {
+	width: 600px;
+	background-color: #FDCD8C;
+	margin-top: -12px;
+	border-bottom: 1px solid #646464;
+	position: relative;
+}
+
+.reply_del {
+	position: absolute;
+	right: 0px;
+}
+
+#reply_div2 {
+	width: 600px;
+	height: 47px;
+	margin-top: 5px;
+}
+
+#reply_input {
+	width: 500px;
+	height: 47px;
+	border: 1px solid #FFBF00;
+}
+
+h4 {
+	margin-top: 7px;
+}
+
+#menu #freeBbs {
+	font-weight: 900;
+	color: black;
+}
+
+#btn {
+	margin-left: 430px;
+	margin-top: 25px;
+}
+
+#reply_rigist {
+	border: 1px solid #FFBF00;
+	color: black;
+	background-color: white;
+}
+
+span {
+	padding: 5px;
+}
+
+a {
+	cursor: pointer;
+}
 </style>
 <body>
-	<%@ include file="./main-header.jsp" %>
+	<%@ include file="./main-header.jsp"%>
 	<div id="container">
-		<%@ include file="./main-community_menu.jsp" %>
+		<%@ include file="./main-community_menu.jsp"%>
 		<div id="right">
-		 	<div id="title">| 자유게시판 |</div>
-		    <h2>${detail.mainBbs_subject }</h2>
-		   	<div> <span id="member">${detail.member_id }</span> | 조회수 : ${detail.mainBbs_hit } | ${detail.mainBbs_date }</div>
-		    <div id="content">
-		    	${detail.mainBbs_content }
-		    </div>
-		    <h4>첨부파일</h4>
-		    <div id="file">
-		    	dd
-		    </div>
-		    <h4 id="reply_count"> 댓글 ${detail.mainBbs_replyCount}</h4>
-		   	<div id="reply_div1">
+			<div id="title">| 자유게시판 |</div>
+			<h2>${detail.mainBbs_subject }</h2>
+			<div>
+				<span id="member">${detail.member_id }</span> | 조회수 :
+				${detail.mainBbs_hit } | ${detail.mainBbs_date }
 			</div>
+			<div id="content">${detail.mainBbs_content }</div>
+			<h4>첨부파일</h4>
+			<div id="file">
+				<!-- 상세보기 컨트롤러에서 file 리스트 조회 -->
+				<%--  	${detail. }  --%>
+			</div>
+			<h4 id="reply_count">댓글 ${detail.mainBbs_replyCount}</h4>
+			<div id="reply_div1"></div>
 			<div id="reply_div2">
-				<input id="reply_input" type="text" value="">
-				<input id="reply_rigist" type="button" value="등록" style="width:75px; height:47px;" >
+				<input id="reply_input" type="text" value=""> <input
+					id="reply_rigist" type="button" value="등록"
+					style="width: 75px; height: 47px;">
 			</div>
 			<div id="btn">
-			   	<input id="freeBbsDelete" type="hidden" value="삭제">
-				<input id="freeBbsUpdateForm" type="hidden" value="수정">
-				<input id="freeBbsList" type="button" value="목록">
-		    </div>
+				<input id="freeBbsDelete" type="hidden" value="삭제"> <input
+					id="freeBbsUpdateForm" type="hidden" value="수정"> <input
+					id="freeBbsList" type="button" value="목록">
+			</div>
 		</div>
 	</div>
 </body>
@@ -119,7 +135,6 @@
 	$(document).ready(function(){
 		//로그인 회원 id 와 글작성 회원 id 를 비교 해서 버튼 활성화 여부 
 		if("${sessionScope.userId}" == "${detail.member_id }"){
-			console.log("ㅇㅇㅇ");
 			$("#freeBbsDelete").attr("type","button");
 			$("#freeBbsUpdateForm").attr("type","button");
 		}
@@ -159,41 +174,44 @@
 	$("#reply_rigist").click(function(){
 		console.log("댓글 등록 버튼 클릭!!");
 		var reply = $("#reply_input").val()
-		if(confirm("댓글을 등록하시겠습니까?")){
-			if(reply!=""){
-				$.ajax({
-					url:"./freeBbsReply",
-					type:"GET",
-					data:{
-					"mainBbs_id":"${detail.mainBbs_id }",
-					"member_id":"<%= session.getAttribute("userId")%>",  //추후 개발시 세션에서 가져온 id
-					"mainBbsReply_content":reply,
-					},
-					dataType:"JSON",
-					
-					success:function(data){
-						var date = new Date(data.reply.mainBbsReply_date);
-						var reply_date=date.toJSON().substring(0,10);
-						//댓글 입력창 초기화
-						$("#reply_input").val("");
-						//댓글 개수 update
-						$("#reply_count").html("댓글 "+data.reply.mainBbs_replyCount);
-						var reply_add = "";
-						reply_add+="<div>"
-						reply_add+="<span>"+data.reply.member_id+"</span>"
-						reply_add+="<span>"+data.reply.mainBbsReply_date+"</span>"
-						reply_add+="<span><a id='"+data.reply.mainBbsReply_id+"' class='reply_del' href='#'>삭제</a></span><br/>"
-						reply_add+="<span>"+data.reply.mainBbsReply_content+"</span>"
-						reply_add+="</div>"
-						$("#reply_div1").append(reply_add);
-					},
-					error:function(error){}
-				});
-			}else{
-				alert("댓글을 입력해주세요");
+		if(<%=request.getAttribute("userId")%> !=null){	
+			if(confirm("댓글을 등록하시겠습니까?")){	
+					if(reply!=""){
+						$.ajax({
+							url:"./freeBbsReply",
+							type:"GET",
+							data:{
+							"mainBbs_id":"${detail.mainBbs_id }",
+							"member_id":"<%= session.getAttribute("userId")%>",  // 세션에서 가져온 id
+							"mainBbsReply_content":reply,
+							},
+							dataType:"JSON",
+							
+							success:function(data){
+								var date = new Date(data.reply.mainBbsReply_date);
+								var reply_date=date.toJSON().substring(0,10);
+								//댓글 입력창 초기화
+								$("#reply_input").val("");
+								//댓글 개수 update
+								$("#reply_count").html("댓글 "+data.reply.mainBbs_replyCount);
+								var reply_add = "";
+								reply_add+="<div>"
+								reply_add+="<span>"+data.reply.member_id+"</span>"
+								reply_add+="<span>"+data.reply.mainBbsReply_date+"</span>"
+								reply_add+="<span><a id='"+data.reply.mainBbsReply_id+"' class='reply_del' href='#'>삭제</a></span><br/>"
+								reply_add+="<span>"+data.reply.mainBbsReply_content+"</span>"
+								reply_add+="</div>"
+								$("#reply_div1").append(reply_add);
+							},
+							error:function(error){}
+						});
+					}else{
+						alert("댓글을 입력해주세요");
+					}
+				}
+			}else{ //session
+				alert("로그인 후에 댓글 등록이 가능합니다.");
 			}
-
-		}
 	});
 	//댓글 삭제 버튼 클릭 시 (동적 HTML 태그는 on 이벤트로  발생시켜야함!)
 	$(document).on("click",".reply_del",function(){

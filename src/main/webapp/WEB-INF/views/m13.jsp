@@ -8,7 +8,7 @@
 <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" 
-	src="<%=request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+	src="<%=request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
 	input[type='button']{
@@ -55,11 +55,6 @@
 	</div>
 </body>
 <script>
-$(document).ready(function(){
-	console.log(document.frm.content);
-});
-
-
 
 $(function(){
     //전역변수선언
@@ -68,7 +63,7 @@ $(function(){
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: editor_object,
         elPlaceHolder: "smarteditor",
-        sSkinURI: "<%=request.getContextPath() %>/smarteditor/SmartEditor2Skin.html ",
+        sSkinURI: "<%=request.getContextPath() %>/resources/smarteditor/SmartEditor2Skin.html ",
         htParams : {
             // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
             bUseToolbar : true,            
@@ -88,18 +83,22 @@ $(function(){
          //폼 submit
          	console.log("subject: "+$("#subject").val());
          	console.log("content: "+$("#smarteditor").val());
-         	if($("#subject").val()==""){
-         		alert("제목을 입력 해 주세요.");
-         	}else if($("#smarteditor").val()=="<p>&nbsp;</p>" || $("#smarteditor").val()==""){
-         		alert("내용을 입력 해 주세요.");
+         	if( ${sessionScope.userId} !=null){     	
+	         	if($("#subject").val()==""){
+	         		alert("제목을 입력 해 주세요.");
+	         	}else if($("#smarteditor").val()=="<p>&nbsp;</p>" || $("#smarteditor").val()==""){
+	         		alert("내용을 입력 해 주세요.");
+	         	}else{
+	         		console.log($("#smarteditor").val());
+	         		//글쓰기 내용 입력 제한
+	         		if($("#smarteditor").val().length > 2000){
+	         			alert("최대 2000자 까지 입력 가능합니다");
+	         		}else{
+	         			$("#frm").submit();	
+	         		}
+	         	}
          	}else{
-         		console.log($("#smarteditor").val());
-         		//글쓰기 내용 입력 제한
-         		if($("#smarteditor").val().length > 2000){
-         			alert("최대 2000자 까지 입력 가능합니다");
-         		}else{
-         			$("#frm").submit();	
-         		}
+         		alert("접속 시간이 만료되어 다시 로그인 후에 이용가능합니다.");
          	}
      });
      

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" 
-	src="<%=request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+	src="<%=request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
 	#right {
@@ -63,7 +63,8 @@
 			    <input type="hidden" name="idx" value="${detail.mainBbs_id}">
 			    <h4>첨부파일</h4>
 			    <div id="file">
-			    	dd
+			    <!-- 상세보기 컨트롤러에서 file 리스트 조회 -->
+			   <%--  	${detail. }  --%>
 			    </div>
 				    <input type="button" id="cancelbutton" value="취소" />
 				    <input type="button" id="savebutton" value="저장" />
@@ -86,7 +87,7 @@ $(function(){
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: editor_object,
         elPlaceHolder: "smarteditor",
-        sSkinURI: "<%=request.getContextPath() %>/smarteditor/SmartEditor2Skin.html ",
+        sSkinURI: "<%=request.getContextPath() %>/resources/smarteditor/SmartEditor2Skin.html ",
         htParams : {
             // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
             bUseToolbar : true,            

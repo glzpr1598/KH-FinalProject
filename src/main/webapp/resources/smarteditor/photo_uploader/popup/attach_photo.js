@@ -340,6 +340,8 @@
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
     		tempFile = htImageInfo['img'+j];
+    		console.log("tempFile : : : "+tempFile);
+    		console.log(tempFile);
     		try{
 	    		if(!!tempFile){
 	    			//Ajax통신하는 부분. 파일과 업로더할 url을 전달한다.

@@ -97,19 +97,13 @@ public class HamoComunityController {
 	@RequestMapping(value = "/freeBbsWrite")
 	public String freeBbsWrite(@RequestParam HashMap<String, String>map,HttpSession session) {
 		logger.info("글쓰기 요청");
-		int mainBbs_id =0;
-		//기본적으로 글쓰기 성공 후 해당 게시글 상세보기 요청
-		String result = "redirect:/freeBbsdetail?idx="+mainBbs_id+"&updateAfter=0";
+		logger.info("content: "+map.get("content"));
+		//글쓰기 요청 한 회원 id 를 map에 담아줌 . why ? 어떤 회원이 글쓰기를 하였는지 확인하기위해
+		map.put("userId", (String)session.getAttribute("userId"));
 		
-		//글쓰기 하는 회원의 id 를 map에 저장(글쓰기 창에서 세션 만료시 에러발생 방지 위해)
-		if(session.getAttribute("userId") !=null) {
-			map.put("userId", (String) session.getAttribute("userId"));
-			mainBbs_id = hamoFreeBbsService.freeBbsWrite(map);
-		}else {
-			//글쓰기 창에서 세션 만료되었는데 글쓰기 요청을 할 경우 에러발생 방지위해 return 값을 게시글 리스트로
-			logger.info("접속시간이 만료되어 글쓰기 요청이 불가합니다");
-			result ="redirect:/freeBbsList"; 
-		}
+		//기본적으로 글쓰기 성공 후 해당 게시글 상세보기 요청
+		int mainBbs_id = hamoFreeBbsService.freeBbsWrite(map);
+		String result = "redirect:/freeBbsdetail?idx="+mainBbs_id+"&updateAfter=0";
 		return result;
 	}
 	// 글 삭제 후 게시글 리스트로 이동
@@ -168,7 +162,7 @@ public class HamoComunityController {
 	         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
 	         logger.info("파일 기본 경로 : "+dftFilePath);
 	         //파일 기본경로 _ 상세경로
-	         String filePath = dftFilePath + "resource" + File.separator + "photo_upload" + File.separator;
+	         String filePath = dftFilePath + "resources" + File.separator + "photo_upload" + File.separator;
 	         logger.info("상세 경로 : "+filePath);
 	         File file = new File(filePath);
 	         if(!file.exists()) {
@@ -197,7 +191,7 @@ public class HamoComunityController {
 	         sFileInfo += "&bNewLine=true";
 	         // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 	         sFileInfo += "&sFileName="+ filename;
-	         sFileInfo += "&sFileURL="+"/resource/photo_upload/"+realFileNm;
+	         sFileInfo += "&sFileURL="+"/controller/resources/photo_upload/"+realFileNm;
 	         logger.info("sFileInfo: :  "+sFileInfo);
 	         PrintWriter print = response.getWriter();
 	         print.print(sFileInfo);
@@ -206,8 +200,6 @@ public class HamoComunityController {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	  
-	    
 	}
 	
 	
