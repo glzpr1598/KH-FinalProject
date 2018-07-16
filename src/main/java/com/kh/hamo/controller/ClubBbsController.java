@@ -2,6 +2,8 @@ package com.kh.hamo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -69,6 +71,68 @@ public class ClubBbsController {
 		return clubBbsService.clubNoticeDetail(params);
 	}
 	
+	//공지사항 글쓰기
+	@RequestMapping(value="/clubNoticeWrite")
+	public ModelAndView clubNoticeWrite(@RequestParam HashMap<String, String> params, HttpSession session) {
+		logger.info("공지사항 글쓰기 호출");
+		String member_id = (String) session.getAttribute("userId");
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubNoticeWrite(params,member_id,root);
+	}
+	
+	//공지사항 게시글 수정 폼
+	@RequestMapping(value="/clubNoticeUpdateForm")
+	public ModelAndView clubNoticeUpdateForm(@RequestParam("clubBbs_id") String clubBbs_id,HttpSession session) throws Exception {
+		logger.info("공지사항 게시글 수정폼");
+		return clubBbsService.clubNoticeUpdateForm(clubBbs_id);
+	}	
+	
+	//공지사항 게시글 수정
+	@RequestMapping(value="/clubNoticeUpdate")
+	public ModelAndView clubNoticeUpdate(@RequestParam HashMap<String, String> params) throws Exception {
+		logger.info("공지사항 게시글 수정");
+		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
+		return clubBbsService.clubNoticeUpdate(params,clubBbs_id);
+	}
+	
+	//공지사항 게시글 삭제 
+	@RequestMapping(value="/clubNoticeDelete")
+	public String clubNoticeDelete(@RequestParam HashMap<String, String> params,HttpSession session) throws Exception {
+		logger.info("공지사항 게시글 삭제");
+		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
+		String root = session.getServletContext().getRealPath("/");
+		clubBbsService.clubNoticeDelete(clubBbs_id,root);
+		
+		return "redirect:/clubNoticeList?club_id="+params.get("club_id")+"&sort=notice";
+	}
+	
+	
+	/*************************************전체글보기***************************************/
+	
+	//전체글보기 리스트 페이지 
+	@RequestMapping(value="/clubAllList")
+	public String clubAllListForm() {
+		logger.info("전체글보기 리스트 폼");
+		return "c02";
+	}
+	
+	//전체글보기 리스트 보기
+	@RequestMapping(value = "/clubAllListForm")
+	public @ResponseBody HashMap<String, Object> clubAllListForm(@RequestParam("club_id") String club_id) {
+		logger.info("전체글보기 게시판 리스트");
+		return clubBbsService.clubAllList(club_id);
+	}
+	
+	
+	/*************************************파일업로드***************************************/
+	
+	//파일업로드
+	@RequestMapping(value="/file_uploader_html5.do")
+	public void file_uploader_html5(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("파일 업로드 요청");
+		clubBbsService.clubFileUpload(request,response);
+	}
+	
 	/*************************************댓글***************************************/
 	
 	//댓글 리스트
@@ -82,7 +146,7 @@ public class ClubBbsController {
 	@RequestMapping(value="/clubReply")
 	public @ResponseBody HashMap<String, Object>  clubReply(@RequestParam HashMap<String, String> params,HttpSession session) {
 		logger.info("댓글 작성");
-		String member_id = (String)session.getAttribute("member_id");
+		String member_id = (String)session.getAttribute("userId");
 		return clubBbsService.clubReply(params,member_id);
 	}
 	

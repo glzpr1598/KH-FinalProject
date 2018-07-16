@@ -49,9 +49,23 @@ public class ClubMeetingPlanService {
 		String meetingPlan_when = (String) list.get("day");
 		String meetingPlan_money = (String) list.get("money");
 		String meetingPlan_content = (String) list.get("content");
-		inter.clubMeetingWrite(
-				Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
-				meetingPlan_when,meetingPlan_money,meetingPlan_content);
+		
+		int meetingCount = inter.clubMeetingCount(club_id);
+		if(meetingCount == 0) {
+			inter.clubMeetingWriteFirst(Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
+					meetingPlan_when,meetingPlan_money,meetingPlan_content);
+		} else {
+			inter.clubMeetingWrite(
+					Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
+					meetingPlan_when,meetingPlan_money,meetingPlan_content);
+		}
+	}
+	//모임 일정 상세보기 
+	public ModelAndView clubMeetingDetail(String meetingPlan_id) {
+		logger.info("모임 일정 상세보기  서비스");
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		ArrayList<ClubMeetingDTO> clubMeetingDetail = inter.clubMeetingDetail(Integer.parseInt(meetingPlan_id));
+		return null;
 	}
 
 }

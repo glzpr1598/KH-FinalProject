@@ -24,6 +24,55 @@
 		SELECT cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
 	</select>
 	
+	<!-- 게시글 수 가져오기 -->
+	<select id="findCount" resultType="Integer" parameterType="Integer">
+		SELECT COUNT(*) FROM clubBbs WHERE club_id=#{param1}
+	</select>
+	
+	<!-- 최근 게시글 글번호 조회 -->
+	<select id="findIdx" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT clubBbs_idx FROM clubBbs WHERE club_id=#{param1} ORDER BY clubBbs_idx DESC
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="clubWrite" parameterType="com.kh.hamo.dto.ClubBbsDTO" useGeneratedKeys="true" keyProperty="clubBbs_id" keyColumn="clubBbs_id">
+		INSERT INTO clubBbs(clubBbs_id, club_id, member_id,clubBbs_sort, clubBbs_idx,clubBbs_subject,clubBbs_date, clubBbs_content,clubBbs_replyCount, clubBbs_hit) 
+		VALUES(seq_clubbbs_id.NEXTVAL, #{club_id}, #{member_id},#{clubBbs_sort},#{clubBbs_idx},#{clubBbs_subject},SYSDATE,#{clubBbs_content},0,0)
+	</insert>
+	<insert id="writeFile">
+		INSERT INTO clubBbsFile VALUES (seq_clubbbsfile_id.NEXTVAL,#{param3},#{param2},#{param1})
+	</insert>
+	
+	<!-- 수정 폼 -->
+	<select id="clubUpdateForm" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT club_id,clubBbs_subject, clubBbs_content,clubBbs_id FROM clubBbs WHERE clubBbs_id=#{param1}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="clubUpdate" parameterType="com.kh.hamo.dto.ClubBbsDTO">
+		UPDATE clubBbs SET clubBbs_subject=#{clubBbs_subject},clubBbs_content=#{clubBbs_content} WHERE clubBbs_id=#{clubBbs_id}
+	</update>
+	
+	<!-- 파일 삭제 -->
+	<delete id="fileDelete">
+		DELETE FROM clubBbsFile WHERE clubBbsFile_newName=#{param1}
+	</delete>
+	
+	<!-- 파일 찾기 -->
+	<select id="findFile" resultType="String" parameterType="int">
+		SELECT clubBbsFile_newName FROM clubBbsFile WHERE clubBbs_id=#{param1}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="clubDelete">
+		DELETE FROM clubBbs WHERE clubBbs_id=#{param1}
+	</delete>
+	
+	<!-- 전체글보기 리스트 -->
+	<select id="clubAllList" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT cb.club_id, cb.clubBbs_sort, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, cj.clubJoin_nickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN clubJoin cj ON cj.member_id = cb.member_id WHERE cb.club_id=#{param1} ORDER BY cb.clubBbs_id DESC
+	</select>
+	
 	<!-- 댓글 수 조회 -->
 	<select id="findReply" resultType="com.kh.hamo.dto.ClubBbsDTO">
 		SELECT clubBbs_replyCount FROM clubBbs WHERE clubBbs_id=#{param1}

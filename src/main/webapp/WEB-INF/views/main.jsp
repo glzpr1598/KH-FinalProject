@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" href="./resources/image/icon-32.png" />
 <title>HAMO</title>
@@ -105,7 +106,7 @@
 		<c:if test="${list0.club_name != null}">
 			<div class='club_name'><a>${list0.club_name}</a></div>
 			<div class='club_interest'><a>${list0.interest_interest}  |  ${list0.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a>${list0.club_memberCount} 명  |  SINCE ${list0.club_date} </a></div><!-- 회원수 | 설립일 -->
+			<div class='club_date'><a><i class="fa fa-user"></i> ${list0.club_memberCount} 명  | <i class="fa fa-calendar"></i> since ${list0.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list0.club_introduce}</a></div><!-- 소개 -->
 		</c:if>
 	</div>
@@ -125,7 +126,7 @@
 		<c:if test="${list1.club_name != null}">
 			<div class='club_name'><a>${list1.club_name}</a></div>
 			<div class='club_interest'><a>${list1.interest_interest}  |  ${list1.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a>${list1.club_memberCount} 명  |  SINCE ${list1.club_date} </a></div><!-- 회원수 | 설립일 -->
+			<div class='club_date'><a><i class="fa fa-user"></i> ${list1.club_memberCount} 명  | <i class="fa fa-calendar"></i> since ${list1.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list1.club_introduce}</a></div><!-- 소개 -->
 		</c:if>
 	</div>
@@ -146,7 +147,7 @@
 		<c:if test="${list2.club_name != null}">
 			<div class='club_name'><a>${list2.club_name}</a></div>
 			<div class='club_interest'><a>${list2.interest_interest}  |  ${list2.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a>${list2.club_memberCount} 명  |  SINCE ${list2.club_date} </a></div><!-- 회원수 | 설립일 -->
+			<div class='club_date'><a><i class="fa fa-user"></i> ${list2.club_memberCount} 명  | <i class="fa fa-calendar"></i> since ${list2.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list2.club_introduce}</a></div><!-- 소개 -->
 		</c:if>
 	</div>
@@ -167,7 +168,7 @@
 		<c:if test="${list3.club_name != null}">
 			<div class='club_name'><a>${list3.club_name}</a></div>
 			<div class='club_interest'><a>${list3.interest_interest}  |  ${list3.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a>${list3.club_memberCount} 명  |  SINCE ${list3.club_date} </a></div><!-- 회원수 | 설립일 -->
+			<div class='club_date'><a><i class="fa fa-user"></i> ${list3.club_memberCount} 명  | <i class="fa fa-calendar"></i> since ${list3.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list3.club_introduce}</a></div><!-- 소개 -->
 		</c:if>
 	</div>
@@ -188,7 +189,7 @@
 		<c:if test="${list4.club_name != null}">
 			<div class='club_name'><a>${list4.club_name}</a></div>
 			<div class='club_interest'><a>${list4.interest_interest}  |  ${list4.club_location} </a></div><!-- 주제 | 지역 -->
-			<div class='club_date'><a>${list4.club_memberCount} 명  |  SINCE ${list4.club_date} </a></div><!-- 회원수 | 설립일 -->
+			<div class='club_date'><a><i class="fa fa-user"></i> ${list4.club_memberCount} 명  | <i class="fa fa-calendar"></i>  since ${list4.club_date} </a></div><!-- 회원수 | 설립일 -->
 			<div class='club_introduce'><a>${list4.club_introduce}</a></div><!-- 소개 -->
 		</c:if>
 	</div>

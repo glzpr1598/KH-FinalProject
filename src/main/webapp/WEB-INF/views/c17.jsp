@@ -32,7 +32,14 @@
 			font-size: 14px;
 			cursor: pointer;
 		}
-	
+		#add{
+			position: relative;
+			left: 172px;
+		}
+		a{
+			color: black;
+			text-decoration: none;
+		}
 	</style>
 
 	</head>
@@ -47,6 +54,7 @@
 			<table id="listTable">
 				<thead>
 					<tr>
+						<th>글번호</th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
@@ -91,7 +99,8 @@
 			var content ="";
 			list.forEach(function(item, idx){
 				content +="<tr>";
-				content +="<td><a href='#'>"+item.meetingPlan_subject+"</a></td>";
+				content +="<td>"+item.meetingPlan_idx+"</td>";
+				content +="<td><a href='clubMeetingDetail?club_id="+<%= request.getParameter("club_id") %>+"&meetingPlan_id="+item.meetingPlan_id+"'>"+item.meetingPlan_subject+"</a></td>";
 				content +="<td>"+item.clubJoin_nickname+"</td>";
 				content +="<td>"+item.meetingPlan_date+"</td>";
 				content +="<td>"+item.meetingPlan_when+"</td>";

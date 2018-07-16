@@ -14,4 +14,15 @@ public interface ClubMeetingPlanInter {
 			Object meetingPlan_locationX, Object meetingPlan_locationY, Object meetingPlan_when,
 			Object meetingPlan_money, Object meetingPlan_content);//모임 일정 등록
 
+
+	int clubMeetingCount(String club_id);
+
+
+	void clubMeetingWriteFirst(int parseInt, String member_id, String meetingPlan_subject, String meetingPlan_locationX,
+			String meetingPlan_locationY, String meetingPlan_when, String meetingPlan_money,
+			String meetingPlan_content);
+
+
+	ArrayList<ClubMeetingDTO> clubMeetingDetail(int parseInt);//모임 일정 상세보기 
+
 }
