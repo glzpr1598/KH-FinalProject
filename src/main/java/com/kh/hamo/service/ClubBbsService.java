@@ -150,9 +150,22 @@ public class ClubBbsService {
 	
 	//공지사항 수정
 	@Transactional
-	public ModelAndView clubNoticeUpdate(HashMap<String, String> params, int clubBbs_id) {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView clubNoticeUpdate(HashMap<String, String> params, int clubBbs_id, String root) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<String> list2 = new ArrayList<String>();
+		ArrayList<String> list = clubBbsInter.findFile(clubBbs_id);
+		
+		int count = Integer.parseInt(params.get("count"));
+		logger.info("textarea 파일 수 : "+count);
+		
+		for(int i=0;i<count;i++) {
+			String file= params.get("filePath"+i);
+			list2.add(file);
+			logger.info("파일list : "+list2.get(i));
+		}
+		
 		ClubBbsDTO dto = new ClubBbsDTO();
 		dto.setClubBbs_subject(params.get("subject"));
 		dto.setClubBbs_content(params.get("editor"));
@@ -164,8 +177,43 @@ public class ClubBbsService {
 		}
 		if(fileList.size() > 0) {
 			for (String key : fileList.keySet()) {
-				clubBbsInter.fileDelete(key);
-				clubBbsInter.writeFile(key, fileList.get(key), clubBbs_id);
+				int result = 0;
+				for(String fileName:list2) {
+					if(key.equals(fileName)) {
+						result = clubBbsInter.writeFile(key,fileList.get(key),dto.getClubBbs_id());
+					}
+				}
+				if(result < 1) {
+					String fullPath = root+"resources/multiuploader/"+key;
+					File file = new File(fullPath);
+					if(file.exists()) {//삭제할 파일이 존재 한다면
+						file.delete();//파일 삭제
+						logger.info("파일 삭제");
+					}else {
+						logger.info("이미 삭제된 사진");
+					}
+				}
+				
+				logger.info("파일 작성 : "+success);
+			}
+		}
+		for(String fileName : list) {
+			int result = 0;
+			for(String textArea : list2) {
+				if(fileName.equals(textArea)) {
+					result++;
+				}
+			}
+			if(result <1) {
+				String fullPath = root+"resources/multiuploader/"+fileName;
+				File file = new File(fullPath);
+				if(file.exists()) {//삭제할 파일이 존재 한다면
+					file.delete();//파일 삭제
+					logger.info("파일 삭제");
+				}else {
+					logger.info("이미 삭제된 사진");
+				}
+				clubBbsInter.fileDelete(fileName);
 			}
 		}
 		fileList.clear();
@@ -198,10 +246,23 @@ public class ClubBbsService {
 	//전제글보기 리스트
 	public HashMap<String, Object> clubAllList(String club_id) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubAllList(club_id);
 		map.put("list", list);
 		return map;
+	}
+	
+	//전체글보기 상세보기
+	@Transactional
+	public ModelAndView clubAllDetail(String clubBbs_id) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		//조회수 올리기
+		clubBbsInter.clubBbsHit(clubBbs_id);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("info", clubBbsInter.clubBoardDetail(clubBbs_id));
+		mav.setViewName("c03");
+		return mav;
 	}
 		
 	/*************************************파일업로드***************************************/

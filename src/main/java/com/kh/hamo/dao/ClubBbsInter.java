@@ -49,6 +49,9 @@ public interface ClubBbsInter {
 	//전체글보기 리스트
 	ArrayList<ClubBbsDTO> clubAllList(String club_id);
 	
+	//상세보기
+	ClubBbsDTO clubBoardDetail(String clubBbs_id);
+	
 	//댓글 찾기
 	ClubBbsDTO findReply(String clubBbs_id);
 	

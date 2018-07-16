@@ -73,6 +73,11 @@
 		SELECT cb.club_id, cb.clubBbs_sort, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, cj.clubJoin_nickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN clubJoin cj ON cj.member_id = cb.member_id WHERE cb.club_id=#{param1} ORDER BY cb.clubBbs_id DESC
 	</select>
 	
+	<!-- 상세보기 -->
+	<select id="clubBoardDetail" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, cj.clubJoin_nickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN clubJoin cj ON cj.member_id = cb.member_id WHERE cb.clubBbs_id=#{param1}
+	</select>
+	
 	<!-- 댓글 수 조회 -->
 	<select id="findReply" resultType="com.kh.hamo.dto.ClubBbsDTO">
 		SELECT clubBbs_replyCount FROM clubBbs WHERE clubBbs_id=#{param1}

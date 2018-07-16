@@ -44,7 +44,7 @@
 		left: 565px;
 		width: 800px;
 	}
-	#name{
+	#title{
 	position: absolute;
 	left: 565px;
 	top: 345px;
@@ -59,31 +59,28 @@
 </head>
 <body>
 	<jsp:include page="club-header.jsp"/>
-	<jsp:include page="club-menu.jsp"/>
-	<div id="name">
-		| 공지사항 |
+	<div id="container">
+		<jsp:include page="club-menu.jsp"/>
+		<div id="right">
+			<div id="title">| 공지사항 |</div>
+			<form name="writefrm" id="writefrm" method="post">
+				<h3>제목 : <input id="subject" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/></h3>
+    			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${info.clubBbs_content}</textarea>
+    			<button id="save">저장</button>
+    			<div id="cancel"><a href="./clubNoticeDetail?club_id=${info.club_id}&clubBbs_id=${info.clubBbs_id}">취소</a></div>
+			</form>
+		</div>
 	</div>
-	<form name="writefrm" id="writefrm" method="post">
-		<h3>제목 : <input id="subject" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/></h3>
-    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);">${info.clubBbs_content}</textarea>
-    	<button id="save">저장</button>
-    	<div id="cancel"><a href="./clubNoticeDetail?club_id=${info.club_id}&clubBbs_id=${info.clubBbs_id}">취소</a></div>
-	</form>
 </body>
 <script>
+	var count = 0;
+
 	var oEditors = [];
 	//스마트에디터 프레임생성
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef : oEditors,
 		elPlaceHolder: "editor",
 		sSkinURI: "<%= request.getContextPath() %>/resources/smarteditor/SmartEditor2Skin.html",
-		 /* fOnAppLoad: function () { //수정시 필요한 코드
-	         var title = localStorage.getItem("subject");                      
-	         var contents = localStorage.getItem("editor"); 
-	         //DB에서 불러온 값을 채워 넣음
-	         document.getElementById("subject").value = title;
-	         oEditors.getById["editor"].exec("PASTE_HTML", [contents]); //로딩이 끝나면 contents를 txtContent에 넣습니다.
-	     }, */
 	     htParams : {
 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseToolbar : true,             
@@ -91,60 +88,32 @@
 			bUseVerticalResizer : true,     
 			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseModeChanger : true,
-			fOnBeforeUnload : function(){
-			},
-	   	fCreator: "createSEditor2"
 	     }
 	});
-	
-	window.onload=function(){
-		var btn = document.getElementById("writefrm");
-		btn.onclick = function(){
-			submitContents(btn);
-		}
-	}
-	
-	function submitContents(elClickedObj){
-		oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-		if(validation()){
-			$("#writefrm").submit();
-		}
-		try{
-			
-		}catch(e){
-			elClickedObj.form.submit();
-		}
-	}
-	
-	/* //작성된 내용 전송
-	$("#save").click(function(){
-		oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-		if(validation()){
-			$("#writefrm").submit();
-		}
-	}); */
-	
-	//textarea 공백 확인
-	function validation(){
-		var contents = $.trim(oEditors[0].getContents());
-		if(contents == ""){
-			alert("내용을 입력하세요");
-			oEditors.getById["editor"].exec("FOCUS");
-			 return;
-		}
-	}
 
-	//textarea 글자수 제한
-	$(document).ready(function() {
-	    $('#editor').on('keyup', function() {
-	        if($(this).val().length > 10) {
-	            $(this).val($(this).val().substring(0, 10));
-	        }
-	    });
-	});
-	
 	$("#save").click(function(){
-		writefrm.action = "./clubNoticeUpdate?&club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id};
+		if($("#subject").val() == ""){
+			alert("제목을 입력하세요");
+			return;
+		}else{
+			oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
+			
+			var str = $("#editor").val();
+
+			var pattern = /src="(.*?)"/g;
+			var list = str.match(pattern);
+			for(var i = 0; i < list.length; i++) {
+			   list[i] = list[i].substring(41);
+			   list[i] = list[i].substring(0, list[i].length - 1);
+			}
+			
+			var param = "";
+			for(var i = 0; i < list.length; i++){
+				param += "&filePath"+i+"="+list[i];
+				count++;
+			}
+			writefrm.action = "./clubNoticeUpdate?&club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id}+param+"&count="+count;
+		}
 	});
 </script>
 </html>

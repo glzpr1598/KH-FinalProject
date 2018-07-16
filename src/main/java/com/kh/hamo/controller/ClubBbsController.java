@@ -89,10 +89,11 @@ public class ClubBbsController {
 	
 	//공지사항 게시글 수정
 	@RequestMapping(value="/clubNoticeUpdate")
-	public ModelAndView clubNoticeUpdate(@RequestParam HashMap<String, String> params) throws Exception {
+	public ModelAndView clubNoticeUpdate(@RequestParam HashMap<String, String> params,HttpSession session) throws Exception {
 		logger.info("공지사항 게시글 수정");
 		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
-		return clubBbsService.clubNoticeUpdate(params,clubBbs_id);
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubNoticeUpdate(params,clubBbs_id,root);
 	}
 	
 	//공지사항 게시글 삭제 
@@ -121,6 +122,13 @@ public class ClubBbsController {
 	public @ResponseBody HashMap<String, Object> clubAllListForm(@RequestParam("club_id") String club_id) {
 		logger.info("전체글보기 게시판 리스트");
 		return clubBbsService.clubAllList(club_id);
+	}
+	
+	//전체글보기 상세보기
+	@RequestMapping(value = "/clubAllDetail")
+	public ModelAndView clubAllDetail(@RequestParam("clubBbs_id") String clubBbs_id) {
+		logger.info("전체글보기 게시판 상세보기");
+		return clubBbsService.clubAllDetail(clubBbs_id);
 	}
 	
 	
