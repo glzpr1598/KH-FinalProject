@@ -105,8 +105,7 @@
 					<option>소분류</option>
 				</select>
 			</div>
-			
-			<div class="msg" id="interestMsg"></div>
+			<div class="msg" id="interestMsg"></div><!-- 에러 메시지 -->
 			
 			<!-- 지역 선택 -->
 			<div id="locationArea">
@@ -122,26 +121,22 @@
 					<option>소분류</option>
 				</select>
 			</div>
-			
-			<div class="msg" id="locationMsg"></div>
+			<div class="msg" id="locationMsg"></div><!-- 에러 메시지 -->
 			
 			<!-- 동호회명 -->
 			<input type="text" name="club_name" maxlength="20" placeholder="동호회명" />
-			
-			<div class="msg" id="nameMsg"></div>
+			<div class="msg" id="nameMsg"></div><!-- 에러 메시지 -->
 			
 			<!-- 동호회 소개 -->
 			<div id="textLengthArea">
 				<span id="textLength">0</span> / 100 자
 			</div>
 			<textarea name="club_introduce" placeholder="동호회 소개"></textarea>
-			
-			<div class="msg" id="introduceMsg"></div>
+			<div class="msg" id="introduceMsg"></div><!-- 에러 메시지 -->
 			
 			<!-- 회장 닉네임 -->
-			<input type="text" name="club_masterNickname" placeholder="회장 닉네임" />
-			
-			<div class="msg" id="nicknameMsg"></div>
+			<input type="text" name="club_masterNickname" maxlength="10" placeholder="회장 닉네임" />
+			<div class="msg" id="nicknameMsg"></div><!-- 에러 메시지 -->
 			
 			<!-- 버튼 -->
 			<input type="submit" class="btn" value="만들기" />

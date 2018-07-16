@@ -178,6 +178,11 @@
 		    });
 		}
 		
+		// 가입하기 클릭
+		$("#btn1").click(function(){
+			location.href="./clubJoinForm?club_id=" + club_id;
+		});
+		
 		// 멤버관리 클릭
 		$("#btn3").click(function(){
 			location.href="./clubMemberList?club_id=" + club_id;
