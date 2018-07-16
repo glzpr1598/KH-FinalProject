@@ -98,7 +98,7 @@
 			
 			<div>
 				<img id="list2" src="./resources/image/list.png" />
-				<a id="menu2" href="./clubNoticeList=<%= request.getParameter("club_id") %>&sort=notice">공지사항</a>
+				<a id="menu2" href="./clubNoticeList?club_id=<%= request.getParameter("club_id") %>&sort=notice">공지사항</a>
 			</div>
 			
 			<div>
@@ -177,6 +177,11 @@
 		        error: function(err) {console.log(err);}
 		    });
 		}
+		
+		// 가입하기 클릭
+		$("#btn1").click(function(){
+			location.href="./clubJoinForm?club_id=" + club_id;
+		});
 		
 		// 멤버관리 클릭
 		$("#btn3").click(function(){

@@ -13,9 +13,7 @@
 		background-color: #FDF5DC;
 	}
 	#table{
-		position: absolute;
-		left: 560px;
-		width: 500px;
+		margin-top: 2%;
 	}
 	table,tr,td,tr {
 		border-collapse: collapse;
@@ -23,9 +21,7 @@
 		height: 50px;
 	}
 	#title{
-	position: absolute;
-	left: 560px;
-	top: 190px;
+	margin-left:0.5%;
 	font-weight: 600;
 	font-size: large;
 	}
@@ -56,23 +52,27 @@
 </head>
 <body>
 	<jsp:include page="club-header.jsp"/>
-	<jsp:include page="club-menu.jsp"/>
-	<div id="title">| 공지사항 |</div>
-	<div id="table">
-	<table id="listTable">
-		<thead>
-			<tr id="head">
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-		</thead>
-		<tbody id="body">
-		</tbody>
-	</table>
-	<input id="write" type="button" value="글쓰기"/>
+	<div id="container">
+		<jsp:include page="club-menu.jsp"/>
+		<div id="right">
+			<div id="title">| 공지사항 |</div>
+			<div id="table">
+				<table id="listTable">
+					<thead>
+						<tr id="head">
+							<th>글번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody id="body">
+					</tbody>
+				</table>
+				<input id="write" type="button" value="글쓰기"/>
+			</div>
+		</div>
 	</div>
 </body>
 <script>
@@ -86,7 +86,7 @@
 				dataType:"json",
 				data:{
 					"club_id":"<%=request.getParameter("club_id")%>",
-					"member_id": "${sessionScope.userId}"
+					"member_id": "${sessionScope.member_id}"
 				},
 				success:function(data){
 					if(data.nick != null){
@@ -124,7 +124,7 @@
 			});
 		});
 
-		function listPrint(list){
+	 function listPrint(list){
 			var content = "";
 			console.log(list);
 			$("#body").empty();
@@ -139,10 +139,11 @@
 				content += "</tr>";
 			});
 			$("#body").append(content);
-		} 
+		}
 	 
 	$("#write").click(function(){
 		location.href="./clubNoticeWriteForm?club_id="+club_id;
 	});
+	
 </script>
 </html>

@@ -30,7 +30,7 @@ public class ClubMeetingPlanService {
 		logger.info("모임 일정 리스트 서비스");
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ArrayList<ClubMeetingDTO> clubMeetingList = inter.clubMeetingList(Integer.parseInt(club_id));
-		HashMap<String, Object> result = new HashMap<>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", clubMeetingList);
 		return result;
 		

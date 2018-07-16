@@ -2,16 +2,30 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<mvc:interceptors>
+	<mvc:interceptor>
+		<mvc:mapping path="/updateForm"/>
+		<bean class="com.kh.hamo.interceptor.LoginCheck"/>		
+	</mvc:interceptor>
+</mvc:interceptors>
 
 	<mvc:interceptors>
 		<!-- 로그인 여부 체크 -->
 		<mvc:interceptor>
+			<!-- 내 동호회 -->
 			<mvc:mapping path="/m09move" />
+			<!-- 회원정보수정 -->
 			<mvc:mapping path="/updateForm" />
+			<!-- 동호회 가입하기 -->
+			<mvc:mapping path="/clubJoinForm" />
 			<bean class="com.kh.hamo.interceptor.LoginCheck" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+
 
 </beans>

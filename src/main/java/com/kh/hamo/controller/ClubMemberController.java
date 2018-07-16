@@ -2,6 +2,8 @@ package com.kh.hamo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.service.ClubMemberService;
 
@@ -51,6 +54,14 @@ public class ClubMemberController {
 		logger.info("회원 확인 요청");
 
 		return service.memberCheck(userId, club_id);
+	}
+	
+	// 동호회 가입하기 페이지
+	@RequestMapping(value = "/clubJoinForm")
+	public String clubJoinForm(HttpSession session, @RequestParam String club_id) {
+		logger.info("동호회 가입하기 페이지 요청");
+		
+		return "c23";
 	}
 	
 }

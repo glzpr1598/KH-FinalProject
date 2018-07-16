@@ -62,21 +62,27 @@
 					<c:forEach items="${freeList}" var="bbs">
 						<tr>
 							<td>${bbs.mainBbs_idx }</td>
-							<td><a href="freeBbsdetail?idx=${bbs.mainBbs_id}&updateAfter=0">${bbs.mainBbs_subject }</a></td>
-							<td><a href="freeBbsdetail?idx=${bbs.mainBbs_id}&updateAfter=0">${bbs.member_id}</a></td>
+							<td><a href="freeBbsdetail?idx=${bbs.mainBbs_id}&updateAfter=1">${bbs.mainBbs_subject }</a></td>
+							<td><a href="freeBbsdetail?idx=${bbs.mainBbs_id}&updateAfter=1">${bbs.member_id}</a></td>
 							<td>${bbs.mainBbs_date }</td>
 							<td>${bbs.mainBbs_hit }</td>
 						</tr>
 					</c:forEach>
 				</table>
-				<input id="writeBtn" type="button" value="글쓰기">
+					<input id="writeBtn" type="button" value="글쓰기">
 			</div>
 	</div>
 </body>
 <script>
 	$("#writeBtn").click(function(){
+		console.log(${sessionScope.userId});
 		//세션 검사 추후에 개발
-		location.href="freeBbsWriteForm";
+		if(${sessionScope.userId ==null }){
+			alert("로그인 후에 서비스 이용 가능합니다.");
+		}else{
+			location.href="freeBbsWriteForm";
+		}
+	
 	});
 </script>
 </html>

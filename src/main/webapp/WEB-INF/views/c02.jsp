@@ -12,35 +12,18 @@
 		border-top: 3px solid #ffbf00;
 		background-color: #FDF5DC;
 	}
-	#table{
-		position: absolute;
-		left: 560px;
-		width: 500px;
-	}
 	table,tr,td,tr {
 		border-collapse: collapse;
 		width: 780px;
 		height: 50px;
 	}
-	#name{
-	position: absolute;
-	left: 560px;
-	top: 345px;
-	font-weight: 600;
-	font-size: large;
-	}
-	#write{
-		border: none;
-		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
-		position: relative;
-		left: 708px;
-		top: 30px;
+	#title{
+		margin-left:0.5%;
 		font-weight: 600;
-		color: white;
-		text-align: center;
-		display: none;
+		font-size: large;
+	}
+	#table{
+		margin-top: 2%;
 	}
 	td a{
 		text-decoration: none;
@@ -56,24 +39,26 @@
 </head>
 <body>
 	<jsp:include page="club-header.jsp"/>
-	<jsp:include page="club-menu.jsp"/>
-	<div id="name">
-		| 전체글보기 |
-	</div>
-	<div id="table">
-	<table id="listTable">
-		<thead>
-			<tr id="head">
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-		</thead>
-		<tbody id="body">
-		</tbody>
-	</table>
+	<div id="container">
+		<jsp:include page="club-menu.jsp"/>
+		<div id="right">
+			<div id="title">| 전체글보기 |</div>
+			<div id="table">
+			<table id="listTable">
+				<thead>
+					<tr id="head">
+						<th>글번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<tbody id="body">
+				</tbody>
+			</table>
+			</div>
+		</div>
 	</div>
 </body>
 <script>
@@ -113,7 +98,5 @@
 		});
 		$("#body").append(content);
 	}
-	
-	
 </script>
 </html>

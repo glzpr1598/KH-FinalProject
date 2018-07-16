@@ -8,6 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>HAMO</title>
 <style>
+	#findClub {
+		background-color: #FDF5DC;
+		color: black;
+	}
+
 	#container {
 		width: 1000px;
 		margin: 0px auto;
@@ -366,37 +371,6 @@
 					</tbody>
 				</table>
 			</div>
-<<<<<<< HEAD
-		</div>
-	</body>
-	<script>
-		// ajax
-		var obj = {};
-		obj.error=function(e){console.log(e)};
-		obj.type="POST";
-		obj.dataType = "JSON";
-		$(document).ready(function(){
-			obj.url="./clubSearch?interest=전체&location=전체";
-			obj.success = function(data){
-				console.log(data);
-				 listPrint(data.list);
-				 /* 설립일 순 클릭 햇을 때 */
-				$("#day").click(function(){
-					console.log(data.list);
-		 			data.list.sort(function(a, b) { // 내림차순
-					    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
-					}); 
-					listPrint(data.list);
-				});
-				 
-				 /* 회원수 순 클릭 햇을 때 */
-				$("#count").click(function(){
-					console.log(data.list);
-					data.list.sort(function(a, b) { // 내림차순
-					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
-					}); 
-					listPrint(data.list);
-=======
 	</div>
 </body>
 <script>
@@ -462,7 +436,6 @@ $(document).ready(function() {
 				// 설립일 내림차순
 				data.list.sort(function(a, b) { 
 				    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
->>>>>>> 778a8705d986902ab961534ea3c5f5ffab18ae61
 				});
 				listPrint(data.list);
 			}
