@@ -43,7 +43,7 @@ public class ClubBbsService {
 	public HashMap<String, Object> findMaster(HashMap<String, String> params) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		String nick = clubBbsInter.findMaster(params);
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("nick", nick);
 		return map;
 	}
@@ -53,7 +53,7 @@ public class ClubBbsService {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		logger.info("리스트 불러오기");
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubNoticeList(club_id, sort);
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		return map;
 	}
@@ -303,7 +303,7 @@ public class ClubBbsService {
 		
 		//리스트 조회
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id);
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("replyCount", replyCount);
 		return map;
@@ -314,7 +314,7 @@ public class ClubBbsService {
 	public HashMap<String, Object> clubReply(HashMap<String, String> params, String member_id) {
 		logger.info("게시글 댓글 작성 서비스 호출");
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		ClubBbsDTO dto = new ClubBbsDTO();
 		dto.setClubBbsReply_content(params.get("replyContent"));
@@ -349,7 +349,7 @@ public class ClubBbsService {
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id);
 		//댓글 수 조회
 		ClubBbsDTO replyCount = clubBbsInter.findReply(clubBbs_id);
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("replyCount", replyCount);
 		return map;
