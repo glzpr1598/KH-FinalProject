@@ -20,9 +20,13 @@
 		#{param3},SYSDATE,#{param4},#{param5},#{param6},#{param7},#{param8})
 	</insert>
 	<select id="clubMeetingDetail" resultType="com.kh.hamo.dto.ClubMeetingDTO" >
-		SELECT mp.meetingPlan_subject,mp.meetingPlan_money,mp.meetingPlan_when,mp.meetingPlan_content,mp.meetingPlan_locationX,mp.meetingPlan_locationY  
-		FROM meetingPlan mp JOIN meetingAttend ma ON mp.meetingPlan_id =ma.meetingPlan_id JOIN clubJoin cj ON mp.club_id=cj.club_id
+		SELECT meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
+		FROM meetingPlan WHERE meetingPlan_id=#{param1}
 	</select>
-	
+	 <select id="meetingAttend" resultType="String" >
+	 	SELECT cj.clubJoin_nickname  
+		FROM meetingPlan mp JOIN meetingAttend ma ON mp.meetingPlan_id =ma.meetingPlan_id JOIN clubJoin cj ON mp.club_id=cj.club_id
+		WHERE mp.meetingPlan_id=#{param1}
+	 </select>
 	
 </mapper>

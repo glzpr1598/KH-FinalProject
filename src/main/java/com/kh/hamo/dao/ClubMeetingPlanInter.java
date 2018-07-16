@@ -1,7 +1,6 @@
 package com.kh.hamo.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.kh.hamo.dto.ClubMeetingDTO;
 
@@ -23,6 +22,9 @@ public interface ClubMeetingPlanInter {
 			String meetingPlan_content);
 
 
-	ArrayList<ClubMeetingDTO> clubMeetingDetail(int parseInt);//모임 일정 상세보기 
+	ClubMeetingDTO clubMeetingDetail(int parseInt);//모임 일정 상세보기 
+
+
+	ArrayList<String> meetingAttend(int parseInt);//모임 일정 참석자
 
 }

@@ -29,6 +29,7 @@
 			position: relative;
 			left: 50%;
 		}
+		#here{}
 	</style>
 
 	</head>
@@ -39,30 +40,67 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 				<!------------------- 양식 ------------------->
-				<h1> | 모임일정 | </h1>
-				<h2 id="subject">제목 :</h2>
-				<h4>회비 :</h4>
-				<h4>모임일시 :</h4>
-				<h4>내용</h4></br>
-				<textarea rows="10" cols="70"></textarea>
-				<div id="map" style="width:750px;height:350px;"></div>
-				<hr>
-				<button>참석</button>
-				<p><b>참석자</b></p>
-				<textarea rows="10" cols="70"></textarea>
-				<hr>
-				
-				
+					<h1> | 모임일정 | </h1>
+					<h2 id="subject">제목 :${list.meetingPlan_subject}</h2>
+					<h4>회비 :${list.meetingPlan_money}</h4>
+					<h4>모임일시 : ${list.meetingPlan_when}</h4>
+					<h4>내용</h4></br>
+					<input type="hidden" value="${list.meetingPlan_locationX}" id="locationX"/>
+					<input type="hidden" value="${list.meetingPlan_locationY}" id="locationY"/>
+					<textarea readonly  rows="10" cols="70">${list.meetingPlan_content}</textarea>
+					<div id="map" style="width:750px;height:350px;"></div>
+					<hr>
+					<button id="attend">참석</button>
+					<p><b>참석자</b></p>
+					<p id="attendName"></p>
+					<input type="hidden" value="${list.meetingPlan_id}" id="meetingPlan_id"/>
+					<hr>
 				<!------------------- 양식 ------------------->
 			</div>
 		</div>
 		<!------------------- 양식 ------------------->
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
-	<script>
+	<script>	
+		var obj = {};
+		obj.error=function(e){console.log(e)};
+		obj.type="POST";
+		obj.dataType = "JSON";
+		obj.data={"meetingPlan_id": $("#meetingPlan_id").val()};
+		$(document).ready(function(){
+			obj.url="./meetingAttend";
+			obj.success = function(data){
+				console.log(data);
+				console.log("성공");
+				listPrint(data.list);
+		}
+			ajaxCall(obj);
+		});
+		function listPrint(list){
+			console.log(list);
+			var content ="";
+			list.forEach(function(item, idx){
+				content += item +" , ";
+			});		
+			
+			$("#attendName").append(content);
+			
+		}
+		function ajaxCall(param){
+			$.ajax(param);
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
-	        center: new daum.maps.LatLng(37.56682, 126.97865), // 지도의 중심좌표
+	        center: new daum.maps.LatLng($("#locationX").val(), $("#locationY").val()), // 지도의 중심좌표
 	        level: 3, // 지도의 확대 레벨
 	        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
 	    }; 
@@ -93,14 +131,14 @@
 		
 		// 지도에 마커를 생성하고 표시한다
 		var marker = new daum.maps.Marker({
-		    position: new daum.maps.LatLng(37.56682, 126.97865), // 마커의 좌표
+		    position: new daum.maps.LatLng($("#locationX").val(), $("#locationY").val()), // 마커의 좌표
 		    image : markerImage, // 마커의 이미지
 		    map: map // 마커를 표시할 지도 객체
 		});
 		
 		// 마커 위에 표시할 인포윈도우를 생성한다
 		var infowindow = new daum.maps.InfoWindow({
-		    content : '<div style="padding:5px;">여기로 모이자~</div>' // 인포윈도우에 표시할 내용
+		    content : '<div style="padding:5px; width: 30px;" id="here">여기</div>' // 인포윈도우에 표시할 내용
 		});
 		
 		// 인포윈도우를 지도에 표시한다
