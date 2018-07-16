@@ -201,7 +201,6 @@
 			</otherwise>
 		</choose>
 	</where>
-	ORDER BY club_date DESC
 </select>
 	
 </mapper>

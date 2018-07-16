@@ -46,7 +46,6 @@ public class ClubMeetingPlanController {
 		logger.info("clubMeetingWriteForm 요청");
 		String club_id=  list.get("club_id");
 		service.clubMeetingWrite(list);
-		
 		return "redirect:/clubMeetingList?club_id="+club_id;
 	}
 	//모임 일정 상세보기 페이지 이동
