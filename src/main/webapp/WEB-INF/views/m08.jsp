@@ -5,9 +5,9 @@
 	<head>
 	
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-   <script src="./resources/js/paginathing.js" type="text/javascript"></script>   -->
+   <script src="./resources/js/paginathing.js" type="text/javascript"></script>   
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
@@ -77,14 +77,14 @@
 				console.log(data);
 				listPrint(data.list);
 
-				/*   jQuery(document).ready(function($){
+				 jQuery(document).ready(function($){
 					$('table tbody').paginathing({
 				    		perPage: 10,
 				    		containerClass: 'paging',
 				    		limitPagination: 5,
 
 					})
-				});   */
+				});   
 				
 		}
 			ajaxCall(obj);
@@ -101,7 +101,6 @@
 				content +="<td>"+item.club_memberCount+"</td>";
 				content += "</tr>";
 			});		
-			
 			$("#listTable").append(content);
 			
 		}

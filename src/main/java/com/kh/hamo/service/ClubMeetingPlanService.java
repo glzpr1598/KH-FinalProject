@@ -60,5 +60,26 @@ public class ClubMeetingPlanService {
 					meetingPlan_when,meetingPlan_money,meetingPlan_content);
 		}
 	}
+	//모임 일정 상세보기 
+	public ModelAndView clubMeetingDetail(String meetingPlan_id) {
+		logger.info("모임 일정 상세보기  서비스");
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		ClubMeetingDTO dto = new ClubMeetingDTO();
+		dto= inter.clubMeetingDetail(Integer.parseInt(meetingPlan_id));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",dto);
+		
+		mav.setViewName("c19");
+		return mav;
+	}
+	public HashMap<String, Object> meetingAttend(String meetingPlan_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		ArrayList<String> attend= inter.meetingAttend(Integer.parseInt(meetingPlan_id));
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("list", attend);
+		
+		return result;
+	}
 
 }

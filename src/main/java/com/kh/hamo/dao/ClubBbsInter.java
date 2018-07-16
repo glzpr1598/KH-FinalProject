@@ -31,6 +31,24 @@ public interface ClubBbsInter {
 	//DB에 파일 저장
 	int writeFile(String newFile, String oldFile, int clubBbs_id);
 	
+	//수정 폼
+	ClubBbsDTO clubUpdateForm(String clubBbs_id);
+	
+	//게시글 수정
+	int clubUpdate(ClubBbsDTO dto);
+	
+	//파일 삭제
+	int fileDelete(String key);
+	
+	//파일 찾기
+	ArrayList<String> findFile(int clubBbs_id);
+	
+	//게시글 삭제
+	void clubDelete(int clubBbs_id);
+	
+	//전체글보기 리스트
+	ArrayList<ClubBbsDTO> clubAllList(String club_id);
+	
 	//댓글 찾기
 	ClubBbsDTO findReply(String clubBbs_id);
 	

@@ -98,17 +98,17 @@
 			
 			<div>
 				<img id="list2" src="./resources/image/list.png" />
-				<a id="menu2" href="./clubNoticeList=<%= request.getParameter("club_id") %>&sort=공지사항">공지사항</a>
+				<a id="menu2" href="./clubNoticeList=<%= request.getParameter("club_id") %>&sort=notice">공지사항</a>
 			</div>
 			
 			<div>
 				<img id="list3" src="./resources/image/list.png" />
-				<a id="menu3" href="">자유게시판</a>
+				<a id="menu3" href="./clubFreeBbsList?club_id=<%= request.getParameter("club_id") %>&sort=free">자유게시판</a>
 			</div>
 			
 			<div>
 				<img id="list4" src="./resources/image/list.png" />
-				<a id="menu4" href="">사진첩</a>
+				<a id="menu4" href="./clubPhotoBbsList?club_id=<%= request.getParameter("club_id") %>&sort=photo">사진첩</a>
 			</div>
 		</div>
 		
