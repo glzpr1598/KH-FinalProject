@@ -8,6 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>HAMO</title>
 <style>
+	#findClub {
+		background-color: #FDF5DC;
+		color: black;
+	}
+
 	#container {
 		width: 1000px;
 		margin: 0px auto;

@@ -104,7 +104,7 @@
 	}
 	.navi:hover {
 		background: #FDF5DC;
-		color: #848484;
+		color: black;
 	}
 </style>
 </head>
@@ -129,7 +129,7 @@
 		<div id="container">
 			<a class="navi" id="myClub" href="m09move">내 동호회</a>
 			<a class="navi" id="findClub" href="m10move">동호회 찾기</a>
-			<a class="navi" id="makeClub" href="">동호회 만들기</a>
+			<a class="navi" id="makeClub" href="makeClubForm">동호회 만들기</a>
 			<a class="navi" id="comunity" href="freeBbsList">커뮤니티</a>
 		</div>
 	</div>

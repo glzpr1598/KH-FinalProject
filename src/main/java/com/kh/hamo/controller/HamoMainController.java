@@ -85,5 +85,10 @@ public class HamoMainController {
 		System.out.println("location : " + map.get("location"));
 		return service.clubSearch(map);
 	}
-	
+	// 동호회 만들기 페이지
+	@RequestMapping(value = "/makeClubForm")
+	public String makeClubForm() {
+		logger.info("동호회 만들기 요청");
+		return "m11";
+	}
 }
