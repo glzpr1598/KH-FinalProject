@@ -48,5 +48,17 @@ public class ClubMeetingPlanController {
 		service.clubMeetingWrite(list);
 		return "redirect:/clubMeetingList?club_id="+club_id;
 	}
-
+	//모임 일정 상세보기 페이지 이동
+		@RequestMapping(value = "/clubMeetingDetailForm")
+		public String clubMeetingDetailForm() {
+			logger.info("clubMeetingDetailForm 요청");
+			return "c19";
+		}
+	//모임 일정 상세보기 
+			@RequestMapping(value = "/clubMeetingDetail")
+			public ModelAndView clubMeetingDetail(@RequestParam ("meetingPlan_id") String meetingPlan_id) {
+				logger.info("clubMeetingDetail 요청");
+				logger.info(meetingPlan_id);
+				return service.clubMeetingDetail(meetingPlan_id);
+			}
 }

@@ -22,4 +22,7 @@ public interface ClubMeetingPlanInter {
 			String meetingPlan_locationY, String meetingPlan_when, String meetingPlan_money,
 			String meetingPlan_content);
 
+
+	ArrayList<ClubMeetingDTO> clubMeetingDetail(int parseInt);//모임 일정 상세보기 
+
 }

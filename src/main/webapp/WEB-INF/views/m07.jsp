@@ -119,6 +119,7 @@
 					},
 					success:function(data){
 						if(data.success == 1){
+							alert("이메일이 수정되었습니다.");
 							close(); 
 						}else{
 							alert("이메일 수정실패");

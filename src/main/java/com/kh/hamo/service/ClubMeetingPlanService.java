@@ -60,5 +60,12 @@ public class ClubMeetingPlanService {
 					meetingPlan_when,meetingPlan_money,meetingPlan_content);
 		}
 	}
+	//모임 일정 상세보기 
+	public ModelAndView clubMeetingDetail(String meetingPlan_id) {
+		logger.info("모임 일정 상세보기  서비스");
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		ArrayList<ClubMeetingDTO> clubMeetingDetail = inter.clubMeetingDetail(Integer.parseInt(meetingPlan_id));
+		return null;
+	}
 
 }
