@@ -29,7 +29,6 @@
 			position: relative;
 			left: 50%;
 		}
-		#here{}
 	</style>
 
 	</head>
@@ -90,14 +89,6 @@
 			$.ajax(param);
 		}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new daum.maps.LatLng($("#locationX").val(), $("#locationY").val()), // 지도의 중심좌표
@@ -138,7 +129,7 @@
 		
 		// 마커 위에 표시할 인포윈도우를 생성한다
 		var infowindow = new daum.maps.InfoWindow({
-		    content : '<div style="padding:5px; width: 30px;" id="here">여기</div>' // 인포윈도우에 표시할 내용
+		    content : '<div style="padding:5px;" >여기</div>' // 인포윈도우에 표시할 내용
 		});
 		
 		// 인포윈도우를 지도에 표시한다
