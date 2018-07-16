@@ -46,7 +46,7 @@
 
 <select id="interestTop3" resultType="com.kh.hamo.dto.HamoMainDTO">
 <![CDATA[ 
-		SELECT * FROM (select * from club ORDER BY club_membercount desc)where rownum <= 3
+		SELECT * FROM (select * from club c join interest i on c.interest_id = i.interest_id ORDER BY club_membercount desc) where rownum <= 3
 ]]> 
 </select>
 
@@ -59,7 +59,7 @@
 </select>
 
 <select id="bestClub" resultType="com.kh.hamo.dto.HamoMainDTO">
-		SELECT * FROM club WHERE club_location = #{param1} AND (INTEREST_ID = #{param2} OR INTEREST_ID = #{param3} OR interest_id = #{param4}) ORDER BY club_membercount DESC
+		SELECT * FROM club c join interest i on c.interest_id = i.interest_id WHERE c.club_location = #{param1} AND (c.INTEREST_ID = #{param2} OR c.INTEREST_ID = #{param3} OR c.interest_id = #{param4}) ORDER BY c.club_membercount DESC
 </select>
 
 <!-- <select id="clubSearch" parameterType="HashMap" resultType="com.kh.hamo.dto.HamoMainDTO" >
