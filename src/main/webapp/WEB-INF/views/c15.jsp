@@ -117,10 +117,10 @@
 	<div id="container">
 		<jsp:include page="club-menu.jsp"/>
 		<div id="right">
-			<div id="title">| 공지사항 |</div>
+			<div id="title">| 사진첩 |</div>
 			<div id="subject">
 				<span id="s">${info.clubBbs_subject}</span><br>
-				<span id="c">${info.club_masterNickname}</span> | 조회수 ${info.clubBbs_hit} | ${info.clubBbs_date}
+				<span id="c">${info.clubJoin_nickname}</span> | 조회수 ${info.clubBbs_hit} | ${info.clubBbs_date}
 			</div>
 			<div id="content">
 				<div id="text">${info.clubBbs_content}</div>
@@ -144,7 +144,7 @@
 <script>
 	var options = {year: "numeric", month: "numeric",
         day: "numeric", hour: "2-digit", minute: "numeric", second: "numeric"}; //날짜 옵션설정
-        
+
 	var clubBbs_id = "${info.clubBbs_id}";
 	var nickName = "${sessionScope.userId}"
 	
@@ -154,19 +154,19 @@
 			return;
 		}else{
 			console.log(clubBbs_id);
-			location.href="./clubNoticeDelete?club_id="+${info.club_id}+"&clubBbs_id="+clubBbs_id;
+			location.href="./clubPhotoBbsDelete?club_id="+${info.club_id}+"&clubBbs_id="+clubBbs_id;
 		}
 	});
 	$("#update").click(function(){
-		if(nickName !=  "${info.member_id}"){
+		if(nickName != "${info.member_id}"){
 			alert("수정 권한이 없습니다.");
 			return;
 		}else{
-			location.href="./clubNoticeUpdateForm?club_id="+${info.club_id}+"&clubBbs_id="+clubBbs_id;
+			location.href="./clubPhotoBbsUpdateForm?club_id="+${info.club_id}+"&clubBbs_id="+clubBbs_id;
 		}
 	});
 	$("#back").click(function(){
-		location.href="./clubNoticeList?club_id="+${info.club_id}+"&sort=notice";
+		location.href="./clubPhotoBbsList?club_id="+${info.club_id}+"&sort=photo";
 	});
 	
 	$(document).ready(function(){
@@ -179,6 +179,8 @@
 			},
 			success:function(data){
 				if(data){
+					//console.log(data);
+					//console.log(data.replyCount);
 					listPrint(data.list);
 					replyCount(data.replyCount);
 				}
@@ -213,11 +215,10 @@
 			});	
 		}
 	});
- 	
+	
  	$(document).on("click",".replyDel",function(){
  		var index = $(this).attr('id');
  		if(nickName != $(this).val()){
- 			console.log($(this).val());
  			alert("댓글을 삭제할 수 없습니다.");
  		}else{
 			$.ajax({

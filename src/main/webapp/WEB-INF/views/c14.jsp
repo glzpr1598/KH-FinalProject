@@ -54,13 +54,13 @@
 	<div id="container">
 		<jsp:include page="club-menu.jsp"/>
 		<div id="right">
-			<div id="title">| 공지사항 |</div>
+			<div id="title">| 사진첩 |</div>
 			<form name="writefrm" id="writefrm" method="post">
-				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/>
-    			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${info.clubBbs_content}</textarea>
+				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/>
+    			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
     			<div id="btn">
-	    			<input id="cancel" type="button" value="취소"/>
-	    			<button id="save">저장</button>
+		    		<input id="cancel" type="button" value="취소"/>
+		    		<button id="save">저장</button>
 	    		</div>
 			</form>
 		</div>
@@ -84,10 +84,10 @@
 			bUseModeChanger : true,
 	     }
 	});
-
+	
 	$("#save").click(function(){
 		if($("#text").val() == ""){
-			alert("제목을 입력하세요");
+			alert("제목을 입력하세요.");
 			return;
 		}else{
 			oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -106,12 +106,12 @@
 				param += "&filePath"+i+"="+list[i];
 				count++;
 			}
-			writefrm.action = "./clubNoticeUpdate?&club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id}+param+"&count="+count;
+			writefrm.action="./clubPhotoBbsWrite?club_id="+<%=request.getParameter("club_id")%>+"&sort=photo"+param+"&count="+count;	
 		}
 	});
 	
 	$("#cancel").click(function(){
-		location.href="./clubNoticeDetail?club_id=${info.club_id}&clubBbs_id=${info.clubBbs_id}";
+		location.href="./clubPhotoBbsList?club_id="+<%=request.getParameter("club_id") %>+"&sort=photo";
 	});
 </script>
 </html>

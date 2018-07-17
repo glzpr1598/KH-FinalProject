@@ -72,9 +72,11 @@ public class ClubMeetingPlanService {
 	//모임 참석자 리스트
 	public HashMap<String, Object> meetingAttendList(String meetingPlan_id, String club_id, String member_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+
 		ArrayList<String> attend= inter.meetingAttendList(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
 		int btn =inter.meetingAttendBtn(member_id,Integer.parseInt(meetingPlan_id));
 		HashMap<String, Object> result = new HashMap<>();
+
 		result.put("list", attend);
 		result.put("btn", btn);
 		return result;

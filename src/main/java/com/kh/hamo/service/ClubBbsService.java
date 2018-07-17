@@ -44,7 +44,7 @@ public class ClubBbsService {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		String nick = clubBbsInter.findMaster(params);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("nick", nick);
+		map.put("masternick", nick);
 		return map;
 	}
     
@@ -60,17 +60,24 @@ public class ClubBbsService {
 	
 	//공지사항 상세보기
 	@Transactional
-	public ModelAndView clubNoticeDetail(HashMap<String, String> params) {
+	public ModelAndView clubNoticeDetail(HashMap<String, String> params, String member_id) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		ModelAndView mav = new ModelAndView();
 		
+		String club_id = params.get("club_id");
 		String clubBbs_id = params.get("clubBbs_id");
 		
-		//조회수 올리기
-		clubBbsInter.clubBbsHit(clubBbs_id);
+		String nick = clubBbsInter.findnickName(club_id,member_id);
+		logger.info("닉네임 : "+nick);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("info", clubBbsInter.clubNoticeDetail(clubBbs_id));
-		mav.setViewName("c07");
+		if(nick == null) {
+			mav.setViewName("c07-error");
+		}else {
+			//조회수 올리기
+			clubBbsInter.clubBbsHit(clubBbs_id);
+			mav.addObject("info", clubBbsInter.clubNoticeDetail(clubBbs_id));
+			mav.setViewName("c07");
+		}
 		return mav;
 	}
 	
@@ -254,14 +261,25 @@ public class ClubBbsService {
 	
 	//전체글보기 상세보기
 	@Transactional
-	public ModelAndView clubAllDetail(String clubBbs_id) {
+	public ModelAndView clubAllDetail(HashMap<String, String> params, String member_id) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
-		//조회수 올리기
-		clubBbsInter.clubBbsHit(clubBbs_id);
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("info", clubBbsInter.clubBoardDetail(clubBbs_id));
-		mav.setViewName("c03");
+		String club_id = params.get("club_id");
+		String clubBbs_id = params.get("clubBbs_id");
+		logger.info("클럽 아이디 : "+club_id+" 게시판 글번호 : "+clubBbs_id);
+		
+		String nick = clubBbsInter.findnickName(club_id, member_id);
+		logger.info("닉네임 : "+nick);
+		
+		if(nick == null) {
+			mav.setViewName("c07-error");
+		}else {
+			//조회수 올리기
+			clubBbsInter.clubBbsHit(clubBbs_id);
+			mav.addObject("info", clubBbsInter.clubBoardDetail(clubBbs_id));
+			mav.setViewName("c03");
+		}
 		return mav;
 	}
 	

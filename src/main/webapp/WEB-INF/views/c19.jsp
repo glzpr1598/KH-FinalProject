@@ -77,49 +77,59 @@
 				if(data.btn>=1){
 					$("#attend").html("참석취소");	
 				}
-				listPrint(data.list);
-			}
-			ajaxCall(obj);
-		});
-		
-		$("#attend").click(function(){
-			if($("#attend").html()=="참석"){
-				$("#attend").html("참석취소");	
-				obj.url="./meetingAttend";
-				obj.success = function(data){
-					console.log(data);
-					console.log("성공");
-					$(document).ready(function(){
-						obj.url="./meetingAttendList";
+				$("#attend").click(function(){
+					if($("#attend").html()=="참석"){
+						obj.url="./meetingAttend";
 						obj.success = function(data){
 							console.log(data);
+<<<<<<< HEAD
 							console.log("성공");
 							listPrint(data.list);
 							if(data.btn>=1){
 								$("#attend").html("참석취소");	
 							}
 						}
+=======
+							$("#attend").html("참석취소");
+							$(document).ready(function(){
+								obj.url="./meetingAttendList";
+								obj.success = function(data){
+									console.log(data);
+									console.log(data.btn);
+									listPrint(data.list);
+								}
+								ajaxCall(obj);
+							});
+							
+							
+			 			}
+>>>>>>> df6ad39f3ca589b871ef1e1d0535e6d434a11f3e
 						ajaxCall(obj);
-					});
-	 			}
-			}else if ($("#attend").html()=="참석취소"){
-				$("#attend").html("참석");
-				/* obj.url="./meetingAttendCancel";
-				obj.success = function(data){
-					console.log(data);
-					console.log("성공");
-					$(document).ready(function(){
-						obj.url="./meetingAttendList";
+					}else if ($("#attend").html()=="참석취소"){
+						obj.url="./meetingAttendCancel";
 						obj.success = function(data){
 							console.log(data);
-							console.log("성공");
-							listPrint(data.list);
-						}
+							$("#attend").html("참석");
+							$(document).ready(function(){
+								obj.url="./meetingAttendList";
+								obj.success = function(data){
+									console.log(data);
+									console.log(data.btn);
+									listPrint(data.list);
+								}
+								ajaxCall(obj);
+							});
+							
+							
+						} 
 						ajaxCall(obj);
-					});
-				} */
+					}
+				});
+				listPrint(data.list);
 			}
+			ajaxCall(obj);
 		});
+		    
 		
 		function listPrint(list){
 			console.log(list);

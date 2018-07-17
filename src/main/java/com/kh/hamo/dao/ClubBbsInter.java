@@ -13,6 +13,9 @@ public interface ClubBbsInter {
 	//공지사항 리스트
 	ArrayList<ClubBbsDTO> clubNoticeList(int club_id, String sort);
 	
+	//동호회 회원 닉네임 조회
+	String findnickName(String club_id, String member_id);
+	
 	//조회수 올리기
 	void clubBbsHit(String clubBbs_id);
 	

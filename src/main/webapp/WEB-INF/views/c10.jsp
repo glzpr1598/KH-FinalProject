@@ -54,11 +54,11 @@
 	<div id="container">
 		<jsp:include page="club-menu.jsp"/>
 		<div id="right">
-			<div id="title">| 공지사항 |</div>
+			<div id="title">| 자유게시판 |</div>
 			<form name="writefrm" id="writefrm" method="post">
-				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/>
-    			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${info.clubBbs_content}</textarea>
-    			<div id="btn">
+				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/>
+		    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
+		    	<div id="btn">
 	    			<input id="cancel" type="button" value="취소"/>
 	    			<button id="save">저장</button>
 	    		</div>
@@ -68,7 +68,7 @@
 </body>
 <script>
 	var count = 0;
-
+	
 	var oEditors = [];
 	//스마트에디터 프레임생성
 	nhn.husky.EZCreator.createInIFrame({
@@ -84,11 +84,10 @@
 			bUseModeChanger : true,
 	     }
 	});
-
+	
 	$("#save").click(function(){
 		if($("#text").val() == ""){
-			alert("제목을 입력하세요");
-			return;
+			alert("제목을 입력하세요.");
 		}else{
 			oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 			
@@ -106,12 +105,12 @@
 				param += "&filePath"+i+"="+list[i];
 				count++;
 			}
-			writefrm.action = "./clubNoticeUpdate?&club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id}+param+"&count="+count;
+		writefrm.action="./clubFreeBbsWrite?club_id="+<%=request.getParameter("club_id")%>+"&sort=free"+param+"&count="+count;
 		}
 	});
 	
 	$("#cancel").click(function(){
-		location.href="./clubNoticeDetail?club_id=${info.club_id}&clubBbs_id=${info.clubBbs_id}";
+		location.href="./clubFreeBbsList?club_id="+<%=request.getParameter("club_id") %>+"&sort=free";
 	});
 </script>
 </html>
