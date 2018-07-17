@@ -4,8 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
 <mapper namespace="com.kh.hamo.dao.ClubMeetingPlanInter">
 	<select id="clubMeetingList" resultType="com.kh.hamo.dto.ClubMeetingDTO" >
-		SELECT mp.meetingPlan_id,mp.meetingPlan_subject,mp.meetingPlan_idx,cj.clubJoin_nickname,to_char(mp.meetingPlan_date, 'YYYY-MM-DD') as meetingPlan_date ,mp.meetingPlan_when FROM MEETINGPLAN mp JOIN clubJoin cj ON mp.club_id=cj.club_id
- 		WHERE mp.club_id=#{param1}
+		SELECT mp.meetingPlan_id,mp.meetingPlan_subject,mp.meetingPlan_idx,cj.clubJoin_nickname,to_char(mp.meetingPlan_date, 'YYYY-MM-DD') as meetingPlan_date ,mp.meetingPlan_when 
+		FROM meetingPlan mp JOIN clubJoin cj ON (mp.member_id=cj.member_id AND mp.club_id = cj.club_id)
+ 		WHERE mp.club_id=#{param1} AND mp.member_id=#{param2} ORDER BY mp.meetingPlan_idx DESC
 	</select>
 	<select id="clubMeetingCount" resultType="int">
 		SELECT count(*) FROM meetingPlan WHERE club_id = #{param1}
@@ -24,9 +25,8 @@
 		FROM meetingPlan WHERE meetingPlan_id=#{param1}
 	</select>
 	 <select id="meetingAttend" resultType="String" >
-	 	SELECT cj.clubJoin_nickname  
-		FROM meetingPlan mp JOIN meetingAttend ma ON mp.meetingPlan_id =ma.meetingPlan_id JOIN clubJoin cj ON mp.club_id=cj.club_id
-		WHERE mp.meetingPlan_id=#{param1}
+	 	SELECT cj.clubJoin_nickname 
+	 	FROM meetingAttend ma JOIN clubJoin cj ON ma.member_id=cj.member_id WHERE ma.MEETINGPLAN_ID=#{param1} AND cj.club_id=#{param2}
 	 </select>
 	
 </mapper>
