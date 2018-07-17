@@ -47,7 +47,7 @@ public class ClubBbsController {
 		
 	//공지사항 게시판 리스트 보기
 	@RequestMapping(value = "/clubNoticeListForm", method = RequestMethod.GET)
-	public @ResponseBody HashMap<String, Object> clubNoticeListForm(@RequestParam HashMap<String, String> params ,HttpSession session) {
+	public @ResponseBody HashMap<String, Object> clubNoticeListForm(@RequestParam HashMap<String, String> params) {
 		logger.info("공지사항 게시판 리스트 보기");
 
 		int club_id = Integer.parseInt(params.get("club_id"));
@@ -66,9 +66,10 @@ public class ClubBbsController {
 	
 	//공지사항 상세보기
 	@RequestMapping(value="/clubNoticeDetail")
-	public ModelAndView clubNoticeDetail(@RequestParam HashMap<String, String> params) {
+	public ModelAndView clubNoticeDetail(@RequestParam HashMap<String, String> params,HttpSession session) {
 		logger.info("공지사항 상세보기");
-		return clubBbsService.clubNoticeDetail(params);
+		String member_id = (String)session.getAttribute("member_id");
+		return clubBbsService.clubNoticeDetail(params,member_id);
 	}
 	
 	//공지사항 글쓰기

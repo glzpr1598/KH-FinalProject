@@ -14,6 +14,11 @@
 		SELECT c.club_id, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_sort=#{param2} AND c.club_id=#{param1} ORDER BY clubBbs_idx DESC 
 	</select>
 	
+	<!-- 동호회 회원 닉네임 찾기 -->
+	<select id="findnickName" resultType="String" parameterType="String">
+		SELECT clubJoin_nickname FROM clubJoin WHERE club_id=#{param1} AND member_id=#{param2}
+	</select>
+	
 	<!-- 조회수 올리기 -->
 	<update id="clubBbsHit">
 		UPDATE clubBbs SET clubBbs_hit = clubBbs_hit+1 WHERE clubBbs_id=#{param1}
