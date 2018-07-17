@@ -146,7 +146,7 @@
         day: "numeric", hour: "2-digit", minute: "numeric", second: "numeric"}; //날짜 옵션설정
         
 	var clubBbs_id = "${info.clubBbs_id}";
-	var nickName = "${sessionScope.member_id}"
+	var nickName = "${sessionScope.userId}"
 	
 	$("#del").click(function(){
 		if(nickName != "${info.member_id}"){
