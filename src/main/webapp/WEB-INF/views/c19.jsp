@@ -65,7 +65,7 @@
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
 		obj.dataType = "JSON";
-		obj.data={"meetingPlan_id": $("#meetingPlan_id").val()};
+		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(), "club_id": "<%= request.getParameter("club_id") %>"};
 		$(document).ready(function(){
 			obj.url="./meetingAttend";
 			obj.success = function(data){

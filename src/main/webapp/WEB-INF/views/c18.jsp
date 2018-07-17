@@ -90,7 +90,7 @@
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
 			<h1> | 모임일정 | </h1>
-			<form action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>">
+			<form action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
 				<input type="text" class="meeting" name="subject" placeholder="제목"/></br>
 				<input type="text" class="meeting" name="day" placeholder="모임 일시 "/></br>
 				<input type="text" class="meeting" name="money" placeholder="회비"/>
