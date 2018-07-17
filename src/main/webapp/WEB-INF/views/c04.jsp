@@ -13,47 +13,39 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: relative;
-		left: 390px;
-		top: 30px;
+		margin-left:3%;
+		margin-top:3%;
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	#cancel{
 		border: none;
 		background-color: #ffbf00;
 		width: 70px;
-		height: 29px;
-		position: relative;
-		left: 300px;
-		top: 1px;
+		height: 30px;
+		margin-left:37%;
 		text-align: center;
-	}
-	#cancel a{
-		text-decoration: none;
 		color: white;
 		font-weight: 600;
 		font-size: small;
-		position: absolute;
-		top: 5px;
-		right: 21px;
+		cursor: pointer;
 	}
 	#writefrm{
-		position: absolute;
-		left: 565px;
+		margin-left:0.5%;
+		margin-top:2%;
 		width: 800px;
 	}
 	#title{
-	position: absolute;
-	left: 565px;
-	top: 345px;
-	font-weight: 600;
-	font-size: large;
+		margin-left:0.5%;
+		font-weight: 600;
+		font-size: large;
 	}
-	#subject{
+	#text{
 		width: 400px;
 		height: 30px;
+		margin-bottom: 2%;
 	}
 </style>
 </head>
@@ -64,10 +56,12 @@
 		<div id="right">
 			<div id="title">| 전체글보기 |</div>
 			<form name="writefrm" id="writefrm" method="post">
-				<h3>제목 : <input id=subject type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/></h3>
+				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/>
 		    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${info.clubBbs_content}</textarea>
-		    	<button id="save">저장</button>
-		    	<div id="cancel"><a href="./clubAllDetail?club_id=${info.club_id}&clubBbs_id=${info.clubBbs_id}">취소</a></div>
+		    	<div id="btn">
+	    			<input id="cancel" type="button" value="취소"/>
+	    			<button id="save">저장</button>
+	    		</div>
 			</form>
 		</div>
 	</div>
@@ -93,7 +87,7 @@
 	
 
 	$("#save").click(function(){
-		if($("#subject").val() == ""){
+		if($("#text").val() == ""){
 			alert("제목을 입력하세요");
 			return;
 		}else{
@@ -117,5 +111,8 @@
 		}
 	});
 
+	$("#cancel").click(function(){
+		location.href="./clubAllDetail?club_id=${info.club_id}&clubBbs_id=${info.clubBbs_id}";
+	});
 </script>
 </html>
