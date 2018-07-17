@@ -64,7 +64,6 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>	
-	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
@@ -74,7 +73,10 @@
 			obj.url="./meetingAttendList";
 			obj.success = function(data){
 				console.log(data);
-				console.log("성공");
+				console.log(data.btn);
+				if(data.btn>=1){
+					$("#attend").html("참석취소");	
+				}
 				listPrint(data.list);
 			}
 			ajaxCall(obj);
@@ -97,11 +99,23 @@
 						ajaxCall(obj);
 					});
 	 			}
-				ajaxCall(obj);
 			}else if ($("#attend").html()=="참석취소"){
 				$("#attend").html("참석");
+				/* obj.url="./meetingAttendCancel";
+				obj.success = function(data){
+					console.log(data);
+					console.log("성공");
+					$(document).ready(function(){
+						obj.url="./meetingAttendList";
+						obj.success = function(data){
+							console.log(data);
+							console.log("성공");
+							listPrint(data.list);
+						}
+						ajaxCall(obj);
+					});
+				} */
 			}
-				
 		});
 		
 		function listPrint(list){

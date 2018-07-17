@@ -31,4 +31,10 @@
 	<insert id="meetingAttend">
 		INSERT INTO meetingAttend VALUES(SEQ_MEETINGATTEND_ID.NEXTVAL,#{param2},#{param1})
 	</insert>
+	<select id="meetingAttendBtn" resultType="int">
+		SELECT count(*) FROM meetingAttend WHERE member_id=#{param1} AND meetingPlan_id=#{param2}
+	</select>
+	<delete id="meetingAttendCancel">
+		DELETE FROM meetingAttend WHERE member_id=#{param1} AND meetingPlan_id=#{param2}
+	</delete>
 </mapper>

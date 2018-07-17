@@ -2,7 +2,6 @@ package com.kh.hamo.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.ClubMeetingPlanInter;
-import com.kh.hamo.dao.HamoMainInter;
 import com.kh.hamo.dto.ClubMeetingDTO;
-import com.kh.hamo.dto.HamoMainDTO;
 
 @Service
 public class ClubMeetingPlanService {
@@ -73,17 +70,28 @@ public class ClubMeetingPlanService {
 		return mav;
 	}
 	//모임 참석자 리스트
-	public HashMap<String, Object> meetingAttendList(String meetingPlan_id, String club_id) {
+	public HashMap<String, Object> meetingAttendList(String meetingPlan_id, String club_id, String member_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ArrayList<String> attend= inter.meetingAttendList(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
+		int btn =inter.meetingAttendBtn(member_id,Integer.parseInt(meetingPlan_id));
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("list", attend);
+		result.put("btn", btn);
 		return result;
 	}
 	//모임 참석
 	public HashMap<String, Object> meetingAttend(String member_id, String meetingPlan_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		int success =inter.meetingAttend(member_id,Integer.parseInt(meetingPlan_id));
+		HashMap<String , Object> map = new HashMap<String , Object>();
+		map.put("list", success);
+		logger.info("참석 성공 : "+success);
+		return map;
+	}
+	//모임 참석취소
+	public HashMap<String, Object> meetingAttendCancel(String member_id, String meetingPlan_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		int success =inter.meetingAttendCancel(member_id,Integer.parseInt(meetingPlan_id));
 		HashMap<String , Object> map = new HashMap<String , Object>();
 		map.put("list", success);
 		logger.info("참석 성공 : "+success);
