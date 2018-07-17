@@ -68,7 +68,7 @@ public class ClubBbsController {
 	@RequestMapping(value="/clubNoticeDetail")
 	public ModelAndView clubNoticeDetail(@RequestParam HashMap<String, String> params,HttpSession session) {
 		logger.info("공지사항 상세보기");
-		String member_id = (String)session.getAttribute("member_id");
+		String member_id = (String)session.getAttribute("userId");
 		return clubBbsService.clubNoticeDetail(params,member_id);
 	}
 	
@@ -127,9 +127,13 @@ public class ClubBbsController {
 	
 	//전체글보기 상세보기
 	@RequestMapping(value = "/clubAllDetail")
-	public ModelAndView clubAllDetail(@RequestParam("clubBbs_id") String clubBbs_id) {
+	public ModelAndView clubAllDetail(@RequestParam HashMap<String, String> params,HttpSession session) {
 		logger.info("전체글보기 게시판 상세보기");
-		return clubBbsService.clubAllDetail(clubBbs_id);
+		String member_id = (String)session.getAttribute("userId");
+		String club_id = params.get("club_id");
+		String clubBbs_id = params.get("clubBbs_id");
+		logger.info(club_id+"/"+clubBbs_id);
+		return clubBbsService.clubAllDetail(params,member_id);
 	}
 	
 	//전체글보기 수정 폼
