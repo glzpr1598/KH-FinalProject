@@ -9,12 +9,35 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
-  			    #all{position: absolute; left: 800px; top: 200px;}         
-  			    #logo {height: 60px;cursor: pointer; position: absolute; left: 880px; top: 160px;}
+  			    #all{
+				width: 300px;
+				margin: 150px auto;      
+				text-align: center;    
+				box-sizing: border-box;                  
+  			    }         
+		     #logo {
+		     	height: 80px;             
+		     	cursor: pointer;  
+		     	text-align: center;    
+		     	box-sizing: border-box;        
+		     }   
+		     #h5Join{
+		     		font-size: 13px;
+					text-align: left;
+					margin:0px 0px;                    
+		     }
   			    input[type='text'], input[type='password']{
+  			    padding-left: 10px;      
   					border: 2px solid #ffbf00;
   					height: 30px;
-					width: 300px;
+					width: 300px;   
+					margin-top: 8px;    
+					box-sizing: border-box;       
+  			    }     
+  			    
+  			    #emailInput{
+  			    	width: 260px;     
+  			    	box-sizing: border-box;    
   			    }
   			    
   			    #idChk, #pwdChk, #emailMsg{
@@ -24,7 +47,7 @@
 							color: #ff1616;
   			    }
   			    button {   
-				    width:297px;
+				    width:300px;     
 				    background-color: #ffbf00;
 				    border: none;
 				    color:#fff;
@@ -32,84 +55,66 @@
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
-				    font-size: 15px;
-				    margin: 4px;
+				    font-size: 15px;     
 				    cursor: pointer;
 				    border-radius:10px;
+				    box-sizing: border-box;           
+				    margin-top: 5px;      
 				}
 
-  			    input[type='button']{
-  			    	width:50px;
-				    background-color: #ffbf00;
-				    border: none;
-				    color:#fff;
-				    padding: 8px 0;
-				    text-align: center;
-				    text-decoration: none;
-				    display: inline-block;
-				    font-size: 14px;
-				    margin: 2px;
-				    cursor: pointer;
-  			    }
-  			    
-  			    
+      			    
   			    select {
-				    width: 150px;
+				    width: 147px;        
 				    height: 30px;
 				    padding-left: 10px;
 				    font-size: 14px;
-				    color: #ffbf00;
+				    color: black;   
 				    border: 2px solid #ffbf00;
 				    border-radius: 3px;
+				    box-sizing: border-box;   
+				    margin-top: 5px;       
 				}
-				
+				#emailChk{
+				  	height: 30px;
+  			      	width:40px;           
+				    background-color: #ffbf00;    
+				    border: none;
+				    color:#fff;      
+				    padding: 2px 0;                        
+				    text-align: center;
+				    text-decoration: none;
+				    font-size: 12px;      
+				    display: inline-block;
+				    cursor: pointer;
+				    box-sizing: border-box;        
+				}
 				#pwChk{
 				font-size: 6px;
 				color:#fff;
 				}
-  
-  			    #serialBtn{position: absolute; left: 255px; top: 262px;position: absolute;}          
+          
   			         
   			    
   			       
 		</style>    
 	</head>
 	<body>
-	<img id="logo" src="./resources/image/logo.png"/>
 	<div id="all">
-		<h5>회원가입</h5>
-		    <table>
-    			<tr>
-    				<td>
+		<img id="logo" src="./resources/image/logo.png"/>      
+		<h5 id='h5Join'>회원가입</h5>     
+
+
     					<input class="inputTxt" id="idtxt" type="text" name="userId" id="userId" placeholder="아이디"  onkeyup="chkword(this, 20)"/>
     					
     					<span id='idChk'></span>
     					
-    				</td>
-    			</tr>
-    			<tr>
-    				<td><input  id="Password" type="password" name="userPw" placeholder="비밀번호" onkeyup="chkword(this, 20)"/></td>
-    			</tr>
-    			<tr>
-    				<td><input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)"/><span id='pwdChk'></span></td>
-    			</tr>
-    			<tr>
-    				<td><input id="nameChk" class="inputTxt" type="text" name="userName" placeholder="이름" onkeyup="chkword(this, 5)"/></td>
-    			</tr>
-    			<tr>
-    				<td><input class="idtxt" type="text" name="phone" placeholder="전화번호" id="only_number"/></td>
-    			</tr>
-    			<tr>
-					<td><input class="inputTxt" type="text" name="email" maxlength="30" placeholder="이메일"/><span id='emailMsg'></span></td><div id="serialBtn"><input  type="button" id="emailChk" value="인증"/></div>
-					
-    			</tr>
-    			<tr>
-    				<td><input class="inputTxt" type="text" name="serial" placeholder="인증번호" id="only_number2"/></td>
-    			</tr>
-				
+				    <input  id="Password" type="password" name="userPw" placeholder="비밀번호" onkeyup="chkword(this, 20)"/>
+				    <input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)"/><span id='pwdChk'></span>
+			     	<input id="nameChk" class="inputTxt" type="text" name="userName" placeholder="이름" onkeyup="chkword(this, 5)"/>
+					<input class="idtxt" type="text" name="phone" placeholder="전화번호" id="only_number"/>
+					<input id="emailInput"class="inputTxt" type="text" name="email" maxlength="30" placeholder="이메일"/><input  type="button" id="emailChk" value="인증"/><span id='emailMsg'></span>
+			     	<input class="inputTxt" type="text" name="serial" placeholder="인증번호" id="only_number2"/>
 
-				<tr>
-					<td>
 							<select id="select1" onchange="itemChange()">
 								<option>관심사1</option>
 								<option>운동/스포츠</option>
@@ -124,11 +129,7 @@
 							<select name="choice11" id="select11">
 								<option>소분류</option>        
 							</select>
-					</td>
-				</tr>
-    			
-    			<tr>
-					<td>
+
 							<select id="select2" onchange="itemChange2()">
 								<option>관심사2</option>        
 								<option>운동/스포츠</option>
@@ -143,11 +144,7 @@
 							<select name="choice22" id="select22">
 								<option>소분류</option>        
 							</select>
-					</td>
-				</tr>
-    			
-    			<tr>
-					<td>
+
 							<select  id="select3" onchange="itemChange3()">
 								<option>관심사3</option>  
 								<option>운동/스포츠</option>
@@ -162,11 +159,7 @@
 							<select name="choice33" id="select33">
 								<option>소분류</option>        
 							</select>
-					</td>
-				</tr>
-    			
-    			<tr>
-					<td>
+
 							<select  id="select4" onchange="itemChange4()">
 								<option>지역</option>        
 								<option>강남</option>
@@ -177,15 +170,9 @@
 							<select name="choice44" id="select44">
 								<option>소분류</option>        
 							</select>
-					</td>
-				</tr>
 
-    			<tr>
-    				<td >
     					<button id="join">회원가입</button>
-    				</td>
-    			</tr>
-    		</table>
+
     		</div>
 	</body>
 	<script>

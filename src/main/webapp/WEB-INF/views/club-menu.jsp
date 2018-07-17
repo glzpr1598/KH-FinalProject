@@ -16,6 +16,7 @@
 		font-size: 13px;
 	}
 	#right {
+		width: 800px;
 		float: left;
 		margin-left: 20px;
 	}
@@ -183,6 +184,13 @@
 			location.href="./clubJoinForm?club_id=" + club_id;
 		});
 		
+		// 탈퇴하기 클릭
+		$("#btn2").click(function() {
+			var url = "./clubOutForm?club_id=" + club_id;
+			var option = "width=350px, height=160px left=200px top=100px";
+			window.open(url, "_blank", option);
+		});
+		
 		// 멤버관리 클릭
 		$("#btn3").click(function(){
 			location.href="./clubMemberList?club_id=" + club_id;
@@ -191,7 +199,7 @@
 		// 동호회 폐쇄 클릭
 		$("#btn4").click(function() {
 			var url = "./clubCloseForm?club_id=" + club_id;
-			var option = "width=450px, height=230px left=200px top=100px";
+			var option = "width=460px, height=230px left=200px top=100px";
 			window.open(url, "_blank", option);
 		});
 		
