@@ -82,14 +82,6 @@
 						obj.url="./meetingAttend";
 						obj.success = function(data){
 							console.log(data);
-<<<<<<< HEAD
-							console.log("성공");
-							listPrint(data.list);
-							if(data.btn>=1){
-								$("#attend").html("참석취소");	
-							}
-						}
-=======
 							$("#attend").html("참석취소");
 							$(document).ready(function(){
 								obj.url="./meetingAttendList";
@@ -103,7 +95,6 @@
 							
 							
 			 			}
->>>>>>> df6ad39f3ca589b871ef1e1d0535e6d434a11f3e
 						ajaxCall(obj);
 					}else if ($("#attend").html()=="참석취소"){
 						obj.url="./meetingAttendCancel";
