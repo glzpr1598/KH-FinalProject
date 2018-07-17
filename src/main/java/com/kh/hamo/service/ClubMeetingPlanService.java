@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.ClubMeetingPlanInter;
-import com.kh.hamo.dao.HamoMainInter;
 import com.kh.hamo.dto.ClubMeetingDTO;
-import com.kh.hamo.dto.HamoMainDTO;
 
 @Service
 public class ClubMeetingPlanService {
@@ -71,16 +69,33 @@ public class ClubMeetingPlanService {
 		mav.setViewName("c19");
 		return mav;
 	}
-	public HashMap<String, Object> meetingAttend(String meetingPlan_id, String club_id) {
+	//모임 참석자 리스트
+	public HashMap<String, Object> meetingAttendList(String meetingPlan_id, String club_id, String member_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
-		ArrayList<String> attend= inter.meetingAttend(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
+		ArrayList<String> attend= inter.meetingAttendList(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
+		int btn =inter.meetingAttendBtn(member_id,Integer.parseInt(meetingPlan_id));
 		HashMap<String, Object> result = new HashMap<>();
-		System.out.println("++++++++++++++++++++++++++");
-		System.out.println("서비스"+club_id);
-		System.out.println("++++++++++++++++++++++++++");
 		result.put("list", attend);
-		
+		result.put("btn", btn);
 		return result;
+	}
+	//모임 참석
+	public HashMap<String, Object> meetingAttend(String member_id, String meetingPlan_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		int success =inter.meetingAttend(member_id,Integer.parseInt(meetingPlan_id));
+		HashMap<String , Object> map = new HashMap<String , Object>();
+		map.put("list", success);
+		logger.info("참석 성공 : "+success);
+		return map;
+	}
+	//모임 참석취소
+	public HashMap<String, Object> meetingAttendCancel(String member_id, String meetingPlan_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		int success =inter.meetingAttendCancel(member_id,Integer.parseInt(meetingPlan_id));
+		HashMap<String , Object> map = new HashMap<String , Object>();
+		map.put("list", success);
+		logger.info("참석 성공 : "+success);
+		return map;
 	}
 
 }

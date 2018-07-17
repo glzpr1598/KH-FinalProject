@@ -63,14 +63,28 @@ public class ClubMeetingPlanController {
 		logger.info(meetingPlan_id);
 		return service.clubMeetingDetail(meetingPlan_id);
 	}
-	//모임 참석자 
-	@RequestMapping(value = "/meetingAttend")
-	public @ResponseBody HashMap<String, Object> meetingAttend(@RequestParam ("meetingPlan_id") String meetingPlan_id,
-			@RequestParam String club_id) {
+	//모임 참석자 리스트 
+	@RequestMapping(value = "/meetingAttendList")
+	public @ResponseBody HashMap<String, Object> meetingAttendList(@RequestParam ("meetingPlan_id") String meetingPlan_id,
+			@RequestParam String club_id,@RequestParam ("member_id") String member_id) {
 		logger.info("모임 참석자");
-		System.out.println("++++++++++++++++++++++++++");
-		System.out.println("컨트롤러"+club_id);
-		System.out.println("++++++++++++++++++++++++++");
-		return service.meetingAttend(meetingPlan_id,club_id);
+		return service.meetingAttendList(meetingPlan_id,club_id,member_id);
 	}
+	//모임 참석
+	@RequestMapping(value = "/meetingAttend")
+	public @ResponseBody HashMap<String, Object> meetingAttend(@RequestParam ("meetingPlan_id") String meetingPlan_id,@RequestParam ("member_id") String member_id,
+			@RequestParam String club_id) {
+		logger.info("모임 참석");
+		return service.meetingAttend(member_id,meetingPlan_id);
+	}
+	//모임 참석 취소
+	@RequestMapping(value = "/meetingAttendCancel")
+	public @ResponseBody HashMap<String, Object> meetingAttendCancel(@RequestParam ("meetingPlan_id") String meetingPlan_id,@RequestParam ("member_id") String member_id,
+			@RequestParam String club_id) {
+		logger.info("모임 참석");
+		return service.meetingAttendCancel(member_id,meetingPlan_id);
+	}
+	
+	
+	
 }

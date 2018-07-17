@@ -6,7 +6,7 @@
 	<select id="clubMeetingList" resultType="com.kh.hamo.dto.ClubMeetingDTO" >
 		SELECT mp.meetingPlan_id,mp.meetingPlan_subject,mp.meetingPlan_idx,cj.clubJoin_nickname,to_char(mp.meetingPlan_date, 'YYYY-MM-DD') as meetingPlan_date ,mp.meetingPlan_when 
 		FROM meetingPlan mp JOIN clubJoin cj ON (mp.member_id=cj.member_id AND mp.club_id = cj.club_id)
- 		WHERE mp.club_id=#{param1} AND mp.member_id=#{param2} ORDER BY mp.meetingPlan_idx DESC
+ 		WHERE mp.club_id=#{param1} ORDER BY mp.meetingPlan_idx DESC
 	</select>
 	<select id="clubMeetingCount" resultType="int">
 		SELECT count(*) FROM meetingPlan WHERE club_id = #{param1}
@@ -24,9 +24,17 @@
 		SELECT meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
 		FROM meetingPlan WHERE meetingPlan_id=#{param1}
 	</select>
-	 <select id="meetingAttend" resultType="String" >
+	 <select id="meetingAttendList" resultType="String" >
 	 	SELECT cj.clubJoin_nickname 
 	 	FROM meetingAttend ma JOIN clubJoin cj ON ma.member_id=cj.member_id WHERE ma.MEETINGPLAN_ID=#{param1} AND cj.club_id=#{param2}
 	 </select>
-	
+	<insert id="meetingAttend">
+		INSERT INTO meetingAttend VALUES(SEQ_MEETINGATTEND_ID.NEXTVAL,#{param2},#{param1})
+	</insert>
+	<select id="meetingAttendBtn" resultType="int">
+		SELECT count(*) FROM meetingAttend WHERE member_id=#{param1} AND meetingPlan_id=#{param2}
+	</select>
+	<delete id="meetingAttendCancel">
+		DELETE FROM meetingAttend WHERE member_id=#{param1} AND meetingPlan_id=#{param2}
+	</delete>
 </mapper>

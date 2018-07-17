@@ -25,7 +25,18 @@ public interface ClubMeetingPlanInter {
 	ClubMeetingDTO clubMeetingDetail(int parseInt);//모임 일정 상세보기 
 
 
-	ArrayList<String> meetingAttend(int meetingPlan_id, int club_id);//모임 일정 참석자
+	ArrayList<String> meetingAttendList(int meetingPlan_id, int club_id);//모임 일정 참석자
+
+
+	int meetingAttend(String member_id, int meetingPlan_id);//모임 일정 참석
+
+
+	int meetingAttendBtn(String member_id, int parseInt);//모임 참석확인 버튼
+
+
+	int meetingAttendCancel(String member_id, int parseInt);//모임 참석취소
+
+
 
 
 
