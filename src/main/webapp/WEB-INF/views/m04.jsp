@@ -16,10 +16,11 @@
 				box-sizing: border-box;                  
   			    }         
 		     #logo {
-		     	height: 80px;             
+		     	height: 80px;                               
+  		     	margin-bottom: 20px;                
 		     	cursor: pointer;  
 		     	text-align: center;    
-		     	box-sizing: border-box;        
+		     	box-sizing: border-box;           
 		     }   
 		     #h5Join{
 		     		font-size: 13px;
@@ -86,7 +87,8 @@
 				    font-size: 12px;      
 				    display: inline-block;
 				    cursor: pointer;
-				    box-sizing: border-box;        
+				    box-sizing: border-box;
+				    border-radius: 0px 5px 5px 0px;            
 				}
 				#pwChk{
 				font-size: 6px;

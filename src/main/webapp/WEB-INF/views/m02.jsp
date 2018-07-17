@@ -26,27 +26,26 @@
 		     	    
 
 				 input[type='text'], input[type='password']{
-				 padding-left: 10px;
-  					border: 2px solid #ffbf00;    
-  					height: 30px;
-					width: 300px;             
-					margin-top: 10px;              
-					box-sizing: border-box;  
+					box-sizing: border-box;
+					width: 300px;
+					padding: 10px;
+					margin: 5px 0px;
+					border: medium solid #FFBF00;
+					border-radius: 5px;
   			    }
   			    
   			    .btn{
-  			    	width:300px;           
-				    background-color: #ffbf00;    
-				    border: 2px solid #ffbf00;
-				    color:#fff;
-				    margin-top: 10px;             
-				    padding: 15px 0;
-				    text-align: center;
-				    text-decoration: none;
-				    display: inline-block;
-				    font-size: 15px;
-				    cursor: pointer;
-				    box-sizing: border-box;        
+					box-sizing: border-box;
+					width: 300px;
+					padding: 10px;
+					margin: 5px 0px;
+					border: none;
+					border-radius: 5px;
+					background: #FFBF00;
+					color: #FFFFFF;
+					font-size: 16px;
+					font-weight: bold;
+					cursor: pointer;
   			    }
   			    input[type='button']{                 
 				    background-color: #ffbf00;
@@ -62,31 +61,36 @@
   			    
 				.idSearch{    
 					width:150px;
+					height: 43px;    
 				    background-color: #ffbf00;      
-				    border: 2px solid #ffbf00;
+				    border: medium solid #ffbf00;
 				    color:#fff;
-				    padding: 15px 0;
+				    padding: 10px 0;
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
 				    font-size: 15px;
-				    margin: 0px;
+				    margin: 5px 0px;
 				    cursor: pointer;   
-				    box-sizing: border-box; 
+				    box-sizing: border-box;   
+				    border-radius: 5px 0px 0px 5px;   
 				}     
-				.pwSearch{
+				.pwSearch{   
 					width:150px;       
+					height: 43px;    
 				    background-color: white;            
-				    border: 2px solid #ffbf00;  
+				    border: medium solid #ffbf00;  
 				    color:black;      
-				    padding: 15px 0;
+				    padding: 10px 0;         
 				    text-align: center;    
 				    text-decoration: none;
 				    display: inline-block;
 				    font-size: 15px;
-				    margin: 0px;
+				    margin: 5px 0px;
 				    cursor: pointer;    
 				    box-sizing: border-box;      
+				    border-radius: 5px;  
+				    border-radius: 0px 5px 5px 0px;     
 				}
 				
 				#spanId{
@@ -99,19 +103,21 @@
 					font-weight: bold;   
 					border: 2px solid #ffbf00;
 					box-sizing: border-box;     
-				}
+				}    
 				
 				#emailId{
-  					border: 2px solid #ffbf00;    
-  					height: 30px;
-					width: 260px;                       
-					margin-top: 10px;              
-					box-sizing: border-box;  
+					box-sizing: border-box;
+					width: 250px;
+					padding: 10px;
+					margin: 5px 0px;
+					border: medium solid #FFBF00;
+					border-radius: 5px;       
+					 border-radius: 5px 0px 0px 5px;        
   			    }
   			    
   			    #emailChk{
-  			        height: 30px;
-  			      	width:40px;           
+  			        height: 41px;
+  			      	width:50px;              
 				    background-color: #ffbf00;    
 				    color:#fff;      
 				    padding: 2px 0;                        
@@ -119,6 +125,7 @@
 				    font-size: 12px;      
 				    cursor: pointer;
 				    box-sizing: border-box;   
+				    border-radius: 0px 5px 5px 0px;     
   			    }
 				  #pwdChk{
   			    			margin: 5px;
