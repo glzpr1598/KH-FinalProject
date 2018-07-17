@@ -15,7 +15,7 @@
 			margin-bottom: 20px;
 		}
 		button{
-			width: 50px;
+			width: 100px;
 			padding: 7px 0px;
 			margin-top : 5px;
 			margin-bottom: 15px;
@@ -28,6 +28,9 @@
 			cursor: pointer;
 			position: relative;
 			left: 50%;
+		}
+		p{
+			width: 700px;
 		}
 	</style>
 
@@ -65,23 +68,63 @@
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
 		obj.dataType = "JSON";
-		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(), "club_id": "<%= request.getParameter("club_id") %>"};
+		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(), "club_id": "<%= request.getParameter("club_id") %>","member_id":"<%= session.getAttribute("userId") %>"};
 		$(document).ready(function(){
-			obj.url="./meetingAttend";
+			obj.url="./meetingAttendList";
 			obj.success = function(data){
 				console.log(data);
-				console.log("성공");
+				console.log(data.btn);
+				if(data.btn>=1){
+					$("#attend").html("참석취소");	
+				}
 				listPrint(data.list);
-		}
+			}
 			ajaxCall(obj);
 		});
+		
+		$("#attend").click(function(){
+			if($("#attend").html()=="참석"){
+				$("#attend").html("참석취소");	
+				obj.url="./meetingAttend";
+				obj.success = function(data){
+					console.log(data);
+					console.log("성공");
+					$(document).ready(function(){
+						obj.url="./meetingAttendList";
+						obj.success = function(data){
+							console.log(data);
+							console.log("성공");
+							listPrint(data.list);
+						}
+						ajaxCall(obj);
+					});
+	 			}
+			}else if ($("#attend").html()=="참석취소"){
+				$("#attend").html("참석");
+				/* obj.url="./meetingAttendCancel";
+				obj.success = function(data){
+					console.log(data);
+					console.log("성공");
+					$(document).ready(function(){
+						obj.url="./meetingAttendList";
+						obj.success = function(data){
+							console.log(data);
+							console.log("성공");
+							listPrint(data.list);
+						}
+						ajaxCall(obj);
+					});
+				} */
+			}
+		});
+		
 		function listPrint(list){
 			console.log(list);
 			var content ="";
 			list.forEach(function(item, idx){
 				content += item +" , ";
 			});		
-			
+			$("#attendName").empty();
 			$("#attendName").append(content);
 			
 		}
