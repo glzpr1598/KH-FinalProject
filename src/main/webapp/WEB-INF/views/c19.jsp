@@ -15,7 +15,7 @@
 			margin-bottom: 20px;
 		}
 		button{
-			width: 50px;
+			width: 100px;
 			padding: 7px 0px;
 			margin-top : 5px;
 			margin-bottom: 15px;
@@ -28,6 +28,9 @@
 			cursor: pointer;
 			position: relative;
 			left: 50%;
+		}
+		p{
+			width: 700px;
 		}
 	</style>
 
@@ -61,27 +64,53 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>	
+	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
 		obj.dataType = "JSON";
-		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(), "club_id": "<%= request.getParameter("club_id") %>"};
+		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(), "club_id": "<%= request.getParameter("club_id") %>","member_id":"<%= session.getAttribute("userId") %>"};
 		$(document).ready(function(){
-			obj.url="./meetingAttend";
+			obj.url="./meetingAttendList";
 			obj.success = function(data){
 				console.log(data);
 				console.log("성공");
 				listPrint(data.list);
-		}
+			}
 			ajaxCall(obj);
 		});
+		
+		$("#attend").click(function(){
+			if($("#attend").html()=="참석"){
+				$("#attend").html("참석취소");	
+				obj.url="./meetingAttend";
+				obj.success = function(data){
+					console.log(data);
+					console.log("성공");
+					$(document).ready(function(){
+						obj.url="./meetingAttendList";
+						obj.success = function(data){
+							console.log(data);
+							console.log("성공");
+							listPrint(data.list);
+						}
+						ajaxCall(obj);
+					});
+	 			}
+				ajaxCall(obj);
+			}else if ($("#attend").html()=="참석취소"){
+				$("#attend").html("참석");
+			}
+				
+		});
+		
 		function listPrint(list){
 			console.log(list);
 			var content ="";
 			list.forEach(function(item, idx){
 				content += item +" , ";
 			});		
-			
+			$("#attendName").empty();
 			$("#attendName").append(content);
 			
 		}
