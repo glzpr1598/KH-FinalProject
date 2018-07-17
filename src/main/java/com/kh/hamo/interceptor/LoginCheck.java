@@ -15,13 +15,11 @@ public class LoginCheck extends HandlerInterceptorAdapter {
 		
 		// 로그아웃 상태
 		if(userId == null) {
-			// 로그인 후 보여줄 페이지 지정
-			// 예) /myClub
-			String next = request.getRequestURI().substring(request.getContextPath().length());
-			response.sendRedirect("./loginForm?next=" + next);
-		} 
-		
-		return true;
+			response.sendRedirect("./loginForm?");
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }

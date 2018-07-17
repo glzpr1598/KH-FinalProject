@@ -12,7 +12,7 @@
 	<style>
 		#myclub{
 			background-color: #FDF5DC;
-			color: #848484;
+			color: black;
 		}
 		table{
 			margin: 10px 0px 40px 0px;
@@ -52,19 +52,22 @@
 			text-decoration: none;
 			font-size: 12px;
 		}
-		.sort:hover {
-			text-decoration: underline;
+		.sort i, .sort span {
+			font-size: 13px;
+			cursor: pointer;
+			color: #a4a4a4;
+		}
+		
+		#day i, #joinDay i {
+			color: #ffbf00;
+		}
+		#day span, #joinDay span {
+			color: #000000;
 		}
 		.title {
 			font-size: 20px;
 			font-weight: bold;
 			margin: 5px 0px;
-		}
-		#day {
-			font-weight: bold;
-		}
-		#joinDay {
-			font-weight: bold;
 		}
 		.club {
 			color: black;
@@ -84,9 +87,15 @@
 		<div id="div1">
 			<div id="myClubList">
 				<div class="title">| 설립한 동호회 |</div>
-				<a id="day" class="sort"><i class="fa fa-check"></i> 설립일순</a>
+				<a id="day" class="sort">
+					<i class="fa fa-check"></i>
+					<span>설립일순</span>
+				</a>
 				&nbsp;
-				<a id="count" class="sort"><i class="fa fa-check"></i> 회원수순 </a>
+				<a id="count" class="sort">
+					<i class="fa fa-check"></i>
+					<span>회원수순</span>
+				</a>
 				<table>
 					<thead>					
 						<tr>
@@ -104,9 +113,15 @@
 			</div>
 			<div >
 				<div class="title">| 가입한 동호회 |</div>
-				<a id="joinDay" class="sort"><i class="fa fa-check"></i> 설립일순</a>
+				<a id="joinDay" class="sort">
+					<i class="fa fa-check"></i>
+					<span>설립일순</span>
+				</a>
 				&nbsp;
-				<a id="joinCount" class="sort"><i class="fa fa-check"></i> 회원수순</a>
+				<a id="joinCount" class="sort">
+					<i class="fa fa-check"></i>
+					<span>회원수순</span>
+				</a>
 				<table >
 					<thead>	
 						<tr>
@@ -140,8 +155,11 @@
 				 listPrint1(data.myClubList);
 				 /* 설립일 순 클릭 햇을 때 */
 				$("#day").click(function(){
-					$("#day").css("font-weight", "bold");
-					$("#count").css("font-weight", "normal");
+					// 색 바꾸기
+					$("#day i").css("color", "#ffbf00");
+					$("#day span").css("color", "#000000");
+					$("#count i").css("color", "#a4a4a4");
+					$("#count span").css("color", "#a4a4a4");
 					
 					data.myClubList.sort(function(a, b) { // 내림차순
 					    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
@@ -151,8 +169,11 @@
 				 
 				 /* 회원수 순 클릭 햇을 때 */
 				$("#count").click(function(){
-					$("#day").css("font-weight", "normal");
-					$("#count").css("font-weight", "bold");
+					// 색 바꾸기
+					$("#day i").css("color", "#a4a4a4");
+					$("#day span").css("color", "#a4a4a4");
+					$("#count i").css("color", "#ffbf00");
+					$("#count span").css("color", "#000000");
 					
 					data.myClubList.sort(function(a, b) { // 내림차순
 					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
@@ -171,8 +192,11 @@
 				 
 				 /* 설립일 순 클릭 햇을 때 */
 				 $("#joinDay").click(function(){
-					 $("#joinDay").css("font-weight", "bold");
-					 $("#joinCount").css("font-weight", "normal");
+					// 색 바꾸기
+					$("#joinDay i").css("color", "#ffbf00");
+					$("#joinDay span").css("color", "#000000");
+					$("#joinCount i").css("color", "#a4a4a4");
+					$("#joinCount span").css("color", "#a4a4a4");
 				 
 					 data.myClubJoin.sort(function(a, b) { // 내림차순
 					     return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
@@ -182,8 +206,11 @@
 				 
 				 /* 회원수 순 클릭 햇을 때 */
 				$("#joinCount").click(function(){
-					$("#joinDay").css("font-weight", "normal");
-					$("#joinCount").css("font-weight", "bold");
+					// 색 바꾸기
+					$("#joinDay i").css("color", "#a4a4a4");
+					$("#joinDay span").css("color", "#a4a4a4");
+					$("#joinCount i").css("color", "#ffbf00");
+					$("#joinCount span").css("color", "#000000");
 					
 					data.myClubJoin.sort(function(a, b) { // 내림차순
 					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;

@@ -31,6 +31,7 @@ public class HamoMainController {
 		String userId = (String) session.getAttribute("userId");
 		logger.info("메인페이지에 동호회 소개");
 		return service.home(userId);
+
 	}
 	
 	// 검색 값 가져오는 컨트롤러
@@ -85,5 +86,10 @@ public class HamoMainController {
 		System.out.println("location : " + map.get("location"));
 		return service.clubSearch(map);
 	}
-	
+	// 동호회 만들기 페이지
+	@RequestMapping(value = "/makeClubForm")
+	public String makeClubForm() {
+		logger.info("동호회 만들기 요청");
+		return "m11";
+	}
 }

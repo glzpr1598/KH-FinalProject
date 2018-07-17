@@ -62,12 +62,12 @@
 	<div id="container">
 		<jsp:include page="club-menu.jsp"/>
 		<div id="right">
-			<div id="title">| 공지사항 |</div>
+			<div id="title">| 전체글보기 |</div>
 			<form name="writefrm" id="writefrm" method="post">
-				<h3>제목 : <input id="subject" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/></h3>
-    			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
-    			<button id="save">저장</button>
-    			<div id="cancel"><a href="./clubNoticeList?club_id=<%=request.getParameter("club_id") %>&sort=notice">취소</a></div>
+				<h3>제목 : <input id=subject type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/></h3>
+		    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${info.clubBbs_content}</textarea>
+		    	<button id="save">저장</button>
+		    	<div id="cancel"><a href="./clubAllDetail?club_id=${info.club_id}&clubBbs_id=${info.clubBbs_id}">취소</a></div>
 			</form>
 		</div>
 	</div>
@@ -91,9 +91,11 @@
 	     }
 	});
 	
+
 	$("#save").click(function(){
 		if($("#subject").val() == ""){
-			alert("제목을 입력하세요.");
+			alert("제목을 입력하세요");
+			return;
 		}else{
 			oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 			
@@ -111,8 +113,9 @@
 				param += "&filePath"+i+"="+list[i];
 				count++;
 			}
-			writefrm.action="./clubNoticeWrite?club_id="+<%=request.getParameter("club_id")%>+"&sort=notice"+param+"&count="+count;
+			writefrm.action="./clubAllUpdate?club_id="+ ${info.club_id}+"&clubBbs_id="+${info.clubBbs_id}+param+"&count="+count;
 		}
 	});
+
 </script>
 </html>

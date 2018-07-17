@@ -26,11 +26,11 @@ public class ClubMeetingPlanService {
     ClubMeetingPlanInter inter;
     
     //모임 일정 리스트
-	public HashMap<String, Object> clubMeetingList(String club_id) {
+	public HashMap<String, Object> clubMeetingList(String club_id, String member_id) {
 		logger.info("모임 일정 리스트 서비스");
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
-		ArrayList<ClubMeetingDTO> clubMeetingList = inter.clubMeetingList(Integer.parseInt(club_id));
-		HashMap<String, Object> result = new HashMap<>();
+		ArrayList<ClubMeetingDTO> clubMeetingList = inter.clubMeetingList(Integer.parseInt(club_id),member_id);
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", clubMeetingList);
 		return result;
 		
@@ -42,7 +42,6 @@ public class ClubMeetingPlanService {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		String club_id=  list.get("club_id");
 		String member_id=list.get("member_id");
-		//글번호
 		String meetingPlan_subject =(String) list.get("subject");
 		String meetingPlan_locationX = (String) list.get("locationX");
 		String meetingPlan_locationY= (String) list.get("locationY");
@@ -55,8 +54,7 @@ public class ClubMeetingPlanService {
 			inter.clubMeetingWriteFirst(Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
 					meetingPlan_when,meetingPlan_money,meetingPlan_content);
 		} else {
-			inter.clubMeetingWrite(
-					Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
+			inter.clubMeetingWrite(Integer.parseInt(club_id),member_id,meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
 					meetingPlan_when,meetingPlan_money,meetingPlan_content);
 		}
 	}
@@ -64,8 +62,25 @@ public class ClubMeetingPlanService {
 	public ModelAndView clubMeetingDetail(String meetingPlan_id) {
 		logger.info("모임 일정 상세보기  서비스");
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
-		ArrayList<ClubMeetingDTO> clubMeetingDetail = inter.clubMeetingDetail(Integer.parseInt(meetingPlan_id));
-		return null;
+		ClubMeetingDTO dto = new ClubMeetingDTO();
+		dto= inter.clubMeetingDetail(Integer.parseInt(meetingPlan_id));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",dto);
+		
+		mav.setViewName("c19");
+		return mav;
+	}
+	public HashMap<String, Object> meetingAttend(String meetingPlan_id, String club_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		ArrayList<String> attend= inter.meetingAttend(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
+		HashMap<String, Object> result = new HashMap<>();
+		System.out.println("++++++++++++++++++++++++++");
+		System.out.println("서비스"+club_id);
+		System.out.println("++++++++++++++++++++++++++");
+		result.put("list", attend);
+		
+		return result;
 	}
 
 }
