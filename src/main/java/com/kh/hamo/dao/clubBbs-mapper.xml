@@ -26,7 +26,7 @@
 	
 	<!-- 공지사항 상세보기 -->
 	<select id="clubNoticeDetail" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
+		SELECT cb.member_id, cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
 	</select>
 	
 	<!-- 게시글 수 가져오기 -->
@@ -80,7 +80,7 @@
 	
 	<!-- 상세보기 -->
 	<select id="clubBoardDetail" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, cj.clubJoin_nickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN clubJoin cj ON cj.member_id = cb.member_id WHERE cb.clubBbs_id=#{param1}
+		SELECT cb.member_id, cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, cj.clubJoin_nickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN clubJoin cj ON cj.member_id = cb.member_id WHERE cb.clubBbs_id=#{param1}
 	</select>
 	
 	<!-- 댓글 수 조회 -->
@@ -90,7 +90,7 @@
 	
 	<!-- 댓글 리스트 조회 -->
 	<select id="clubReplyList" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT cb.clubBbsReply_id, cj.clubJoin_nickname, cb.clubBbsReply_content, cb.clubBbsReply_date FROM clubBbsReply cb JOIN clubJoin cj ON cb.member_id = cj.member_id WHERE cb.clubBbs_id = #{param1} ORDER BY cb.clubBbsReply_id DESC
+		SELECT cb.member_id, cb.clubBbsReply_id, cj.clubJoin_nickname, cb.clubBbsReply_content, cb.clubBbsReply_date FROM clubBbsReply cb JOIN clubJoin cj ON cb.member_id = cj.member_id WHERE cb.clubBbs_id = #{param1} ORDER BY cb.clubBbsReply_id DESC
 	</select>
 	
 	<!-- 댓글 작성 -->

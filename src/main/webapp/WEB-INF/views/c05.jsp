@@ -30,7 +30,7 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		margin-left:91.5%;
+		margin-left:89%;
 		margin-top: 2%;
 		font-weight: 600;
 		color: white;
@@ -92,7 +92,7 @@
 						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='inline';
 					}else{
-						console.log("동호회 회장 : "+data.nick);
+						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='none';
 					}
 				},

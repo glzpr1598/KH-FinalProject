@@ -44,7 +44,7 @@ public class ClubBbsService {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		String nick = clubBbsInter.findMaster(params);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("nick", nick);
+		map.put("masternick", nick);
 		return map;
 	}
     
