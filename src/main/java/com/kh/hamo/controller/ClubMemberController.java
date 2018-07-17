@@ -64,4 +64,10 @@ public class ClubMemberController {
 		return "c23";
 	}
 	
+	// 동호회 탈퇴하기 페이지
+	@RequestMapping(value = "/clubOutForm")
+	public String clubOutForm() {
+		logger.info("동호회 탈퇴 페이지 요청");
+		return "c24";
+	}
 }
