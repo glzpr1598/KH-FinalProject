@@ -95,6 +95,9 @@
 							console.log(data);
 							console.log("성공");
 							listPrint(data.list);
+							if(data.btn>=1){
+								$("#attend").html("참석취소");	
+							}
 						}
 						ajaxCall(obj);
 					});
