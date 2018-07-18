@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <title>Insert title here</title>
 <style>
 	#save{
@@ -13,70 +13,68 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: relative;
-		left: 390px;
-		top: 30px;
+		margin-left:3%;
+		margin-top:3%;
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	#cancel{
 		border: none;
 		background-color: #ffbf00;
 		width: 70px;
-		height: 29px;
-		position: relative;
-		left: 300px;
-		top: 1px;
+		height: 30px;
+		margin-left:37%;
 		text-align: center;
-	}
-	#cancel a{
-		text-decoration: none;
 		color: white;
 		font-weight: 600;
 		font-size: small;
-		position: absolute;
-		top: 5px;
-		right: 21px;
+		cursor: pointer;
 	}
 	#writefrm{
-		position: absolute;
-		left: 565px;
+		margin-left:0.5%;
+		margin-top:2%;
 		width: 800px;
 	}
-	#name{
-	position: absolute;
-	left: 565px;
-	top: 345px;
-	font-weight: 600;
-	font-size: large;
+	#title{
+		margin-left:0.5%;
+		font-weight: 600;
+		font-size: large;
 	}
 	#text{
 		width: 400px;
 		height: 30px;
+		margin-bottom: 2%;
 	}
 </style>
 </head>
 <body>
 	<jsp:include page="club-header.jsp"/>
-	<jsp:include page="club-menu.jsp"/>
-	<div id="name">
-		| 공지사항 |
+	<div id="container">
+		<jsp:include page="club-menu.jsp"/>
+		<div id="right">
+			<div id="title">| 공지사항 |</div>
+				<form name="writefrm" id="writefrm" method="post">
+					<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/>
+	    			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
+	    			<div id="btn">
+		    			<input id="cancel" type="button" value="취소"/>
+		    			<button id="save">저장</button>
+	    			</div>
+				</form>
+		</div>
 	</div>
-	<form name="writefrm" id="writefrm" method="post">
-		<h3>제목 : <input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/></h3>
-    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;" onKeyUp="checkLength(this);" onKeyDown="checkLength(this);"></textarea>
-    	<button id="save">저장</button>
-    	<div id="cancel"><a href="./clubNoticeList?club_id=<%=request.getParameter("club_id") %>&sort=notice">취소</a></div>
-	</form>
 </body>
 <script>
+	var count = 0;
+	
 	var oEditors = [];
 	//스마트에디터 프레임생성
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef : oEditors,
 		elPlaceHolder: "editor",
-		sSkinURI: "<%= request.getContextPath() %>/smarteditor/SmartEditor2Skin.html",
+		sSkinURI: "<%= request.getContextPath() %>/resources/se2/SmartEditor2Skin.html",
 	     htParams : {
 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseToolbar : true,             
@@ -88,8 +86,9 @@
 	});
 	
 	$("#save").click(function(){
-		if($("#subject").val() == ""){
+		if($("#text").val() == ""){
 			alert("제목을 입력하세요.");
+			return;
 		}else{
 			oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 			
@@ -98,7 +97,7 @@
 			var pattern = /src="(.*?)"/g;
 			var list = str.match(pattern);
 			for(var i = 0; i < list.length; i++) {
-			   list[i] = list[i].substring(41);
+			   list[i] = list[i].substring(list[i].lastIndexOf('/')+1);
 			   list[i] = list[i].substring(0, list[i].length - 1);
 			}
 			
@@ -111,5 +110,8 @@
 		}
 	});
 	
+	$("#cancel").click(function(){
+		location.href="./clubNoticeList?club_id="+<%=request.getParameter("club_id") %>+"&sort=notice";
+	});
 </script>
 </html>

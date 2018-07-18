@@ -13,9 +13,7 @@
 		background-color: #FDF5DC;
 	}
 	#table{
-		position: absolute;
-		left: 560px;
-		width: 500px;
+		margin-top: 2%;
 	}
 	table,tr,td,tr {
 		border-collapse: collapse;
@@ -23,9 +21,7 @@
 		height: 50px;
 	}
 	#title{
-	position: absolute;
-	left: 560px;
-	top: 190px;
+	margin-left:0.5%;
 	font-weight: 600;
 	font-size: large;
 	}
@@ -34,9 +30,8 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: relative;
-		left: 708px;
-		top: 30px;
+		margin-left:89%;
+		margin-top: 2%;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -56,29 +51,33 @@
 </head>
 <body>
 	<jsp:include page="club-header.jsp"/>
-	<jsp:include page="club-menu.jsp"/>
-	<div id="title">| 공지사항 |</div>
-	<div id="table">
-	<table id="listTable">
-		<thead>
-			<tr id="head">
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-		</thead>
-		<tbody id="body">
-		</tbody>
-	</table>
-	<input id="write" type="button" value="글쓰기"/>
+	<div id="container">
+		<jsp:include page="club-menu.jsp"/>
+		<div id="right">
+			<div id="title">| 공지사항 |</div>
+			<div id="table">
+				<table id="listTable">
+					<thead>
+						<tr id="head">
+							<th>글번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody id="body">
+					</tbody>
+				</table>
+				<input id="write" type="button" value="글쓰기"/>
+			</div>
+		</div>
 	</div>
 </body>
 <script>
 	var club_id=<%=request.getParameter("club_id")%>
 	console.log("동호회 아이디 :"+club_id);
-	 
+		
 	 $(document).ready(function(){
 			$.ajax({
 				type : "get",
@@ -89,11 +88,11 @@
 					"member_id": "${sessionScope.userId}"
 				},
 				success:function(data){
-					if(data.nick != null){
-						console.log("동호회 회장 : "+data.nick);
+					if(data.masternick != null){
+						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='inline';
 					}else{
-						console.log("동호회 회장 : "+data.nick);
+						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='none';
 					}
 				},
@@ -124,7 +123,7 @@
 			});
 		});
 
-		function listPrint(list){
+	 function listPrint(list){
 			var content = "";
 			console.log(list);
 			$("#body").empty();
@@ -139,10 +138,12 @@
 				content += "</tr>";
 			});
 			$("#body").append(content);
-		} 
+		}
 	 
 	$("#write").click(function(){
 		location.href="./clubNoticeWriteForm?club_id="+club_id;
 	});
+
+	
 </script>
 </html>

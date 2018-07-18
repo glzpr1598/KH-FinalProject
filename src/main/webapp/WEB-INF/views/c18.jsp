@@ -90,9 +90,9 @@
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
 			<h1> | 모임일정 | </h1>
-			<form action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>">
-				<input type="text" class="meeting" name="subject" placeholder="제목"/></br>
-				<input type="text" class="meeting" name="day" placeholder="모임 일시 "/></br>
+			<form action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
+				<input type="text" class="meeting" name="subject" placeholder="제목"/>
+				<input type="text" class="meeting" name="day" placeholder="모임 일시 "/>
 				<input type="text" class="meeting" name="money" placeholder="회비"/>
 				<P>내용</P>
 				<textarea name="content" rows="10" cols="70"></textarea>
@@ -113,7 +113,7 @@
 			        <div class="option">
 			            <div>
 			                <form onsubmit="searchPlaces(); return false;">
-			                    키워드 : <input type="text" value="서울역" id="keyword" size="15"> 
+								검색 : <input type="text" value=${ club_location } id="keyword" size="15"> 
 			                    <button type="submit">검색하기</button> 
 			                </form>
 			            </div>
@@ -123,8 +123,7 @@
 			        <div id="pagination"></div>
 			    </div>
 			</div>
-		
-			
+ 			
 			<!------------------- 양식 ------------------->
 			</div>
 		</div>
@@ -142,7 +141,7 @@
 	        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
 	    }; 
 
-		
+
 		
 		// 지도를 생성합니다    
 		var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -402,6 +401,6 @@
 		});
 		
 		
-
+		
 	</script>
 </html>

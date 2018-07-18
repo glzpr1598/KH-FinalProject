@@ -26,7 +26,6 @@ public class HamoMainController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	/**김응주 - 메인페이지에 동호회를 소개 (사진,소개글)*/
-	
 	@RequestMapping(value = "/")
 	public ModelAndView main(HttpSession session) {
 		String userId = (String) session.getAttribute("userId");
@@ -86,5 +85,17 @@ public class HamoMainController {
 		System.out.println("location : " + map.get("location"));
 		return service.clubSearch(map);
 	}
+	// 동호회 만들기 페이지
+	@RequestMapping(value = "/makeClubForm")
+	public String makeClubForm() {
+		logger.info("동호회 만들기 요청");
+		return "m11";
+	}
 	
+	// 테스트 페이지
+	@RequestMapping(value = "/test")
+	public String test() {
+		logger.info("테스트 페이지 요청");
+		return "test";
+	}
 }

@@ -14,6 +14,11 @@
 		SELECT c.club_id, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_sort=#{param2} AND c.club_id=#{param1} ORDER BY clubBbs_idx DESC 
 	</select>
 	
+	<!-- 동호회 회원 닉네임 찾기 -->
+	<select id="findnickName" resultType="String" parameterType="String">
+		SELECT clubJoin_nickname FROM clubJoin WHERE club_id=#{param1} AND member_id=#{param2}
+	</select>
+	
 	<!-- 조회수 올리기 -->
 	<update id="clubBbsHit">
 		UPDATE clubBbs SET clubBbs_hit = clubBbs_hit+1 WHERE clubBbs_id=#{param1}
@@ -21,7 +26,7 @@
 	
 	<!-- 공지사항 상세보기 -->
 	<select id="clubNoticeDetail" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
+		SELECT cb.member_id, cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
 	</select>
 	
 	<!-- 게시글 수 가져오기 -->
@@ -59,7 +64,7 @@
 	</delete>
 	
 	<!-- 파일 찾기 -->
-	<select id="findFile" resultType="String" parameterType="int">
+	<select id="findFile" resultType="String" parameterType="Integer">
 		SELECT clubBbsFile_newName FROM clubBbsFile WHERE clubBbs_id=#{param1}
 	</select>
 	
@@ -73,6 +78,26 @@
 		SELECT cb.club_id, cb.clubBbs_sort, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, cj.clubJoin_nickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN clubJoin cj ON cj.member_id = cb.member_id WHERE cb.club_id=#{param1} ORDER BY cb.clubBbs_id DESC
 	</select>
 	
+	<!-- 상세보기 -->
+	<select id="clubBoardDetail" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT cb.member_id, cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, cj.clubJoin_nickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN clubJoin cj ON cj.member_id = cb.member_id WHERE cb.clubBbs_id=#{param1}
+	</select>
+	
+	<!-- 자유게시판 리스트 조회 -->
+	<select id="clubFreeBbsList" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT cb.club_id, cb.clubBbs_sort, cb.clubBbs_id, cb.clubBbs_idx, cb.clubBbs_subject, cj.clubJoin_nickname, cb.clubBbs_date, cb.clubBbs_hit FROM clubBbs cb JOIN clubJoin cj ON cj.member_id = cb.member_id WHERE cb.club_id=#{param1} AND clubBbs_sort=#{param2} ORDER BY cb.clubBbs_id DESC
+	</select>
+	
+	<!-- 사진첩 게시글 제목 조회 -->
+	<select id="clubPhotoBbsList" resultType="com.kh.hamo.dto.ClubBbsDTO">
+		SELECT clubBbs_subject, clubBbs_id FROM clubBbs WHERE club_id=#{param1} AND clubBbs_sort=#{param2} ORDER BY clubBbs_idx DESC
+	</select>
+	
+	<!-- 사진첩 사진 조회 -->
+	<select id="clubPhoto" resultType="String" parameterType="Integer">
+		SELECT MIN(clubBbsFile_newName) FROM clubBbsFile WHERE clubBbs_id=#{param1} GROUP BY clubBbs_id
+	</select>
+	
 	<!-- 댓글 수 조회 -->
 	<select id="findReply" resultType="com.kh.hamo.dto.ClubBbsDTO">
 		SELECT clubBbs_replyCount FROM clubBbs WHERE clubBbs_id=#{param1}
@@ -80,7 +105,7 @@
 	
 	<!-- 댓글 리스트 조회 -->
 	<select id="clubReplyList" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT cb.clubBbsReply_id, cj.clubJoin_nickname, cb.clubBbsReply_content, cb.clubBbsReply_date FROM clubBbsReply cb JOIN clubJoin cj ON cb.member_id = cj.member_id WHERE cb.clubBbs_id = #{param1} ORDER BY cb.clubBbsReply_id DESC
+		SELECT cb.member_id, cb.clubBbsReply_id, cj.clubJoin_nickname, cb.clubBbsReply_content, cb.clubBbsReply_date FROM clubBbsReply cb JOIN clubJoin cj ON cb.member_id = cj.member_id WHERE cb.clubBbs_id = #{param1} ORDER BY cb.clubBbsReply_id DESC
 	</select>
 	
 	<!-- 댓글 작성 -->

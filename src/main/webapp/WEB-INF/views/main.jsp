@@ -46,9 +46,11 @@
 	}
 	.picture img{
 		height: 215px;
+	    max-width: 400px;
 	}
 	
 	.text {
+		width: 470px;
 		margin-left: 20px;
 		font-size: 13px;
 	}

@@ -8,16 +8,13 @@
 <title>Insert title here</title>
 <style>
 	#title{
-	position: absolute;
-	left: 400px;
-	top: 215px;
-	font-weight: 600;
-	font-size: large;
+		margin-left: 0.5%;
+		font-weight: 600;
+		font-size: large;
 	}
 	#subject{
-		position: absolute;
-		left: 400px;
-		top: 250px;
+		margin-left: 0.5%;
+		margin-top: 1%;
 	}
 	#s{
 		font-size: x-large;
@@ -28,43 +25,32 @@
 		font-weight: 600;
 	}
 	#content{
-		position: absolute;
-		left: 400px;
-		top: 330px;
+		margin-left: 0.5%;
+		margin-top: 2%;
 	}
 	#text{
-		/* border: none; */
 		resize: none;
-		height: 300px;
-	}
-	#file span{
-		font-size:medium;
-		font-weight: 600;
-	}
-	#file{
-		position: absolute;
-		left: 400px;
-		top: 650px;
-	}
-	#download{
-		border: 3px solid #ffbf00;
-		resize: none;
+		height: 70%;
 	}
 	#reply{
-		position: absolute;
-		left: 400px;
-		top:870px;
-		width: 1000px;
+		margin-left:0.5%;
+		margin-top:2%;
 		font-size:small;
 		font-weight: 600;
+		width: 800px;
 	}
 	#replyTable{
 		background-color: #FDF5DC;
-		width: 730px;
+		width: 770px;
 	}
 	#replyContent{
 		border: 3px solid #ffbf00;
 		resize: none;
+		margin-left: 0.5%;
+		margin-top: 2%;
+		width: 690px;
+		height: 52px;
+		margin-top: 0px;
 	}
 	#save{
 		border: 3px solid #ffbf00;
@@ -72,19 +58,14 @@
 		width: 70px;
 		height: 52px;
 		text-align: center;
-		position: absolute;
-		top: 1px;
-		left: 663px;
 		font-weight: 600;
+		margin-left: 1%;
 	}
 	#del{
 		border: none;
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: absolute;
-		left: 1063px;
-		top: 830px;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -94,26 +75,18 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: absolute;
-		left: 978px;
-		top: 830px;
 		font-weight: 600;
 		color: white;
 		text-align: center;
-		display: inline;
 	}
 	#back{
-		border: none;
+		border: none;	
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: absolute;
-		left: 893px;
-		top: 830px;
 		font-weight: 600;
 		color: white;
 		text-align: center;
-		display: inline;
 	}
 	.replyDel{
 		color: #5a5a5a;
@@ -126,13 +99,20 @@
 	#nick{
 		font-weight: 600;
 	}
-	#replyfrm{
-		position: absolute;
-		left: 400px;
-		top: 770px;
-	}
 	.last{
 		border-bottom: 1px solid #d2d2d2;
+	}
+	#btn{
+		margin-left: 69%;
+		margin-top: 2%;
+		width: 800px;
+	}
+	#replyfrm{
+		width: 800px;
+	}
+	.date{
+		font-weight: 600;
+		font-size: small;
 	}
 </style>	
 </head>
@@ -146,36 +126,34 @@
 				<span id="s">${info.clubBbs_subject}</span><br>
 				<span id="c">${info.club_masterNickname}</span> | 조회수 ${info.clubBbs_hit} | ${info.clubBbs_date}
 			</div>
-		<div id="content">
-			<div id="text">${info.clubBbs_content}</div>
+			<div id="content">
+				<div id="text">${info.clubBbs_content}</div>
+			</div>
+			<div id="replyfrm">
+				<input type="text" maxlength="150" id="replyContent" name="replyContent"/><input id="save" type="button" value="등록"/>
+			</div>
+			<div id="btn">
+				<button id="back">목록</button>
+				<button id="update">수정</button>
+				<button id="del">삭제</button>
+			</div>
+			<div id="reply">
+				댓글 <span id="replyCount"></span>
+				<table id="replyTable">
+				</table>
+			</div>
 		</div>
-		<div id="file">
-			<span>첨부파일</span><br/>
-			<textarea id="download" rows="5" cols="100" readonly="readonly"></textarea>
-		</div>
-		<form id="replyfrm">
-			<textarea rows="3" cols="88" id="replyContent" name="replyContent"></textarea>
-			<input id="save" type="button" value="등록"/>
-		</form>
-		<div id="reply">
-			댓글 <span id="replyCount"></span>
-			<table id="replyTable">
-			</table>
-		</div>
-		<div id="btn">
-			<button id="del">삭제</button>
-			<button id="update">수정</button>
-			<button id="back">목록</button>
-		</div>
-	</div>
 	</div>
 </body>
 <script>
+	var options = {year: "numeric", month: "numeric",
+        day: "numeric", hour: "2-digit", minute: "numeric", second: "numeric"}; //날짜 옵션설정
+        
 	var clubBbs_id = "${info.clubBbs_id}";
+	var nickName = "${sessionScope.userId}"
 	
 	$("#del").click(function(){
-		var nickName = "${sessionScope.nickName}";
-		if(nickName != "${info.club_masterNickname}"){
+		if(nickName != "${info.member_id}"){
 			alert("삭제 권한이 없습니다.");
 			return;
 		}else{
@@ -184,8 +162,7 @@
 		}
 	});
 	$("#update").click(function(){
-		var nickName = "${sessionScope.nickName}";
-		if(nickName != "${info.club_masterNickname}"){
+		if(nickName !=  "${info.member_id}"){
 			alert("수정 권한이 없습니다.");
 			return;
 		}else{
@@ -206,8 +183,6 @@
 			},
 			success:function(data){
 				if(data){
-					//console.log(data);
-					//console.log(data.replyCount);
 					listPrint(data.list);
 					replyCount(data.replyCount);
 				}
@@ -219,29 +194,34 @@
 	});
 	
 	$("#save").click(function(){
-		$.ajax({
-			type : "get",
-			url: "./clubReply",
-			dataType:"json",
-			data:{
-				"replyContent":$("#replyContent").val(),
-				"clubBbs_id":clubBbs_id
-			},
-			success:function(data){
-				//console.log(data);
-				$("#replyContent").val("");
-				listPrint(data.list);
-				replyCount(data.replyCount);
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});
+		if($("#replyContent").val() == ""){
+			alert("댓글을 작성하세요.");
+		}else{
+			$.ajax({
+				type : "get",
+				url: "./clubReply",
+				dataType:"json",
+				data:{
+					"replyContent":$("#replyContent").val(),
+					"clubBbs_id":clubBbs_id
+				},
+				success:function(data){
+					//console.log(data);
+					$("#replyContent").val("");
+					listPrint(data.list);
+					replyCount(data.replyCount);
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});	
+		}
 	});
-	
+ 	
  	$(document).on("click",".replyDel",function(){
- 		var nick = "${sessionScope.nickName}";
- 		if(nick != "${info.club_masterNickname}"){
+ 		var index = $(this).attr('id');
+ 		if(nickName != $(this).val()){
+ 			console.log($(this).val());
  			alert("댓글을 삭제할 수 없습니다.");
  		}else{
 			$.ajax({
@@ -250,7 +230,7 @@
 				dataType:"json",
 				data:{
 					"clubBbs_id":clubBbs_id,
-					"clubBbsReply_id":$("#reply_id").val()
+					"clubBbsReply_id":$("#reply_id"+index).val()
 				},
 				success:function(data){
 					console.log(data);
@@ -268,16 +248,17 @@
 		var content = "";
 		//console.log(list);
 		$("#replyTable").empty();
-		list.forEach(function(item){ 
+		list.forEach(function(item,index){ 
 			//console.log(item);
 			content += "<tr>";
-			content += "<td id='nick'>"+item.clubJoin_nickname+"</td>";
+			content += "<td id='nick' width='540px'>"+item.clubJoin_nickname+"</td>";
 			var date = new Date(item.clubBbsReply_date); 
-			content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
-			content += "<td><div class='replyDel'>삭제</div></td>";
+			content += "<td class='date'>"+date.toLocaleDateString("ko-KR",options)+"&nbsp;&nbsp;&nbsp;|</td>";
+			content += "<td><button class='replyDel' id='"+index+"' value='"+item.member_id+"'>삭제</button></td>";
 			content += "</tr>";
+			content += "<tr><td height='10px;'></td></tr>";
 			content += "<tr>";
-			content += "<td class='last' colspan=3><input id='reply_id' type='hidden' value='"+item.clubBbsReply_id+"'/>"+item.clubBbsReply_content+"</td>";
+			content += "<td class='last' colspan=3><input id='reply_id"+index+"' type='hidden' value='"+item.clubBbsReply_id+"'/>"+item.clubBbsReply_content+"</td>";
 			content += "</tr>";
 		});
 		$("#replyTable").append(content);

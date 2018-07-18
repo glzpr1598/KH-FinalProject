@@ -5,9 +5,15 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <link rel="icon" href="./resources/image/icon-32.png" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>HAMO</title>
 <style>
+	#findClub {
+		background-color: #FDF5DC;
+		color: black;
+	}
+
 	#container {
 		width: 1000px;
 		margin: 0px auto;
@@ -329,12 +335,12 @@
 		
 		<div id="text">
 			<div>
-				<b>주제 ></b>
+				<b>주제 <i class="fas fa-chevron-right"></i></b>
 				<span id="interest1"></span>
 				<span id="interest2">전체</span>
 			</div>
 			<div>
-				<b>지역 ></b>
+				<b>지역 <i class="fas fa-chevron-right"></i></b>
 				<span id="location1"></span>
 				<span id="location2">전체</span>
 			</div>
@@ -472,35 +478,35 @@ $(document).ready(function() {
 		// 하위 카테고리 표시
 		$("#interest2").html(interest);
 		// 상위 카테고리 표시
-		if($(this).attr("class") == null) {
+		if($(this).attr("class") == null || $(this).attr("class") == "all") {
 			$("#interest1").html("");
 		} 
 		else {
 			var className = $(this).attr("class");
 			
 			if(className == "sports") {
-				$("#interest1").html("운동/스포츠 >");
+				$("#interest1").html("운동/스포츠 <i class='fas fa-chevron-right'></i>");
 			} 
 			else if(className == "travel") {
-				$("#interest1").html("아웃도어/여행 >");
+				$("#interest1").html("아웃도어/여행 <i class='fas fa-chevron-right'></i>");
 			} 
 			else if(className == "culture") {
-				$("#interest1").html("공연/문화 >");
+				$("#interest1").html("공연/문화 <i class='fas fa-chevron-right'></i>");
 			}
 			else if(className == "music") {
-				$("#interest1").html("음악/악기 >");
+				$("#interest1").html("음악/악기 <i class='fas fa-chevron-right'></i>");
 			}
 			else if(className == "book") {
-				$("#interest1").html("인문학/책/글 >");
+				$("#interest1").html("인문학/책/글 <i class='fas fa-chevron-right'></i>");
 			}
 			else if(className == "service") {
-				$("#interest1").html("봉사활동 >");
+				$("#interest1").html("봉사활동 <i class='fas fa-chevron-right'></i>");
 			}
 			else if(className == "crafts") {
-				$("#interest1").html("공예/만들기 >");
+				$("#interest1").html("공예/만들기 <i class='fas fa-chevron-right'></i>");
 			}
 			else if(className == "car") {
-				$("#interest1").html("차/오토바이 >");
+				$("#interest1").html("차/오토바이 <i class='fas fa-chevron-right'></i>");
 			}
 		}
 		
@@ -527,23 +533,23 @@ $(document).ready(function() {
 		// 하위 카테고리 표시
 		$("#location2").html(location);
 		// 상위 카테고리 표시
-		if($(this).attr("class") == null) {
+		if($(this).attr("class") == null || $(this).attr("class") == "all") {
 			$("#location1").html("");
 		} 
 		else {
 			var className = $(this).attr("class");
 			
 			if(className == "south") {
-				$("#location1").html("강남 >");
+				$("#location1").html("강남 <i class='fas fa-chevron-right'></i>");
 			} 
 			else if(className == "east") {
-				$("#location1").html("강동 >");
+				$("#location1").html("강동 <i class='fas fa-chevron-right'></i>");
 			} 
 			else if(className == "north") {
-				$("#location1").html("강북 >");
+				$("#location1").html("강북 <i class='fas fa-chevron-right'></i>");
 			}
 			else if(className == "west") {
-				$("#location1").html("강서 >");
+				$("#location1").html("강서 <i class='fas fa-chevron-right'></i>");
 			}
 		}
 		

@@ -121,20 +121,14 @@
 		        success: function(data) {
 		            // 로그인 성공
 		            if(data.success == true) {
-		            	// 다음으로 넘어갈 주소(인터셉터를 통해 온 경우)
-		            	var next = "<%= request.getParameter("next") %>";
 		            	// 이전 주소
 		            	var referer = "${referer}";
 		            	
-		            	// next가 있는 경우(다음으로 넘어갈 주소)
-		            	if(next != "null") {
-		            		location.href = "." + next;
-		            	}
 		            	// 이전 주소가 있는 경우
-		            	else if(referer != "") {
+		            	if(referer != "") {
 		            		location.href = referer;
 		            	}
-		            	// 모두 해당하지 않을 경우 메인 페이지로
+		            	// 이전 주소가 없을 경우 메인 페이지로
 		            	else {
 		            		location.href="./";
 		            	}

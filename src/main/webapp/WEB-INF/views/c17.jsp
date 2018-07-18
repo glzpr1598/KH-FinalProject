@@ -87,7 +87,7 @@
 		obj.dataType = "JSON";
 		$(document).ready(function(){
 			obj.url="./MeetingList";
-			obj.data = {"club_id": "<%= request.getParameter("club_id") %>"};
+			obj.data = {"club_id": "<%= request.getParameter("club_id") %>","member_id":"<%= session.getAttribute("userId") %>"};
 			obj.success = function(data){
 				console.log(data);
 				listPrint(data.list);
@@ -106,7 +106,6 @@
 				content +="<td>"+item.meetingPlan_when+"</td>";
 				content += "</tr>";
 			});		
-			
 			$("#listTable").append(content);
 			
 		}

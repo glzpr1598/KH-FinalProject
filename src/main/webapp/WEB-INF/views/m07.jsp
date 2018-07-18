@@ -10,9 +10,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
 			  input[type='text']{
+			  		padding-left: 10px;     
   					border: 2px solid #ffbf00;
   					height: 30px;
 					width: 300px;
+					box-sizing: border-box;       
   			    }
   			      #emailUpdate {   
 				    width:297px;
@@ -23,28 +25,29 @@
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
-				    font-size: 15px;
+				    font-size: 15px;   
 				    margin: 4px;
 				    cursor: pointer;
 				}
 				 #emailChk {   
-  			    	width:50px;     
+  			    	width:40px;     
 				    background-color: #ffbf00;
 				    border: none;
 				    color:#fff;
-				    padding: 8px 0;
+				    padding: 5px 0;
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
-				    font-size: 14px;
+				    font-size: 13px;
 				    margin: 2px;
 				    cursor: pointer;
+				    box-sizing: border-box;       
 				}
-				#serialBtn{position: absolute; left: 262px; top: 90px;}   
+				#serialBtn{position: absolute; left: 268px; top: 89px;}   
 				
 				#emailMsg{
   				    font-weight: bold;   
-  			    	font-size: 12px;      
+  			    	font-size: 10px;      
   			    }
 		</style>
 		

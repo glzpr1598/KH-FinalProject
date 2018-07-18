@@ -9,173 +9,182 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
-				div{position: absolute; left: 774px; top: 340px;}
-				#logo {height: 90px;cursor: pointer; position: absolute; left: 850px; top: 130px;}
-				#idSearch{position: absolute; left: 780px; top: 250px;}     
-				#pwSearch{position: absolute; left: 963px; top: 250px;}
+				#container{		
+				width: 300px;
+				margin: 150px auto;      
+				text-align: center;    
+				box-sizing: border-box;                  
+				}           
+		     
+		     #logo {
+		     	height: 80px;                               
+  		     	margin-bottom: 20px;                
+		     	cursor: pointer;  
+		     	text-align: center;    
+		     	box-sizing: border-box;        
+		     }   
+		     	    
+
 				 input[type='text'], input[type='password']{
-  					border: 2px solid #ffbf00;    
-  					height: 30px;
-					width: 366px;     
-					margin-top:10px;    
+					box-sizing: border-box;
+					width: 300px;
+					padding: 10px;
+					margin: 5px 0px;
+					border: medium solid #FFBF00;
+					border-radius: 5px;
   			    }
+  			    
   			    .btn{
-  			    	width:366px;
-				    background-color: #ffbf00;    
-				    border: 2px solid #ffbf00;
-				    color:#fff;
-				    padding: 15px 0;
-				    text-align: center;
-				    text-decoration: none;
-				    display: inline-block;
-				    font-size: 15px;
-				    margin: 4px;
-				    cursor: pointer;
-				    position:absolute;     
-				    top:170px;
+					box-sizing: border-box;
+					width: 300px;
+					padding: 10px;
+					margin: 5px 0px;
+					border: none;
+					border-radius: 5px;
+					background: #FFBF00;
+					color: #FFFFFF;
+					font-size: 16px;
+					font-weight: bold;
+					cursor: pointer;
   			    }
   			    input[type='button']{                 
-  			    	width:50px;     
 				    background-color: #ffbf00;
 				    border: none;
 				    color:#fff;
-				    padding: 8px 0;
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
 				    font-size: 14px;
-				    margin: 2px;
 				    cursor: pointer;
+				    box-sizing: border-box;   
   			    }
   			    
 				.idSearch{    
-					width:183px;
-				    background-color: #ffbf00;
-				    border: 2px solid #ffbf00;
+					width:150px;
+					height: 43px;    
+				    background-color: #ffbf00;      
+				    border: medium solid #ffbf00;
 				    color:#fff;
-				    padding: 15px 0;
+				    padding: 10px 0;
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
 				    font-size: 15px;
-				    margin: 0px;
+				    margin: 5px 0px;
 				    cursor: pointer;   
-				}
-				.pwSearch{
-					width:183px;
+				    box-sizing: border-box;   
+				    border-radius: 5px 0px 0px 5px;   
+				}     
+				.pwSearch{   
+					width:150px;       
+					height: 43px;    
 				    background-color: white;            
-				    border: 2px solid #ffbf00;  
+				    border: medium solid #ffbf00;  
 				    color:black;      
-				    padding: 15px 0;
-				    text-align: center;
+				    padding: 10px 0;         
+				    text-align: center;    
 				    text-decoration: none;
 				    display: inline-block;
 				    font-size: 15px;
-				    margin: 0px;
-				    cursor: pointer;       
+				    margin: 5px 0px;
+				    cursor: pointer;    
+				    box-sizing: border-box;      
+				    border-radius: 5px;  
+				    border-radius: 0px 5px 5px 0px;     
 				}
+				
+				#spanId{
+					width: 300px;      
+					height: 100px;                  
+					margin: 10px auto;     
+					text-align: center;        
+					padding: 37px 0;                           
+					font-size: 15px;        
+					font-weight: bold;   
+					border: 2px solid #ffbf00;
+					box-sizing: border-box;     
+				}    
+				
+				#emailId{
+					box-sizing: border-box;
+					width: 250px;
+					padding: 10px;
+					margin: 5px 0px;
+					border: medium solid #FFBF00;
+					border-radius: 5px;       
+					 border-radius: 5px 0px 0px 5px;        
+  			    }
+  			    
+  			    #emailChk{
+  			        height: 41px;
+  			      	width:50px;              
+				    background-color: #ffbf00;    
+				    color:#fff;      
+				    padding: 2px 0;                        
+				    text-align: center;
+				    font-size: 12px;      
+				    cursor: pointer;
+				    box-sizing: border-box;   
+				    border-radius: 0px 5px 5px 0px;     
+  			    }
 				  #pwdChk{
   			    			margin: 5px;
 							font-size: 13px;
 							text-align: left;
 							color: #ff1616;
-  			    }
-  			      
-  			    #msgChk{          
-  			    	position: absolute; top: 125px; left: 0px; float: left;       
-  			    	text-decoration: none;        
-  			    	font-weight: bold;   
-  			    	font-size: 15px;
-  			    }
-  			    
-  			    
-  			    #spanId{
-  				    font-weight: bold;   
-  			    	font-size: 15px;
-  			    }
-  			    
-  			    
+							box-sizing: border-box;  
+  			    }  
   			    .aTag:link { color: red; text-decoration: none;}
 				.aTag:visited { color: black; text-decoration: none;}
  				.aTag:hover { color: blue; text-decoration: underline;}
 				.aTag{display: none;}    
-				#emailChk{position: absolute; left: 320px; top: 63px;}                
+				                
 		</style>
 		
 	</head>
 	<body>
-	<img id="logo" src="./resources/image/logo.png"/>
-	<button class="idSearch" id="idSearch">아이디 찾기</button><button class="pwSearch" id="pwSearch">비밀번호 찾기</button>
-	
-	
-	
-		<div id="1">
-			<table>
-				<tr>
-					<td><input type="text" name="userName1" id="userName1" placeholder="이름"></td>
-				</tr>
-				<tr>
-					<td><input type="text" name="email1" id="email1" placeholder="이메일"></td>
-				</tr>
-				<tr>
-					<td><button class="btn" id="idCheck">확인</button></td>
-				</tr>
-			</table>
-			<div id="msgChk">
-				<a href="./" class="aTag">홈으로</a>   
-				<a  class="aTag"> | </a>
-				<a href="loginForm"  class="aTag">로그인</a>&nbsp;&nbsp;
-				<span id = spanId></span>   
-			</div>
-		</div>
-		     
-		
-		<div id="2">
-			<table>
-				<tr>
-					<td><input type="text" name="userId" placeholder="아이디"></td>
-				</tr>
-				<tr>
-					<td><input type="text" name="email2" placeholder="이메일"><input  type="button" id="emailChk" value="인증"/>
-				</tr>
-				<tr>
-					<td><input type="text" name="serial" placeholder="인증번호"></td>
-				</tr>
-				<tr>
-					<td><button class="btn" id="pwCheck">확인</button></td>
-				</tr>
-			</table>
+		<div id="container">
+			<img id="logo" src="./resources/image/logo.png"/>
+			<div id="Search"><button class="idSearch"  id="idSearch">아이디 찾기</button><button class="pwSearch" id="pwSearch">비밀번호 찾기</button></div>
+			
+			     
 			
 			
-			
-		</div>
-		
-		
-		<div id="3">
-			<table>
-				<tr>
-					<td><input type="password" name="userPw" placeholder="변경할 비밀번호" onkeyup="chkword(this, 20)"></td>
-				</tr>
-				<tr>
-					<td><input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)"></td>
+				<div id="div1">
+					<input type="text" name="userName1" id="userName1" placeholder="이름">
+					<input type="text" name="email1" id="email1" placeholder="이메일">
+					<button class="btn" id="idCheck">확인</button>
+	    					<div id = spanId></div>       
+								<a href="./" class="aTag">홈으로</a>                
+								<a  class="aTag"> | </a>
+								<a href="loginForm"  class="aTag">로그인</a>&nbsp;&nbsp;
+				</div>
+				     
+				
+				<div id="div2">
+					<input type="text" name="userId" placeholder="아이디">
+					<input id="emailId" type="text" name="email2" placeholder="이메일"><input  type="button" id="emailChk" value="인증"/>
+					<input type="text" name="serial" placeholder="인증번호">
+					<button class="btn" id="pwCheck">확인</button>    
+				</div>
+				
+				
+				<div id="div3">
+					<input type="password" name="userPw" placeholder="변경할 비밀번호" onkeyup="chkword(this, 20)">
+					<input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)">
 					<span id='pwdChk'></span>
-				</tr>
-				<tr>
-					<td><button class="btn" id="pwUpdate">확인</button></td>
-				</tr>
-			</table>
-			
-			
+					<button class="btn" id="pwUpdate">확인</button>    
+				</div>
 		</div>
-		
 	</body>
 	<script>
 	var serialNumber = "인증미완료";
 	
     $(document).ready(function(){
-    	$("#1").show();
-        $("#2").hide();
-        $("#3").hide();
+    	$("#div1").show();
+        $("#div2").hide();
+        $("#div3").hide();
+        $("#spanId").hide();   
      });
  
               
@@ -186,9 +195,9 @@
 	    var x2 = document.getElementById("pwSearch");
  	    x2.style.backgroundColor = "#ffbf00";
  	    x2.style.color = "#fff";
-    	$("#1").hide();
-        $("#2").show();
-        $("#3").hide();
+    	$("#div1").hide();
+        $("#div2").show();
+        $("#div3").hide();
 	});
 	
 	
@@ -200,9 +209,9 @@
 	    var x2 = document.getElementById("idSearch");
  	    x2.style.backgroundColor = "#ffbf00";
  	    x2.style.color = "#fff";
-    	$("#1").show();
-        $("#2").hide(); 
-        $("#3").hide();
+    	$("#div1").show();
+        $("#div2").hide(); 
+        $("#div3").hide();
 	});
 	
 	$("#logo").click(function() {
@@ -230,7 +239,8 @@
 						success: function(data) {
 							console.log("success");
 							if(data.success){
-								document.getElementById("spanId").innerHTML = "요청하신 아이디는 : "+data.userId+" 입니다.";
+								$("#spanId").show();      
+								document.getElementById("spanId").innerHTML = "회원님의 아이디는   "+data.userId+"   입니다.";
 								/* $("#msgChk").show();     */
 								$(".aTag").css("display","inline");
 							}else{
@@ -270,9 +280,9 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 						if(data.success){
 							userId = $("input[name='userId']").val();
 							console.log(userId);
-					    	$("#1").hide();
-					        $("#2").hide(); 
-					        $("#3").show();
+					    	$("#div1").hide();
+					        $("#div2").hide(); 
+					        $("#div3").show();
 						}else{
 							alert("입력내용이 맞지 않습니다.");  
 						}
