@@ -49,8 +49,24 @@ public class ClubBbsService {
 	}
     
 	//공지사항 리스트
-	public HashMap<String, Object> clubNoticeList(int club_id,String sort) {
+	public HashMap<String, Object> clubNoticeList(int club_id,String sort, String root) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		
+		if(fileList.size() > 0) {
+			for(String key : fileList.keySet()) {
+				String fullPath = root+"/resources/multiuploader/"+key;
+				System.out.println("파일의 경로 : "+fullPath);
+				File file = new File(fullPath);
+				if(file.exists()) {//삭제할 파일이 존재 한다면
+					file.delete();//파일 삭제
+					logger.info("파일 삭제");
+				}else {
+					logger.info("이미 삭제된 사진");
+				}
+			}
+			fileList.clear();
+		}
+		
 		logger.info("리스트 불러오기");
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubNoticeList(club_id, sort);
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -389,8 +405,24 @@ public class ClubBbsService {
 	/*************************************자유게시판***************************************/
 	
 	//자유게시판 리스트
-	public HashMap<String, Object> clubFreeBbsList(String club_id, String clubBbs_sort,String member_id) {
+	public HashMap<String, Object> clubFreeBbsList(String club_id, String clubBbs_sort,String member_id, String root) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		
+		if(fileList.size() > 0) {
+			for(String key : fileList.keySet()) {
+				String fullPath = root+"/resources/multiuploader/"+key;
+				System.out.println("파일의 경로 : "+fullPath);
+				File file = new File(fullPath);
+				if(file.exists()) {//삭제할 파일이 존재 한다면
+					file.delete();//파일 삭제
+					logger.info("파일 삭제");
+				}else {
+					logger.info("이미 삭제된 사진");
+				}
+			}
+			fileList.clear();
+		}
+		
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubFreeBbsList(club_id,clubBbs_sort);
 		HashMap<String, Object> map = new HashMap<>();
 		String nick = clubBbsInter.findnickName(club_id, member_id);
@@ -593,8 +625,24 @@ public class ClubBbsService {
 	/*************************************사진첩***************************************/
 
 	//사진첩 리스트 조회
-	public HashMap<String, Object> clubPhotoBbsListForm(int club_id, String clubBbs_sort, String member_id) {
+	public HashMap<String, Object> clubPhotoBbsListForm(int club_id, String clubBbs_sort, String member_id, String root) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		
+		if(fileList.size() > 0) {
+			for(String key : fileList.keySet()) {
+				String fullPath = root+"/resources/multiuploader/"+key;
+				System.out.println("파일의 경로 : "+fullPath);
+				File file = new File(fullPath);
+				if(file.exists()) {//삭제할 파일이 존재 한다면
+					file.delete();//파일 삭제
+					logger.info("파일 삭제");
+				}else {
+					logger.info("이미 삭제된 사진");
+				}
+			}
+			fileList.clear();
+		}
+		
 		HashMap<String, Object> map = new HashMap<>();
 		ArrayList<String> allList = new ArrayList<String>();
 		

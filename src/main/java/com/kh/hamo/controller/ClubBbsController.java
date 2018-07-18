@@ -47,14 +47,14 @@ public class ClubBbsController {
 		
 	//공지사항 게시판 리스트 보기
 	@RequestMapping(value = "/clubNoticeListForm", method = RequestMethod.GET)
-	public @ResponseBody HashMap<String, Object> clubNoticeListForm(@RequestParam HashMap<String, String> params) {
+	public @ResponseBody HashMap<String, Object> clubNoticeListForm(@RequestParam HashMap<String, String> params,HttpSession session) {
 		logger.info("공지사항 게시판 리스트 보기");
 
 		int club_id = Integer.parseInt(params.get("club_id"));
 		logger.info("동호회 아이디 : "+club_id);
 		String sort = params.get("sort");
-		
-		return clubBbsService.clubNoticeList(club_id,sort);
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubNoticeList(club_id,sort,root);
 	}
 	
 	//공지사항 글쓰기 폼
@@ -178,7 +178,8 @@ public class ClubBbsController {
 	public @ResponseBody HashMap<String, Object> clubFreeBbsListForm(@RequestParam("club_id") String club_id, @RequestParam("sort") String clubBbs_sort,HttpSession session) {
 		logger.info("자유게시판 리스트");
 		String member_id = (String)session.getAttribute("userId");
-		return clubBbsService.clubFreeBbsList(club_id,clubBbs_sort,member_id);
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubFreeBbsList(club_id,clubBbs_sort,member_id,root);
 	}
 		
 	//자유게시판 상세보기
@@ -247,7 +248,8 @@ public class ClubBbsController {
 	public @ResponseBody HashMap<String, Object> clubPhotoBbsListForm(@RequestParam("club_id") int club_id, @RequestParam("sort") String clubBbs_sort,HttpSession session) {
 		logger.info("자유게시판 리스트");
 		String member_id = (String)session.getAttribute("userId");
-		return clubBbsService.clubPhotoBbsListForm(club_id,clubBbs_sort,member_id);
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubPhotoBbsListForm(club_id,clubBbs_sort,member_id,root);
 	}
 	
 	//사진첩 상세보기
