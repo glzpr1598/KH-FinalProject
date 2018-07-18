@@ -97,7 +97,7 @@
 			var pattern = /src="(.*?)"/g;
 			var list = str.match(pattern);
 			for(var i = 0; i < list.length; i++) {
-			   list[i] = list[i].substring(41);
+			   list[i] = list[i].substring(list[i].lastIndexOf('/')+1);
 			   list[i] = list[i].substring(0, list[i].length - 1);
 			}
 			
