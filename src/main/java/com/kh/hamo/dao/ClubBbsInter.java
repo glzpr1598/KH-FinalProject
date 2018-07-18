@@ -55,6 +55,9 @@ public interface ClubBbsInter {
 	//상세보기
 	ClubBbsDTO clubBoardDetail(String clubBbs_id);
 	
+	//자유게시판 리스트
+	ArrayList<ClubBbsDTO> clubFreeBbsList(String club_id, String clubBbs_sort);
+	
 	//댓글 찾기
 	ClubBbsDTO findReply(String clubBbs_id);
 	

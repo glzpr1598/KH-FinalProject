@@ -386,6 +386,45 @@ public class ClubBbsService {
 			clubBbsInter.clubDelete(clubBbs_id);
 		}
 		
+	/*************************************자유게시판***************************************/
+	
+	//자유게시판 리스트
+	public HashMap<String, Object> clubFreeBbsList(String club_id, String clubBbs_sort,String member_id) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		ArrayList<ClubBbsDTO> list = clubBbsInter.clubFreeBbsList(club_id,clubBbs_sort);
+		HashMap<String, Object> map = new HashMap<>();
+		String nick = clubBbsInter.findnickName(club_id, member_id);
+		map.put("list", list);
+		map.put("nick", nick);
+		return map;
+		
+	}
+	
+	//자유게시판 상세보기
+	@Transactional
+	public ModelAndView clubFreeDetail(HashMap<String, String> params, String member_id) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		ModelAndView mav = new ModelAndView();
+		
+		String club_id = params.get("club_id");
+		String clubBbs_id = params.get("clubBbs_id");
+		
+		String nick = clubBbsInter.findnickName(club_id, member_id);
+		
+		if(nick == null) {
+			mav.setViewName("c07-error");
+		}else {
+			//조회수 올리기
+			clubBbsInter.clubBbsHit(clubBbs_id);
+			
+			mav.addObject("info", clubBbsInter.clubBoardDetail(clubBbs_id));
+			mav.setViewName("c11");
+		}
+		return mav;
+	}
+	
+	
+		
 	/*************************************파일업로드***************************************/
 
 	//파일 업로드
