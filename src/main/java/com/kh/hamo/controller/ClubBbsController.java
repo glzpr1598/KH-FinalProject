@@ -163,6 +163,75 @@ public class ClubBbsController {
 	}
 	
 	
+	/*************************************자유게시판***************************************/
+	
+	
+	//자유게시판 리스트 폼
+	@RequestMapping(value="/clubFreeBbsList")
+	public String clubFreeBbsListForm() {
+		logger.info("자유게시판 리스트 폼");
+		return "c09";
+	}
+	
+	//자유게시판 리스트 조회  
+	@RequestMapping(value = "/clubFreeBbsListForm")
+	public @ResponseBody HashMap<String, Object> clubFreeBbsListForm(@RequestParam("club_id") String club_id, @RequestParam("sort") String clubBbs_sort,HttpSession session) {
+		logger.info("자유게시판 리스트");
+		String member_id = (String)session.getAttribute("userId");
+		return clubBbsService.clubFreeBbsList(club_id,clubBbs_sort,member_id);
+	}
+		
+	//자유게시판 상세보기
+	@RequestMapping(value = "/clubFreeBbsDetail")
+	public ModelAndView clubFreeDetail(@RequestParam HashMap<String, String> params, HttpSession session) {
+		logger.info("자유게시판 상세보기");
+		String member_id = (String) session.getAttribute("userId");
+		return clubBbsService.clubFreeDetail(params,member_id);
+	}	
+	
+	//자유게시판 글쓰기 폼
+	@RequestMapping(value="/clubFreeBbsWriteForm")
+	public String clubFreeBbsWriteForm() {
+		logger.info("자유게시판 글쓰기 폼");
+		return "c10";
+	}
+	
+	//자유게시판 글쓰기
+	@RequestMapping(value="/clubFreeBbsWrite")
+	public ModelAndView clubFreeWrite(@RequestParam HashMap<String, String> params, HttpSession session) {
+		logger.info("자유게시판 글쓰기 호출");
+		String member_id = (String) session.getAttribute("member_id");
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubFreeWrite(params,member_id,root);
+	}
+	
+	//자유게시판 수정 폼 
+	@RequestMapping(value = "/clubFreeUpdateForm")
+	public ModelAndView clubFreeUpdateForm(@RequestParam HashMap<String, String> params) {
+		logger.info("자유게시판 게시판 수정 폼");
+		return clubBbsService.clubFreeUpdateForm(params);
+	}
+	
+	//자유게시판 수정
+	@RequestMapping(value = "/clubFreeBbsUpdate")
+	public ModelAndView clubFreeBbsUpdate(@RequestParam HashMap<String, String> params,HttpSession session) {
+		logger.info("자유게시판 게시판 수정");
+		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
+		String root = session.getServletContext().getRealPath("/");
+		return clubBbsService.clubFreeBbsUpdate(params,clubBbs_id,root);
+	}		
+	
+	//자유게시판 삭제
+	@RequestMapping(value = "/clubFreeBbsDelete")
+	public String clubFreeBbsDelete(@RequestParam HashMap<String, String> params,HttpSession session) {
+		logger.info("자유게시판 게시판 삭제");
+		int clubBbs_id = Integer.parseInt(params.get("clubBbs_id"));
+		String root = session.getServletContext().getRealPath("/");
+		clubBbsService.clubFreeBbsDelete(clubBbs_id,root);
+		return "redirect:/clubFreeBbsList?club_id="+params.get("club_id")+"&sort=free";
+	}
+	
+	
 	/*************************************파일업로드***************************************/
 	
 	//파일업로드
