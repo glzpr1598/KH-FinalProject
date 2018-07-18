@@ -50,7 +50,7 @@
 					<input type="hidden" value="${list.meetingPlan_locationX}" id="locationX"/>
 					<input type="hidden" value="${list.meetingPlan_locationY}" id="locationY"/>
 					<textarea readonly  rows="10" cols="70">${list.meetingPlan_content}</textarea>
-					<div id="map" style="width:750px;height:350px;"></div>
+					<div id="map" style="width:800px;height:350px;"></div>
 					<hr>
 					<button id="attend">참석</button>
 					<p><b>참석자</b></p>
@@ -139,7 +139,7 @@
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new daum.maps.LatLng($("#locationX").val(), $("#locationY").val()), // 지도의 중심좌표
-	        level: 3, // 지도의 확대 레벨
+	        level: 5, // 지도의 확대 레벨
 	        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
 	    }; 
 

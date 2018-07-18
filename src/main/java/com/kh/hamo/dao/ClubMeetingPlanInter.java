@@ -8,6 +8,7 @@ public interface ClubMeetingPlanInter {
 
 	ArrayList<ClubMeetingDTO> clubMeetingList(int club_id, String member_id);//모임 일정 리스트
 
+	String clubLocation(String club_id);  // 동호회 지역 가져오기
 
 	int clubMeetingWrite(Object club_id, Object member_id, Object meetingPlan_subject,
 			Object meetingPlan_locationX, Object meetingPlan_locationY, Object meetingPlan_when,
@@ -35,6 +36,8 @@ public interface ClubMeetingPlanInter {
 
 
 	int meetingAttendCancel(String member_id, int parseInt);//모임 참석취소
+
+
 
 
 
