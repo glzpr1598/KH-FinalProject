@@ -22,7 +22,6 @@ public interface ClubMeetingPlanInter {
 	int clubMeetingCount(String club_id);
 
 
-
 	ClubMeetingDTO clubMeetingDetail(int parseInt);//모임 일정 상세보기 
 
 
@@ -36,6 +35,15 @@ public interface ClubMeetingPlanInter {
 
 
 	int meetingAttendCancel(String member_id, int parseInt);//모임 참석취소
+
+
+	int replyAdd(int parseInt, String member_id, String replyContent);//모임참석 댓글 등록
+
+
+	ArrayList<String> replyList(int parseInt, int i);//모임 댓글 리스트
+
+
+	int replyDel(int parseInt, String member_id);//모임 댓글 삭제
 
 
 

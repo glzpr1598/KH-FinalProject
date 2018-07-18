@@ -74,7 +74,7 @@
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef : oEditors,
 		elPlaceHolder: "editor",
-		sSkinURI: "<%= request.getContextPath() %>/resources/smarteditor/SmartEditor2Skin.html",
+		sSkinURI: "<%= request.getContextPath() %>/resources/se2/SmartEditor2Skin.html",
 	     htParams : {
 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseToolbar : true,             
