@@ -134,9 +134,14 @@
 							color: #ff1616;
 							box-sizing: border-box;  
   			    }  
-  			    .aTag:link { color: red; text-decoration: none;}
-				.aTag:visited { color: black; text-decoration: none;}
- 				.aTag:hover { color: blue; text-decoration: underline;}
+  			    .aTag:link { 
+  			   			font-size: 15px;    
+						color: black;
+						text-decoration: none;
+						font-weight: bold;
+						cursor: pointer;
+  			   	}
+				.aTag:visited { color: black; text-decoration: none;}   
 				.aTag{display: none;}    
 				                
 		</style>
@@ -242,7 +247,7 @@
 								$("#spanId").show();      
 								document.getElementById("spanId").innerHTML = "회원님의 아이디는   "+data.userId+"   입니다.";
 								/* $("#msgChk").show();     */
-								$(".aTag").css("display","inline");
+					 			$(".aTag").css("display","inline"); 
 							}else{
 								alert(data.userId);  
 							}
