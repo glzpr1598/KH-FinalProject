@@ -29,19 +29,11 @@ input[type='button'] {
 
 #content {
 	width: 600px;
-	height: 250px;
 	background-color: transparent;
 	resize: none;
 	border-color: #FFBF00;
 	border-width: 1px;
 	border-style: solid;
-}
-
-#file {
-	width: 600px;
-	height: 30px;
-	border: 1px solid #FFBF00;
-	margin-top: -15px;
 }
 
 #reply_div1 {
@@ -109,11 +101,6 @@ a {
 				${detail.mainBbs_hit } | ${detail.mainBbs_date }
 			</div>
 			<div id="content">${detail.mainBbs_content }</div>
-			<h4>첨부파일</h4>
-			<div id="file">
-				<!-- 상세보기 컨트롤러에서 file 리스트 조회 -->
-				<%--  	${detail. }  --%>
-			</div>
 			<h4 id="reply_count">댓글 ${detail.mainBbs_replyCount}</h4>
 			<div id="reply_div1"></div>
 			<div id="reply_div2">
@@ -122,9 +109,9 @@ a {
 					style="width: 75px; height: 47px;">
 			</div>
 			<div id="btn">
-				<input id="freeBbsDelete" type="hidden" value="삭제"> <input
-					id="freeBbsUpdateForm" type="hidden" value="수정"> <input
-					id="freeBbsList" type="button" value="목록">
+				<input id="freeBbsDelete" type="hidden" value="삭제"> 
+				<input id="freeBbsUpdateForm" type="hidden" value="수정"> 
+				<input id="freeBbsList" type="button" value="목록">
 			</div>
 		</div>
 	</div>
@@ -137,8 +124,8 @@ a {
 		if("${sessionScope.userId}" == "${detail.member_id }"){
 			$("#freeBbsDelete").attr("type","button");
 			$("#freeBbsUpdateForm").attr("type","button");
+			
 		}
-		
 		//상세보기 페이지가 리드되자마자 DB에 접속해 해당 게시글에 달린 댓글 리스트 조회해오기
 		//어떻게? 해당 게시글의 아이디를 기준으로 
 		$.ajax({
@@ -169,12 +156,20 @@ a {
 			reply_append+="</div>"
 		}
 		$("#reply_div1").append(reply_append);
+		$(".reply_del").hide();	
+ 		for(var i =0;  i<data.reply_list.length; i++){
+			console.log("${sessionScope.userId}" == data.reply_list[i].member_id);
+			if("${sessionScope.userId}" == data.reply_list[i].member_id){
+				console.log("ID : "+data.reply_list[i].member_id);
+				$('#'+data.reply_list[i].mainBbsReply_id).show();	
+			}
+		} 
 	}
 	//댓글 등록 버튼 클릭 시 아작스 실행
 	$("#reply_rigist").click(function(){
 		console.log("댓글 등록 버튼 클릭!!");
 		var reply = $("#reply_input").val()
-		if(<%=request.getAttribute("userId")%> !=null){	
+		if("${sessionScope.userId}" != null ){	
 			if(confirm("댓글을 등록하시겠습니까?")){	
 					if(reply!=""){
 						$.ajax({
@@ -231,15 +226,10 @@ a {
 					dataType:"JSON",
 					success:function(data){
 						console.log(data);
-						if(data.reply_request =="ok"){
-							console.log("안들어오나???");
-							//하나의 댓글을 감싸고 있는 div 태그 제거
-							div.remove();
-							//댓글 개수 update
-							$("#reply_count").html("댓글 "+data.reply);
-						}else{
-							alert("댓글 삭제 권한이 없습니다!");
-						}
+						//하나의 댓글을 감싸고 있는 div 태그 제거
+						div.remove();
+						//댓글 개수 update
+						$("#reply_count").html("댓글 "+data.reply);
 					},
 					error:function(error){
 						console.log(error);

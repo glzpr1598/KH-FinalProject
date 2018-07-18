@@ -41,14 +41,14 @@
 	<div id="container">
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
-			<form action="freeBbsWrite" name="frm" id="frm">
-			 <div id="title">| 자유게시판 |</div>
+			<form action="" name="frm" id="frm" method="post">
+			 	<div id="title">| 자유게시판 |</div>
 				<input type="text" id="subject" placeholder="포스트 제목을 입력해주세요." name="subject" style="width:766px;"maxlength="20">
 			    <textarea  name="content" id="smarteditor"  placeholder="10" cols="100" style="width:766px; height:312px;">
 			    </textarea>
 			    <div id="btn">
-				    <input type="button" id="cancelbutton" value="취소" />
-				    <input type="button" id="savebutton" value="저장" />
+				    <input type="button" id="cancel" value="취소" />
+				    <input type="button" id="save" value="저장" />
 				 </div>
 			</form>
 		</div>
@@ -76,14 +76,14 @@ $(function(){
     });
      
      //전송버튼 클릭이벤트
-     $("#savebutton").click(function(){
-         //id가 smarteditor인 textarea에 에디터에서 대입
-         editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
-         
+     $("#save").click(function(){
+    	//id가 smarteditor인 textarea에 에디터에서 대입
+	    editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
+		         
          //폼 submit
          	console.log("subject: "+$("#subject").val());
          	console.log("content: "+$("#smarteditor").val());
-         	if( ${sessionScope.userId} !=null){     	
+         	if( "${sessionScope.userId}" !=null){     	
 	         	if($("#subject").val()==""){
 	         		alert("제목을 입력 해 주세요.");
 	         	}else if($("#smarteditor").val()=="<p>&nbsp;</p>" || $("#smarteditor").val()==""){
@@ -94,7 +94,30 @@ $(function(){
 	         		if($("#smarteditor").val().length > 2000){
 	         			alert("최대 2000자 까지 입력 가능합니다");
 	         		}else{
-	         			$("#frm").submit();	
+	        			var str = $("#smarteditor").val();
+
+	        			var pattern = /src="(.*?)"/g;
+	        			var list = str.match(pattern);
+	        			if(list != null) {
+		        			for(var i = 0; i < list.length; i++) {
+		        				list[i] = list[i].substring(list[i].lastIndexOf('/') + 1);
+		        			   list[i] = list[i].substring(0, list[i].length - 1);
+		        			}
+	        			}
+	        			
+	        			var param = "";
+	        			var count =0; //선언
+	        			if(list != null) {
+		        			for(var i = 0; i < list.length; i++){
+		        				param += "&filePath"+i+"="+list[i];
+		        				console.log(param);
+		        				count++;
+		        				console.log("textarea 파일 개수 : "+count);
+		        			}
+	        			}
+	        			console.log("글 쓰기 test");
+	        			$("#frm").attr("action","./freeBbsWrite?count="+count+param);
+	        			$("#frm").submit();
 	         		}
 	         	}
          	}else{
@@ -102,7 +125,7 @@ $(function(){
          	}
      });
      
-    $("#cancelbutton").click(function(){
+    $("#cancel").click(function(){
     	if(confirm("작성을 취소하시겠습니까?")){ 
     		//true 일 경우 자유게시판 리스트로 이동
     		location.href="./freeBbsList";

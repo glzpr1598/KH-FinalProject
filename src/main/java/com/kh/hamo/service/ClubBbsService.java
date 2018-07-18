@@ -198,7 +198,7 @@ public class ClubBbsService {
 	//전제글보기 리스트
 	public HashMap<String, Object> clubAllList(String club_id) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubAllList(club_id);
 		map.put("list", list);
 		return map;

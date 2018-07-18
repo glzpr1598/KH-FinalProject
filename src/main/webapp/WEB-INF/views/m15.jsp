@@ -54,20 +54,15 @@
 	<div id="container">
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
-			<form action="freeBbsUpdate" name="frm" id="frm">
+			<form action="" name="frm" id="frm" method="POST">
 			 	<div id="title">| 자유게시판 |</div>
 			    <h2>${detail.mainBbs_subject }</h2>
 			   <div><span id="member">${detail.member_id }</span> | 조회수 : ${detail.mainBbs_hit } | ${detail.mainBbs_date }</div>
 			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:633px; height:300px;">
 			    </textarea>
 			    <input type="hidden" name="idx" value="${detail.mainBbs_id}">
-			    <h4>첨부파일</h4>
-			    <div id="file">
-			    <!-- 상세보기 컨트롤러에서 file 리스트 조회 -->
-			   <%--  	${detail. }  --%>
-			    </div>
-				    <input type="button" id="cancelbutton" value="취소" />
-				    <input type="button" id="savebutton" value="저장" />
+			    <input type="button" id="cancelbutton" value="취소" />
+			    <input type="button" id="savebutton" value="저장" />
 		    </form>
 		</div>
 		
@@ -77,7 +72,7 @@
 <script>
 $(function(){
 	//textarea에 값 넣기
-	$("#smarteditor").val("${detail.mainBbs_content }");
+	$("#smarteditor").val( '${detail.mainBbs_content }' );
 	console.log("초기 content: "+$("#smarteditor").val());
 	
 	
@@ -109,6 +104,27 @@ $(function(){
         	if($("#smarteditor").val()=="<p>&nbsp;</p>" || $("#smarteditor").val()==""){
         		alert("내용을 입력 해 주세요.");
         	}else{
+        		var str = $("#smarteditor").val();
+        		var pattern = /src="(.*?)"/g;
+        		var list = str.match(pattern);
+        		if(list !=null){
+        			for(var i=0; i < list.length; i++){
+        				list[i] = list[i].substring(list[i].lastIndexOf('/') + 1);
+	        			list[i] = list[i].substring(0, list[i].length - 1);
+        			}
+        		}
+        		var param = "";
+    			var count =0; //선언
+    			if(list != null) {
+        			for(var i = 0; i < list.length; i++){
+        				param += "&filePath"+i+"="+list[i];
+        				console.log(param);
+        				count++;
+        				console.log("textarea 파일 개수 : "+count);
+        			}
+    			}
+    			console.log("글 수정 test");
+    			$("#frm").attr("action","freeBbsUpdate?count="+count+param);
         		$("#frm").submit();	
         	}
         } 

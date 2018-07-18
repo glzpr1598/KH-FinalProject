@@ -76,7 +76,7 @@ public class ClubMeetingPlanService {
 	public HashMap<String, Object> meetingAttend(String meetingPlan_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ArrayList<String> attend= inter.meetingAttend(Integer.parseInt(meetingPlan_id));
-		HashMap<String, Object> result = new HashMap<>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", attend);
 		
 		return result;

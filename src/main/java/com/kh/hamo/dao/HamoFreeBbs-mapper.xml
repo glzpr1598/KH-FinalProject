@@ -28,14 +28,29 @@
 			mainBbs_content,mainBbs_date,mainBbs_replyCount,mainBbs_hit)
 			VALUES(seq_mainbbs_id.NEXTVAL,#{member_id},'자유게시판',seq_freebbs_idx.NEXTVAL,#{mainBbs_subject},#{mainBbs_content},SYSDATE,0,0)
 	</insert>
+	<!-- 자유게시판 이미지 업로드 -->
+	<insert id="freeBbsUpload">
+		INSERT INTO mainBbsFile(mainBbsFile_id,mainBbs_id,mainBbsFile_oldName,mainBbsFile_newName)
+		VALUES(seq_mainbbsfile_id.NEXTVAL,#{param1},#{param3},#{param2})
+	</insert>
+
 	<!-- 자유게시판 글 수정하기 -->
 	<update id="freeBbsUpdate">
 		UPDATE mainBbs SET mainBbs_content=#{param2} WHERE mainBbs_id=#{param1}
 	</update>
+	<delete id="freeBbsFileDel">
+		DELETE FROM mainBbsFile WHERE mainBbs_id = #{param1}
+	</delete>
+	<select id="selectFile" resultType="com.kh.hamo.dto.HamoBbsDTO">
+		SELECT mainBbsFile_newName , mainBbsFile_oldName FROM mainBbsFile WHERE mainBbs_id = #{param1}
+	</select>
 	<!-- 자유게시판 글 삭제  -->
 	<delete id="freeBbsDelete">
 	 	DELETE FROM mainBbs WHERE mainBbs_id = #{param1}
 	</delete>
+	<select id="freeBbsImage" resultType="String">
+		SELECT mainBbsFile_newName FROM mainBbsFile WHERE mainBbs_id =#{param1}
+	</select>
 	<!-- 자유게시판 댓글 등록 -->
 	<insert id="freeBbsReply" parameterType="com.kh.hamo.dto.HamoBbsDTO" useGeneratedKeys="true" keyProperty="mainBbsReply_id" keyColumn="mainBbsReply_id">
 		INSERT INTO mainBbsReply(mainBbsReply_id,mainBbs_id,member_id,mainBbsReply_content,mainBbsReply_date)
@@ -51,10 +66,12 @@
 		TO_CHAR(mainBbsReply_date,'yyyy.mm.dd. hh24:mi') as mainBbsReply_date FROM mainBbsReply WHERE mainBbs_id =#{param1} 
 		ORDER BY mainBbsReply_date ASC
 	</select>
-	<!--자유게시판 삭제 하기 전 댓글을 입력한 회원ID 조회  -->
-	<select id="freeBbsReply_IdCheck" resultType="String">
+	
+ 	<!--자유게시판 삭제 하기 전 댓글을 입력한 회원ID 조회 (댓글 삭제 권한 부여위해) -->
+	<!-- <select id="freeBbsReply_IdCheck" resultType="String">
 		SELECT member_id FROM mainBbsReply WHERE mainBbsReply_id = #{param1}
-	</select>
+	</select> -->
+	 
 	<!-- 자유게시판 댓글 삭제 -->
 	<delete id="freBbsReplyDel">
 		DELETE FROM mainBbsReply WHERE mainBbsReply_id = #{param1}
