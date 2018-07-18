@@ -11,6 +11,9 @@
 	<select id="clubMeetingCount" resultType="int">
 		SELECT count(*) FROM meetingPlan WHERE club_id = #{param1}
 	</select>
+	<select id="clubLocation" resultType="String">
+		SELECT club_location FROM club WHERE club_id = #{param1} 
+	</select>
 	<insert id="clubMeetingWrite">
 		INSERT INTO meetingPlan VALUES(SEQ_MEETINGPLAN_ID.NEXTVAL,#{param1},#{param2},
 			(SELECT MAX(meetingPlan_idx)+1 FROM meetingPlan WHERE club_id=#{param1}),

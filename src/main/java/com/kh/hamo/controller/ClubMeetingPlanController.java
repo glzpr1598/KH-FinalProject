@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,8 +36,10 @@ public class ClubMeetingPlanController {
 	}
 	//모임 일정 등록페이지 이동  
 	@RequestMapping(value = "/clubMeetingWriteForm")
-	public String clubMeetingWriteForm() {
+	public String clubMeetingWriteForm(Model model, @RequestParam String club_id) {
 		logger.info("clubMeetingWriteForm 요청");
+		// 동호회 정보(지역) 가져오기 서비스
+		service.clubLocation(model, club_id);
 		return "c18";
 	}
 	//모임 일정 등록 

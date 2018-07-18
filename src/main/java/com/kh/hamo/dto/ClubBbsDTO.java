@@ -1,6 +1,7 @@
 package com.kh.hamo.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ClubBbsDTO {
 	
@@ -19,7 +20,7 @@ public class ClubBbsDTO {
 	private String clubBbsFile_newName;
 	private int clubBbsReply_id;
 	private String clubBbsReply_content;
-	private Date clubBbsReply_date;
+	private Timestamp clubBbsReply_date;
 	private String club_masterNickname;
 	private String clubJoin_nickname;
 	
@@ -107,10 +108,10 @@ public class ClubBbsDTO {
 	public void setClubBbsReply_content(String clubBbsReply_content) {
 		this.clubBbsReply_content = clubBbsReply_content;
 	}
-	public Date getClubBbsReply_date() {
+	public Timestamp getClubBbsReply_date() {
 		return clubBbsReply_date;
 	}
-	public void setClubBbsReply_date(Date clubBbsReply_date) {
+	public void setClubBbsReply_date(Timestamp clubBbsReply_date) {
 		this.clubBbsReply_date = clubBbsReply_date;
 	}
 	public String getClub_masterNickname() {

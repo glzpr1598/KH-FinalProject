@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.ClubMeetingPlanInter;
@@ -33,6 +34,13 @@ public class ClubMeetingPlanService {
 		return result;
 		
 		
+	}
+	// 동호회 정보(지역) 가져오기 서비스
+	public void clubLocation(Model model, String club_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		
+		String club_location = inter.clubLocation(club_id);
+		model.addAttribute("club_location", club_location);
 	}
 	//모임 일정 등록 
 	public void clubMeetingWrite(HashMap<String, String> list) {

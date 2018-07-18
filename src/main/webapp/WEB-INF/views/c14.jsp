@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="<%= request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <title>Insert title here</title>
 <style>
 	#save{
@@ -74,7 +74,7 @@
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef : oEditors,
 		elPlaceHolder: "editor",
-		sSkinURI: "<%= request.getContextPath() %>/resources/smarteditor/SmartEditor2Skin.html",
+		sSkinURI: "<%= request.getContextPath() %>/resources/se2/SmartEditor2Skin.html",
 	     htParams : {
 			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
 			bUseToolbar : true,             
@@ -97,7 +97,7 @@
 			var pattern = /src="(.*?)"/g;
 			var list = str.match(pattern);
 			for(var i = 0; i < list.length; i++) {
-			   list[i] = list[i].substring(41);
+			   list[i] = list[i].substring(list[i].lastIndexOf('/')+1);
 			   list[i] = list[i].substring(0, list[i].length - 1);
 			}
 			
