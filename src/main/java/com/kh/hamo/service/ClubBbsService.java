@@ -423,6 +423,172 @@ public class ClubBbsService {
 		return mav;
 	}
 	
+	//자유게시판 글 쓰기
+	@Transactional
+	public ModelAndView clubFreeWrite(HashMap<String, String> params, String member_id, String root) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		ArrayList<String> list2 = new ArrayList<String>();
+		ModelAndView mav = new ModelAndView();
+		
+		String page = "redirect:/clubFreeBbsWriteForm?club_id="+params.get("club_id");
+		
+		int clubBbs_idx = 0;
+		//게시글 수
+		int boardCount = clubBbsInter.findCount(Integer.parseInt(params.get("club_id")));
+		if(boardCount == 0) {
+			clubBbs_idx = 1;
+		}else {
+			//최근 글번호 가져오기
+			ArrayList<ClubBbsDTO> list = clubBbsInter.findIdx(params.get("club_id"));
+			clubBbs_idx = list.get(0).getClubBbs_idx() + 1;
+		}
+		
+		int count = Integer.parseInt(params.get("count"));
+		logger.info("textarea 파일 수 : "+count);
+		for(int i=0;i<count;i++) {
+			String file= params.get("filePath"+i);
+			list2.add(file);
+			logger.info("파일list : "+list2.get(i));
+		}
+		
+		ClubBbsDTO dto = new ClubBbsDTO();
+		dto.setMember_id(member_id);
+		dto.setClubBbs_subject(params.get("subject"));
+		dto.setClubBbs_content(params.get("editor"));
+		dto.setClub_id(Integer.parseInt(params.get("club_id")));
+		dto.setClubBbs_sort(params.get("sort"));
+		dto.setClubBbs_idx(clubBbs_idx);
+		
+		if(clubBbsInter.clubWrite(dto) == 1) {
+			page = "redirect:/clubFreeBbsDetail?club_id="+params.get("club_id")+"&clubBbs_id="+dto.getClubBbs_id();
+			for (String key : fileList.keySet()) {
+				int success = 0;
+				for(String fileName:list2) {
+					if(key.equals(fileName)) {
+						success = clubBbsInter.writeFile(key,fileList.get(key),dto.getClubBbs_id());
+					}
+				}
+				if(success < 1) {
+					String fullPath = root+"resources/multiuploader/"+key;
+					File file = new File(fullPath);
+					if(file.exists()) {//삭제할 파일이 존재 한다면
+						file.delete();//파일 삭제
+						logger.info("파일 삭제");
+					}else {
+						logger.info("이미 삭제된 사진");
+					}
+				}
+				logger.info("파일 작성 : "+success);
+			}
+		}
+		fileList.clear();
+		mav.setViewName(page);
+		return mav;
+	}
+	
+	//자유게시판 수정 폼
+	public ModelAndView clubFreeUpdateForm(HashMap<String, String> params) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		ModelAndView mav = new ModelAndView();
+		String clubBbs_id = params.get("clubBbs_id");
+		mav.addObject("info",clubBbsInter.clubUpdateForm(clubBbs_id));
+		mav.setViewName("c12");
+		return mav;
+	}
+	
+	//자유게시판 수정
+	@Transactional
+	public ModelAndView clubFreeBbsUpdate(HashMap<String, String> params, int clubBbs_id, String root) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		ModelAndView mav = new ModelAndView();
+		
+		ArrayList<String> list2 = new ArrayList<String>();
+		ArrayList<String> list = clubBbsInter.findFile(clubBbs_id);
+		
+		int count = Integer.parseInt(params.get("count"));
+		logger.info("textarea 파일 수 : "+count);
+		
+		for(int i=0;i<count;i++) {
+			String file= params.get("filePath"+i);
+			list2.add(file);
+			logger.info("파일list : "+list2.get(i));
+		}	
+		
+		ClubBbsDTO dto = new ClubBbsDTO();
+		dto.setClubBbs_subject(params.get("subject"));
+		dto.setClubBbs_content(params.get("editor"));
+		dto.setClubBbs_id(clubBbs_id);
+		String page = "redirect:/clubFreeUpdateForm?club_id="+params.get("club_id")+"&clubBbs_id="+clubBbs_id;
+		int success = clubBbsInter.clubUpdate(dto);
+		if(success > 0) {
+			page = "redirect:/clubFreeBbsDetail?club_id="+params.get("club_id")+"&clubBbs_id="+clubBbs_id;
+		}
+		if(fileList.size() > 0) {
+			for (String key : fileList.keySet()) {
+				int result = 0;
+				for(String fileName:list2) {
+					if(key.equals(fileName)) {
+						result = clubBbsInter.writeFile(key,fileList.get(key),dto.getClubBbs_id());
+					}
+				}
+				if(result < 1) {
+					String fullPath = root+"resources/multiuploader/"+key;
+					File file = new File(fullPath);
+					if(file.exists()) {//삭제할 파일이 존재 한다면
+						file.delete();//파일 삭제
+						logger.info("파일 삭제");
+					}else {
+						logger.info("이미 삭제된 사진");
+					}
+				}
+				
+				logger.info("파일 작성 : "+success);
+			}
+		}
+		for(String fileName : list) {
+			int result = 0;
+			for(String textArea : list2) {
+				if(fileName.equals(textArea)) {
+					result++;
+				}
+			}
+			if(result <1) {
+				String fullPath = root+"resources/multiuploader/"+fileName;
+				File file = new File(fullPath);
+				if(file.exists()) {//삭제할 파일이 존재 한다면
+					file.delete();//파일 삭제
+					logger.info("파일 삭제");
+				}else {
+					logger.info("이미 삭제된 사진");
+				}
+				clubBbsInter.fileDelete(fileName);
+			}
+		}
+		fileList.clear();
+		mav.setViewName(page);
+		return mav;
+	}
+	
+	//자유게시판 삭제
+	@Transactional
+	public void clubFreeBbsDelete(int clubBbs_id, String root) {
+		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
+		//글 아이디에 해당하는 파일 찾기
+		ArrayList<String> list = clubBbsInter.findFile(clubBbs_id);
+		for (String newFilename : list) {
+			String fullPath = root+"/resources/multiuploader/"+newFilename;
+			System.out.println("파일의 경로 : "+fullPath);
+			File file = new File(fullPath);
+			if(file.exists()) {//삭제할 파일이 존재 한다면
+				file.delete();//파일 삭제
+				logger.info("파일 삭제");
+			}else {
+				logger.info("이미 삭제된 사진");
+			}
+		}
+		clubBbsInter.clubDelete(clubBbs_id);
+	}
+	
 	
 		
 	/*************************************파일업로드***************************************/
