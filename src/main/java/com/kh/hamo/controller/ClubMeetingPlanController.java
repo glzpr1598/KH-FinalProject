@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,8 +36,10 @@ public class ClubMeetingPlanController {
 	}
 	//모임 일정 등록페이지 이동  
 	@RequestMapping(value = "/clubMeetingWriteForm")
-	public String clubMeetingWriteForm() {
+	public String clubMeetingWriteForm(Model model, @RequestParam String club_id) {
 		logger.info("clubMeetingWriteForm 요청");
+		// 동호회 정보(지역) 가져오기 서비스
+		service.clubLocation(model, club_id);
 		return "c18";
 	}
 	//모임 일정 등록 
@@ -84,7 +86,30 @@ public class ClubMeetingPlanController {
 		logger.info("모임 참석");
 		return service.meetingAttendCancel(member_id,meetingPlan_id);
 	}
-	
-	
+	//모임참석 댓글 등록
+		@RequestMapping(value = "/replyAdd")
+		public @ResponseBody HashMap<String, Object> replyAdd(@RequestParam ("meetingPlan_id") String meetingPlan_id,@RequestParam ("member_id") String member_id,
+				@RequestParam  ("replyContent") String replyContent) {
+			logger.info("모임참석 댓글");
+			logger.info(replyContent);
+			logger.info(meetingPlan_id);
+			return service.replyAdd(meetingPlan_id,member_id,replyContent);
+		}
+	//모임 댓글 리스트 
+	@RequestMapping(value = "/replyList")
+	public @ResponseBody HashMap<String, Object> replyList(@RequestParam ("meetingPlan_id") String meetingPlan_id,
+			@RequestParam ("club_id") String club_id) {
+		logger.info("모임 댓글 리스트");
+		return service.replyList(meetingPlan_id,club_id);
+	}
+	//모임 댓글 삭제 
+		@RequestMapping(value = "/replyDel")
+		public @ResponseBody HashMap<String, Object> replyDel(@RequestParam ("meetingPlanReply_id") String meetingPlanReply_id,
+				@RequestParam ("member_id") String member_id) {
+			logger.info("모임 댓글 삭제 ");
+			logger.info(meetingPlanReply_id);
+			return service.replyDel(meetingPlanReply_id,member_id);
+			
+		}
 	
 }

@@ -11,6 +11,9 @@
 	<select id="clubMeetingCount" resultType="int">
 		SELECT count(*) FROM meetingPlan WHERE club_id = #{param1}
 	</select>
+	<select id="clubLocation" resultType="String">
+		SELECT club_location FROM club WHERE club_id = #{param1} 
+	</select>
 	<insert id="clubMeetingWrite">
 		INSERT INTO meetingPlan VALUES(SEQ_MEETINGPLAN_ID.NEXTVAL,#{param1},#{param2},
 			(SELECT MAX(meetingPlan_idx)+1 FROM meetingPlan WHERE club_id=#{param1}),
@@ -36,5 +39,17 @@
 	</select>
 	<delete id="meetingAttendCancel">
 		DELETE FROM meetingAttend WHERE member_id=#{param1} AND meetingPlan_id=#{param2}
+	</delete>
+	<insert id="replyAdd">
+		INSERT INTO meetingPlanReply VALUES(seq_meetingplanreply_id.NEXTVAL,#{param1},#{param2},#{param3},sysdate)
+	</insert>
+	<select id="replyList" resultType="com.kh.hamo.dto.ClubMeetingDTO">
+		SELECT mp.member_id,mp.meetingPlan_id,mp.meetingPlanReply_id,cj.clubJoin_nickname,mp.meetingPlanReply_content,to_char(mp.meetingPlanReply_date , 'YYYY-MM-DD') as meetingPlanReply_date                  
+		FROM meetingPlanReply mp JOIN clubJoin cj ON mp.member_id=cj.member_id
+		WHERE mp.meetingPlan_id=#{param1} AND cj.club_id=#{param2}
+	</select>
+	<delete id="replyDel">
+		DELETE FROM meetingPlanReply 
+		WHERE meetingPlanReply_id=#{param1} AND member_id=#{param2}
 	</delete>
 </mapper>

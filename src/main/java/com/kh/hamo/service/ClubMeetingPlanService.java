@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.ClubMeetingPlanInter;
@@ -33,6 +34,13 @@ public class ClubMeetingPlanService {
 		return result;
 		
 		
+	}
+	// 동호회 정보(지역) 가져오기 서비스
+	public void clubLocation(Model model, String club_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		
+		String club_location = inter.clubLocation(club_id);
+		model.addAttribute("club_location", club_location);
 	}
 	//모임 일정 등록 
 	public void clubMeetingWrite(HashMap<String, String> list) {
@@ -94,7 +102,33 @@ public class ClubMeetingPlanService {
 		int success =inter.meetingAttendCancel(member_id,Integer.parseInt(meetingPlan_id));
 		HashMap<String , Object> map = new HashMap<String , Object>();
 		map.put("list", success);
-		logger.info("참석 성공 : "+success);
+		logger.info("참석 취소  성공 : "+success);
+		return map;
+	}
+	//모임참석 댓글 등록
+	public HashMap<String, Object> replyAdd(String meetingPlan_id, String member_id, String replyContent) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		int success = inter.replyAdd(Integer.parseInt(meetingPlan_id),member_id,replyContent);
+		HashMap<String , Object> map = new HashMap<String , Object>();
+		map.put("list", success);
+		logger.info("등록 : "+success);
+		return map;
+	}
+	//모임 댓글 리스트
+	public HashMap<String, Object> replyList(String meetingPlan_id, String club_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		ArrayList<String> replyList= inter.replyList(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
+		HashMap<String, Object> result = new HashMap<>();
+		result.put("list", replyList);
+		return result;
+	}
+	//모임 댓글 삭제
+	public HashMap<String, Object> replyDel(String meetingPlanReply_id, String member_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		int success = inter.replyDel(Integer.parseInt(meetingPlanReply_id),member_id);
+		HashMap<String , Object> map = new HashMap<String , Object>();
+		map.put("list", success);
+		logger.info("삭제 : "+success);
 		return map;
 	}
 

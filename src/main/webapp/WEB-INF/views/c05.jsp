@@ -30,9 +30,8 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: relative;
-		left: 708px;
-		top: 30px;
+		margin-left:89%;
+		margin-top: 2%;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -78,7 +77,7 @@
 <script>
 	var club_id=<%=request.getParameter("club_id")%>
 	console.log("동호회 아이디 :"+club_id);
-	 
+		
 	 $(document).ready(function(){
 			$.ajax({
 				type : "get",
@@ -86,14 +85,14 @@
 				dataType:"json",
 				data:{
 					"club_id":"<%=request.getParameter("club_id")%>",
-					"member_id": "${sessionScope.member_id}"
+					"member_id": "${sessionScope.userId}"
 				},
 				success:function(data){
-					if(data.nick != null){
-						console.log("동호회 회장 : "+data.nick);
+					if(data.masternick != null){
+						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='inline';
 					}else{
-						console.log("동호회 회장 : "+data.nick);
+						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='none';
 					}
 				},
@@ -144,6 +143,7 @@
 	$("#write").click(function(){
 		location.href="./clubNoticeWriteForm?club_id="+club_id;
 	});
+
 	
 </script>
 </html>

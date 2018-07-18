@@ -21,17 +21,18 @@
 		table{
 			width : 1000px;
 			margin: 15px 0px;
-			text-align: center;
 			border-collapse: collapse;
 			font-size: 13px;
 		}
 		th{
 			background-color:#FDF5DC;
 			height: 35px;
+			text-align: center;
 		}
 		td{
 			border-bottom: 1px solid #ffbf00;
 			height: 35px;
+			text-align: center;
 		}
 		.clubName {
 			width: 500px;
@@ -65,53 +66,47 @@
 		</div>
 	</body>
 	<script>
-	
-		var obj = {};
-		obj.error=function(e){console.log(e)};
-		obj.type="POST";
-		obj.dataType = "JSON";
-		obj.data ={"search": "${search}"};
 		$(document).ready(function(){
+	
+			var obj = {};
+			obj.error=function(e){console.log(e)};
+			obj.type="POST";
+			obj.dataType = "JSON";
 			obj.url="./totalClubSearch";
+			obj.data ={"search": "${search}"};
 			obj.success = function(data){
 				console.log(data);
 				listPrint(data.list);
 
-				 jQuery(document).ready(function($){
+				jQuery(document).ready(function($){
 					$('table tbody').paginathing({
 				    		perPage: 10,
 				    		containerClass: 'paging',
 				    		limitPagination: 5,
 
 					})
-				});   
+				});
+			}
+			$.ajax(obj);
+			function listPrint(list){
+				console.log(list);
+				var content ="";
+				list.forEach(function(item, idx){
+					content +="<tr>";
+					content +="<td><a class='club' href='./clubMain?club_id="+item.club_id+"'>"+item.club_name+"</a></td>";
+					content +="<td>"+item.interest_interest+"</td>";
+					content +="<td>"+item.club_location+"</td>";
+					content +="<td>"+item.club_date+"</td>";
+					content +="<td>"+item.club_memberCount+"</td>";
+					content += "</tr>";
+				});		
+				$("#listTable").append(content);
 				
-		}
-			ajaxCall(obj);
+			}
+		
+		
+		
 		});
-		function listPrint(list){
-			console.log(list);
-			var content ="";
-			list.forEach(function(item, idx){
-				content +="<tr>";
-				content +="<td><a class='club' href='./clubMain?club_id="+item.club_id+"'>"+item.club_name+"</a></td>";
-				content +="<td>"+item.interest_interest+"</td>";
-				content +="<td>"+item.club_location+"</td>";
-				content +="<td>"+item.club_date+"</td>";
-				content +="<td>"+item.club_memberCount+"</td>";
-				content += "</tr>";
-			});		
-			$("#listTable").append(content);
-			
-		}
-		
-		
-		function ajaxCall(param){
-			$.ajax(param);
-		}
-	
-		
-		
 	</script>
 		
 </html>

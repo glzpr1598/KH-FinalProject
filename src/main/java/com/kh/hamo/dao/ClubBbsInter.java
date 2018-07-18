@@ -13,6 +13,9 @@ public interface ClubBbsInter {
 	//공지사항 리스트
 	ArrayList<ClubBbsDTO> clubNoticeList(int club_id, String sort);
 	
+	//동호회 회원 닉네임 조회
+	String findnickName(String club_id, String member_id);
+	
 	//조회수 올리기
 	void clubBbsHit(String clubBbs_id);
 	
@@ -51,6 +54,15 @@ public interface ClubBbsInter {
 	
 	//상세보기
 	ClubBbsDTO clubBoardDetail(String clubBbs_id);
+	
+	//자유게시판 리스트
+	ArrayList<ClubBbsDTO> clubFreeBbsList(String club_id, String clubBbs_sort);
+	
+	//사진첩 리스트 조회
+	ArrayList<ClubBbsDTO> clubPhotoBbsList(int club_id, String clubBbs_sort);
+	
+	//사진첩 사진 가져오기
+	String clubPhoto(int clubBbs_id);
 	
 	//댓글 찾기
 	ClubBbsDTO findReply(String clubBbs_id);

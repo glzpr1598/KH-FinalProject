@@ -478,7 +478,7 @@ $(document).ready(function() {
 		// 하위 카테고리 표시
 		$("#interest2").html(interest);
 		// 상위 카테고리 표시
-		if($(this).attr("class") == null) {
+		if($(this).attr("class") == null || $(this).attr("class") == "all") {
 			$("#interest1").html("");
 		} 
 		else {
@@ -533,7 +533,7 @@ $(document).ready(function() {
 		// 하위 카테고리 표시
 		$("#location2").html(location);
 		// 상위 카테고리 표시
-		if($(this).attr("class") == null) {
+		if($(this).attr("class") == null || $(this).attr("class") == "all") {
 			$("#location1").html("");
 		} 
 		else {
