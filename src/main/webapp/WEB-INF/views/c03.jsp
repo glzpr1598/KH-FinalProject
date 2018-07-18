@@ -14,7 +14,7 @@
 	}
 	#subject{
 		margin-left: 0.5%;
-			margin-top: 1%;
+		margin-top: 1%;
 	}
 	#s{
 		font-size: x-large;
@@ -109,6 +109,10 @@
 	}
 	#replyfrm{
 		width: 800px;
+	}
+	.date{
+		font-weight: 600;
+		font-size: small;
 	}
 </style>	
 </head>
@@ -250,13 +254,14 @@
 		list.forEach(function(item,index){ 
 			console.log(item);
 			content += "<tr>";
-			content += "<td id='nick'>"+item.clubJoin_nickname+"</td>";
+			content += "<td id='nick' width='540px'>"+item.clubJoin_nickname+"</td>";
 			var date = new Date(item.clubBbsReply_date); 
-			content += "<td>"+date.toLocaleDateString("ko-KR",options)+"</td>";
+			content += "<td class='date'>"+date.toLocaleDateString("ko-KR",options)+"&nbsp;&nbsp;&nbsp;|</td>";
 			content += "<td><button class='replyDel' id='"+index+"' value='"+item.member_id+"'>삭제</button></td>";
 			content += "</tr>";
+			content += "<tr><td height='10px;'></td></tr>";
 			content += "<tr>";
-			content += "<td class='last' colspan=3><input id='reply_id"+index+"' type='hidden' value='"+item.clubBbsReply_id+"'/>"+item.clubBbsReply_content+"</td>";
+			content += "<td class='last' colspan=4><input id='reply_id"+index+"' type='hidden' value='"+item.clubBbsReply_id+"'/>"+item.clubBbsReply_content+"</td>";
 			content += "</tr>";
 		});
 		$("#replyTable").append(content);
