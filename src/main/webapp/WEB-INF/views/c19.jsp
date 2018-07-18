@@ -32,6 +32,18 @@
 		p{
 			width: 700px;
 		}
+		table,tr,td{
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+		a{
+			cursor: pointer;
+		}
+		
+		
+		
+		
+		
 	</style>
 
 	</head>
@@ -50,13 +62,30 @@
 					<input type="hidden" value="${list.meetingPlan_locationX}" id="locationX"/>
 					<input type="hidden" value="${list.meetingPlan_locationY}" id="locationY"/>
 					<textarea readonly  rows="10" cols="70">${list.meetingPlan_content}</textarea>
-					<div id="map" style="width:750px;height:350px;"></div>
+					<div id="map" style="width:800px;height:350px;"></div>
 					<hr>
 					<button id="attend">참석</button>
 					<p><b>참석자</b></p>
 					<p id="attendName"></p>
 					<input type="hidden" value="${list.meetingPlan_id}" id="meetingPlan_id"/>
 					<hr>
+					
+					<div id="reply">
+						댓글 <span id="replyCount"></span>
+						<table id="replyTable">
+						</table>
+					</div>
+					<div id="replyfrm">
+							<input type="text" maxlength="150" id="replyContent" name="replyContent"/>
+							<input id="save" type="button" value="등록"/>
+					</div>
+					
+					<div id="btn">
+						<button id="back">목록</button>
+						<button id="update">수정</button>
+						<button id="del">삭제</button>
+					</div>	
+					
 				<!------------------- 양식 ------------------->
 			</div>
 		</div>
@@ -64,62 +93,164 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>	
+	$(document).ready(function(){
+		
+		//댓글
+		$.ajax({
+			type: "post",
+			dataType: "JSON",
+			error: function(e) {console.log(e)},
+			url: "./replyList",
+			data: {
+				"meetingPlan_id": $("#meetingPlan_id").val(),
+				"member_id": "<%= session.getAttribute("userId") %>",
+				"replyContent": $("#replyContent").val()
+			},
+			success: function(data) {
+				console.log(data);
+				console.log(data.list);
+				replyList(data.list);
+			}
+		});
+		function replyList(list){
+			console.log(list);
+			var content ="";
+			list.forEach(function(item, idx){
+				content += "<tr>";
+				content += "<td>"+item.clubJoin_nickname+"</td>";
+				content += "<td><input class='reply' type='hidden' value='"+item.meetingPlanReply_id+"'/>"+item.meetingPlanReply_date+"</td>";
+				content += "<td rowspan=2><a class='replyDel'>삭제</a></td>";
+				content += "</tr>";
+				content += "<tr>";
+				content += "<td colspan=2>"+item.meetingPlanReply_content+"</td>";
+			});		  
+			$("#replyTable").empty();
+			$("#replyTable").append(content);
+			    
+		}
+		//댓글 삭제
+	 	$(document).on("click",".replyDel",function() {
+			$.ajax({
+				type: "post",  
+				dataType: "JSON",
+				error: function(e) {console.log(e)},
+				url: "./replyDel",
+				data: {
+					"meetingPlanReply_id":  $(".reply").val(),
+					"member_id": "<%= session.getAttribute("userId") %>"
+				},
+				success: function(data) {
+					console.log(data.list);
+					$(document).ready(function() {
+						$.ajax({
+							type: "post",
+							dataType: "JSON",
+							error: function(e) {console.log(e)},
+							url: "./replyList",
+							data: {
+								"meetingPlan_id": $("#meetingPlan_id").val(),
+								"member_id": "<%= session.getAttribute("userId") %>",
+								"replyContent": $("#replyContent").val()
+							},
+							success: function(data) {
+								replyList(data.list);
+							}
+						});
+					});
+				}
+			});
+			
+		}); 
+		//댓글 등록
+		$("#save").click(function() {
+			$.ajax({
+				type: "post",
+				dataType: "JSON",
+				error: function(e) {console.log(e)},
+				url: "./replyAdd",
+				data: {
+					"meetingPlan_id": $("#meetingPlan_id").val(),
+					"member_id": "<%= session.getAttribute("userId") %>",
+					"replyContent": $("#replyContent").val()
+				},
+				success: function(data) {
+					$(document).ready(function() {
+						$.ajax({
+							type: "post",
+							dataType: "JSON",
+							error: function(e) {console.log(e)},
+							url: "./replyList",
+							data: {
+								"meetingPlan_id": $("#meetingPlan_id").val(),
+								"member_id": "<%= session.getAttribute("userId") %>",
+								"replyContent": $("#replyContent").val()
+							},
+							success: function(data) {
+								replyList(data.list);
+							}
+						});
+					});
+				}
+			});
+		});
+	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
 		obj.dataType = "JSON";
-		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(), "club_id": "<%= request.getParameter("club_id") %>","member_id":"<%= session.getAttribute("userId") %>"};
-		$(document).ready(function(){
-			obj.url="./meetingAttendList";
-			obj.success = function(data){
-				console.log(data);
-				console.log(data.btn);
-				if(data.btn>=1){
-					$("#attend").html("참석취소");	
-				}
-				$("#attend").click(function(){
-					if($("#attend").html()=="참석"){
-						obj.url="./meetingAttend";
-						obj.success = function(data){
-							console.log(data);
-							$("#attend").html("참석취소");
-							$(document).ready(function(){
-								obj.url="./meetingAttendList";
-								obj.success = function(data){
-									console.log(data);
-									console.log(data.btn);
-									listPrint(data.list);
-								}
-								ajaxCall(obj);
-							});
-							
-							
-			 			}
-						ajaxCall(obj);
-					}else if ($("#attend").html()=="참석취소"){
-						obj.url="./meetingAttendCancel";
-						obj.success = function(data){
-							console.log(data);
-							$("#attend").html("참석");
-							$(document).ready(function(){
-								obj.url="./meetingAttendList";
-								obj.success = function(data){
-									console.log(data);
-									console.log(data.btn);
-									listPrint(data.list);
-								}
-								ajaxCall(obj);
-							});
-							
-							
-						} 
-						ajaxCall(obj);
-					}
-				});
-				listPrint(data.list);
+		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(),
+				"club_id": "<%= request.getParameter("club_id") %>",
+				"member_id":"<%= session.getAttribute("userId") %>",
+				
+		};
+		
+		// 참석자 리스트
+		obj.url="./meetingAttendList";
+		obj.success = function(data){
+			console.log(data);
+			console.log(data.btn);
+			if(data.btn>=1){
+				$("#attend").html("참석취소");	
 			}
-			ajaxCall(obj);
-		});
+			$("#attend").click(function(){
+				if($("#attend").html()=="참석"){
+					obj.url="./meetingAttend";
+					obj.success = function(data){
+						console.log(data);
+						$("#attend").html("참석취소");
+						$(document).ready(function(){
+							obj.url="./meetingAttendList";
+							obj.success = function(data){
+								console.log(data);
+								console.log(data.btn);
+								listPrint(data.list);
+							}
+							ajaxCall(obj);
+						});
+		 			}
+					ajaxCall(obj);
+				}else if ($("#attend").html()=="참석취소"){
+					obj.url="./meetingAttendCancel";
+					obj.success = function(data){
+						console.log(data);
+						$("#attend").html("참석");
+						$(document).ready(function(){
+							obj.url="./meetingAttendList";
+							obj.success = function(data){
+								console.log(data);
+								console.log(data.btn);
+								listPrint(data.list);
+							}
+							ajaxCall(obj);
+						});
+					} 
+					ajaxCall(obj);
+				}
+			});
+			listPrint(data.list);
+		}
+		ajaxCall(obj);
+		
 		    
 		
 		function listPrint(list){
@@ -181,6 +312,6 @@
 		
 		// 인포윈도우를 지도에 표시한다
 		infowindow.open(map, marker);
-			
+	});
 	</script>
 </html>
