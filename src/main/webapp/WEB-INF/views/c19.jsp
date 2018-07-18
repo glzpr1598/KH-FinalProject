@@ -32,14 +32,18 @@
 		p{
 			width: 700px;
 		}
-		table,tr,td{
-			border: 1px solid black;
-			border-collapse: collapse;
+		table{
+			background-color:#FDF5DC; 
 		}
 		a{
 			cursor: pointer;
 		}
-		
+		#replyTable{
+			width: 800px;
+		}
+		.delA{
+			width:50px; 
+		}
 		
 		
 		
@@ -104,12 +108,14 @@
 			data: {
 				"meetingPlan_id": $("#meetingPlan_id").val(),
 				"member_id": "<%= session.getAttribute("userId") %>",
-				"replyContent": $("#replyContent").val()
+				"replyContent": $("#replyContent").val(),
+				"club_id":"<%= request.getParameter("club_id") %>",
 			},
 			success: function(data) {
 				console.log(data);
 				console.log(data.list);
 				replyList(data.list);
+				
 			}
 		});
 		function replyList(list){
@@ -119,7 +125,7 @@
 				content += "<tr>";
 				content += "<td>"+item.clubJoin_nickname+"</td>";
 				content += "<td><input class='reply' type='hidden' value='"+item.meetingPlanReply_id+"'/>"+item.meetingPlanReply_date+"</td>";
-				content += "<td rowspan=2><a class='replyDel'>삭제</a></td>";
+				content += "<td class='delA' rowspan=2><a class='replyDel'>삭제</a></td>";
 				content += "</tr>";
 				content += "<tr>";
 				content += "<td colspan=2>"+item.meetingPlanReply_content+"</td>";
@@ -150,7 +156,8 @@
 							data: {
 								"meetingPlan_id": $("#meetingPlan_id").val(),
 								"member_id": "<%= session.getAttribute("userId") %>",
-								"replyContent": $("#replyContent").val()
+								"replyContent": $("#replyContent").val(),
+								"club_id":"<%= request.getParameter("club_id") %>"
 							},
 							success: function(data) {
 								replyList(data.list);
@@ -166,7 +173,10 @@
 			$.ajax({
 				type: "post",
 				dataType: "JSON",
-				error: function(e) {console.log(e)},
+				error: function(e) {
+					console.log(e);
+					//alert("동호회 회원가입해야 댓글을 작성할 수 있습니다. ");
+				},
 				url: "./replyAdd",
 				data: {
 					"meetingPlan_id": $("#meetingPlan_id").val(),
@@ -183,7 +193,8 @@
 							data: {
 								"meetingPlan_id": $("#meetingPlan_id").val(),
 								"member_id": "<%= session.getAttribute("userId") %>",
-								"replyContent": $("#replyContent").val()
+								"replyContent": $("#replyContent").val(),
+								"club_id":"<%= request.getParameter("club_id") %>"
 							},
 							success: function(data) {
 								replyList(data.list);
@@ -195,7 +206,10 @@
 		});
 	
 		var obj = {};
-		obj.error=function(e){console.log(e)};
+		obj.error=function(e){
+			console.log(e);
+			//alert("동호회 회원가입해야 참석할 수 있습니다. ");
+		};
 		obj.type="POST";
 		obj.dataType = "JSON";
 		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(),

@@ -98,9 +98,9 @@ public class ClubMeetingPlanController {
 	//모임 댓글 리스트 
 	@RequestMapping(value = "/replyList")
 	public @ResponseBody HashMap<String, Object> replyList(@RequestParam ("meetingPlan_id") String meetingPlan_id,
-			@RequestParam ("member_id") String member_id) {
+			@RequestParam ("club_id") String club_id) {
 		logger.info("모임 댓글 리스트");
-		return service.replyList(meetingPlan_id,member_id);
+		return service.replyList(meetingPlan_id,club_id);
 	}
 	//모임 댓글 삭제 
 		@RequestMapping(value = "/replyDel")

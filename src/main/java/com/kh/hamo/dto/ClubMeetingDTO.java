@@ -11,8 +11,14 @@ public class ClubMeetingDTO {
 	private String meetingPlan_locationY;
 	private String meetingPlan_when;
 	private String meetingPlan_money;
+	private String member_id;
 	
-	
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
 	public int getMeetingPlanReply_id() {
 		return meetingPlanReply_id;
 	}

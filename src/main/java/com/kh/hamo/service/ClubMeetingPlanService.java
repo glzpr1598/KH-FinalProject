@@ -115,9 +115,9 @@ public class ClubMeetingPlanService {
 		return map;
 	}
 	//모임 댓글 리스트
-	public HashMap<String, Object> replyList(String meetingPlan_id, String member_id) {
+	public HashMap<String, Object> replyList(String meetingPlan_id, String club_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
-		ArrayList<String> replyList= inter.replyList(Integer.parseInt(meetingPlan_id),member_id);
+		ArrayList<String> replyList= inter.replyList(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("list", replyList);
 		return result;

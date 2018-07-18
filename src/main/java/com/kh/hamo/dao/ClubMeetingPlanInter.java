@@ -40,7 +40,7 @@ public interface ClubMeetingPlanInter {
 	int replyAdd(int parseInt, String member_id, String replyContent);//모임참석 댓글 등록
 
 
-	ArrayList<String> replyList(int parseInt, String member_id);//모임 댓글 리스트
+	ArrayList<String> replyList(int parseInt, int i);//모임 댓글 리스트
 
 
 	int replyDel(int parseInt, String member_id);//모임 댓글 삭제
