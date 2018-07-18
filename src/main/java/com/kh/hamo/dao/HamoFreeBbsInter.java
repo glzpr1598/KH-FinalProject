@@ -14,7 +14,7 @@ public interface HamoFreeBbsInter {
 	
 	void freeBbsHit(String idx); //특정 글 상세 보기 시 조회수 올리기
 	
-	int freeBbsUpdate(String idx, String content); //자유게시판 글 수정하기
+	int freeBbsUpdate(int idx, String content); //자유게시판 글 수정하기
 
 	int freeBbsWrite(HamoBbsDTO dto); //자유게시판 글쓰기
 
@@ -32,8 +32,17 @@ public interface HamoFreeBbsInter {
 
 	int reply_count(int mainBbs_id); //댓글 개수 가져오기
 
-	String freeBbsReply_IdCheck(int reply_id);
+//	String freeBbsReply_IdCheck(int reply_id); //자유게시판 삭제 권한 부여
 
+	int freeBbsUpload(int mainBbs_id, String key, String oldFileNmae); //자유게시판 이미지 업로드 성공 여부 반환
+
+	ArrayList<String> freeBbsImage(String idx); //삭제하려고 하는 글에 몇개의 이미지가 있는지 확인
+
+	int freeBbsFileDel(int idx); //게시글 수정 시 기존 이미지 초기화시킴
+
+	ArrayList<HamoBbsDTO> selectFile(int idx); //수정 하기 전에 게시글에 업로드 된 이미지
+
+	
 
 
 
