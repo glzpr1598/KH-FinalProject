@@ -7,7 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="./resources/js/jundo_paging.js" type="text/javascript"></script>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
 <style>
 	table, th, td {
 		border: thin solid black;
@@ -27,9 +30,9 @@
 			</tr>
 		</thead>
 		<tbody id="tbody">
-			
 		</tbody>
 	</table>
+	<div id="pagingArea"></div>
 </body>
 <script>
 $(document).ready(function(){
@@ -43,21 +46,23 @@ $(document).ready(function(){
 		data: {"search": ""},
 		success: function(data) {
 			
-			var pagingList = $.kPaging(data.list);
-			console.log("pagingList", pagingList);
+			$.paging(data.list, 5, 5, listPrint);
 			
-			content = "";
-			pagingList.forEach(function(item, idx) {
-				content += "<tr>";
-				content += "<td>" + item.club_name + "</td>";
-				content += "<td>" + item.interest_interest + "</td>";
-				content += "<td>" + item.club_location + "</td>";
-				content += "</tr>";
-			});
-	
-			$("#tbody").append(content);
 		}
 	});
+	
+	function listPrint(list) {
+		content = new String();
+		list.forEach(function(item, idx) {
+			content += "<tr>";
+			content += "<td>" + item.club_name + "</td>";
+			content += "<td>" + item.interest_interest + "</td>";
+			content += "<td>" + item.club_location + "</td>";
+			content += "</tr>";
+		});;
+		
+		$("#tbody").html(content);
+	}
 	
 });
 </script>
