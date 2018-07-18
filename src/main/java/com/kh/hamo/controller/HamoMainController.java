@@ -92,4 +92,11 @@ public class HamoMainController {
 		logger.info("동호회 만들기 요청");
 		return "m11";
 	}
+	
+	// 테스트 페이지
+	@RequestMapping(value = "/test")
+	public String test() {
+		logger.info("테스트 페이지 요청");
+		return "test";
+	}
 }
