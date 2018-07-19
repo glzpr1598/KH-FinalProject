@@ -506,7 +506,17 @@
 					success:function(d){
 						if(d.success>0){
 							alert("회원정보 수정이 완료되었습니다.");
-							location.href="./";
+							// 이전 주소
+			            	var referer = "${referer}";
+			            	
+			            	// 이전 주소가 있는 경우
+			            	if(referer != "") {
+			            		location.href = referer;
+			            	}
+			            	// 이전 주소가 없을 경우 메인 페이지로
+			            	else {
+			            		location.href="./";
+			            	}
 						}else{
 							alert("회원정보 수정 실패");
 						}
