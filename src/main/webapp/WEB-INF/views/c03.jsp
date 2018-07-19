@@ -27,10 +27,10 @@
 	#content{
 		margin-left: 0.5%;
 		margin-top: 2%;
+		height: 70%;
 	}
 	#text{
 		resize: none;
-		height: 70%;
 	}
 	#reply{
 		margin-left:0.5%;
@@ -41,21 +41,21 @@
 	}
 	#replyTable{
 		background-color: #FDF5DC;
-		width: 770px;
+		width: 100%;
 	}
 	#replyContent{
 		border: 3px solid #ffbf00;
 		resize: none;
 		margin-left: 0.5%;
 		margin-top: 2%;
-		width: 690px;
+		width: 89.5%;
 		height: 52px;
 		margin-top: 0px;
 	}
 	#save{
 		border: 3px solid #ffbf00;
 		background-color: white;
-		width: 70px;
+		width: 9%;
 		height: 52px;
 		text-align: center;
 		font-weight: 600;
@@ -103,17 +103,17 @@
 		border-bottom: 1px solid #d2d2d2;
 	}
 	#btn{
-		margin-left: 69%;
+		margin-left: 72.5%;
 		margin-top: 2%;
 		width: 800px;
 	}
 	#replyfrm{
-		width: 800px;
+		width: 100%;
+		margin-top: 2%;
 	}
 	.date{
 		font-weight: 600;
 		font-size: small;
-	}
 </style>	
 </head>
 <body>
@@ -209,7 +209,6 @@
 					"clubBbs_id":clubBbs_id
 				},
 				success:function(data){
-					//console.log(data);
 					$("#replyContent").val("");
 					listPrint(data.list);
 					replyCount(data.replyCount);
@@ -249,10 +248,8 @@
 	
 	function listPrint(list){
 		var content = "";
-		console.log(list);
 		$("#replyTable").empty();
 		list.forEach(function(item,index){ 
-			console.log(item);
 			content += "<tr>";
 			content += "<td id='nick' width='10%'>"+item.clubJoin_nickname+"</td>";
 			var date = new Date(item.clubBbsReply_date); 
@@ -274,10 +271,5 @@
 	function replyCount(replyCount){
 		$("#replyCount").html(replyCount.clubBbs_replyCount);
 	}
-	
-	/* $(document).ready(function(){
-		$(".replyDel test").css("display", "inline");
-		console.log($(".replyDel, ."+nickName));
-	}); */
 </script>
 </html>

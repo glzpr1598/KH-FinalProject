@@ -924,7 +924,7 @@ public class ClubBbsService {
 			sFileInfo += "&bNewLine=true";
 			//img 태그의 title속성을 원본 파일명으로 적용
 			sFileInfo += "&sFileName="+fileName;
-			sFileInfo += "&sFileURL="+"/controller/resources/multiuploader/"+realFileNm;
+			sFileInfo += "&sFileURL="+"/hamo/resources/multiuploader/"+realFileNm;
 			PrintWriter print = response.getWriter();
 			fileList.put(realFileNm, fileName);
 			logger.info("업로드 된 파일 개수 : "+fileList.size());

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -122,12 +123,19 @@ public class HamoMemberService {
 	}
 	
 	/**수정폼 - 김응주*/
-	public ModelAndView updateForm(String userId) {
+	public ModelAndView updateForm(String userId, HttpServletRequest request) {
 		inter = sqlSession.getMapper(HamoMemberInter.class);
 		ModelAndView mav = new ModelAndView();
 		if(userId != null) {
-		mav.addObject("bbs", inter.updateForm(userId));
-		ArrayList<Integer> list = inter.updateFormInterest(userId);
+			// 이전 주소
+			String referer = request.getHeader("Referer");
+			String command = referer.substring(referer.lastIndexOf('/'));
+			
+			// 모델에 담아서 보냄
+			mav.addObject("referer", referer);
+			
+			mav.addObject("bbs", inter.updateForm(userId));
+			ArrayList<Integer> list = inter.updateFormInterest(userId);
 
 		
 			int interest1 = 0;
