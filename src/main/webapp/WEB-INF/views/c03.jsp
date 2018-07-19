@@ -209,7 +209,6 @@
 					"clubBbs_id":clubBbs_id
 				},
 				success:function(data){
-					//console.log(data);
 					$("#replyContent").val("");
 					listPrint(data.list);
 					replyCount(data.replyCount);
@@ -249,10 +248,8 @@
 	
 	function listPrint(list){
 		var content = "";
-		console.log(list);
 		$("#replyTable").empty();
 		list.forEach(function(item,index){ 
-			console.log(item);
 			content += "<tr>";
 			content += "<td id='nick' width='10%'>"+item.clubJoin_nickname+"</td>";
 			var date = new Date(item.clubBbsReply_date); 
@@ -274,10 +271,5 @@
 	function replyCount(replyCount){
 		$("#replyCount").html(replyCount.clubBbs_replyCount);
 	}
-	
-	/* $(document).ready(function(){
-		$(".replyDel test").css("display", "inline");
-		console.log($(".replyDel, ."+nickName));
-	}); */
 </script>
 </html>
