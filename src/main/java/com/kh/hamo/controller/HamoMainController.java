@@ -91,7 +91,13 @@ public class HamoMainController {
 		logger.info("동호회 만들기 요청");
 		return "m11";
 	}
-	
+	// 동호회 만들기 페이지
+	@RequestMapping(value = "/clubName_overLap")
+	public @ResponseBody HashMap<String, String> clubName_overLap(
+			@RequestParam HashMap<String, String> map ) {
+		logger.info("동호회 만들기 요청");
+		return map;
+	}
 	// 테스트 페이지
 	@RequestMapping(value = "/test")
 	public String test() {
