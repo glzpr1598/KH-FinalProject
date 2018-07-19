@@ -121,7 +121,7 @@
 			<span id="bar"></span>
 			<a id="login"></a>
 			<span>|</span>
-			<a href="./updateForm" id="update">회원정보수정</a>
+			<a id="update">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
 			<a href="./"><img id="logo" src="./resources/image/logo.png" /></a>
@@ -143,7 +143,7 @@
 	</div>
 </body>
 <script>
-
+/* href="./updateForm" */
      
 	// 로고 클릭
 	$("#logo").click(function() {
@@ -157,10 +157,12 @@
 	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";
 		$("#login").html("로그인");
+		$("#update").html("회원가입");
 		$("#bar").html("");
 	} else {  // 로그인 상태
 		loginState = "login";
 		$("#login").html("로그아웃");
+		$("#update").html("회원정보수정");
 		$("#loginId").html('<%= session.getAttribute("userId") %>');
 		$("#bar").html("|");
 	}
@@ -173,6 +175,16 @@
 		} else {  // 로그아웃 상태
 			// 로그인 페이지로 이동
 			location.href="./loginForm";       
+		}
+	});
+	
+	$("#update").click(function() {
+		if(loginState == "login") {  // 로그인 상태
+			// 로그아웃   
+			location.href="./updateForm";
+		} else {  // 로그아웃 상태
+			// 로그인 페이지로 이동
+			location.href="./hamoJoinForm";            
 		}
 	});
 

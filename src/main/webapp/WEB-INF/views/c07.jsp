@@ -27,10 +27,10 @@
 	#content{
 		margin-left: 0.5%;
 		margin-top: 2%;
+		height: auto;
 	}
-	#text{
-		resize: none;
-		height: 70%;
+	#text img{
+		width: 30%;
 	}
 	#reply{
 		margin-left:0.5%;
@@ -41,21 +41,21 @@
 	}
 	#replyTable{
 		background-color: #FDF5DC;
-		width: 770px;
+		width: 100%;
 	}
 	#replyContent{
 		border: 3px solid #ffbf00;
 		resize: none;
 		margin-left: 0.5%;
 		margin-top: 2%;
-		width: 690px;
+		width: 89.5%;
 		height: 52px;
 		margin-top: 0px;
 	}
 	#save{
 		border: 3px solid #ffbf00;
 		background-color: white;
-		width: 70px;
+		width: 9%;
 		height: 52px;
 		text-align: center;
 		font-weight: 600;
@@ -103,12 +103,13 @@
 		border-bottom: 1px solid #d2d2d2;
 	}
 	#btn{
-		margin-left: 69%;
+		margin-left: 72.5%;
 		margin-top: 2%;
 		width: 800px;
 	}
 	#replyfrm{
-		width: 800px;
+		width: 100%;
+		margin-top: 2%;
 	}
 	.date{
 		font-weight: 600;
