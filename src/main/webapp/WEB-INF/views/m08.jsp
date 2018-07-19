@@ -5,9 +5,9 @@
 	<head>
 	
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-   <script src="./resources/js/paginathing.js" type="text/javascript"></script>   
+	<script src="./resources/paging/paging.js" type="text/javascript"></script>
+	<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
@@ -63,11 +63,12 @@
 				<tbody >
 				</tbody>
 			</table>
+			<div id="pagingArea"></div>
 		</div>
 	</body>
 	<script>
 		$(document).ready(function(){
-	
+			
 			var obj = {};
 			obj.error=function(e){console.log(e)};
 			obj.type="POST";
@@ -75,21 +76,11 @@
 			obj.url="./totalClubSearch";
 			obj.data ={"search": "${search}"};
 			obj.success = function(data){
-				console.log(data);
-				listPrint(data.list);
-
-				jQuery(document).ready(function($){
-					$('table tbody').paginathing({
-				    		perPage: 10,
-				    		containerClass: 'paging',
-				    		limitPagination: 5,
-
-					})
-				});
+				list = data.list;
+				$.paging(data.list, 10, 10, listPrint);
 			}
 			$.ajax(obj);
 			function listPrint(list){
-				console.log(list);
 				var content ="";
 				list.forEach(function(item, idx){
 					content +="<tr>";
@@ -100,11 +91,11 @@
 					content +="<td>"+item.club_memberCount+"</td>";
 					content += "</tr>";
 				});		
-				$("#listTable").append(content);
+				$("tbody").html(content);
 				
 			}
-		
-		
+			
+			
 		
 		});
 	</script>

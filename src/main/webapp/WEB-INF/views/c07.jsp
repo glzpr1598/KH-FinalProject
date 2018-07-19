@@ -27,8 +27,10 @@
 	#content{
 		margin-left: 0.5%;
 		margin-top: 2%;
-		height: 70%;
-		overflow: hidden;
+		height: auto;
+	}
+	#text img{
+		width: 30%;
 	}
 	#reply{
 		margin-left:0.5%;

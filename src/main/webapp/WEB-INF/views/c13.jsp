@@ -35,7 +35,7 @@
 		width: 800px;
 	}
 	.move img{
-		border: 3px solid #ffbf00;
+		border: 2px solid #ffbf00;
 		margin-bottom: 1%;
 	}
 	.move{
