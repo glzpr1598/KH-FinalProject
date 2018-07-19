@@ -401,7 +401,6 @@
 		<%@ include file="./footer.jsp" %>     
 </body>
 <script>
-
 var size = "${size}";
 
 /* 동호회가 5개 이상일때 */
