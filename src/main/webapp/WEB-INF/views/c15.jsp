@@ -27,9 +27,9 @@
 	#content{
 		margin-left: 0.5%;
 		margin-top: 2%;
+		height: auto;
 	}
 	#text{
-		resize: none;
 		height: 70%;
 	}
 	#reply{
@@ -41,21 +41,21 @@
 	}
 	#replyTable{
 		background-color: #FDF5DC;
-		width: 770px;
+		width: 100%;
 	}
 	#replyContent{
 		border: 3px solid #ffbf00;
 		resize: none;
 		margin-left: 0.5%;
 		margin-top: 2%;
-		width: 690px;
+		width: 89.5%;
 		height: 52px;
 		margin-top: 0px;
 	}
 	#save{
 		border: 3px solid #ffbf00;
 		background-color: white;
-		width: 70px;
+		width: 9%;
 		height: 52px;
 		text-align: center;
 		font-weight: 600;
@@ -103,12 +103,13 @@
 		border-bottom: 1px solid #d2d2d2;
 	}
 	#btn{
-		margin-left: 69%;
+		margin-left: 72.5%;
 		margin-top: 2%;
 		width: 800px;
 	}
 	#replyfrm{
-		width: 800px;
+		width: 100%;
+		margin-top: 2%;
 	}
 	.date{
 		font-weight: 600;
@@ -183,8 +184,6 @@
 			},
 			success:function(data){
 				if(data){
-					//console.log(data);
-					//console.log(data.replyCount);
 					listPrint(data.list);
 					replyCount(data.replyCount);
 				}
@@ -208,7 +207,6 @@
 					"clubBbs_id":clubBbs_id
 				},
 				success:function(data){
-					//console.log(data);
 					$("#replyContent").val("");
 					listPrint(data.list);
 					replyCount(data.replyCount);
@@ -247,19 +245,21 @@
  	
 	function listPrint(list){
 		var content = "";
-		//console.log(list);
 		$("#replyTable").empty();
 		list.forEach(function(item,index){ 
-			//console.log(item);
 			content += "<tr>";
-			content += "<td id='nick' width='540px'>"+item.clubJoin_nickname+"</td>";
+			content += "<td id='nick' width='10%'>"+item.clubJoin_nickname+"</td>";
 			var date = new Date(item.clubBbsReply_date); 
-			content += "<td class='date'>"+date.toLocaleDateString("ko-KR",options)+"&nbsp;&nbsp;&nbsp;|</td>";
-			content += "<td><button class='replyDel' id='"+index+"' value='"+item.member_id+"'>삭제</button></td>";
+			content += "<td class='date' width='80%'>"+date.toLocaleDateString("ko-KR",options)+"</td>";
+			if(nickName != item.member_id){
+				content += "<td><button class='replyDel' id='"+index+"' value='"+item.member_id+"' style='display:none'>삭제</button></td>";
+			}else{
+				content += "<td width='6%'><button class='replyDel' id='"+index+"' value='"+item.member_id+"'>삭제</button></td>";
+			}
 			content += "</tr>";
-			content += "<tr><td height='10px;'></td></tr>";
+			content += "<tr><td height='5%;'></td></tr>";
 			content += "<tr>";
-			content += "<td class='last' colspan=3><input id='reply_id"+index+"' type='hidden' value='"+item.clubBbsReply_id+"'/>"+item.clubBbsReply_content+"</td>";
+			content += "<td class='last' colspan=4><input id='reply_id"+index+"' type='hidden' value='"+item.clubBbsReply_id+"'/>"+item.clubBbsReply_content+"</td>";
 			content += "</tr>";
 		});
 		$("#replyTable").append(content);

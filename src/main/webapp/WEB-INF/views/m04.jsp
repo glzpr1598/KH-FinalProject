@@ -232,28 +232,43 @@
 	
 	
 	var serialNumber = "인증미완료";
+	var email = "";
 	
-	/* ajax  1. 이메일중복검사 통과시 + 2. 메일인증 전송 */
+
+
+
+	var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;     
+	
+	
+	/* ajax  1. 유효성 검사 통과시 -> 2. 이메일중복검사 통과시 -> 3. 메일인증 전송 */
 	$("#emailChk").click(function(){
-		obj.url="./emailOverlay";
-		obj.data={email:$("input[name='email']").val()};	
-		obj.success=function(d){
-			if(d.success>=1){
-				document.getElementById("emailMsg").innerHTML =" 사용중인 이메일 입니다.";
-			}else{
-					obj.url="./emailChk";
-					obj.data={email:$("input[name='email']").val()};	
-					obj.success=function(d){
-						document.getElementById("emailMsg").innerHTML =" 사용가능한 이메일 입니다. ";
-						$("#emailMsg").css("color","green");
-						serialNumber = d.serialNumber;		
+		if(!regExp.test($("#emailInput").val())){ 
+		      alert("이메일 주소가 유효하지 않습니다"); 
+		      $("#emailInput").focus(); 
+		} else { 
+			obj.url="./emailOverlay";
+			obj.data={email:$("input[name='email']").val()};	
+			obj.success=function(d){
+				if(d.success>=1){
+					document.getElementById("emailMsg").innerHTML =" 사용중인 이메일 입니다.";
+				}else{
 						alert("입력하신 이메일로 인증번호를 전송하였습니다.");
-						console.log(serialNumber);
-					};
-					ajaxCall(obj);
-			}
-		};
-		ajaxCall(obj);
+						document.getElementById("emailMsg").innerHTML =" 사용가능한 이메일 입니다. ";   
+						$("#emailMsg").css("color","green");
+						obj.url="./emailChk";
+						obj.data={email:$("input[name='email']").val()};	
+						obj.success=function(d){
+							serialNumber = d.serialNumber;		
+							email = $("input[name='email']").val();
+							console.log(serialNumber);
+							console.log(email);       
+						};
+						ajaxCall(obj);   
+				}
+			};
+			ajaxCall(obj);     
+		} 
+
 	}); 
 	
 
@@ -293,7 +308,7 @@ $("#only_number2").keyup(function () {
 });
 	
 	
-	function ajaxCall(obj){
+	function ajaxCall(obj){    
 		$.ajax(obj);
 	}
 	
@@ -303,7 +318,7 @@ $("#only_number2").keyup(function () {
 	function itemChange(){
 	
 		var first = ["소분류"];
-		var sports = ["축구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
+		var sports = ["축구","농구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
 		var tour = ["등산","캠핑","국내여행","해외여행","낚시"];
 		var show = ["뮤지컬/오페라","공연/연극","영화","전시회","고궁/문화재"];
 		var music = ["노래/보컬","기타/베이스","드럼","피아노","밴드","작사/작곡","클래식","재즈","락/메탈"];
@@ -357,7 +372,7 @@ $("#only_number2").keyup(function () {
 	function itemChange2(){
 		
 		var first = ["소분류"];
-		var sports = ["축구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
+		var sports = ["축구","농구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
 		var tour = ["등산","캠핑","국내여행","해외여행","낚시"];
 		var show = ["뮤지컬/오페라","공연/연극","영화","전시회","고궁/문화재"];
 		var music = ["노래/보컬","기타/베이스","드럼","피아노","밴드","작사/작곡","클래식","재즈","락/메탈"];
@@ -412,7 +427,7 @@ $("#only_number2").keyup(function () {
 	function itemChange3(){
 		
 		var first = ["소분류"];
-		var sports = ["축구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
+		var sports = ["축구","농구","야구","배구","자전거","배트민턴","볼링","테니스/스쿼시","수영","족구"];
 		var tour = ["등산","캠핑","국내여행","해외여행","낚시"];
 		var show = ["뮤지컬/오페라","공연/연극","영화","전시회","고궁/문화재"];
 		var music = ["노래/보컬","기타/베이스","드럼","피아노","밴드","작사/작곡","클래식","재즈","락/메탈"];
@@ -520,13 +535,13 @@ $("#only_number2").keyup(function () {
 			}else if($("input[name='phone']").val()==""){//전화번호 입력 확인
 				alert("전화번호를 확인 해 주세요");
 				$("input[name='phone']").focus();//포커스 이동
-			}else if($("input[name='email']").val()==""){//이메일 입력 확인
+			}else if($("input[name='email']").val()=="" || $("input[name='email']").val()!=email){//이메일 입력 확인     
 				alert("이메일을 확인 해 주세요");
 				$("input[name='email']").focus();//포커스 이동   
-			}else if( ($("input[name='serial']").val()!=serialNumber) || ( serialNumber == "인증미완료") ){// 인증번호 확인
+			}else if( ($("input[name='serial']").val()!=serialNumber) || ( serialNumber == "인증미완료") ){// 인증번호 확인   
 				alert("인증번호를 확인해주세요");
 				$("input[name='serial']").focus();//포커스 이동
-			}else if( ($("#select11").val() == "소분류") && ($("#select22").val() == "소분류") && ($("#select33").val() == "소분류") ) {
+			}else if( ($("#select11").val() == "소분류") && ($("#select22").val() == "소분류") && ($("#select33").val() == "소분류") ) {            
 				alert("관심사를 1가지 이상 선택해주세요");
 			}else if($("#select44").val()=="소분류"){
 				alert("지역을 설정해주세요");
