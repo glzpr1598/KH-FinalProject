@@ -38,6 +38,11 @@
 		text-decoration: underline;
 	}
 	
+	#header #link a#nickName {
+		cursor: auto;
+		text-decoration: none;           
+	}
+    
 	/* 동호회 이름 */
 	#clubNameArea {
 		width: 1000px;
@@ -59,6 +64,8 @@
 		<div id="link">
 			<a href="./">HAMO</a>
 			|
+			<a id="nickName"></a>
+			<span id="bar"></span>
 			<a id="login"></a>
 			|
 			<a href="./updateForm">회원정보수정</a>
@@ -111,6 +118,25 @@
 	            $("#createDate").html(data.CLUB_DATE);
 	            $("#subject").html(data.INTEREST_INTEREST);
 	            $("#location").html(data.CLUB_LOCATION);
+
+							    		$.ajax({
+							    	        url: "./nickNameSearch",
+							    	        type: "post",
+							    	        data: {
+							    	            "userId": '<%= session.getAttribute("userId") %>',
+							    	            "clubId" : '<%= request.getParameter("club_id") %>'          
+							    	        },
+							    	        dataType: "json",
+							    	        success: function(data) {
+							    	        	if(data.nick != null){
+							    	      	      $("#nickName").html(data.nick);
+							    		      	  $("#bar").html("|");
+							    	        	}           
+							    	        },
+							    	        error: function(err) {console.log(err);}
+							    	    });
+	            
+	            
 	        },
 	        error: function(err) {console.log(err);}
 	    });

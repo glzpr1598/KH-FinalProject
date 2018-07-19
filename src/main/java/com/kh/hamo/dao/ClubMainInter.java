@@ -10,5 +10,7 @@ public interface ClubMainInter {
 	String clubPicture(String club_id);
 	// 동호회 소개글 가져오기
 	String clubIntroduce(String club_id);
+	// 내 동호회 내 닉네임 가져오기
+	String nickNameSearch(String userId, int clubId);
 
 }

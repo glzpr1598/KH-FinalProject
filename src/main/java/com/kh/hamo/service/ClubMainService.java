@@ -28,6 +28,7 @@ public class ClubMainService {
 		return inter.clubInfo(Integer.parseInt(club_id));
 	}
 
+	
 	// 동호회 사진, 소개글 조회
 	public void clubMain(Model model, String club_id) {
 		inter = sqlSession.getMapper(ClubMainInter.class);
@@ -42,6 +43,14 @@ public class ClubMainService {
 		model.addAttribute("picture", picture);
 		model.addAttribute("introduce", introduce);
 		
+	}
+
+
+	public String nickNameSearch(String userId, String clubId) {
+		inter = sqlSession.getMapper(ClubMainInter.class);
+		
+
+		return  inter.nickNameSearch(userId,Integer.parseInt(clubId)); 
 	}
     
     

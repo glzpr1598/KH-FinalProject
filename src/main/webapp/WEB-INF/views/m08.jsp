@@ -78,14 +78,14 @@
 				console.log(data);
 				listPrint(data.list);
 
-				 /* jQuery(document).ready(function($){
+				jQuery(document).ready(function($){
 					$('table tbody').paginathing({
 				    		perPage: 10,
 				    		containerClass: 'paging',
 				    		limitPagination: 5,
 
 					})
-				});   */ 
+				});
 			}
 			$.ajax(obj);
 			function listPrint(list){
