@@ -28,9 +28,7 @@
 		margin-left: 0.5%;
 		margin-top: 2%;
 		height: 70%;
-	}
-	#text{
-		resize: none;
+		overflow: hidden;
 	}
 	#reply{
 		margin-left:0.5%;
