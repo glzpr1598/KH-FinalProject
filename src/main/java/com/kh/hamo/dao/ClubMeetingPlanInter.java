@@ -45,6 +45,8 @@ public interface ClubMeetingPlanInter {
 
 	int replyDel(int parseInt, String member_id);//모임 댓글 삭제
 
+	int replyCount(String meetingPlan_id);
+
 
 
 

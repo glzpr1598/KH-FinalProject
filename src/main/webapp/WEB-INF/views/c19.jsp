@@ -97,8 +97,8 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>	
+	var replyCount;
 	$(document).ready(function(){
-		
 		//댓글
 		$.ajax({
 			type: "post",
@@ -113,9 +113,9 @@
 			},
 			success: function(data) {
 				console.log(data);    
-				
 				replyList(data.list);
-				
+				replyCount = data.replyCount;   
+				$("#replyCount").html(replyCount);   
 				     
 			}
 		});
@@ -173,6 +173,8 @@
 							},
 							success: function(data) {
 								replyList(data.list);
+								replyCount = data.replyCount;   
+								$("#replyCount").html(replyCount);    
 								
 							}
 						});
@@ -211,6 +213,8 @@
 							},
 							success: function(data) {
 								replyList(data.list);
+								replyCount = data.replyCount;
+								$("#replyCount").html(replyCount); 
 							}
 						});
 					});
