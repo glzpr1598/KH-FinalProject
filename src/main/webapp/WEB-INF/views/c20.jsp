@@ -3,85 +3,86 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
-	<link rel="icon" href="./resources/image/icon-32.png" />
-	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>HAMO</title>
-	<style>
-		.meeting{
-			height: 50px;
-			margin-top: 10px; 
-			font-size: 20px;
-			border: 0px;
-			width: 100%;
-		}
-		p{
-			font-size: 20px;
-		}
-		textarea{
-			font-size: 20px;
-			width: 100%;
-			resize: none;
-		}
+		<link rel="icon" href="./resources/image/icon-32.png" />
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>HAMO</title>
+		<style>
+			.meeting{
+				height: 50px;
+				margin-top: 10px; 
+				font-size: 20px;
+				border: 0px;
+				width: 100%;
+			}
+			p{
+				font-size: 20px;
+			}
+			textarea{
+				font-size: 20px;
+				width: 100%;
+				resize: none;
+			}
+			
+			#ok{
+				position: relative; 
+				top: 640px;
+				margin-bottom: 25px;			
+			}
+			.bottomBtn{
+				width: 50px;
+				padding: 7px 0px;
+				margin-top : 5px;
+				margin-bottom: 5px;
+				background-color: #ffbf00;
+				border: none;
+				border-radius: 5px;
+				color: white;
+				font-weight: bold;
+				font-size: 14px;
+				cursor: pointer;
+				position: relative;
+				left: 40%;
+			}
 		
-		#ok{
-			position: relative; 
-			top: 640px;
-			margin-bottom: 25px;			
-		}
-		.bottomBtn{
-			width: 50px;
-			padding: 7px 0px;
-			margin-top : 5px;
-			margin-bottom: 5px;
-			background-color: #ffbf00;
-			border: none;
-			border-radius: 5px;
-			color: white;
-			font-weight: bold;
-			font-size: 14px;
-			cursor: pointer;
-			position: relative;
-			left: 40%;
-		}
-		.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-		.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-		.map_wrap {position:relative;width:100%;height:500px;}
-		#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-		.bg_white {background:#fff;}
-		#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-		#menu_wrap .option{text-align: center;}
-		#menu_wrap .option p {margin:10px 0;}  
-		#menu_wrap .option button {margin-left:5px;}
-		#placesList li {list-style: none;}
-		#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-		#placesList .item span {display: block;margin-top:4px;}
-		#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-		#placesList .item .info{padding:10px 0 10px 55px;}
-		#placesList .info .gray {color:#8a8a8a;}
-		#placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-		#placesList .info .tel {color:#009900;}
-		#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-		#placesList .item .marker_1 {background-position: 0 -10px;}
-		#placesList .item .marker_2 {background-position: 0 -56px;}
-		#placesList .item .marker_3 {background-position: 0 -102px}
-		#placesList .item .marker_4 {background-position: 0 -148px;}
-		#placesList .item .marker_5 {background-position: 0 -194px;}
-		#placesList .item .marker_6 {background-position: 0 -240px;}
-		#placesList .item .marker_7 {background-position: 0 -286px;}
-		#placesList .item .marker_8 {background-position: 0 -332px;}
-		#placesList .item .marker_9 {background-position: 0 -378px;}
-		#placesList .item .marker_10 {background-position: 0 -423px;}
-		#placesList .item .marker_11 {background-position: 0 -470px;}
-		#placesList .item .marker_12 {background-position: 0 -516px;}
-		#placesList .item .marker_13 {background-position: 0 -562px;}
-		#placesList .item .marker_14 {background-position: 0 -608px;}
-		#placesList .item .marker_15 {background-position: 0 -654px;}
-		#pagination {margin:10px auto;text-align: center;}
-		#pagination a {display:inline-block;margin-right:10px;}
-		#pagination .on {font-weight: bold; cursor: default;color:#777;}
-	</style>
+			.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+			.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+			.map_wrap {position:relative;width:100%;height:500px;}
+			#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+			.bg_white {background:#fff;}
+			#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+			#menu_wrap .option{text-align: center;}
+			#menu_wrap .option p {margin:10px 0;}  
+			#menu_wrap .option button {margin-left:5px;}
+			#placesList li {list-style: none;}
+			#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+			#placesList .item span {display: block;margin-top:4px;}
+			#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+			#placesList .item .info{padding:10px 0 10px 55px;}
+			#placesList .info .gray {color:#8a8a8a;}
+			#placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+			#placesList .info .tel {color:#009900;}
+			#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+			#placesList .item .marker_1 {background-position: 0 -10px;}
+			#placesList .item .marker_2 {background-position: 0 -56px;}
+			#placesList .item .marker_3 {background-position: 0 -102px}
+			#placesList .item .marker_4 {background-position: 0 -148px;}
+			#placesList .item .marker_5 {background-position: 0 -194px;}
+			#placesList .item .marker_6 {background-position: 0 -240px;}
+			#placesList .item .marker_7 {background-position: 0 -286px;}
+			#placesList .item .marker_8 {background-position: 0 -332px;}
+			#placesList .item .marker_9 {background-position: 0 -378px;}
+			#placesList .item .marker_10 {background-position: 0 -423px;}
+			#placesList .item .marker_11 {background-position: 0 -470px;}
+			#placesList .item .marker_12 {background-position: 0 -516px;}
+			#placesList .item .marker_13 {background-position: 0 -562px;}
+			#placesList .item .marker_14 {background-position: 0 -608px;}
+			#placesList .item .marker_15 {background-position: 0 -654px;}
+			#pagination {margin:10px auto;text-align: center;}
+			#pagination a {display:inline-block;margin-right:10px;}
+			#pagination .on {font-weight: bold; cursor: default;color:#777;}
 		
+		</style>
 	</head>
 	<body>
 		<!------------------- 양식 ------------------->
@@ -91,21 +92,23 @@
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
 			<h1> | 모임일정 | </h1>
-			<form action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
-				<input type="text" class="meeting" name="subject" placeholder="제목"/>
-				<input type="text" class="meeting" name="day" placeholder="모임 일시 "/>
-				<input type="text" class="meeting" name="money" placeholder="회비"/>
+			<form action="clubMeetingUpdate?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
+				<input type="text" class="meeting" name="subject" placeholder="제목" value="${list.meetingPlan_subject}"/>        
+				<input type="text" class="meeting" name="day" placeholder="모임 일시 " value="${list.meetingPlan_when}"/>
+				<input type="text" class="meeting" name="money" placeholder="회비" value="${list.meetingPlan_money}"/>
 				<P>내용</P>
-				<textarea name="content" rows="10" cols="70"></textarea>
+				<textarea name="content" rows="10" cols="70">${list.meetingPlan_content}</textarea>
 				<div  id="ok">
+					
+					<input type="hidden" name="meetingPlan_id" value="${list.meetingPlan_id}"/>
 					<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>"/>
 					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
-					<input id="locationX" type="hidden" name="locationX" value=""/>
-					<input id="locationY" type="hidden" name="locationY" value=""/>
-					<input type="submit" value="저장" class="bottomBtn"/>
-					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'"/>
+					<input id="locationX" type="hidden" name="locationX" value="${list.meetingPlan_locationX}"/>
+					<input id="locationY" type="hidden" name="locationY" value="${list.meetingPlan_locationY}"/>
+					<input type="submit" value="수정" class="bottomBtn" />
+					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingDetail?club_id=<%= request.getParameter("club_id") %>&meetingPlan_id=${list.meetingPlan_id}'"/>
 				</div>
-			</form>
+			</form>                     
 			<P>지역</P>
 			<div class="map_wrap" id="mapdiv">
 			    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -114,7 +117,7 @@
 			        <div class="option">
 			            <div>
 			                <form onsubmit="searchPlaces(); return false;">
-								검색 : <input type="text" value=${ club_location } id="keyword" size="15"> 
+								검색 : <input type="text" value="" id="keyword" size="15"> 
 			                    <button type="submit">검색하기</button> 
 			                </form>
 			            </div>
@@ -124,25 +127,27 @@
 			        <div id="pagination"></div>
 			    </div>
 			</div>
- 			
 			<!------------------- 양식 ------------------->
 			</div>
 		</div>
+		
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>
-		$("#exit").click(function(){alert("모임일정 작성 취소");});
+		
+		
 	
 		var markers = [];
-	
+		var locationX =$("#locationX").val();
+		var locationY =$("#locationY").val();
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
-	        center: new daum.maps.LatLng(37.556175, 126.972256), // 지도의 중심좌표
+	        center: new daum.maps.LatLng(locationX, locationY), // 지도의 중심좌표
 	        level: 3, // 지도의 확대 레벨
 	        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
 	    }; 
-
-
+	
+	
 		
 		// 지도를 생성합니다    
 		var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -162,9 +167,8 @@
 		    var keyword = document.getElementById('keyword').value;
 	
 		    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-		        alert('키워드를 입력해주세요!');
 		        return false;
-		    }
+		    }     
 	
 		    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 		    ps.keywordSearch( keyword, placesSearchCB); 
@@ -352,14 +356,14 @@
 		    }
 		}
 	
-
+	
 		// 지도 타입 변경 컨트롤을 생성한다
 		var mapTypeControl = new daum.maps.MapTypeControl();
-
-
+	
+	
 		// 지도에 확대 축소 컨트롤을 생성한다
 		var zoomControl = new daum.maps.ZoomControl();
-
+	
 		// 지도의 우측에 확대 축소 컨트롤을 추가한다
 		map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 		
@@ -370,18 +374,18 @@
 		    markerImageOptions = { 
 		        offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
 		    };
-
+	
 		// 마커 이미지를 생성한다
 		var markerImage = new daum.maps.MarkerImage(markerImageUrl, markerImageSize, markerImageOptions);
-
+	
 		// 지도에 마커를 생성하고 표시한다
 		var marker = new daum.maps.Marker({
-		    position: new daum.maps.LatLng(37.556175, 126.972256), // 마커의 좌표
+		    position: new daum.maps.LatLng(locationX, locationY), // 마커의 좌표
 		    image : markerImage, // 마커의 이미지
 		    map: map // 마커를 표시할 지도 객체
 		});
 		
-
+	
 		// 지도에 클릭 이벤트를 등록합니다
 		// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
 		daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
@@ -392,16 +396,20 @@
 		    // 마커 위치를 클릭한 위치로 옮깁니다
 		    marker.setPosition(latlng);
 		    
-		    var locationX =latlng.getLat();
-		    var locationY =latlng.getLng();
+		    var updateLocationX =latlng.getLat();
+		    var updateLocationY =latlng.getLng();
 		    
 		    var resultDiv = document.getElementById('clickLatlng'); 
-		    $("#locationX").val(locationX);
-		    $("#locationY").val(locationY);
+		    $("#locationX").val(updateLocationX);
+		    $("#locationY").val(updateLocationY);
 		    locationY
 		});
+		// 마커 위에 표시할 인포윈도우를 생성한다
+		var infowindow = new daum.maps.InfoWindow({
+		    content : '<div style="padding:5px;" >여기</div>' // 인포윈도우에 표시할 내용
+		});
 		
-		
-		
+		// 인포윈도우를 지도에 표시한다
+		infowindow.open(map, marker);
 	</script>
 </html>

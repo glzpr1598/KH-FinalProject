@@ -81,9 +81,8 @@
 </body>
 <script>
 	$("#writeBtn").click(function(){
-		console.log("${sessionScope.userId}");
-		//세션 검사 추후에 개발
-		if(${sessionScope.userId ==null }){
+
+		if("${sessionScope.userId}" == "null" ){
 			alert("로그인 후에 서비스 이용 가능합니다.");
 		}else{
 			location.href="freeBbsWriteForm";

@@ -318,7 +318,7 @@ public class HamoFreeBbsService {
 			sFileInfo += "&bNewLine=true";
 			// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 			sFileInfo += "&sFileName="+ filename;
-			sFileInfo += "&sFileURL="+"/controller/resources/photo_upload/"+realFileNm;
+			sFileInfo += "&sFileURL="+"/hamo/resources/photo_upload/"+realFileNm;
 			logger.info("sFileInfo: :  "+sFileInfo);
 			PrintWriter print = response.getWriter();
 			fileList.put(realFileNm, filename); // newFileName , oldFileName

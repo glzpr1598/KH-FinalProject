@@ -24,7 +24,7 @@
 		#{param3},SYSDATE,#{param4},#{param5},#{param6},#{param7},#{param8})
 	</insert>
 	<select id="clubMeetingDetail" resultType="com.kh.hamo.dto.ClubMeetingDTO" >
-		SELECT meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
+		SELECT member_id,meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
 		FROM meetingPlan WHERE meetingPlan_id=#{param1}
 	</select>
 	 <select id="meetingAttendList" resultType="String" >
@@ -52,4 +52,15 @@
 		DELETE FROM meetingPlanReply 
 		WHERE meetingPlanReply_id=#{param1} AND member_id=#{param2}
 	</delete>
+	<select id="clubMeetingUpdateForm" resultType="com.kh.hamo.dto.ClubMeetingDTO" >
+		SELECT meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
+		FROM meetingPlan WHERE meetingPlan_id=#{param1} AND member_id=#{param2}
+	</select>
+	<update id="clubMeetingUpdate">
+		UPDATE meetingPlan SET meetingPlan_subject = #{param4}, meetingPlan_locationX= #{param5}, meetingPlan_locationY= #{param6},meetingPlan_when=#{param7},meetingPlan_money=#{param8},meetingPlan_content=#{param9}
+		WHERE club_id=#{param1} AND member_id=#{param2} AND meetingPlan_id=#{param3}
+	</update>
+	<select id="replyCount" resultType="int">   
+		SELECT count(*) FROM meetingPlanReply WHERE meetingPlan_id=#{param1}
+	</select>
 </mapper>

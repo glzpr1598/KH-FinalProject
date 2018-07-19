@@ -1,5 +1,6 @@
 package com.kh.hamo.service;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.HamoMainInter;
@@ -179,5 +181,75 @@ public class HamoMainService {
 		result.put("list", clubSearch);
 		return result;
 	}
+	
+	
+	/****************윤지현(동호회 중복체크 , 생성 )********/
+	public HashMap<String, Object> clubName_overLap(String club_name) {
+		// TODO Auto-generated method stub
+		logger.info("동호회명 중복 여부 서비스 실행");
+		inter = sqlSession.getMapper(HamoMainInter.class);
+		HashMap<String, Object> returnMap = new HashMap<String, Object>();
+		
+		//success 가 true 일 경우 동호회명 중복이 없다는 의미 ->승인  O
+		boolean success = true;
+		ArrayList<String> check_list = new ArrayList<String>();
+		check_list =inter.clubName_overLap(club_name);
+		logger.info("모든 동호회명 개수 : "+check_list.size());
+		if(check_list.size()>0) {
+			if(check_list.contains(club_name)) {//중복이라면 승인 X
+				success = false ;
+			}
+		}
+		returnMap.put("success", success);
+		return returnMap;
+	}
+	@Transactional
+	public ModelAndView makeClub(HashMap<String, String> map) {
+		logger.info("동호회명 만들기 서비스 실행");
+		inter = sqlSession.getMapper(HamoMainInter.class);
+		ModelAndView mav = new ModelAndView();
+		String page = "redirect:/makeClubForm";
+		String msg = "동호회 만들기에 실패하였습니다. 다시 시도해주세요.";
+		//선택한 관심사가 테이블의 interest id가 무엇인지 확인하기 위해 DB확인필요.
+		int interest_id = inter.interest_check(map.get("interest2"));
+		
+		HamoMainDTO dto =new HamoMainDTO();
+		dto.setClub_name(map.get("club_name"));
+		dto.setClub_introduce(map.get("club_introduce"));
+		dto.setClub_location(map.get("location2"));
+		dto.setInterest_id(interest_id);
+		dto.setMember_id(map.get("member_id"));
+		dto.setClub_masterNickname(map.get("club_masterNickname"));
+		logger.info("멤버 : "+dto.getMember_id());
+	
+		//동호회 만들기 DB에 삽입
+		int success = inter.makeClub(dto);
+		
+		if(success > 0 ) {
+			//동호회에서 회원관리를 위해 회장닉네임도 club회원관리 테이블에 추가시켜줌
+			logger.info("반환 받은 동호회 고유 번호 : "+dto.getClub_id());
+			if(inter.insertMaster(dto) > 0 ) {
+				page ="redirect:/";
+				msg = map.get("club_name")+" 동호회를 생성하였습니다";
+			}		
+		}
+
+		mav.addObject("msg", msg);
+		mav.setViewName(page);
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 

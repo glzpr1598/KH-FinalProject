@@ -36,6 +36,7 @@
 		color: white;
 		text-align: center;
 		display: none;
+		cursor: pointer;
 	}
 	#listTable{
 		text-align: center;
