@@ -76,9 +76,10 @@
 			obj.url="./totalClubSearch";
 			obj.data ={"search": "${search}"};
 			obj.success = function(data){
-				$.paging(data.list, 10, 10, listPrint);
+				$.pagingHash(data.list, 10, 10, listPrint);
 			}
 			$.ajax(obj);
+			
 			function listPrint(list){
 				var content ="";
 				list.forEach(function(item, idx){
