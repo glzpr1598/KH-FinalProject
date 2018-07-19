@@ -26,7 +26,7 @@
 	
 	<!-- 공지사항 상세보기 -->
 	<select id="clubNoticeDetail" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT cb.member_id, cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.member_id = c.member_id WHERE cb.clubBbs_id=#{param1}
+		SELECT cb.member_id, cb.club_id, cb.clubBbs_id, cb.clubBbs_subject, c.club_masterNickname, cb.clubBbs_hit, cb.clubBbs_date, cb.clubBbs_content FROM clubBbs cb JOIN club c ON cb.club_id = c.club_id WHERE cb.clubBbs_id=#{param1}
 	</select>
 	
 	<!-- 게시글 수 가져오기 -->

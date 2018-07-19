@@ -90,19 +90,19 @@
 		
 		if($("#text").val() == ""){
 			alert("제목을 입력하세요");
-			return;
 		}else if($("#editor").val() == "<p>&nbsp;</p>" || $("#editor").val() == ""){
 			alert("내용을 입력하세요.");
-			return;
 		}else{
 			if($("#editor").val().length > 2000){
 				alert("최대 2000자까지 입력 가능합니다.");
-				return;	
 			}else{
 				var str = $("#editor").val();
 
 				var pattern = /src="(.*?)"/g;
 				var list = str.match(pattern);
+				if(list == null){
+					alert("사진을 넣어주세요.");
+				}
 				for(var i = 0; i < list.length; i++) {
 				   list[i] = list[i].substring(list[i].lastIndexOf('/')+1);
 				   list[i] = list[i].substring(0, list[i].length - 1);
