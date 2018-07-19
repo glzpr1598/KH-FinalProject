@@ -85,8 +85,8 @@
 					</div>
 					
 					<div id="btn">
-						<button id="back">목록</button>
-						<button id="update">수정</button>
+						<button id="back" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'">목록</button>
+						<button id="update" onclick="location.href='clubMeetingUpdateForm?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>&meetingPlan_id=${list.meetingPlan_id}'">수정</button>
 						<button id="del">삭제</button>
 					</div>	
 					

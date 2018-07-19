@@ -38,7 +38,6 @@ public class ClubMeetingPlanService {
 	// 동호회 정보(지역) 가져오기 서비스
 	public void clubLocation(Model model, String club_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
-		
 		String club_location = inter.clubLocation(club_id);
 		model.addAttribute("club_location", club_location);
 	}
@@ -70,10 +69,8 @@ public class ClubMeetingPlanService {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ClubMeetingDTO dto = new ClubMeetingDTO();
 		dto= inter.clubMeetingDetail(Integer.parseInt(meetingPlan_id));
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",dto);
-		
 		mav.setViewName("c19");
 		return mav;
 	}
@@ -130,6 +127,34 @@ public class ClubMeetingPlanService {
 		map.put("list", success);
 		logger.info("삭제 : "+success);
 		return map;
+	}
+	//모임 일정 수정 페이지 이동
+	public ModelAndView clubMeetingUpdateForm(String meetingPlan_id, String member_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		ClubMeetingDTO dto = new ClubMeetingDTO();
+		dto=  inter.clubMeetingUpdateForm(Integer.parseInt(meetingPlan_id),member_id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list",dto);
+		mav.setViewName("c20");
+		return mav;
+	}
+	//모임 일정 수정 
+	public void clubMeetingUpdate(HashMap<String, String> list) {
+		logger.info("모임 일정 등록  서비스");
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		String club_id=  list.get("club_id");
+		String member_id=list.get("member_id");
+		String meetingPlan_subject =(String) list.get("subject");
+		String meetingPlan_locationX = (String) list.get("locationX");
+		String meetingPlan_locationY= (String) list.get("locationY");
+		String meetingPlan_when = (String) list.get("day");
+		String meetingPlan_money = (String) list.get("money");
+		String meetingPlan_content = (String) list.get("content");
+		String meetingPlan_id=list.get("meetingPlan_id");
+		
+		int meetingCount = inter.clubMeetingUpdate(Integer.parseInt(club_id),member_id,Integer.parseInt(meetingPlan_id),meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
+				meetingPlan_when,meetingPlan_money,meetingPlan_content);
+		logger.info("수정 성공 :"+meetingCount);
 	}
 
 }
