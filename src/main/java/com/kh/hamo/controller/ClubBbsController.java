@@ -315,9 +315,9 @@ public class ClubBbsController {
 	
 	//댓글 리스트
 	@RequestMapping(value="/clubReplyList")
-	public @ResponseBody HashMap<String, Object>  clubNoticeReplyList(@RequestParam("clubBbs_id") String clubBbs_id) {
+	public @ResponseBody HashMap<String, Object>  clubNoticeReplyList(@RequestParam("clubBbs_id") String clubBbs_id,@RequestParam("club_id") String club_id) {
 		logger.info("댓글 리스트");
-		return clubBbsService.clubReplyList(clubBbs_id);
+		return clubBbsService.clubReplyList(clubBbs_id,club_id);
 	}
 	
 	//댓글 작성
@@ -330,9 +330,9 @@ public class ClubBbsController {
 	
 	//댓글 삭제
 	@RequestMapping(value="/clubReplyDelete")
-	public @ResponseBody HashMap<String, Object>  clubNoticeReplyDelete(@RequestParam("clubBbs_id") String clubBbs_id,@RequestParam("clubBbsReply_id") String clubBbsReply_id) {
+	public @ResponseBody HashMap<String, Object>  clubNoticeReplyDelete(@RequestParam("clubBbs_id") String clubBbs_id,@RequestParam("clubBbsReply_id") String clubBbsReply_id,@RequestParam("club_id") String club_id) {
 		logger.info("댓글 삭제");
-		return clubBbsService.clubReplyDelete(clubBbs_id,clubBbsReply_id);
+		return clubBbsService.clubReplyDelete(clubBbs_id,clubBbsReply_id,club_id);
 	}
 	
 }

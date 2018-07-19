@@ -942,10 +942,11 @@ public class ClubBbsService {
 	}
 		
 	
-	/*************************************댓글***************************************/
+	/*************************************댓글
+	 * @param club_id ***************************************/
 	
 	//댓글 리스트
-	public HashMap<String, Object> clubReplyList(String clubBbs_id) {
+	public HashMap<String, Object> clubReplyList(String clubBbs_id, String club_id) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		
 		//댓글 수 조회
@@ -953,7 +954,7 @@ public class ClubBbsService {
 		logger.info("댓글 수"+replyCount.getClubBbs_replyCount());
 		
 		//리스트 조회
-		ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id);
+		ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id,club_id);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("replyCount", replyCount);
@@ -977,9 +978,10 @@ public class ClubBbsService {
 		if(clubBbsInter.clubReply(dto) == 1) {
 			//댓글 수 증가
 			String clubBbs_id = params.get("clubBbs_id");
+			String club_id = params.get("club_id");
 			clubBbsInter.replyUp(clubBbs_id);
 			//리스트 reload
-			ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id);
+			ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id,club_id);
 			//댓글 수 조회
 			ClubBbsDTO replyCount = clubBbsInter.findReply(clubBbs_id);
 			map.put("list", list);
@@ -990,14 +992,14 @@ public class ClubBbsService {
 	
 	//댓글 삭제
 	@Transactional
-	public HashMap<String, Object> clubReplyDelete(String clubBbs_id, String clubBbsReply_id) {
+	public HashMap<String, Object> clubReplyDelete(String clubBbs_id, String clubBbsReply_id, String club_id) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		//댓글 삭제
 		clubBbsInter.replyDelete(clubBbsReply_id);
 		//댓글 수 감소
 		clubBbsInter.replyDown(clubBbs_id);
 		//댓글 리스트 조회
-		ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id);
+		ArrayList<ClubBbsDTO> list = clubBbsInter.clubReplyList(clubBbs_id,club_id);
 		//댓글 수 조회
 		ClubBbsDTO replyCount = clubBbsInter.findReply(clubBbs_id);
 		HashMap<String, Object> map = new HashMap<String, Object>();
