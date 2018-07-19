@@ -29,6 +29,7 @@
 		margin-left:91.5%;
 		margin-top: 2%;
 		display: none;
+		cursor: pointer;
 	}
 	#table{
 		margin-top: 3%;

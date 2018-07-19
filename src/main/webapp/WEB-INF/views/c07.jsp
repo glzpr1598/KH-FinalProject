@@ -60,6 +60,7 @@
 		text-align: center;
 		font-weight: 600;
 		margin-left: 1%;
+		cursor: pointer;
 	}
 	#del{
 		border: none;
@@ -69,6 +70,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	#update{
 		border: none;
@@ -78,6 +80,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	#back{
 		border: none;	
@@ -87,6 +90,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	.replyDel{
 		color: #5a5a5a;

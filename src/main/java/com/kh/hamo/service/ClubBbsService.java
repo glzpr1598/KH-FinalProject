@@ -117,13 +117,15 @@ public class ClubBbsService {
 			clubBbs_idx = list.get(0).getClubBbs_idx() + 1;
 		}
 		
-		int count = Integer.parseInt(params.get("count"));
-		logger.info("textarea 파일 수 : "+count);
-		
-		for(int i=0;i<count;i++) {
-			String file= params.get("filePath"+i);
-			list2.add(file);
-			logger.info("파일list : "+list2.get(i));
+		if(params.get("count") != null) {
+			int count = Integer.parseInt(params.get("count"));
+			logger.info("textarea 파일 수 : "+count);
+			
+			for(int i=0;i<count;i++) {
+				String file= params.get("filePath"+i);
+				list2.add(file);
+				logger.info("파일list : "+list2.get(i));
+			}
 		}
 
 		//파라미터 값 추출
@@ -137,24 +139,26 @@ public class ClubBbsService {
 		
 		if(clubBbsInter.clubWrite(dto) == 1) {
 			page = "redirect:/clubNoticeDetail?club_id="+params.get("club_id")+"&clubBbs_id="+dto.getClubBbs_id();
-			for (String key : fileList.keySet()) {
-				int success = 0;
-				for(String fileName:list2) {
-					if(key.equals(fileName)) {
-						success = clubBbsInter.writeFile(key,fileList.get(key),dto.getClubBbs_id());
+			if(fileList.size() > 0) {
+				for (String key : fileList.keySet()) {
+					int success = 0;
+					for(String fileName:list2) {
+						if(key.equals(fileName)) {
+							success = clubBbsInter.writeFile(key,fileList.get(key),dto.getClubBbs_id());
+						}
 					}
-				}
-				if(success < 1) {
-					String fullPath = root+"resources/multiuploader/"+key;
-					File file = new File(fullPath);
-					if(file.exists()) {//삭제할 파일이 존재 한다면
-						file.delete();//파일 삭제
-						logger.info("파일 삭제");
-					}else {
-						logger.info("이미 삭제된 사진");
+					if(success < 1) {
+						String fullPath = root+"resources/multiuploader/"+key;
+						File file = new File(fullPath);
+						if(file.exists()) {//삭제할 파일이 존재 한다면
+							file.delete();//파일 삭제
+							logger.info("파일 삭제");
+						}else {
+							logger.info("이미 삭제된 사진");
+						}
 					}
+					logger.info("파일 작성 : "+success);
 				}
-				logger.info("파일 작성 : "+success);
 			}
 		}
 		fileList.clear();
