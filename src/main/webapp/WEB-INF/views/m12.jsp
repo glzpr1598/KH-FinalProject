@@ -50,6 +50,10 @@
 		color: black;
 		font-weight: bold;
 	}
+	
+	#space {
+		height: 200px;
+	}
 </style>
 <body>
 	<%@ include file="./main-header.jsp" %>
@@ -75,8 +79,9 @@
 						</tr>
 					</c:forEach>
 				</table>
-					<input id="writeBtn" type="button" value="글쓰기">
-			</div>
+				<input id="writeBtn" type="button" value="글쓰기">
+				<div id="space"></div>
+		</div>
 	</div>
 </body>
 <script>
