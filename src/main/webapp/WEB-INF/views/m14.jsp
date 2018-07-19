@@ -169,7 +169,7 @@ a {
 	$("#reply_rigist").click(function(){
 		console.log("댓글 등록 버튼 클릭!!");
 		var reply = $("#reply_input").val()
-		if("${sessionScope.userId}" != null ){	
+		if("${sessionScope.userId}" != "" ){	
 			if(confirm("댓글을 등록하시겠습니까?")){	
 					if(reply!=""){
 						$.ajax({

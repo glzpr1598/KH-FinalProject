@@ -424,7 +424,7 @@ public class ClubBbsService {
 		}
 		
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubFreeBbsList(club_id,clubBbs_sort);
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		String nick = clubBbsInter.findnickName(club_id, member_id);
 		map.put("list", list);
 		map.put("nick", nick);
@@ -643,7 +643,7 @@ public class ClubBbsService {
 			fileList.clear();
 		}
 		
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<String> allList = new ArrayList<String>();
 		
 		//사진첩 리스트 가져오기

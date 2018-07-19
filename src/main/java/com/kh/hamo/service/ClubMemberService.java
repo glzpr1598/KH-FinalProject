@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.ClubMemberInter;
 
@@ -68,5 +69,44 @@ public class ClubMemberService {
 		
 		return result;
 	}
-
+	/***********윤지현************/
+	//동호회 소개글 가져오기
+	public void club_introduce(String club_id,Model model) {
+		inter = sqlSession.getMapper(ClubMemberInter.class);
+		String introduce = inter.introduce(club_id);
+		model.addAttribute("introduce", introduce);
+		model.addAttribute("club_id", club_id);
+	}
+	
+	//동호회 닉네임 체크
+		public HashMap<String, Object> club_overLap( 
+				String club_id , String nickName){
+			inter = sqlSession.getMapper(ClubMemberInter.class);
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			// true 일 경우 중복 X -> 승인 O
+			boolean success = true;
+			ArrayList<String> nameList = new ArrayList<String>();
+			nameList = inter.club_overLap(club_id);
+			if(nameList.size()>0) {
+				if(nameList.contains(nickName)) {
+					success = false; //중복 O ->승인 X
+				}
+			}
+			logger.info("승인 여부 : "+success);
+			resultMap.put("success", success);
+			return resultMap;
+		}
+		//동호회 가입하기
+		public String clubJoin(HashMap<String, String> map) {
+			logger.info("동호회 가입하기 서비스 요청");
+			//동호회 가입 실패시 이동 할 페이지
+			inter = sqlSession.getMapper(ClubMemberInter.class);
+			String page = "redirect:/clubJoinForm";
+			int success = inter.clubJoin(map);
+			if(success > 0 ) {
+				logger.info("동호회 가입 성공");
+				page = "redirect:/clubMain?club_id="+map.get("club_id");
+			}
+			return page;
+		}
 }

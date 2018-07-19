@@ -56,13 +56,42 @@ public class ClubMemberController {
 		return service.memberCheck(userId, club_id);
 	}
 	
-	// 동호회 가입하기 페이지
+	// 동호회 가입하기 페이지 + 소개를 DB에 요청
 	@RequestMapping(value = "/clubJoinForm")
-	public String clubJoinForm(HttpSession session, @RequestParam String club_id) {
+	public String clubJoinForm(HttpSession session, 
+			@RequestParam String club_id, Model model) {
 		logger.info("동호회 가입하기 페이지 요청");
 		
+		//동호회 소개글 가져오기
+		service.club_introduce(club_id,model);
 		return "c23";
 	}
+	
+	//동호회 닉네임 체크
+	@RequestMapping(value = "/club_overLap")
+	public @ResponseBody HashMap<String, Object> club_overLap(
+			@RequestParam String club_id , String nickName ) {
+		logger.info("동호회 닉네임 체크 요청");
+		return service.club_overLap(club_id,nickName);
+	}
+	//동호회 가입하기
+	@RequestMapping(value = "/clubJoin")
+	public String clubJoin(HttpSession session, 
+			@RequestParam HashMap<String, String> map) {
+		logger.info("동호회 가입하기 페이지 요청");
+		logger.info("닉네임 : "+map.get("nickname"));
+		logger.info("동호회 ID :"+map.get("club_id"));
+		map.put("member_id",(String)session.getAttribute("userId"));
+		logger.info("회원 ID : "+map.get("member_id"));
+		//동호회 소개글 가져오기
+	
+		return 	service.clubJoin(map);
+	}
+	
+	
+	
+	
+	
 	
 	// 동호회 탈퇴하기 페이지
 	@RequestMapping(value = "/clubOutForm")

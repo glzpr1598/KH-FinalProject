@@ -82,7 +82,7 @@ public class ClubMeetingPlanService {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ArrayList<String> attend= inter.meetingAttendList(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
 		int btn =inter.meetingAttendBtn(member_id,Integer.parseInt(meetingPlan_id));
-		HashMap<String, Object> result = new HashMap<>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", attend);
 		result.put("btn", btn);
 		return result;
@@ -121,7 +121,7 @@ public class ClubMeetingPlanService {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ArrayList<String> replyList= inter.replyList(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
 		int replyCount = inter.replyCount(meetingPlan_id);
-		HashMap<String, Object> result = new HashMap<>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", replyList);
 		result.put("replyCount",replyCount);
 		return result;

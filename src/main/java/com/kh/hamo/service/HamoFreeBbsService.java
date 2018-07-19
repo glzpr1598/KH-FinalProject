@@ -289,7 +289,7 @@ public class HamoFreeBbsService {
 			String dftFilePath = request.getSession().getServletContext().getRealPath("/");
 			logger.info("파일 기본 경로 : "+dftFilePath);
 			//파일 기본경로 _ 상세경로
-			String filePath = dftFilePath + "resources" + File.separator + "photo_upload" + File.separator;
+			String filePath = dftFilePath + "resources" + File.separator+"photo_upload" + File.separator;
 			logger.info("상세 경로 : "+filePath);
 			File file = new File(filePath);
 			if(!file.exists()) {
@@ -318,7 +318,7 @@ public class HamoFreeBbsService {
 			sFileInfo += "&bNewLine=true";
 			// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 			sFileInfo += "&sFileName="+ filename;
-			sFileInfo += "&sFileURL="+"/controller/resources/photo_upload/"+realFileNm;
+			sFileInfo += "&sFileURL="+"/hamo/resources/photo_upload/"+realFileNm;
 			logger.info("sFileInfo: :  "+sFileInfo);
 			PrintWriter print = response.getWriter();
 			fileList.put(realFileNm, filename); // newFileName , oldFileName

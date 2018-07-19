@@ -54,4 +54,18 @@
 		SELECT COUNT(*) FROM clubclose WHERE club_id = #{param1}
 	</select>
 	
+		<!-- *******윤지현****** -->
+	<select id="introduce" resultType="String">
+		SELECT club_introduce FROM club WHERE club_id = #{param1}
+	</select>
+	
+	<select id="club_overLap" resultType="String">
+		SELECT clubJoin_nickname FROM clubJoin WHERE club_id =#{param1}
+	</select>
+	
+	<insert id="clubJoin" parameterType="HashMap">
+		INSERT INTO clubJoin(clubjoin_id,member_id,club_id,clubjoin_nickname)
+		VALUES( seq_clubjoin_id.NEXTVAL,#{member_id},#{club_id},#{nickname})
+	</insert>
+	
 </mapper>

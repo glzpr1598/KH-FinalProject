@@ -82,13 +82,17 @@
 			
 			<!-- 닉네임 설정 -->
 			<div class="subTitle"><i class="fas fa-angle-right"></i> 닉네임 설정</div>
-			<input type="text" name="nickname" maxlength="10" placeholder="닉네임" />
-			
-			<!-- 경고글 -->
-			<div id="alertText">원활한 동호회 운영을 위해 동호회 회장에게 아이디, 이메일, 전화번호가 동호회 이용기간 동안 공개됩니다.<br />
-				<!-- 가입하기 버튼 -->
-				<input type="button" id="joinBtn" value="가입하기" />
-			</div>
+			<form id="form" action="">
+				<input type="text" id="nick_name" name="nickname" value="" maxlength="10" placeholder="닉네임" />
+				<div class="msg" id="nickNameMsg"></div><!-- 에러 메시지 -->
+				<!-- 경고글 -->
+				
+				<div id="alertText">원활한 동호회 운영을 위해 동호회 회장에게 아이디, 이메일, 전화번호가 동호회 이용기간 동안 공개됩니다.<br />
+					<!-- 가입하기 버튼 -->				
+					<input type="hidden" name="club_id" value="${club_id }"/>
+					<input type="button" id="joinBtn" value="가입하기" />	
+				</div>
+			</form>
 	<!------------------- 양식 ------------------->
 		</div>
 	</div>
@@ -96,6 +100,68 @@
 </body>
 <script>
 $(document).ready(function() {
+	/* 동호회 소개 말  가져오기 */
+	var club_introduce = "${introduce}"; 
+	console.log( $('#nick_name').val());
+	$("#club_introduce").html(club_introduce);
+	
+	/* 동호회 닉네임 중복 여부 체크  */
+	//nickName_ok = false : 닉네임명 승인  X
+	var nickName_ok  = false;
+	
+	$("input[name='nickname']").focusout(function(){
+		console.log("focusout");
+		$.ajax({
+			url:"./club_overLap",
+			type:"GET",
+			data:{
+				"club_id" : "${club_id}",
+				"nickName" : $('#nick_name').val()
+			},
+			dataType:"JSON",
+			success:function(data){
+				console.log(data);
+				nickName_ok = data.success ; 
+				if(nickName_ok){
+					$("#nickNameMsg").html("사용가능한 닉네임 입니다.");
+					$("#nickNameMsg").css("color","red");
+				}else{
+					$("#nickNameMsg").html("이미 사용중인 닉네임 입니다.");
+					$("#nickNameMsg").css("color","red");
+				}
+			},error:function(error){console.log(error);}
+		});	
+	});
+	
+	$("#joinBtn").click(function(){
+		/* submit가 0일 경우 모든 조건을 만족했다는 가정 하에 동호호 만들기 요청 */
+		var submit = 0; 		
+		$("#nickNameMsg").html("");
+		
+		if("${sessionScope.userId}" == "null"){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href="./loginForm";
+			submit++
+		}
+		if($('#nick_name').val() == ""){
+			$("#nickNameMsg").html("닉네임을 입력 해주세요");
+			$("#nickNameMsg").css("color","red");
+			submit++
+		}else if(!nickName_ok){
+			$("#nickNameMsg").html("닉네임 중복 여부 확인해주세요");
+			$("#nickNameMsg").css("color","red");
+			submit++
+		}
+		if(submit == 0 ){
+			$("#form").attr("action","./clubJoin");
+			$("#form").submit();
+		}
+	});
+	
+	
+	
+
+	
 	
 });
 </script>

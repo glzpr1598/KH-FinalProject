@@ -216,7 +216,7 @@
 <insert id="makeClub" parameterType="com.kh.hamo.dto.HamoMainDTO" useGeneratedKeys="true" keyProperty="club_id" keyColumn="club_id">
 	INSERT INTO club(club_id,club_name,club_introduce,club_date,club_membercount,
 	club_location,club_masternickname,interest_id,member_id) 
-	VALUES(seq_clubjoin_id.NEXTVAL,#{club_name},#{club_introduce},SYSDATE,0,#{club_location},
+	VALUES(seq_clubjoin_id.NEXTVAL,#{club_name},#{club_introduce},SYSDATE,1,#{club_location},
 	#{club_masterNickname},#{interest_id},#{member_id})
 </insert>
 

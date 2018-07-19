@@ -146,7 +146,7 @@ public class HamoComunityController {
 	
 	
 	//다중파일업로드
-	@RequestMapping(value="/multiplePhotoUpload")
+	@RequestMapping(value="/file_uploader_html.do")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
 		logger.info("파일 업로드 요청");
 		hamoFreeBbsService.hamoFreeBbsUpload(request,response);
