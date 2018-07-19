@@ -115,7 +115,7 @@
 						count++;
 					}
 				}
-				$("#writefrm").attr("action","./clubAllUpdate?club_id=${info.club_id}&clubBbs_id=${info.clubBbs_id}"+param+"&count="+count);
+				$("#writefrm").attr("action","./clubAllUpdate?club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id}+param+"&count="+count);
 				$("#writefrm").submit();
 			}
 		}
