@@ -45,16 +45,13 @@ public interface ClubMeetingPlanInter {
 
 	int replyDel(int parseInt, String member_id);//모임 댓글 삭제
 
-<<<<<<< HEAD
 	ClubMeetingDTO clubMeetingUpdateForm(int parseInt, String member_id);	//모임 일정 수정 페이지 이동
 
 	int clubMeetingUpdate(int parseInt, String member_id, int i, String meetingPlan_subject,
 			String meetingPlan_locationX, String meetingPlan_locationY, String meetingPlan_when,
 			String meetingPlan_money, String meetingPlan_content);//모임 일정 수정
 
-=======
 	int replyCount(String meetingPlan_id);
->>>>>>> f09b5627cab8820d5dd07e88c8d4bb28970e739a
 
 
 
