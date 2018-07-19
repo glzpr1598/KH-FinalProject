@@ -37,6 +37,7 @@
 		color: white;
 		text-align: center;
 		display: none;
+		cursor: pointer;
 	}
 	td a{
 		text-decoration: none;

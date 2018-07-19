@@ -16,34 +16,40 @@
 		width: 1000px;
 		margin: auto;
 	}
-	/* 제목 */
-	#title {
-		font-size: 20px;
-		font-weight: bold;
-	}
 	.list{
-		width: 20px;
-		height: 20px;
+		height: 13px;
 	}
 	#left {
 		width : 180px;
 		float: left;
 	}
+	#right{
+		margin-left: 20px;
+		width: 800px;
+		float:left;
+	}
 	#menu{
-		height: 170px;
-		border: 3px solid #ffbf00;
+		height: 83px;
+		border: medium solid #ffbf00;
 		background-color: #FDF5DC;
-		border-radius:20px;
-		
+		border-radius: 5px;
 	}
 	#menu .menu1{
 		text-decoration: none;
 		color: #5a5a5a;
-		font-weight: 600;
+		font-size: 13px;
+	}
+	#menu .menu1:hover {
+		text-decoration: underline;
 	}
 	.margin{
 		margin:10px;
 		padding:2px;
+	}
+	/* 제목 */
+	#title {
+		font-size: 18px;
+		font-weight: bold;
 	}
 </style>
 </head>

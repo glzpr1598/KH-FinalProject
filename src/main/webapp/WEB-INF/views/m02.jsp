@@ -43,7 +43,7 @@
 					border-radius: 5px;
 					background: #FFBF00;
 					color: #FFFFFF;
-					font-size: 16px;
+					font-size: 14px;
 					font-weight: bold;
 					cursor: pointer;
   			    }
@@ -69,7 +69,7 @@
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
-				    font-size: 15px;
+				    font-size: 14px;
 				    margin: 5px 0px;
 				    cursor: pointer;   
 				    box-sizing: border-box;   
@@ -85,7 +85,7 @@
 				    text-align: center;    
 				    text-decoration: none;
 				    display: inline-block;
-				    font-size: 15px;
+				    font-size: 14px;
 				    margin: 5px 0px;
 				    cursor: pointer;    
 				    box-sizing: border-box;      
@@ -94,15 +94,16 @@
 				}
 				
 				#spanId{
-					width: 300px;      
-					height: 100px;                  
-					margin: 10px auto;     
-					text-align: center;        
-					padding: 37px 0;                           
-					font-size: 15px;        
-					font-weight: bold;   
-					border: 2px solid #ffbf00;
-					box-sizing: border-box;     
+					width: 300px;
+				    height: 70px;
+				    margin: 5px auto;
+				    text-align: center;
+				    padding: 23px 0;
+				    font-size: 14px;
+				    /* font-weight: bold; */
+				    border: medium solid #ffbf00;
+				    border-radius: 5px;
+				    box-sizing: border-box;  
 				}    
 				
 				#emailId{
@@ -135,10 +136,9 @@
 							box-sizing: border-box;  
   			    }  
   			    .aTag:link { 
-  			   			font-size: 15px;    
+  			   			font-size: 13px;    
 						color: black;
 						text-decoration: none;
-						font-weight: bold;
 						cursor: pointer;
   			   	}
 				.aTag:visited { color: black; text-decoration: none;}   
@@ -245,7 +245,7 @@
 							console.log("success");
 							if(data.success){
 								$("#spanId").show();      
-								document.getElementById("spanId").innerHTML = "회원님의 아이디는   "+data.userId+"   입니다.";
+								document.getElementById("spanId").innerHTML = "회원님의 아이디는 <b>"+data.userId+"</b>입니다.";
 								/* $("#msgChk").show();     */
 					 			$(".aTag").css("display","inline"); 
 							}else{
@@ -255,7 +255,7 @@
 						error: function(e){console.log(e)}
 				});      
 			}				
-		});
+		});     
 
 	
 var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값이 필요

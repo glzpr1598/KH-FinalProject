@@ -55,12 +55,12 @@
 		<jsp:include page="club-menu.jsp"/>
 		<div id="right">
 			<div id="title">| 공지사항 |</div>
-			<form name="writefrm" id="writefrm" method="post">
+			<form action="" name="writefrm" id="writefrm" method="post">
 				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/>
     			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${info.clubBbs_content}</textarea>
     			<div id="btn">
 	    			<input id="cancel" type="button" value="취소"/>
-	    			<button id="save">저장</button>
+	    			<input id="save" type="button" value="저장"/>
 	    		</div>
 			</form>
 		</div>
@@ -90,30 +90,33 @@
 		
 		if($("#text").val() == ""){
 			alert("제목을 입력하세요");
-			return;
 		}else if($("#editor").val() == "<p>&nbsp;</p>" || $("#editor").val() == ""){
 			alert("내용을 입력하세요.");
-			return;
 		}else{
 			if($("#editor").val().length > 2000){
 				alert("최대 2000자까지 입력 가능합니다.");
-				return;	
 			}else{
 				var str = $("#editor").val();
 
 				var pattern = /src="(.*?)"/g;
 				var list = str.match(pattern);
-				for(var i = 0; i < list.length; i++) {
-				   list[i] = list[i].substring(list[i].lastIndexOf('/')+1);
-				   list[i] = list[i].substring(0, list[i].length - 1);
-				}
+				
+				if(list != null){
+					for(var i = 0; i < list.length; i++) {
+						   list[i] = list[i].substring(list[i].lastIndexOf('/')+1);
+						   list[i] = list[i].substring(0, list[i].length - 1);
+						}
+					}
 				
 				var param = "";
-				for(var i = 0; i < list.length; i++){
-					param += "&filePath"+i+"="+list[i];
-					count++;
+				if(list != null) {
+					for(var i = 0; i < list.length; i++){
+						param += "&filePath"+i+"="+list[i];
+						count++;
+					}	
 				}
-				writefrm.action = "./clubNoticeUpdate?&club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id}+param+"&count="+count;
+				$("#writefrm").attr("action","./clubNoticeUpdate?&club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id}+param+"&count="+count);
+				$("#writefrm").submit();
 			}
 		}
 	});

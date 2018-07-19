@@ -63,6 +63,7 @@
 					<h4>회비 :${list.meetingPlan_money}</h4>
 					<h4>모임일시 : ${list.meetingPlan_when}</h4>
 					<h4>내용</h4></br>
+					<input type="hidden" value="${list.member_id}" id="member"/>
 					<input type="hidden" value="${list.meetingPlan_locationX}" id="locationX"/>
 					<input type="hidden" value="${list.meetingPlan_locationY}" id="locationY"/>
 					<textarea readonly  rows="10" cols="70">${list.meetingPlan_content}</textarea>
@@ -85,9 +86,9 @@
 					</div>
 					
 					<div id="btn">
-						<button id="back">목록</button>
-						<button id="update">수정</button>
-						<button id="del">삭제</button>
+						<button id="back" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'">목록</button>
+						<button id="update" onclick="location.href='clubMeetingUpdateForm?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>&meetingPlan_id=${list.meetingPlan_id}'" >수정</button>
+						<button id="del">삭제</button>          
 					</div>	
 					
 				<!------------------- 양식 ------------------->
@@ -96,7 +97,18 @@
 		<!------------------- 양식 ------------------->
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
-	<script>	
+	<script>
+	console.log("+++++++++++++++++++++");
+	console.log($("#member").val());
+	console.log("<%= session.getAttribute("userId") %>");   
+	
+
+	if($("#member").val()!="<%= session.getAttribute("userId") %>"){
+		$("#update").hide();
+		$("#del").hide();
+	} 
+	                
+	       
 	var replyCount;
 	$(document).ready(function(){
 		//댓글
