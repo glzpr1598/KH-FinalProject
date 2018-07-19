@@ -184,7 +184,8 @@
 			url: "./clubReplyList",
 			dataType:"json",
 			data:{
-				"clubBbs_id":clubBbs_id
+				"clubBbs_id":clubBbs_id,
+				"club_id":"<%=request.getParameter("club_id")%>"
 			},
 			success:function(data){
 				if(data){
@@ -208,7 +209,8 @@
 				dataType:"json",
 				data:{
 					"replyContent":$("#replyContent").val(),
-					"clubBbs_id":clubBbs_id
+					"clubBbs_id":clubBbs_id,
+					"club_id":"<%=request.getParameter("club_id")%>"
 				},
 				success:function(data){
 					$("#replyContent").val("");
@@ -233,7 +235,8 @@
 				dataType:"json",
 				data:{
 					"clubBbs_id":clubBbs_id,
-					"clubBbsReply_id":$("#reply_id"+index).val()
+					"clubBbsReply_id":$("#reply_id"+index).val(),
+					"club_id":"<%=request.getParameter("club_id")%>"
 				},
 				success:function(data){
 					console.log(data);

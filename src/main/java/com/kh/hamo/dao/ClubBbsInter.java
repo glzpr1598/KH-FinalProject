@@ -68,7 +68,7 @@ public interface ClubBbsInter {
 	ClubBbsDTO findReply(String clubBbs_id);
 	
 	//댓글 리스트
-	ArrayList<ClubBbsDTO> clubReplyList(String clubBbs_id);
+	ArrayList<ClubBbsDTO> clubReplyList(String clubBbs_id, String club_id);
 	
 	//댓글작성
 	int clubReply(ClubBbsDTO dto);
