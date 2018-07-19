@@ -232,7 +232,7 @@
 	
 	
 	var serialNumber = "인증미완료";
-	
+	var email = "";
 	/* ajax  1. 이메일중복검사 통과시 + 2. 메일인증 전송 */
 	$("#emailChk").click(function(){
 		obj.url="./emailOverlay";
@@ -247,8 +247,10 @@
 						document.getElementById("emailMsg").innerHTML =" 사용가능한 이메일 입니다. ";
 						$("#emailMsg").css("color","green");
 						serialNumber = d.serialNumber;		
+						email = $("input[name='email']").val();
 						alert("입력하신 이메일로 인증번호를 전송하였습니다.");
 						console.log(serialNumber);
+						console.log(email);       
 					};
 					ajaxCall(obj);
 			}
@@ -293,7 +295,7 @@ $("#only_number2").keyup(function () {
 });
 	
 	
-	function ajaxCall(obj){
+	function ajaxCall(obj){    
 		$.ajax(obj);
 	}
 	
@@ -520,13 +522,13 @@ $("#only_number2").keyup(function () {
 			}else if($("input[name='phone']").val()==""){//전화번호 입력 확인
 				alert("전화번호를 확인 해 주세요");
 				$("input[name='phone']").focus();//포커스 이동
-			}else if($("input[name='email']").val()==""){//이메일 입력 확인
+			}else if($("input[name='email']").val()=="" || $("input[name='email']").val()!=email){//이메일 입력 확인     
 				alert("이메일을 확인 해 주세요");
 				$("input[name='email']").focus();//포커스 이동   
-			}else if( ($("input[name='serial']").val()!=serialNumber) || ( serialNumber == "인증미완료") ){// 인증번호 확인
+			}else if( ($("input[name='serial']").val()!=serialNumber) || ( serialNumber == "인증미완료") ){// 인증번호 확인   
 				alert("인증번호를 확인해주세요");
 				$("input[name='serial']").focus();//포커스 이동
-			}else if( ($("#select11").val() == "소분류") && ($("#select22").val() == "소분류") && ($("#select33").val() == "소분류") ) {
+			}else if( ($("#select11").val() == "소분류") && ($("#select22").val() == "소분류") && ($("#select33").val() == "소분류") ) {            
 				alert("관심사를 1가지 이상 선택해주세요");
 			}else if($("#select44").val()=="소분류"){
 				alert("지역을 설정해주세요");
