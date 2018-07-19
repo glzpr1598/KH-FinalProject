@@ -99,12 +99,13 @@
 				<P>내용</P>
 				<textarea name="content" rows="10" cols="70">${list.meetingPlan_content}</textarea>
 				<div  id="ok">
+					<input type="hidden" value="${list.member_id}" id="member"/>
 					<input type="hidden" name="meetingPlan_id" value="${list.meetingPlan_id}"/>
 					<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>"/>
 					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
 					<input id="locationX" type="hidden" name="locationX" value="${list.meetingPlan_locationX}"/>
 					<input id="locationY" type="hidden" name="locationY" value="${list.meetingPlan_locationY}"/>
-					<input type="submit" value="수정" class="bottomBtn"/>
+					<input type="submit" value="수정" class="bottomBtn" onclick="check()"/>
 					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingDetail?club_id=<%= request.getParameter("club_id") %>&meetingPlan_id=${list.meetingPlan_id}'"/>
 				</div>
 			</form>                     
@@ -133,6 +134,12 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>
+		function check(){
+			if($("#member").val()!=<%= session.getAttribute("userId") %>){
+				alert("수정못함");
+			}
+		}
+	
 		var markers = [];
 		var locationX =$("#locationX").val();
 		var locationY =$("#locationY").val();
