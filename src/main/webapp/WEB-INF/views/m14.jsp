@@ -8,15 +8,37 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <style>
-#right {
-	width: 800px;
-	float: left;
-	margin-left: 20px;
+#subject {
+	margin-top: 20px;
+	padding: 10px;
+	font-size: 14px;
+	font-weight: bold;
+	border-top: thin solid #ffbf00;
+	border-bottom: thin dashed #ffbf00;
 }
 
 #member {
-	font-weight: 800;
+	padding: 10px; 
+	font-size: 12px;
 }
+
+#content {
+	padding: 10px 10px 50px 10px;
+	font-size: 13px;
+}
+
+#reply_count {
+	padding: 10px;
+	font-size: 13px;
+}
+
+#reply_div1 {
+	background-color: #FDF5DC;
+	padding: 10px;
+	font-size: 13px;
+}
+
+
 
 input[type='button'] {
 	border: none;
@@ -25,23 +47,6 @@ input[type='button'] {
 	margin: 4px;
 	padding: 12px;
 	cursor: pointer;
-}
-
-#content {
-	width: 600px;
-	background-color: transparent;
-	resize: none;
-	border-color: #FFBF00;
-	border-width: 1px;
-	border-style: solid;
-}
-
-#reply_div1 {
-	width: 600px;
-	background-color: #FDCD8C;
-	margin-top: -12px;
-	border-bottom: 1px solid #646464;
-	position: relative;
 }
 
 .reply_del {
@@ -61,9 +66,7 @@ input[type='button'] {
 	border: 1px solid #FFBF00;
 }
 
-h4 {
-	margin-top: 7px;
-}
+
 
 #menu #freeBbs {
 	font-weight: 900;
@@ -80,11 +83,6 @@ h4 {
 	color: black;
 	background-color: white;
 }
-
-span {
-	padding: 5px;
-}
-
 a {
 	cursor: pointer;
 }
@@ -95,13 +93,13 @@ a {
 		<%@ include file="./main-community_menu.jsp"%>
 		<div id="right">
 			<div id="title">| 자유게시판 |</div>
-			<h2>${detail.mainBbs_subject }</h2>
-			<div>
-				<span id="member">${detail.member_id }</span> | 조회수 :
+			<div id="subject">${detail.mainBbs_subject }</div>
+			<div id="member">
+				<span>${detail.member_id }</span> | 조회
 				${detail.mainBbs_hit } | ${detail.mainBbs_date }
 			</div>
 			<div id="content">${detail.mainBbs_content }</div>
-			<h4 id="reply_count">댓글 ${detail.mainBbs_replyCount}</h4>
+			<div id="reply_count">댓글 ${detail.mainBbs_replyCount}</div>
 			<div id="reply_div1"></div>
 			<div id="reply_div2">
 				<input id="reply_input" type="text" value=""> <input

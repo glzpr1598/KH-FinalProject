@@ -8,11 +8,13 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <style>
-	table{
-		width:800px;
+	#comunity {
+		background: #FDF5DC;
+		color: black;
 	}
-	#right{
-	float:left;
+	table{
+		margin-top: 20px;
+		width:800px;
 	}
 	table,th,td{
 		text-align: center;
@@ -20,29 +22,33 @@
 		border-width:1px 0px;
 		border-style:solid;
 		border-color:#ffbf00;
-		padding:10px;
-		font-size: 14px;
+		padding: 8px 10px;
+		font-size: 13px;
 	}
 	th{
 		background-color: #FDF5DC;
 	}
 	#writeBtn{
+		margin-top: 10px;
+		float: right;
 		border:none;
+		border-radius: 5px;
 		background-color: #FFBF00;
 		color:white;
-		padding:5px;
+		padding:5px 10px;
 		cursor: pointer;
+		font-weight: bold;
 	}
 	td a{
 		text-decoration: none;
 		color: black;
 	}
 	td a:hover{
-		color:red;
+		text-decoration: underline;
 	}
 	#menu #freeBbs{
-		font-weight: 900;
-		color:black;
+		color: black;
+		font-weight: bold;
 	}
 </style>
 <body>
@@ -75,7 +81,7 @@
 </body>
 <script>
 	$("#writeBtn").click(function(){
-		console.log(${sessionScope.userId});
+		console.log("${sessionScope.userId}");
 		//세션 검사 추후에 개발
 		if(${sessionScope.userId ==null }){
 			alert("로그인 후에 서비스 이용 가능합니다.");
