@@ -35,7 +35,7 @@
 		width: 800px;
 	}
 	.move img{
-		border: 3px solid #ffbf00;
+		border: 2px solid #ffbf00;
 		margin-bottom: 1%;
 	}
 	.move{
@@ -97,7 +97,7 @@
 		content += "<tr>";
 		list.forEach(function(item, index){
 			cnt++;
-			content += "<td class='move'><a href='./clubPhotoBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'><img src='/controller/resources/multiuploader/"+photolist[index]+"' width='250' height='280'></a><br/>"+item.clubBbs_subject+"</td><br/>";
+			content += "<td class='move'><a href='./clubPhotoBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'><img src='/hamo/resources/multiuploader/"+photolist[index]+"' width='250' height='280'></a><br/>"+item.clubBbs_subject+"</td><br/>";
 			if(cnt % 3 == 0){
 				content += "</tr>";
 				content += "<tr>";

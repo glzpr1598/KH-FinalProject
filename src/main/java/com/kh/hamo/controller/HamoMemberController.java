@@ -264,10 +264,10 @@ public class HamoMemberController {
 	
 	/**수정폼 - 김응주*/
 	@RequestMapping(value="/updateForm")
-	public ModelAndView pwUpdate(HttpSession session) {
+	public ModelAndView pwUpdate(HttpSession session, HttpServletRequest request) {
 		String userId = (String) session.getAttribute("userId");
 		logger.info("멤버 수정폼 요청");
-		return service.updateForm(userId);
+		return service.updateForm(userId, request);
 	}
 	
 	/**비밀번호 수정 (새창) - 김응주 */

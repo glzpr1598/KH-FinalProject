@@ -4,6 +4,8 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
 <link rel="icon" href="./resources/image/icon-32.png" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -347,31 +349,33 @@
 		</div>
 		
 		<div id="clubSearch">
-				<a class="order" id="day">
-					<i class="fa fa-check"></i>
-					<span>설립일순</span>
-				</a>
-				&nbsp;
-				<a class="order" id="count">
-					<i class="fa fa-check"></i>
-					<span>회원수순</span>
-				</a>
-				
-				<table>
-					<thead>					
-						<tr>
-							<th class="clubName">동호회 명</th>
-							<th>주제</th>
-							<th>지역</th>
-							<th>설립일</th>
-							<th>회원수 </th>
-						</tr>
-					</thead>
-					<tbody id="clubListTable">
-						<!-- 리스트 보여줄 자리 -->
-					</tbody>
-				</table>
-			</div>
+			<a class="order" id="day">
+				<i class="fa fa-check"></i>
+				<span>설립일순</span>
+			</a>
+			&nbsp;
+			<a class="order" id="count">
+				<i class="fa fa-check"></i>
+				<span>회원수순</span>
+			</a>
+			
+			<table>
+				<thead>					
+					<tr>
+						<th class="clubName">동호회 명</th>
+						<th>주제</th>
+						<th>지역</th>
+						<th>설립일</th>
+						<th>회원수 </th>
+					</tr>
+				</thead>
+				<tbody id="clubListTable">
+					<!-- 리스트 보여줄 자리 -->
+				</tbody>
+			</table>
+		</div>
+		
+		<div id="pagingArea"></div>
 	</div>
 </body>
 <script>
@@ -411,7 +415,8 @@ $(document).ready(function() {
 		dataType: "JSON",
 		error: function(e) {console.log(e);},
 		success: function(data) {
-			listPrint(data.list);
+			$.paging(data.list, 10, 10, listPrint);
+			//listPrint(data.list);
 		}
 	});
 	
@@ -438,7 +443,8 @@ $(document).ready(function() {
 				data.list.sort(function(a, b) { 
 				    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
 				});
-				listPrint(data.list);
+				$.paging(data.list, 10, 10, listPrint);
+				//listPrint(data.list);
 			}
 		});
 	});
@@ -466,7 +472,8 @@ $(document).ready(function() {
 				data.list.sort(function(a, b) { 
 					return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
 				});
-				listPrint(data.list);
+				$.paging(data.list, 10, 10, listPrint);
+				//listPrint(data.list);
 			}
 		});
 	});
@@ -521,7 +528,8 @@ $(document).ready(function() {
 			dataType: "JSON",
 			error: function(e) {console.log(e);},
 			success: function(data) {
-				listPrint(data.list);
+				$.paging(data.list, 10, 10, listPrint);
+				//listPrint(data.list);
 			}
 		});
 	});
@@ -564,7 +572,8 @@ $(document).ready(function() {
 			dataType: "JSON",
 			error: function(e) {console.log(e);},
 			success: function(data) {
-				listPrint(data.list);
+				$.paging(data.list, 10, 10, listPrint);
+				//listPrint(data.list);
 			}
 		});
 	});

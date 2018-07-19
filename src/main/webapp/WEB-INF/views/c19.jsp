@@ -97,8 +97,8 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>	
+	var replyCount;
 	$(document).ready(function(){
-		
 		//댓글
 		$.ajax({
 			type: "post",
@@ -112,10 +112,11 @@
 				"club_id":"<%= request.getParameter("club_id") %>",
 			},
 			success: function(data) {
-				console.log(data);
-				console.log(data.list);
+				console.log(data);    
 				replyList(data.list);
-				
+				replyCount = data.replyCount;   
+				$("#replyCount").html(replyCount);   
+				     
 			}
 		});
 		function replyList(list){
@@ -124,15 +125,26 @@
 			list.forEach(function(item, idx){
 				content += "<tr>";
 				content += "<td>"+item.clubJoin_nickname+"</td>";
-				content += "<td><input class='reply' type='hidden' value='"+item.meetingPlanReply_id+"'/>"+item.meetingPlanReply_date+"</td>";
-				content += "<td class='delA' rowspan=2><a class='replyDel'>삭제</a></td>";
-				content += "</tr>";
+				content += "<td>"+item.meetingPlanReply_date+"</td>";       
+				content += "<td class='delA' rowspan=2 ><a class='replyDel' id='"+item.meetingPlanReply_id+"'>삭제</a></td>";
+				content += "</tr >";
 				content += "<tr>";
-				content += "<td colspan=2>"+item.meetingPlanReply_content+"</td>";
+				content += "<td colspan=2 >"+item.meetingPlanReply_content+"</td>";
+				content += "</tr>";
 			});		  
 			$("#replyTable").empty();
 			$("#replyTable").append(content);
-			    
+			
+			for (var i =0; i<list.length;i++ ){           
+				console.log(list[i].member_id);
+				console.log(list[i].meetingPlanReply_id);
+				console.log($("a#"+list[i].meetingPlanReply_id).attr("id"));
+				if(list[i].member_id=="<%= session.getAttribute("userId") %>"){
+					$("a#"+list[i].meetingPlanReply_id).show();
+				} else{
+					$("a#"+list[i].meetingPlanReply_id).hide();  
+				}
+			}
 		}
 		//댓글 삭제
 	 	$(document).on("click",".replyDel",function() {
@@ -142,7 +154,7 @@
 				error: function(e) {console.log(e)},
 				url: "./replyDel",
 				data: {
-					"meetingPlanReply_id":  $(".reply").val(),
+					"meetingPlanReply_id":  $(this).attr('id'),     
 					"member_id": "<%= session.getAttribute("userId") %>"
 				},
 				success: function(data) {
@@ -161,6 +173,9 @@
 							},
 							success: function(data) {
 								replyList(data.list);
+								replyCount = data.replyCount;   
+								$("#replyCount").html(replyCount);    
+								
 							}
 						});
 					});
@@ -198,6 +213,8 @@
 							},
 							success: function(data) {
 								replyList(data.list);
+								replyCount = data.replyCount;
+								$("#replyCount").html(replyCount); 
 							}
 						});
 					});

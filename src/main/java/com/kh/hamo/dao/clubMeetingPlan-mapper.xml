@@ -52,4 +52,7 @@
 		DELETE FROM meetingPlanReply 
 		WHERE meetingPlanReply_id=#{param1} AND member_id=#{param2}
 	</delete>
+	<select id="replyCount" resultType="int">   
+		SELECT count(*) FROM meetingPlanReply WHERE meetingPlan_id=#{param1}
+	</select>
 </mapper>
