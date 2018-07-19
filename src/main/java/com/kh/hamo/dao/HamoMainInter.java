@@ -31,6 +31,16 @@ public interface HamoMainInter {
 	ArrayList<Integer> searchBest(String userId);
 
 	ArrayList<HamoMainDTO> bestClub(String location, int best1, int best2, int best3);
+	
+	/****윤지현(동호회명 중복 여부 체크)*****/
+	
+	ArrayList<String> clubName_overLap(String club_name); //동호회명 중복 체크
+
+	int interest_check(String interest); //관심사 id 리턴
+
+	int makeClub(HamoMainDTO dto); //동호회 만들기 요청
+
+	int insertMaster(HamoMainDTO dto); //회장 닉네임 동호회 회원 관리 테이블에 추가
 
 
 
