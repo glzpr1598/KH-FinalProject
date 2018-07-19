@@ -233,29 +233,42 @@
 	
 	var serialNumber = "인증미완료";
 	var email = "";
-	/* ajax  1. 이메일중복검사 통과시 + 2. 메일인증 전송 */
+	
+
+
+
+	var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;     
+	
+	
+	/* ajax  1. 유효성 검사 통과시 -> 2. 이메일중복검사 통과시 -> 3. 메일인증 전송 */
 	$("#emailChk").click(function(){
-		obj.url="./emailOverlay";
-		obj.data={email:$("input[name='email']").val()};	
-		obj.success=function(d){
-			if(d.success>=1){
-				document.getElementById("emailMsg").innerHTML =" 사용중인 이메일 입니다.";
-			}else{
-					obj.url="./emailChk";
-					obj.data={email:$("input[name='email']").val()};	
-					obj.success=function(d){
-						document.getElementById("emailMsg").innerHTML =" 사용가능한 이메일 입니다. ";
-						$("#emailMsg").css("color","green");
-						serialNumber = d.serialNumber;		
-						email = $("input[name='email']").val();
+		if(!regExp.test($("#emailInput").val())){ 
+		      alert("이메일 주소가 유효하지 않습니다"); 
+		      $("#emailInput").focus(); 
+		} else { 
+			obj.url="./emailOverlay";
+			obj.data={email:$("input[name='email']").val()};	
+			obj.success=function(d){
+				if(d.success>=1){
+					document.getElementById("emailMsg").innerHTML =" 사용중인 이메일 입니다.";
+				}else{
 						alert("입력하신 이메일로 인증번호를 전송하였습니다.");
-						console.log(serialNumber);
-						console.log(email);       
-					};
-					ajaxCall(obj);
-			}
-		};
-		ajaxCall(obj);
+						document.getElementById("emailMsg").innerHTML =" 사용가능한 이메일 입니다. ";   
+						$("#emailMsg").css("color","green");
+						obj.url="./emailChk";
+						obj.data={email:$("input[name='email']").val()};	
+						obj.success=function(d){
+							serialNumber = d.serialNumber;		
+							email = $("input[name='email']").val();
+							console.log(serialNumber);
+							console.log(email);       
+						};
+						ajaxCall(obj);   
+				}
+			};
+			ajaxCall(obj);     
+		} 
+
 	}); 
 	
 
