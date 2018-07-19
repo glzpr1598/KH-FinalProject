@@ -106,8 +106,10 @@ public class ClubMeetingPlanService {
 	public HashMap<String, Object> replyAdd(String meetingPlan_id, String member_id, String replyContent) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		int success = inter.replyAdd(Integer.parseInt(meetingPlan_id),member_id,replyContent);
+		int replyCount = inter.replyCount(meetingPlan_id);
 		HashMap<String , Object> map = new HashMap<String , Object>();
 		map.put("list", success);
+		map.put("replyCount",replyCount);
 		logger.info("등록 : "+success);
 		return map;
 	}
@@ -115,8 +117,10 @@ public class ClubMeetingPlanService {
 	public HashMap<String, Object> replyList(String meetingPlan_id, String club_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ArrayList<String> replyList= inter.replyList(Integer.parseInt(meetingPlan_id),Integer.parseInt(club_id));
+		int replyCount = inter.replyCount(meetingPlan_id);
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("list", replyList);
+		result.put("replyCount",replyCount);
 		return result;
 	}
 	//모임 댓글 삭제

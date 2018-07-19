@@ -68,7 +68,7 @@
 			<span id="bar"></span>
 			<a id="login"></a>
 			|
-			<a id="update">회원정보수정</a>
+			<a id="update1">회원정보수정</a>
 		</div>
 	</div>
 	<div id="clubNameArea">
@@ -83,11 +83,11 @@
 	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";
 		$("#login").html("로그인");
-		$("#update").html("회원가입");
+		$("#update1").html("회원가입");
 	} else {  // 로그인 상태
 		loginState = "login";
 		$("#login").html("로그아웃");
-		$("#update").html("회원정보수정");
+		$("#update1").html("회원정보수정");
 	}
 	
 	// 로그인/로그아웃 클릭
@@ -101,7 +101,7 @@
 		}
 	});
 	
-	$("#update").click(function() {
+	$("#update1").click(function() {    
 		if(loginState == "login") {  // 로그인 상태
 			// 로그아웃   
 			location.href="./updateForm";

@@ -29,8 +29,8 @@
 		margin-top: 2%;
 		height: auto;
 	}
-	#text{
-		height: 70%;
+	#text img{
+		width: 30%;
 	}
 	#reply{
 		margin-left:0.5%;

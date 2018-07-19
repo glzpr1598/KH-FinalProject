@@ -85,6 +85,15 @@ public class HamoMainController {
 		System.out.println("location : " + map.get("location"));
 		return service.clubSearch(map);
 	}
+	// 테스트 페이지
+	@RequestMapping(value = "/test")
+	public String test() {
+		logger.info("테스트 페이지 요청");
+		return "test";
+	}
+	
+	/***********************윤지현(동호회)*****************/
+	
 	// 동호회 만들기 페이지
 	@RequestMapping(value = "/makeClubForm")
 	public String makeClubForm() {
@@ -92,10 +101,26 @@ public class HamoMainController {
 		return "m11";
 	}
 	
-	// 테스트 페이지
-	@RequestMapping(value = "/test")
-	public String test() {
-		logger.info("테스트 페이지 요청");
-		return "test";
+	// 동호회명 중복 여부 체크
+	@RequestMapping(value = "/clubName_overLap")
+	public @ResponseBody HashMap<String, Object> clubName_overLap(
+			@RequestParam("club_name") String club_name) {
+		logger.info("동호회명 중복 여부 체크");
+		logger.info("요청한 동호회 명 : "+club_name);
+		return service.clubName_overLap(club_name);
 	}
+	// 동호회 만들기 요청
+	@RequestMapping(value = "//makeClub")
+	public  ModelAndView makeClub(
+			@RequestParam HashMap<String , String> map,HttpSession session) {
+		logger.info("동호회명 만들기 요청");
+		logger.info("선택한 주제 : "+map.get("interest2"));
+		logger.info("선택한 지역 : "+map.get("location2"));
+		logger.info("요청한 동호회명 : "+map.get("club_name"));
+		logger.info("동호회 소개 : "+map.get("club_introduce"));
+		logger.info("회장 닉네임 : "+map.get("club_masterNickname"));
+		map.put("member_id",(String)session.getAttribute("userId"));
+		return service.makeClub(map);
+	}
+
 }

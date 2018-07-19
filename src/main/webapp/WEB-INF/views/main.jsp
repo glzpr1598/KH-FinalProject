@@ -142,7 +142,6 @@
 </head>   
 <body>               
 	<%@ include file="./main-header.jsp" %>
-	
 	<!-- 랜덤동호회  5개 -->
 	<c:if test="${size >= 1}">
 		<div id='all'>
@@ -399,9 +398,9 @@
 			</c:if>
 		</div>
 	</c:if>
+		<%@ include file="./footer.jsp" %>     
 </body>
 <script>
-
 var size = "${size}";
 
 /* 동호회가 5개 이상일때 */
