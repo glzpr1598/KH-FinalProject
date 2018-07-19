@@ -24,7 +24,7 @@
 		#{param3},SYSDATE,#{param4},#{param5},#{param6},#{param7},#{param8})
 	</insert>
 	<select id="clubMeetingDetail" resultType="com.kh.hamo.dto.ClubMeetingDTO" >
-		SELECT meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
+		SELECT member_id,meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
 		FROM meetingPlan WHERE meetingPlan_id=#{param1}
 	</select>
 	 <select id="meetingAttendList" resultType="String" >
