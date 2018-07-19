@@ -90,6 +90,8 @@
 		
 		if($("#text").val() == ""){
 			alert("제목을 입력하세요.");
+		}else if($("#editor").val() == "<p>&nbsp;</p>" || $("#editor").val() == ""){
+			alert("내용을 입력하세요.");
 		}else{
 			if($("#editor").val().length > 2000){
 				alert("최대 2000자까지 입력 가능합니다.");
