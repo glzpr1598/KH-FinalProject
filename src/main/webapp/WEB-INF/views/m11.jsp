@@ -148,7 +148,7 @@
 	$(document).ready(function(){
 		//createOk = false : 동호회명 승인  X
 		var createOk = false;
-		
+		var before_name ="";
 		
 		/* 동호회명 중복 체크 이벤트 */
 		$("input[name='club_name']").focusout(function(){
@@ -163,8 +163,9 @@
 				success:function(data){
 					console.log(data);
 					createOk = data.success;
-					if(createOk){
+					if(createOk || $("input[name='club_name']").val() !=""){
 						$("#nameMsg").html("사용 가능한 동호회명 입니다.");
+						before_name = $("input[name='club_name']").val();
 					}else{
 						$("#nameMsg").html("이미 존재하는 동호회명 입니다");
 						$("#nameMsg").css("color","red");
@@ -197,8 +198,12 @@
 				$("#locationMsg").html("");
 			}
 			/* 동호회명 중복 체크를 하였는지 */
-			if(createOk ==false){
+			if(createOk ==false || before_name != $("input[name='club_name']").val() ){
 				$("#nameMsg").html("동호회명 중복 체크를 해주세요");
+				$("#nameMsg").css("color","red");
+				submit++;
+			}else if($("input[name='club_name']").val() =="" ){
+				$("#nameMsg").html("동호회명을 입력해주세요");
 				$("#nameMsg").css("color","red");
 				submit++;
 			}else{
@@ -219,7 +224,7 @@
 
 			/* 닉네임을 입력하였는지  */
 			if( $("input[name='club_masterNickname']").val() == "" ){
-				$("#nicknameMsg").html("동호회 소개말을 입력해주세요");
+				$("#nicknameMsg").html("동호회 닉네임을 입력해주세요");
 				$("#nicknameMsg").css("color","red");
 				submit++;
 			}else{
