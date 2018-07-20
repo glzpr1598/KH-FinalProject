@@ -75,8 +75,6 @@ public class HamoFreeBbsService {
 
 		ArrayList<HamoBbsDTO > dto = new ArrayList<HamoBbsDTO>();
 		dto = inter.selectFile(idx);
-		logger.info("k 이름 "+dto.get(0).getMainBbsFile_newName());
-		logger.info("v 이름 "+dto.get(0).getMainBbsFile_oldName());
 		logger.info("dto 사이즈 : "+dto.size());
 		for(int i =0; i<dto.size();i++) {
 			fileList.put(dto.get(i).getMainBbsFile_newName(), dto.get(i).getMainBbsFile_oldName());
