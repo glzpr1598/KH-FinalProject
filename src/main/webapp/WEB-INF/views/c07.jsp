@@ -43,30 +43,32 @@
 		background-color: #FDF5DC;
 		width: 100%;
 	}
+	#replyfrm{
+		width: 100%;
+		margin-top: 2%;
+	}
 	#replyContent{
 		border: 3px solid #ffbf00;
 		resize: none;
 		margin-left: 0.5%;
-		margin-top: 2%;
-		width: 89.5%;
-		height: 52px;
-		margin-top: 0px;
+		width: 88.5%;
+		height: 7%;
 	}
-	#save{
+	input[type='button']{
 		border: 3px solid #ffbf00;
 		background-color: white;
 		width: 9%;
-		height: 52px;
+		height: 7%;
 		text-align: center;
 		font-weight: 600;
-		margin-left: 1%;
 		cursor: pointer;
+		float: right;
 	}
 	#del{
 		border: none;
 		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
+		width: 8%;
+		height: 4%;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -75,8 +77,8 @@
 	#update{
 		border: none;
 		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
+		width: 8%;
+		height: 4%;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -85,8 +87,8 @@
 	#back{
 		border: none;	
 		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
+		width: 8%;
+		height: 4%;
 		font-weight: 600;
 		color: white;
 		text-align: center;
@@ -107,18 +109,13 @@
 		border-bottom: 1px solid #d2d2d2;
 	}
 	#btn{
-		margin-left: 72.5%;
+		margin-left: 74.5%;
 		margin-top: 2%;
 		width: 800px;
-	}
-	#replyfrm{
-		width: 100%;
-		margin-top: 2%;
 	}
 	.date{
 		font-weight: 600;
 		font-size: small;
-	}
 </style>	
 </head>
 <body>
@@ -135,7 +132,7 @@
 				<div id="text">${info.clubBbs_content}</div>
 			</div>
 			<div id="replyfrm">
-				<input type="text" maxlength="150" id="replyContent" name="replyContent"/><input id="save" type="button" value="등록"/>
+				<textarea rows="3" cols="88" id="replyContent" name="replyContent"></textarea><input id="save" type="button" value="등록"/>
 			</div>
 			<div id="btn">
 				<button id="back">목록</button>
@@ -203,24 +200,28 @@
 		if($("#replyContent").val() == ""){
 			alert("댓글을 작성하세요.");
 		}else{
-			$.ajax({
-				type : "get",
-				url: "./clubReply",
-				dataType:"json",
-				data:{
-					"replyContent":$("#replyContent").val(),
-					"clubBbs_id":clubBbs_id,
-					"club_id":"<%=request.getParameter("club_id")%>"
-				},
-				success:function(data){
-					$("#replyContent").val("");
-					listPrint(data.list);
-					replyCount(data.replyCount);
-				},
-				error:function(e){
-					console.log(e);
-				}
-			});	
+			if($("#replyContent").val().length > 100){
+				alert("최대 100자까지 입력 가능합니다.");
+			}else{
+				$.ajax({
+					type : "get",
+					url: "./clubReply",
+					dataType:"json",
+					data:{
+						"replyContent":$("#replyContent").val(),
+						"clubBbs_id":clubBbs_id,
+						"club_id":"<%=request.getParameter("club_id")%>"
+					},
+					success:function(data){
+						$("#replyContent").val("");
+						listPrint(data.list);
+						replyCount(data.replyCount);
+					},
+					error:function(e){
+						console.log(e);
+					}
+				});	
+			}
 		}
 	});
  	
