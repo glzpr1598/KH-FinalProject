@@ -189,7 +189,7 @@
 			
 			/* select의 option 주제 선택 여부 체크 */
 			if( $("select[name=interest1]").val() == $("#sel_ck1 option:eq(0)").val() ){
-				$("#interestMsg").html("주제를 선택해주세요");
+				$("#interestMsg").html("주제를 선택해주세요.");
 				$("#interestMsg").css("color","red");
 				submit++;
 			}else{
@@ -197,7 +197,7 @@
 			}
 			/* select의 option 지역 선택 여부 체크 */
 			if( $("select[name='location1']").val() == $("#sel_ck2 option:eq(0)").val() ){
-				$("#locationMsg").html("지역을 선택해주세요");
+				$("#locationMsg").html("지역을 선택해주세요.");
 				$("#locationMsg").css("color","red");
 				submit++;
 			}else{
@@ -205,11 +205,11 @@
 			}
 			/* 동호회명 중복 체크를 하였는지 */
 			if(createOk ==false || before_name != $("input[name='club_name']").val() ){
-				$("#nameMsg").html("동호회명 중복 체크를 해주세요");
+				$("#nameMsg").html("동호회명을 확인해주세요.");
 				$("#nameMsg").css("color","red");
 				submit++;
 			}else if($("input[name='club_name']").val() =="" ){
-				$("#nameMsg").html("동호회명을 입력해주세요");
+				$("#nameMsg").html("동호회명을 입력해주세요.");
 				$("#nameMsg").css("color","red");
 				submit++;
 			}else{
@@ -217,11 +217,11 @@
 			}
 			/* 동호회 소개를 입력하였는지  */
 			if($("textarea[name='club_introduce']").val() == "" ){
-				$("#introduceMsg").html("동호회 소개말을 입력해주세요");
+				$("#introduceMsg").html("동호회 소개글을 입력해주세요.");
 				$("#introduceMsg").css("color","red");
 				submit++;
 			}else if($("textarea[name='club_introduce']").val().length> 100){
-				$("#introduceMsg").html("동호회 소개는 100자 이하로 입력해주세요");
+				$("#introduceMsg").html("동호회 소개는 100자 이하로 입력해주세요.");
 				$("#introduceMsg").css("color","red");
 				submit++;
 			}else{
@@ -230,7 +230,7 @@
 
 			/* 닉네임을 입력하였는지  */
 			if( $("input[name='club_masterNickname']").val() == "" ){
-				$("#nicknameMsg").html("닉네임을 입력해주세요");
+				$("#nicknameMsg").html("닉네임을 입력해주세요.");
 				$("#nicknameMsg").css("color","red");
 				submit++;
 			}else{
