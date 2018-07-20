@@ -189,34 +189,37 @@
 		
 		if("${sessionScope.userId}" != ""){	
 			if(reply!=""){
-				$.ajax({
-					url:"./freeBbsReply",
-					type:"GET",
-					data:{
-					"mainBbs_id":"${detail.mainBbs_id }",
-					"member_id":"<%= session.getAttribute("userId")%>",  // 세션에서 가져온 id
-					"mainBbsReply_content":reply,
-					},
-					dataType:"JSON",
-					
-					success:function(data){
-						var date = new Date(data.reply.mainBbsReply_date);
-						var reply_date=date.toJSON().substring(0,10);
-						//댓글 입력창 초기화
-						$("#reply_input").val("");
-						//댓글 개수 update
-						$("#reply_count").html("댓글 "+data.reply.mainBbs_replyCount);
-						var reply_add = "";
-						reply_add+="<div id='remove'>"
-						reply_add+="<span><b>"+data.reply.member_id+"</b></span> "
-						reply_add+="<span class='date'>"+data.reply.mainBbsReply_date+"</span>"
-						reply_add+="<a id='"+data.reply.mainBbsReply_id+"' class='reply_del' href='#'>삭제</a><br/>"
-						reply_add+="<div class='replyContent'>"+data.reply.mainBbsReply_content+"</div>"
-						reply_add+="</div>"
-						$("#reply_div1").append(reply_add);
-					},
-					error:function(error){}
-				});
+				if(reply.length <= 100){
+					$.ajax({
+						url:"./freeBbsReply",
+						type:"GET",
+						data:{
+						"mainBbs_id":"${detail.mainBbs_id }",
+						"member_id":"<%= session.getAttribute("userId")%>",  // 세션에서 가져온 id
+						"mainBbsReply_content":reply,
+						},
+						dataType:"JSON",					
+						success:function(data){
+							var date = new Date(data.reply.mainBbsReply_date);
+							var reply_date=date.toJSON().substring(0,10);
+							//댓글 입력창 초기화
+							$("#reply_input").val("");
+							//댓글 개수 update
+							$("#reply_count").html("댓글 "+data.reply.mainBbs_replyCount);
+							var reply_add = "";
+							reply_add+="<div id='remove'>"
+							reply_add+="<span><b>"+data.reply.member_id+"</b></span> "
+							reply_add+="<span class='date'>"+data.reply.mainBbsReply_date+"</span>"
+							reply_add+="<a id='"+data.reply.mainBbsReply_id+"' class='reply_del' href='#'>삭제</a><br/>"
+							reply_add+="<div class='replyContent'>"+data.reply.mainBbsReply_content+"</div>"
+							reply_add+="</div>"
+							$("#reply_div1").append(reply_add);
+						},
+						error:function(error){}
+					});
+				}else{
+					alert("최대 100자까지만 입력 가능합니다");
+				}
 			}else{
 				alert("댓글을 입력해주세요.");
 			}
@@ -266,6 +269,7 @@
 	$("#freeBbsUpdateForm").click(function(){
 		location.href="./freeBbsUpdateForm?idx=${detail.mainBbs_id}";
 	});
+	
 	//목록 버튼 클릭 시 리스트로 
 	$("#freeBbsList").click(function(){
 		location.href="./freeBbsList";

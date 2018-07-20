@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--****자유게시판 글 수정하기 폼 jsp  ****-->
@@ -90,7 +90,11 @@ $(function(){
         //폼 submit
         if(confirm("수정 하시겠습니까?")){
         	console.log("content:"+$("#smarteditor").val());
-        	if($("#smarteditor").val()=="<p>&nbsp;</p>" || $("#smarteditor").val()==""){
+        	if($("#smarteditor").val()== "<p>&nbsp;</p>" 
+        	|| $("#smarteditor").val()== ""
+        	|| $("#smarteditor").val()== '<p><br style="clear:both;">&nbsp;</p>' 
+        	|| $("#smarteditor").val()== '<br style="clear:both;"><br>'
+       		|| $("#smarteditor").val()== '<br style="clear:both;">'){
         		alert("내용을 입력 해 주세요.");
         	}else{
         		var str = $("#smarteditor").val();

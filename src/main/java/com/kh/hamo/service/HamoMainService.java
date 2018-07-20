@@ -185,7 +185,6 @@ public class HamoMainService {
 	
 	/****************윤지현(동호회 중복체크 , 생성 )********/
 	public HashMap<String, Object> clubName_overLap(String club_name) {
-		// TODO Auto-generated method stub
 		logger.info("동호회명 중복 여부 서비스 실행");
 		inter = sqlSession.getMapper(HamoMainInter.class);
 		HashMap<String, Object> returnMap = new HashMap<String, Object>();
@@ -209,7 +208,6 @@ public class HamoMainService {
 		inter = sqlSession.getMapper(HamoMainInter.class);
 		ModelAndView mav = new ModelAndView();
 		String page = "redirect:/makeClubForm";
-		String msg = "동호회 만들기에 실패하였습니다. 다시 시도해주세요.";
 		//선택한 관심사가 테이블의 interest id가 무엇인지 확인하기 위해 DB확인필요.
 		int interest_id = inter.interest_check(map.get("interest2"));
 		
@@ -230,11 +228,10 @@ public class HamoMainService {
 			logger.info("반환 받은 동호회 고유 번호 : "+dto.getClub_id());
 			if(inter.insertMaster(dto) > 0 ) {
 				page ="redirect:/";
-				msg = map.get("club_name")+" 동호회를 생성하였습니다";
 			}		
 		}
 
-		mav.addObject("msg", msg);
+
 		mav.setViewName(page);
 		return mav;
 	}

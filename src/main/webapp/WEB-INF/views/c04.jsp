@@ -91,7 +91,11 @@
 		
 		if($("#text").val() == ""){
 			alert("제목을 입력하세요");
-		}else if($("#editor").val() == "<p>&nbsp;</p>" || $("#editor").val() == ""){
+		}else if(($("#editor").val() == "<p>&nbsp;</p>" 
+		|| $("#editor").val() == "" 
+		|| $("#editor").val() == "<p><br style='clear:both;'>&nbsp;<p>" 
+		|| $("#editor").val() == "<br style='clear:both;'><br/>" 
+		|| $("#editor").val() == "<br style='clear:both;'>")){
 			alert("내용을 입력하세요.");
 		}else{
 			if($("#editor").val().length > 2000){

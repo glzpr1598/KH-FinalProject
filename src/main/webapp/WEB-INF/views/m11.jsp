@@ -148,30 +148,36 @@
 	$(document).ready(function(){
 		//createOk = false : 동호회명 승인  X
 		var createOk = false;
-		
+		var before_name ="";
 		
 		/* 동호회명 중복 체크 이벤트 */
 		$("input[name='club_name']").focusout(function(){
-			console.log($(this).val());
-			$.ajax({
-				url:"./clubName_overLap",
-				type:"GET",
-				data:{
-					"club_name" : $(this).val()
-				},
-				dataType:"JSON",
-				success:function(data){
-					console.log(data);
-					createOk = data.success;
-					if(createOk){
-						$("#nameMsg").html("사용 가능한 동호회명 입니다.");
-						$("#nameMsg").css("color","blue");
-					}else{
-						$("#nameMsg").html("이미 존재하는 동호회명 입니다");
-						$("#nameMsg").css("color","red");
-					}
-				},error:function(error){console.log(error);}
-			});
+			if($(this).val()!="") {
+				$.ajax({
+					url:"./clubName_overLap",
+					type:"GET",
+					data:{
+						"club_name" : $(this).val()
+					},
+					dataType:"JSON",
+					success:function(data){
+						console.log(data);
+						createOk = data.success;
+						if(createOk || $("input[name='club_name']").val() !=""){
+							$("#nameMsg").html("사용 가능한 동호회명 입니다.");
+							$("#nameMsg").css("color","blue");
+							before_name = $("input[name='club_name']").val();
+						}else{
+							$("#nameMsg").html("이미 존재하는 동호회명 입니다");
+							$("#nameMsg").css("color","red");
+						}
+					},error:function(error){console.log(error);}
+				});
+				
+			} else {
+				$("#nameMsg").html("동호회명을 입력해주세요.");
+				$("#nameMsg").css("color","red");
+			}
 		});
 		
 		
@@ -198,8 +204,12 @@
 				$("#locationMsg").html("");
 			}
 			/* 동호회명 중복 체크를 하였는지 */
-			if(createOk ==false){
+			if(createOk ==false || before_name != $("input[name='club_name']").val() ){
 				$("#nameMsg").html("동호회명 중복 체크를 해주세요");
+				$("#nameMsg").css("color","red");
+				submit++;
+			}else if($("input[name='club_name']").val() =="" ){
+				$("#nameMsg").html("동호회명을 입력해주세요");
 				$("#nameMsg").css("color","red");
 				submit++;
 			}else{

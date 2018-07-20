@@ -144,7 +144,7 @@ public class ClubMeetingPlanService {
 	}
 	//모임 일정 수정 
 	public void clubMeetingUpdate(HashMap<String, String> list) {
-		logger.info("모임 일정 등록  서비스");
+		logger.info("모임 일정 수정  서비스");
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		String club_id=  list.get("club_id");
 		String member_id=list.get("member_id");
@@ -159,6 +159,12 @@ public class ClubMeetingPlanService {
 		int meetingCount = inter.clubMeetingUpdate(Integer.parseInt(club_id),member_id,Integer.parseInt(meetingPlan_id),meetingPlan_subject,meetingPlan_locationX,meetingPlan_locationY,
 				meetingPlan_when,meetingPlan_money,meetingPlan_content);
 		logger.info("수정 성공 :"+meetingCount);
+	}
+	//모임 일정 삭제
+	public void clubMeetingDel(String meetingPlan_id, String member_id) {
+		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
+		int success = inter.clubMeetingDel(meetingPlan_id,member_id);
+		logger.info("삭제 성공 :"+success);
 	}
 
 }
