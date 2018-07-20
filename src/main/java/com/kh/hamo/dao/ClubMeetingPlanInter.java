@@ -51,9 +51,11 @@ public interface ClubMeetingPlanInter {
 			String meetingPlan_locationX, String meetingPlan_locationY, String meetingPlan_when,
 			String meetingPlan_money, String meetingPlan_content);//모임 일정 수정
 
+    
 	int replyCount(String meetingPlan_id);
 
 	int clubMeetingDel(String meetingPlan_id, String member_id);//모임 일정 삭제
+
 
 
 

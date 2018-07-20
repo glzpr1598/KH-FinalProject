@@ -259,7 +259,7 @@
 
 	
 var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값이 필요
-
+	
 	$("#pwCheck").click(function(){
 		if($( "input[name='userId']").val()==""){//아이디확인
 			alert("아이디를 확인해주세요");
@@ -294,11 +294,19 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 					},
 					error: function(e){console.log(e)}
 			});
-		}				
+		}		
+		
 	});
 
+	var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;      
 	
+	/* ajax  1. 유효성 검사 통과 -> 2. 메일인증 전송 */     
 	$("#emailChk").click(function(){
+		if(!regExp.test($("#emailId").val())){ 
+		      alert("이메일 주소가 유효하지 않습니다"); 
+		      $("#emailId").focus();        
+		} else {   
+			alert("입력하신 이메일로 인증번호를 전송하였습니다.");   
 		$.ajax({
 			url: "./emailChk",
 			type: "post",
@@ -309,11 +317,11 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 			success: function(d) {
 				console.log("success");
 					serialNumber = d.serialNumber;		
-					alert("입력하신 이메일로 인증번호를 전송하였습니다.");
 					console.log(serialNumber);
 			},
 			error: function(e){console.log(e)}
 			});
+		}
 		});
 	
 	  $("#pwUpdate").click(function(){
