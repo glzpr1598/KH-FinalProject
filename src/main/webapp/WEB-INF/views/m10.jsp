@@ -528,6 +528,7 @@ $(document).ready(function() {
 			dataType: "JSON",
 			error: function(e) {console.log(e);},
 			success: function(data) {
+				history.pushState("", document.title, window.location.pathname + window.location.search);
 				$.paging(data.list, 10, 10, listPrint);
 				//listPrint(data.list);
 			}

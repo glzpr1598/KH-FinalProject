@@ -177,7 +177,6 @@
 		
 		/* 동호회 만들기 버튼 이벤트 */
 		$(".btn").click(function(){
-			console.log("버튼 클릭");
 			/* submit가 0일 경우 모든 조건을 만족했다는 가정 하에 동호호 만들기 요청 */
 			var submit = 0; 
 			
@@ -342,6 +341,9 @@
 				content+="<option>유럽차</option>"
 				content+="<option>바이크</option>"
 				$("select[name='interest2']").append(content);
+			}else{
+				content+="<option>소분류</option>"
+				$("select[name='interest2']").append(content);
 			}
 		});
 		/*****************************************************/
@@ -391,6 +393,9 @@
 				content+="<option>신도림/구로/금천</option>"
 				content+="<option>노량진/사당/동작</option>"
 				content+="<option>연신내/불광/은평</option>"
+				$("select[name='location2']").append(content);
+			}else{
+				content+="<option>소분류</option>"
 				$("select[name='location2']").append(content);
 			}
 		});

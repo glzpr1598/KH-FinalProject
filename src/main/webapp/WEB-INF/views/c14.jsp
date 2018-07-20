@@ -55,7 +55,7 @@
 		<jsp:include page="club-menu.jsp"/>
 		<div id="right">
 			<div id="title">| 사진첩 |</div>
-			<form name="writefrm" id="writefrm" method="post">
+			<form action="" name="writefrm" id="writefrm" method="post">
 				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/>
     			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
     			<div id="btn">
@@ -90,27 +90,32 @@
 		
 		if($("#text").val() == ""){
 			alert("제목을 입력하세요.");
-			return;
+		}else if($("#editor").val() == "<p>&nbsp;</p>" || $("#editor").val() == ""){
+			alert("내용을 입력하세요.");
 		}else{
 			if($("#editor").val().length > 2000){
 				alert("최대 2000자까지 입력 가능합니다.");
-				return;	
 			}else{
 				var str = $("#editor").val();
 
 				var pattern = /src="(.*?)"/g;
 				var list = str.match(pattern);
-				for(var i = 0; i < list.length; i++) {
-				   list[i] = list[i].substring(list[i].lastIndexOf('/')+1);
-				   list[i] = list[i].substring(0, list[i].length - 1);
+				
+				if(list == null){
+					alert("사진을 넣어주세요.");
 				}
+				for(var i = 0; i < list.length; i++) {
+					   list[i] = list[i].substring(list[i].lastIndexOf('/')+1);
+					   list[i] = list[i].substring(0, list[i].length - 1);
+					}
 				
 				var param = "";
 				for(var i = 0; i < list.length; i++){
 					param += "&filePath"+i+"="+list[i];
 					count++;
 				}
-				writefrm.action="./clubPhotoBbsWrite?club_id="+<%=request.getParameter("club_id")%>+"&sort=photo"+param+"&count="+count;	
+				$("#writefrm").attr("action","./clubPhotoBbsWrite?club_id="+<%=request.getParameter("club_id")%>+"&sort=photo"+param+"&count="+count);
+				$("#writefrm").submit();
 			}
 		}
 	});

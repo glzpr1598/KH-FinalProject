@@ -21,5 +21,18 @@ public interface ClubMemberInter {
 	int masterCheck(String userId, String club_id);
 	// 동호회 폐쇄 여부 확인
 	int clubCloseCheck(String club_id);
+	
+	/*******윤지현******/
+	//동호회 소개글 가져오기
+	String introduce(String club_id);
+	
+	//닉네임 중복 여부 확인
+	ArrayList<String> club_overLap(String club_id);
+	
+	//동호회 가입 
+	int clubJoin(HashMap<String, String> map);
 
+	
+	
+	
 }

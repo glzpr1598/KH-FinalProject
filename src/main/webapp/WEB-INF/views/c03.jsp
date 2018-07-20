@@ -27,7 +27,7 @@
 	#content{
 		margin-left: 0.5%;
 		margin-top: 2%;
-		height: auto;
+		height: 70%;
 	}
 	#text img{
 		width: 30%;
@@ -60,6 +60,7 @@
 		text-align: center;
 		font-weight: 600;
 		margin-left: 1%;
+		cursor: pointer;
 	}
 	#del{
 		border: none;
@@ -69,6 +70,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	#update{
 		border: none;
@@ -78,6 +80,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	#back{
 		border: none;	
@@ -87,6 +90,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	.replyDel{
 		color: #5a5a5a;
@@ -155,7 +159,6 @@
 	$("#del").click(function(){
 		if(nickName != "${info.member_id}"){
 			alert("삭제 권한이 없습니다.");
-			return;
 		}else{
 			console.log(clubBbs_id);
 			location.href="./clubAllDelete?club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id};
@@ -165,7 +168,6 @@
 	$("#update").click(function(){
 		if(nickName != "${info.member_id}"){
 			alert("수정 권한이 없습니다.");
-			return;
 		}else{
 			location.href="./clubAllUpdateForm?club_id="+${info.club_id}+"&clubBbs_id="+${info.clubBbs_id};
 		}
@@ -181,7 +183,8 @@
 			url: "./clubReplyList",
 			dataType:"json",
 			data:{
-				"clubBbs_id":clubBbs_id
+				"clubBbs_id":clubBbs_id,
+				"club_id":"<%=request.getParameter("club_id")%>"
 			},
 			success:function(data){
 				if(data){
@@ -206,7 +209,8 @@
 				dataType:"json",
 				data:{
 					"replyContent":$("#replyContent").val(),
-					"clubBbs_id":clubBbs_id
+					"clubBbs_id":clubBbs_id,
+					"club_id":"<%=request.getParameter("club_id")%>"
 				},
 				success:function(data){
 					$("#replyContent").val("");
@@ -232,7 +236,8 @@
 				dataType:"json",
 				data:{
 					"clubBbs_id":clubBbs_id,
-					"clubBbsReply_id":$("#reply_id"+index).val()
+					"clubBbsReply_id":$("#reply_id"+index).val(),
+					"club_id":"<%=request.getParameter("club_id")%>"
 				},
 				success:function(data){
 					console.log(data);

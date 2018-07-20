@@ -27,7 +27,7 @@
 	#content{
 		margin-left: 0.5%;
 		margin-top: 2%;
-		height: auto;
+		height: 70%;
 	}
 	#text img{
 		width: 30%;
@@ -60,6 +60,7 @@
 		text-align: center;
 		font-weight: 600;
 		margin-left: 1%;
+		cursor: pointer;
 	}
 	#del{
 		border: none;
@@ -69,6 +70,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	#update{
 		border: none;
@@ -78,6 +80,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	#back{
 		border: none;	
@@ -87,6 +90,7 @@
 		font-weight: 600;
 		color: white;
 		text-align: center;
+		cursor: pointer;
 	}
 	.replyDel{
 		color: #5a5a5a;
@@ -180,7 +184,8 @@
 			url: "./clubReplyList",
 			dataType:"json",
 			data:{
-				"clubBbs_id":clubBbs_id
+				"clubBbs_id":clubBbs_id,
+				"club_id":"<%=request.getParameter("club_id")%>"
 			},
 			success:function(data){
 				if(data){
@@ -204,7 +209,8 @@
 				dataType:"json",
 				data:{
 					"replyContent":$("#replyContent").val(),
-					"clubBbs_id":clubBbs_id
+					"clubBbs_id":clubBbs_id,
+					"club_id":"<%=request.getParameter("club_id")%>"
 				},
 				success:function(data){
 					$("#replyContent").val("");
@@ -230,7 +236,8 @@
 				dataType:"json",
 				data:{
 					"clubBbs_id":clubBbs_id,
-					"clubBbsReply_id":$("#reply_id"+index).val()
+					"clubBbsReply_id":$("#reply_id"+index).val(),
+					"club_id":"<%=request.getParameter("club_id")%>"
 				},
 				success:function(data){
 					console.log(data);
