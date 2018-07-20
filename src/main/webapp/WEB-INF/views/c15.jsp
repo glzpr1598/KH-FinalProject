@@ -64,36 +64,6 @@
 		cursor: pointer;
 		float: right;
 	}
-	#del{
-		border: none;
-		background-color: #ffbf00;
-		width: 8%;
-		height: 4%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		cursor: pointer;
-	}
-	#update{
-		border: none;
-		background-color: #ffbf00;
-		width: 8%;
-		height: 4%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		cursor: pointer;
-	}
-	#back{
-		border: none;	
-		background-color: #ffbf00;
-		width: 8%;
-		height: 4%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		cursor: pointer;
-	}
 	.replyDel{
 		color: #5a5a5a;
 		font-weight: 600;
@@ -112,6 +82,16 @@
 		margin-left: 74.5%;
 		margin-top: 2%;
 		width: 800px;
+	}
+	#btn button{
+		border: none;
+		background-color: #ffbf00;
+		width: 8%;
+		height: 4%;
+		font-weight: 600;
+		color: white;
+		text-align: center;
+		cursor: pointer;
 	}
 	.date{
 		font-weight: 600;
