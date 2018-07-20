@@ -53,6 +53,8 @@ public interface ClubMeetingPlanInter {
 
 	int replyCount(String meetingPlan_id);
 
+	int clubMeetingDel(String meetingPlan_id, String member_id);//모임 일정 삭제
+
 
 
 
