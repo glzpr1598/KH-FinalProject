@@ -58,7 +58,7 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 				<!------------------- 양식 ------------------->
-					<h1> | 모임일정 | </h1>
+					<h3> | 모임일정 | </h3>
 					<h2 id="subject">제목 :${list.meetingPlan_subject}</h2>
 					<h4>회비 :${list.meetingPlan_money}</h4>
 					<h4>모임일시 : ${list.meetingPlan_when}</h4>

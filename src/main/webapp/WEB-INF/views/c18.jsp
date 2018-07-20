@@ -90,7 +90,7 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
-			<h1> | 모임일정 | </h1>
+			<h3> | 모임일정 | </h3>
 			<form id="form1" action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
 				<input id="subject" type="text" class="meeting" name="subject" placeholder="제목"/>
 				<input id="day" type="text" class="meeting" name="day" placeholder="모임 일시 "/>
