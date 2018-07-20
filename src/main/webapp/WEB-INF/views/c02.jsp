@@ -5,25 +5,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<title>Insert title here</title>
+<title>HAMO</title>
 <style>
 	#head{
 		border-bottom: 3px solid #ffbf00;
 		border-top: 3px solid #ffbf00;
 		background-color: #FDF5DC;
 	}
-	table,tr,td,tr {
+	table{
+		width: 100%;
+		margin-top: 2%;
+	}
+	table,th,td{
 		border-collapse: collapse;
-		width: 780px;
-		height: 50px;
+		padding: 2% 0.5%;
+		text-align: center;
 	}
 	#title{
 		margin-left:0.5%;
 		font-weight: 600;
 		font-size: large;
-	}
-	#table{
-		margin-top: 2%;
 	}
 	td a{
 		text-decoration: none;

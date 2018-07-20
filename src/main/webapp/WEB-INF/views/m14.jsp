@@ -11,6 +11,11 @@
 
 </head>
 <style>
+#menu #freeBbs {
+	color: black;
+	font-weight: bold;
+}
+
 #subject {
 	margin-top: 20px;
 	padding: 10px;

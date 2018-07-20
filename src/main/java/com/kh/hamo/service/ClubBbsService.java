@@ -942,8 +942,7 @@ public class ClubBbsService {
 	}
 		
 	
-	/*************************************댓글
-	 * @param club_id ***************************************/
+	/*************************************댓글 ***************************************/
 	
 	//댓글 리스트
 	public HashMap<String, Object> clubReplyList(String clubBbs_id, String club_id) {

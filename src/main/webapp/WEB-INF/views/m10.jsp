@@ -184,6 +184,10 @@
 	#clubSearch a.club:hover {
 		text-decoration: underline;
 	}
+	
+	#space {
+		height: 100px;
+	}
 </style>
 </head>
 <body>
@@ -376,6 +380,7 @@
 		</div>
 		
 		<div id="pagingArea"></div>
+		<div id="space"></div>
 	</div>
 </body>
 <script>

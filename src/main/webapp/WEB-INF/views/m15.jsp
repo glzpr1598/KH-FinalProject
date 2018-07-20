@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--****자유게시판 글 수정하기 폼 jsp  ****-->
@@ -10,43 +10,31 @@
 	src="<%=request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
-	#right {
-		width: 800px;
-		float: left;
-		margin-left: 20px;
-	}
-	#member{
-		font-weight: 800;
-	}
-	input[type='button']{
-		border:none;
-	 	background-color:#FFBF00 ;
-	 	color: white;
-		margin:4px;
-		padding:10px;
-		cursor: pointer;
-	}
-	#content{
-		background-color: transparent;
-		resize: none;
-		border-color: #FFBF00;
-		border-width: 1px;
-		border-style: solid;
-	}
-	#file{
-		width:500px;
-		height:40px;
-		border-color: #FFBF00;
-		border-width: 1px;
-		border-style: solid;
-		margin-top:-12px;
-	}
-	h4{
-		margin-top:7px;
-	}
 	#menu #freeBbs{
-		font-weight: 900;
+		font-weight: bold;
 		color:black;
+	}
+	
+	#subject {
+		margin-top: 20px;
+		height: 30px;
+		width: 100%;
+		padding: 0px 5px;
+	}
+	
+	#btn{
+		margin-top: 10px;
+		margin-bottom: 100px;
+		text-align: center;
+	}
+	#btn input[type="button"] {
+		padding: 5px 10px;
+		background: #ffbf00;
+	    border: none;
+		border-radius: 5px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
 	}
 </style>
 <body>
@@ -56,13 +44,14 @@
 		<div id="right">
 			<form action="" name="frm" id="frm" method="POST">
 			 	<div id="title">| 자유게시판 |</div>
-			    <h2>${detail.mainBbs_subject }</h2>
-			   <div><span id="member">${detail.member_id }</span> | 조회수 : ${detail.mainBbs_hit } | ${detail.mainBbs_date }</div>
-			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:633px; height:300px;">
+			 	<input type="text" id="subject" value="${ detail.mainBbs_subject }" />
+			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:798px; height:300px;">
 			    </textarea>
-			    <input type="hidden" name="idx" value="${detail.mainBbs_id}">
-			    <input type="button" id="cancelbutton" value="취소" />
-			    <input type="button" id="savebutton" value="저장" />
+			    <div id="btn">
+				    <input type="hidden" name="idx" value="${detail.mainBbs_id}">
+				    <input type="button" id="cancelbutton" value="취소" />
+				    <input type="button" id="savebutton" value="저장" />
+			    </div>
 		    </form>
 		</div>
 		

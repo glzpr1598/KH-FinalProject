@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<title>Insert title here</title>
+<title>HAMO</title>
 <style>
 </style>	
 </head>
