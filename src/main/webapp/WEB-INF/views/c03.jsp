@@ -27,7 +27,7 @@
 	#content{
 		margin-left: 0.5%;
 		margin-top: 2%;
-		height: auto;
+		height: 70%;
 	}
 	#text img{
 		width: 30%;
