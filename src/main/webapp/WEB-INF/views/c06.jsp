@@ -86,15 +86,21 @@
 	});
 	
 	$("#save").click(function(){
+		oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
+		
 		if($("#text").val() == ""){
 			alert("제목을 입력하세요.");
-		}else if($("#editor").val() == "<p>&nbsp;</p>" || $("#editor").val() == ""){
+		}else if($("#editor").val() == "<p>&nbsp;</p>" 
+		|| $("#editor").val() == "" 
+		|| $("#editor").val() == "<p><br style='clear:both;'>&nbsp;<p>" 
+		|| $("#editor").val() == "<br style='clear:both;'><br/>" 
+		|| $("#editor").val() == "<br style='clear:both;'>"){
+			console.log($("#editor").val());
 			alert("내용을 입력하세요.");
 		}else{
 			if($("#editor").val().length > 2000){
 				alert("최대 2000자까지 입력 가능합니다.");
 			}else{
-				oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 				
 				var str = $("#editor").val();
 
