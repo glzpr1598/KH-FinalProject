@@ -92,11 +92,11 @@
 			<!------------------- 양식 ------------------->
 			<h1> | 모임일정 | </h1>
 			<form id="form1" action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
-				<input type="text" class="meeting" name="subject" placeholder="제목"/>
-				<input type="text" class="meeting" name="day" placeholder="모임 일시 "/>
-				<input type="text" class="meeting" name="money" placeholder="회비"/>
+				<input id="subject" type="text" class="meeting" name="subject" placeholder="제목"/>
+				<input id="day" type="text" class="meeting" name="day" placeholder="모임 일시 "/>
+				<input id="money" type="text" class="meeting" name="money" placeholder="회비"/>
 				<P>내용</P>
-				<textarea name="content" rows="10" cols="70"></textarea>
+				<textarea  id="content" name="content" rows="10" cols="70"></textarea>
 				<div  id="ok">
 					<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>"/>
 					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
@@ -406,10 +406,17 @@
 		    locationY
 		});
 		function addMeeting(){
-		 	if( $("#locationX").val()=="" && $("#locationY").val()==""){
-				alert("지역을 선택해 주세요 ");         
-			}
-		 	else {
+		 	if($("#subject").val()==""){
+		 		alert("제목을 입력해 주세요 ");      
+			}else if($("#day").val()==""){
+				alert("모임일시를 입력해 주세요 ");    
+			}else if($("#money").val()==""){
+				alert("회비를 입력해 주세요 ");    
+			}else if($("#content").val()==""){
+				alert("내용을 입력해 주세요 ")
+			}else  if($("#locationX").val()=="" && $("#locationY").val()==""){
+				alert("지역을 선택해 주세요 "); 
+			}else {
 		 		$("#form1").submit();
 		 	}
 		}

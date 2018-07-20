@@ -17,12 +17,11 @@
 	<insert id="clubMeetingWrite">
 		INSERT INTO meetingPlan (meetingPlan_id,club_id,member_id,meetingPlan_idx,meetingPlan_subject,meetingPlan_date,meetingPlan_locationX,meetingPlan_locationY,meetingPlan_when,meetingPlan_money,meetingPlan_content)
 		 VALUES(SEQ_MEETINGPLAN_ID.NEXTVAL,#{param1},#{param2},
-		(SELECT MAX(meetingPlan_idx)+1 FROM meetingPlan WHERE club_id=#{param1}),
-		#{param3},SYSDATE,#{param4},#{param5},	#{param6},#{param7},#{param8})
+		(SELECT MAX(meetingPlan_idx)+1 FROM meetingPlan WHERE club_id=#{param1}),#{param3},	SYSDATE,#{param4},#{param5},	#{param6},#{param7},#{param8})
 	</insert>
 	<insert id="clubMeetingWriteFirst">
-		INSERT INTO meetingPlan VALUES(SEQ_MEETINGPLAN_ID.NEXTVAL,#{param1},#{param2}, 1,
-		#{param3},SYSDATE,#{param4},#{param5},	#{param6},#{param7},#{param8})
+		INSERT INTO meetingPlan VALUES(SEQ_MEETINGPLAN_ID.NEXTVAL,#{param1},#{param2}, 1,#{param3},
+		SYSDATE,#{param4},#{param5},	#{param6},#{param7},#{param8})
 	</insert>
 	<select id="clubMeetingDetail" resultType="com.kh.hamo.dto.ClubMeetingDTO" >
 		SELECT member_id,meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
