@@ -91,18 +91,18 @@
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
 			<h1> | 모임일정 | </h1>
-			<form action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
-				<input type="text" class="meeting" name="subject" placeholder="제목"/>
-				<input type="text" class="meeting" name="day" placeholder="모임 일시 "/>
-				<input type="text" class="meeting" name="money" placeholder="회비"/>
+			<form id="form1" action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
+				<input id="subject" type="text" class="meeting" name="subject" placeholder="제목"/>
+				<input id="day" type="text" class="meeting" name="day" placeholder="모임 일시 "/>
+				<input id="money" type="text" class="meeting" name="money" placeholder="회비"/>
 				<P>내용</P>
-				<textarea name="content" rows="10" cols="70"></textarea>
+				<textarea  id="content" name="content" rows="10" cols="70"></textarea>
 				<div  id="ok">
 					<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>"/>
 					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
 					<input id="locationX" type="hidden" name="locationX" value=""/>
 					<input id="locationY" type="hidden" name="locationY" value=""/>
-					<input type="submit" value="저장" class="bottomBtn"/>
+					<input type="button" value="저장" class="bottomBtn" onclick="addMeeting()"/>
 					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'"/>
 				</div>
 			</form>
@@ -370,16 +370,20 @@
 		    markerImageOptions = { 
 		        offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
 		    };
-
-		// 마커 이미지를 생성한다
+		 var latlng = map.getCenter(); 
+		 var message = "중심 좌표는 위도 " + latlng.getLat() + ", 경도 " + latlng.getLng() + "입니다";
+		    console.log(message);
+			
+		// 마커 이미지를 생성한다     
 		var markerImage = new daum.maps.MarkerImage(markerImageUrl, markerImageSize, markerImageOptions);
 
 		// 지도에 마커를 생성하고 표시한다
 		var marker = new daum.maps.Marker({
-		    position: new daum.maps.LatLng(37.556175, 126.972256), // 마커의 좌표
+		    position: new daum.maps.LatLng( latlng.getLat(),  latlng.getLng()), // 마커의 좌표
 		    image : markerImage, // 마커의 이미지
 		    map: map // 마커를 표시할 지도 객체
-		});
+		});           
+		
 		
 
 		// 지도에 클릭 이벤트를 등록합니다
@@ -398,10 +402,24 @@
 		    var resultDiv = document.getElementById('clickLatlng'); 
 		    $("#locationX").val(locationX);
 		    $("#locationY").val(locationY);
+		   
 		    locationY
 		});
-		
-		
+		function addMeeting(){
+		 	if($("#subject").val()==""){
+		 		alert("제목을 입력해 주세요 ");      
+			}else if($("#day").val()==""){
+				alert("모임일시를 입력해 주세요 ");    
+			}else if($("#money").val()==""){
+				alert("회비를 입력해 주세요 ");    
+			}else if($("#content").val()==""){
+				alert("내용을 입력해 주세요 ")
+			}else  if($("#locationX").val()=="" && $("#locationY").val()==""){
+				alert("지역을 선택해 주세요 "); 
+			}else {
+		 		$("#form1").submit();
+		 	}
+		}
 		
 	</script>
 </html>
