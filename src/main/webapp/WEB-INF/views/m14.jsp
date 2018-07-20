@@ -11,6 +11,11 @@
 
 </head>
 <style>
+#menu #freeBbs {
+	color: black;
+	font-weight: bold;
+}
+
 #subject {
 	margin-top: 20px;
 	padding: 10px;
@@ -218,7 +223,7 @@
 		}else{ //session
 			alert("로그인이 필요합니다.");
 		}
-	}
+	});
 
 	//댓글 삭제 버튼 클릭 시 (동적 HTML 태그는 on 이벤트로  발생시켜야함!)
 	$(document).on("click",".reply_del",function(){

@@ -5,35 +5,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" 
 	src="<%=request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
-	input[type='button']{
-		border:none;
-	 	background-color:#FFBF00 ;
-	 	color: white;
-	 	margin:7px;
-		padding:10px;
-		cursor: pointer;
-	}
 	#menu #freeBbs{
-		font-weight: 900;
+		font-weight: bold;
 		color:black;
 	}
-	#title{
-		float:left;
+	
+	#subject {
+		margin-top: 20px;
+		height: 30px;
+		width: 100%;
+		padding: 0px 5px;
 	}
-	#right {
-		width: 800px;
-		float: left;
-		margin-left: 20px;
-	}
+
 	#btn{
-		margin-left: 300px;
-		margin-top:25px;
+		margin-top: 10px;
+		margin-bottom: 100px;
+		text-align: center;
+	}
+	#btn input[type="button"] {
+		padding: 5px 10px;
+		background: #ffbf00;
+	    border: none;
+		border-radius: 5px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
 	}
 </style>
 <body>
@@ -43,8 +44,8 @@
 		<div id="right">
 			<form action="" name="frm" id="frm" method="post">
 			 	<div id="title">| 자유게시판 |</div>
-				<input type="text" id="subject" placeholder="포스트 제목을 입력해주세요." name="subject" style="width:766px;"maxlength="20">
-			    <textarea  name="content" id="smarteditor"  placeholder="10" cols="100" style="width:766px; height:312px;">
+				<input type="text" id="subject" placeholder="제목을 입력하세요." name="subject" maxlength="20">
+			    <textarea  name="content" id="smarteditor"  placeholder="10" cols="100" style="width:798px; height:300px;">
 			    </textarea>
 			    <div id="btn">
 				    <input type="button" id="cancel" value="취소" />

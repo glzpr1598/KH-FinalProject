@@ -165,6 +165,7 @@
 					createOk = data.success;
 					if(createOk){
 						$("#nameMsg").html("사용 가능한 동호회명 입니다.");
+						$("#nameMsg").css("color","blue");
 					}else{
 						$("#nameMsg").html("이미 존재하는 동호회명 입니다");
 						$("#nameMsg").css("color","red");
@@ -219,7 +220,7 @@
 
 			/* 닉네임을 입력하였는지  */
 			if( $("input[name='club_masterNickname']").val() == "" ){
-				$("#nicknameMsg").html("동호회 소개말을 입력해주세요");
+				$("#nicknameMsg").html("닉네임을 입력해주세요");
 				$("#nicknameMsg").css("color","red");
 				submit++;
 			}else{
@@ -246,16 +247,14 @@
 			
 	        // 텍스트 길이
 	        var textLength = $(this).val().length;
-	        $("#textLength").css("color","black");
 	        
 	        // 텍스트 길이 표시
 	        $("#textLength").html(textLength);
 	        
 	        // 제한된 길이보다 입력된 길이가 큰 경우 제한 길이만큼만 자르고 텍스트영역에 넣음
 	        if (textLength > limit) {
-	        	alert("소개글은 최대 100자 까지만 가능 합니다");
-	            $("#textLength").css("color","red");
-	            $(this).val($(this).val().substring(0,limit+1));
+	            $(this).val($(this).val().substring(0,limit));
+	            $("#textLength").html($(this).val().length);
 	        }
 	    });
 		

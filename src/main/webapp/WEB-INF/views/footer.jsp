@@ -7,12 +7,12 @@
 <style>
 #footer {
     width: 100%;
-    line-height: 150px;
-	margin-top: 40px;
-    background-color: rgb(245, 245, 245);        
-    color: rgba(0,0,0,0.38);    
+    line-height: 100px;
+    margin-top: 40px;
+    background-color: rgb(240, 240, 240);
+    color: rgba(0,0,0,0.7);
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
 }
 </style>
 </head>

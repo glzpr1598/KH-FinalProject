@@ -187,7 +187,7 @@
 			</when>
 			<when test="location == '강서'">
 				AND (C.club_location = '강서/양천' OR
-				C.club_location = '영의도/영등포/당산' OR
+				C.club_location = '여의도/영등포/당산' OR
 				C.club_location = '신촌/이대/서대문' OR
 				C.club_location = '홍대/합정/상수' OR
 				C.club_location = '마포역/공덕' OR
