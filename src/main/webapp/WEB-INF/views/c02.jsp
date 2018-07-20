@@ -58,10 +58,14 @@
 				<tbody id="body">
 				</tbody>
 			</table>
+			<div id="pagingArea"></div>
 			</div>
 		</div>
 	</div>
 </body>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <script>
 	$(document).ready(function(){
 		$.ajax({
@@ -72,32 +76,29 @@
 				"club_id":"<%=request.getParameter("club_id")%>"
 			},
 			success:function(data){
-				if(data){
-					console.log(data.list);
-					listPrint(data.list);
-				}
+				$.pagingHash(data.list, 10, 10, listPrint);
 			},
 			error:function(e){
 				console.log(e);
 			}
 		});
+		
+		function listPrint(list){
+			var content = "";
+			console.log(list);
+			$("#body").empty();
+			list.forEach(function(item){
+				content += "<tr>";
+				content += "<td>"+item.clubBbs_idx+"</td>";
+				content += "<td><a href='./clubAllDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
+				content += "<td>"+item.clubJoin_nickname+"</td>";
+				var date = new Date(item.clubBbs_date);
+				content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+				content += "<td>"+item.clubBbs_hit+"</td>";
+				content += "</tr>";
+			});
+			$("#body").append(content);
+		}
 	});
-	
-	function listPrint(list){
-		var content = "";
-		console.log(list);
-		$("#body").empty();
-		list.forEach(function(item){
-			content += "<tr>";
-			content += "<td>"+item.clubBbs_idx+"</td>";
-			content += "<td><a href='./clubAllDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
-			content += "<td>"+item.clubJoin_nickname+"</td>";
-			var date = new Date(item.clubBbs_date);
-			content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
-			content += "<td>"+item.clubBbs_hit+"</td>";
-			content += "</tr>";
-		});
-		$("#body").append(content);
-	}
 </script>
 </html>

@@ -175,7 +175,7 @@ public class ClubBbsController {
 	
 	//자유게시판 리스트 조회  
 	@RequestMapping(value = "/clubFreeBbsListForm")
-	public @ResponseBody HashMap<String, Object> clubFreeBbsListForm(@RequestParam("club_id") String club_id, @RequestParam("sort") String clubBbs_sort,HttpSession session) {
+	public @ResponseBody HashMap<String, Object> clubFreeBbsListForm(@RequestParam("club_id") int club_id, @RequestParam("sort") String clubBbs_sort,HttpSession session) {
 		logger.info("자유게시판 리스트");
 		String member_id = (String)session.getAttribute("userId");
 		String root = session.getServletContext().getRealPath("/");

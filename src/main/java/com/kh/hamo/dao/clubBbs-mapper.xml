@@ -15,7 +15,7 @@
 	</select>
 	
 	<!-- 동호회 회원 닉네임 찾기 -->
-	<select id="findnickName" resultType="String" parameterType="String">
+	<select id="findnickName" resultType="String">
 		SELECT clubJoin_nickname FROM clubJoin WHERE club_id=#{param1} AND member_id=#{param2}
 	</select>
 	
@@ -95,7 +95,7 @@
 	
 	<!-- 사진첩 사진 조회 -->
 	<select id="clubPhoto" resultType="String" parameterType="Integer">
-		SELECT MIN(clubBbsFile_newName) FROM clubBbsFile WHERE clubBbs_id=#{param1} GROUP BY clubBbs_id
+		SELECT MIN(clubBbsFile_newName) AS clubBbsFile_newName FROM clubBbsFile WHERE clubBbs_id=#{param1} GROUP BY clubBbs_id
 	</select>
 	
 	<!-- 댓글 수 조회 -->

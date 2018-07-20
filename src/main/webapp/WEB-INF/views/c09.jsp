@@ -72,10 +72,14 @@
 				</tbody>
 			</table>
 			<input id="write" type="button" value="글쓰기"/>
+			<div id="pagingArea"></div>
 			</div>
 		</div>
 	</div>
 </body>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <script>
 	$(document).ready(function(){
 		$.ajax({
@@ -83,42 +87,40 @@
 			url: "./clubFreeBbsListForm",
 			dataType:"json",
 			data:{
-				"club_id":"<%=request.getParameter("club_id")%>",
+				"club_id": "<%=request.getParameter("club_id")%>",
 				"sort": "<%=request.getParameter("sort")%>"
 			},
 			success:function(data){
-				if(data){
-					console.log(data.list);
-					listPrint(data.list);
-					if(data.nick != null){
-						document.getElementById("write").style.display='inline';
-					}else{
-						document.getElementById("write").style.display='none';
-					}
+				$.pagingHash(data.list, 10, 10, listPrint);
+				if(data.nick != null){
+					document.getElementById("write").style.display='inline';
+				}else{
+					document.getElementById("write").style.display='none';
 				}
 			},
 			error:function(e){
 				console.log(e);
 			}
 		});
+		
+		function listPrint(list){
+			var content = "";
+			console.log(list);
+			$("#body").empty();
+			list.forEach(function(item){
+				content += "<tr>";
+				content += "<td>"+item.clubBbs_idx+"</td>";
+				content += "<td><a class='move' href='./clubFreeBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
+				content += "<td>"+item.clubJoin_nickname+"</td>";
+				var date = new Date(item.clubBbs_date);
+				content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+				content += "<td>"+item.clubBbs_hit+"</td>";
+				content += "</tr>";
+			});
+			$("#body").append(content);
+		}
+		
 	});
-
-	function listPrint(list){
-		var content = "";
-		console.log(list);
-		$("#body").empty();
-		list.forEach(function(item){
-			content += "<tr>";
-			content += "<td>"+item.clubBbs_idx+"</td>";
-			content += "<td><a class='move' href='./clubFreeBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
-			content += "<td>"+item.clubJoin_nickname+"</td>";
-			var date = new Date(item.clubBbs_date);
-			content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
-			content += "<td>"+item.clubBbs_hit+"</td>";
-			content += "</tr>";
-		});
-		$("#body").append(content);
-	}
 	
 	$("#write").click(function(){
 			location.href="./clubFreeBbsWriteForm?club_id="+<%=request.getParameter("club_id")%>;
