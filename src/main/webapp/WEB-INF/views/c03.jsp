@@ -51,13 +51,13 @@
 		border: 3px solid #ffbf00;
 		resize: none;
 		margin-left: 0.5%;
-		width: 88.5%;
+		width: 90.5%;
 		height: 7%;
 	}
 	input[type='button']{
 		border: 3px solid #ffbf00;
 		background-color: white;
-		width: 9%;
+		width: 8%;
 		height: 7%;
 		text-align: center;
 		font-weight: 600;
