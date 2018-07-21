@@ -83,7 +83,7 @@ public class ClubMemberController {
 	@RequestMapping(value = "/clubJoin")
 	public String clubJoin(HttpSession session, 
 			@RequestParam HashMap<String, String> map) {
-		logger.info("동호회 가입하기 페이지 요청");
+		logger.info("동호회 가입하기 요청");
 		logger.info("닉네임 : "+map.get("nickname"));
 		logger.info("동호회 ID :"+map.get("club_id"));
 		map.put("member_id",(String)session.getAttribute("userId"));

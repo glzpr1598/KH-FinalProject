@@ -104,14 +104,15 @@ public class ClubMemberService {
 			//동호회 가입 실패시 이동 할 페이지
 			inter = sqlSession.getMapper(ClubMemberInter.class);
 			String page = "redirect:/clubJoinForm";
-			ClubMemberDTO dto = new ClubMemberDTO();
-			dto.setClub_id(Integer.parseInt(map.get("club_id")));
-			dto.setMember_id(map.get("member_id"));
-			dto.setNickName(map.get("nickname"));
+
 			int success = inter.clubJoin(map);
 			if(success > 0 ) {
 				logger.info("동호회 가입 성공");
-				page = "redirect:/clubMain?club_id="+map.get("club_id");
+				if(inter.memberCountUp(map.get("club_id")) > 0) {
+					logger.info("동호회 회원 증가");
+					page = "redirect:/clubMain?club_id="+map.get("club_id");
+				}
+			
 			}
 			return page;
 		}
@@ -126,6 +127,9 @@ public class ClubMemberService {
 			int success = inter.clubMemberOut(member_id,club_id);
 			if(success > 0 ) {
 				logger.info("탈퇴 성공!");
+				if(inter.memberCountDown(club_id) > 0) {
+					logger.info("동호회 회원 감소");
+				}
 				page = "redirect:/clubMain?club_id="+club_id;
 			}
 			
