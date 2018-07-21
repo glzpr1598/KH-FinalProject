@@ -68,4 +68,7 @@
 		VALUES( seq_clubjoin_id.NEXTVAL,#{member_id},#{club_id},#{nickname})
 	</insert>
 	
+	<delete id="clubMemberOut">
+		DELETE FROM clubJoin WHERE member_id = #{param1} AND club_id = #{param2}
+	</delete>
 </mapper>

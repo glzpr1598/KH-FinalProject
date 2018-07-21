@@ -94,7 +94,8 @@ $(function(){
         	|| $("#smarteditor").val()== ""
         	|| $("#smarteditor").val()== '<p><br style="clear:both;">&nbsp;</p>' 
         	|| $("#smarteditor").val()== '<br style="clear:both;"><br>'
-       		|| $("#smarteditor").val()== '<br style="clear:both;">'){
+       		|| $("#smarteditor").val()== '<br style="clear:both;">'
+       		|| $("#smarteditor").val()=='<p><br style="clear:both;"><br style="clear:both;"><br style="clear:both;">&nbsp;</p>'){
         		alert("내용을 입력 해 주세요.");
         	}else{
         		var str = $("#smarteditor").val();

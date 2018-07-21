@@ -11,7 +11,7 @@
 	
 	<!--자유게시판 글 리스트 조회  -->
 	<select id="freeBbsList" resultType="com.kh.hamo.dto.HamoBbsDTO">
-		SELECT * FROM mainBbs order by mainBbs_idx DESC 
+		SELECT * FROM mainBbs WHERE mainBbs_sort = '자유게시판' order by mainBbs_idx DESC 
 	</select>
 	<!--자유게시판 글 상세보기  -->
 	<select id="freeBbsdetail" resultType="com.kh.hamo.dto.HamoBbsDTO">

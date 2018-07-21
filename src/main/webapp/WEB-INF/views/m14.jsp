@@ -127,7 +127,7 @@
 			<div id="btn">
 				<input id="freeBbsDelete" type="hidden" value="삭제"> 
 				<input id="freeBbsUpdateForm" type="hidden" value="수정"> 
-				<input id="freeBbsList" type="button" value="목록">
+				<input id="freeBbsListPage" type="button" value="목록">
 			</div>
 			<div id="space"></div>
 		</div>
@@ -271,8 +271,8 @@
 	});
 	
 	//목록 버튼 클릭 시 리스트로 
-	$("#freeBbsList").click(function(){
-		location.href="./freeBbsList";
+	$("#freeBbsListPage").click(function(){
+		location.href="./freeBbsListPage";
 	});
 	
 

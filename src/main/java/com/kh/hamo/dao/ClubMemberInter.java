@@ -3,6 +3,8 @@ package com.kh.hamo.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.hamo.dto.ClubMemberDTO;
+
 public interface ClubMemberInter {
 	
 	// 특정 동호회의 멤버 리스트 가져오기
@@ -31,6 +33,9 @@ public interface ClubMemberInter {
 	
 	//동호회 가입 
 	int clubJoin(HashMap<String, String> map);
+	
+	//동호회 탈퇴
+	int clubMemberOut(String member_id, String club_id); 
 
 	
 	

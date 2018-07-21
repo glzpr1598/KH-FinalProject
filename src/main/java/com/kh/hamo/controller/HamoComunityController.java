@@ -49,11 +49,20 @@ public class HamoComunityController {
 	@Autowired
 	HamoFileService hamoFileService;
 	
-	@RequestMapping(value = "/freeBbsList")
-	public String freeBbsList(Model model) {
-		logger.info("자유게시판 리스트 요청");
-		hamoFreeBbsService.freeBbsList(model);
+	
+	
+	@RequestMapping(value = "/freeBbsListPage")
+	public String freeBbsListPage() {
+		logger.info("자유게시판 리스트 페이지 요청");
 		return "m12";
+	}	
+
+	@RequestMapping(value = "/freeBbsList")
+	public @ResponseBody HashMap<String, Object>
+	freeBbsList() {
+		logger.info("자유게시판 리스트 요청");
+		return hamoFreeBbsService.freeBbsList();
+		
 	}	
 	@RequestMapping(value = "/freeBbsWriteForm")
 	public String freeBbsWriteForm() {
@@ -110,7 +119,7 @@ public class HamoComunityController {
 		String root = session.getServletContext().getRealPath("/");
 		logger.info("root 경로 : "+root);
 		hamoFreeBbsService.freeBbsWrite(idx,root);
-		return "redirect:/freeBbsList";
+		return "redirect:/freeBbsListPage";
 	}
 	// 특정 글의 댓글 리스트 조회
 	@RequestMapping(value = "/freeBbsReplyList")
@@ -144,7 +153,7 @@ public class HamoComunityController {
 	
 	
 	
-	
+	/********************동호회 친목**********************/
 	//다중파일업로드
 	@RequestMapping(value="/file_uploader_html.do")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
@@ -153,6 +162,13 @@ public class HamoComunityController {
 	}
 	
 	
+	
+	
+	@RequestMapping(value = "/friendShipBbsListPage")
+	public String friendShipBbsListPage() {
+		logger.info("동호회 친목 리스트 페이지 요청");
+		return "m12";
+	}	
 	
 	
 	

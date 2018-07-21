@@ -42,5 +42,27 @@
 	</div>
 </body>
 <script>
+$(document).ready(function(){
+	
+ 	var club_id = "${club_id}";
+ 	
+ 	
+ 	
+	$("#btn1").click(function(){
+		if(confirm("탈퇴 하시겠습니까?")){
+			var url = "./clubMemberOut?club_id="+club_id;
+			opener.memberOut(url);
+			window.close();		
+		}else{
+			window.close();
+		}
+	
+	});
+	
+	
+	
+});
+
+	
 </script>
 </html>

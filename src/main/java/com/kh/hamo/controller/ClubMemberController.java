@@ -2,6 +2,7 @@ package com.kh.hamo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -56,6 +57,9 @@ public class ClubMemberController {
 		return service.memberCheck(userId, club_id);
 	}
 	
+	
+	/******윤지현***********/
+	
 	// 동호회 가입하기 페이지 + 소개를 DB에 요청
 	@RequestMapping(value = "/clubJoinForm")
 	public String clubJoinForm(HttpSession session, 
@@ -74,6 +78,7 @@ public class ClubMemberController {
 		logger.info("동호회 닉네임 체크 요청");
 		return service.club_overLap(club_id,nickName);
 	}
+	
 	//동호회 가입하기
 	@RequestMapping(value = "/clubJoin")
 	public String clubJoin(HttpSession session, 
@@ -83,20 +88,30 @@ public class ClubMemberController {
 		logger.info("동호회 ID :"+map.get("club_id"));
 		map.put("member_id",(String)session.getAttribute("userId"));
 		logger.info("회원 ID : "+map.get("member_id"));
-		//동호회 소개글 가져오기
-	
+		
 		return 	service.clubJoin(map);
 	}
 	
 	
-	
-	
-	
-	
 	// 동호회 탈퇴하기 페이지
 	@RequestMapping(value = "/clubOutForm")
-	public String clubOutForm() {
+	public String clubOutForm(@RequestParam String club_id,Model model) {
 		logger.info("동호회 탈퇴 페이지 요청");
+		model.addAttribute("club_id", club_id);
 		return "c24";
 	}
+	
+	// 동호회 탈퇴
+	@RequestMapping(value="/clubMemberOut")
+	public ModelAndView clubMemberOut(HttpSession session,
+			@RequestParam("club_id") String club_id) {
+		logger.info("동호회 탈퇴 요청");
+		String member_id = (String)session.getAttribute("userId");
+		
+		return service.clubMemberOut(member_id,club_id) ;
+	}
+	
+	
+	
+
 }

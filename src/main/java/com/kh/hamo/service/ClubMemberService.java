@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.ClubMemberInter;
+import com.kh.hamo.dto.ClubMemberDTO;
+import com.kh.hamo.dto.HamoMainDTO;
 
 @Service
 public class ClubMemberService {
@@ -102,11 +104,33 @@ public class ClubMemberService {
 			//동호회 가입 실패시 이동 할 페이지
 			inter = sqlSession.getMapper(ClubMemberInter.class);
 			String page = "redirect:/clubJoinForm";
+			ClubMemberDTO dto = new ClubMemberDTO();
+			dto.setClub_id(Integer.parseInt(map.get("club_id")));
+			dto.setMember_id(map.get("member_id"));
+			dto.setNickName(map.get("nickname"));
 			int success = inter.clubJoin(map);
 			if(success > 0 ) {
 				logger.info("동호회 가입 성공");
 				page = "redirect:/clubMain?club_id="+map.get("club_id");
 			}
 			return page;
+		}
+
+		public ModelAndView clubMemberOut(String member_id, String club_id) {
+			logger.info("동호회 탈퇴하기 서비스 요청");
+			inter = sqlSession.getMapper(ClubMemberInter.class);
+			ModelAndView mav = new ModelAndView();
+			
+			//탈퇴하기 실패 시 경고창과 함께 다시 시도 		
+			String page ="redirect:/clubOutForm?club_id=" + club_id;
+			int success = inter.clubMemberOut(member_id,club_id);
+			if(success > 0 ) {
+				logger.info("탈퇴 성공!");
+				page = "redirect:/clubMain?club_id="+club_id;
+			}
+			
+			mav.setViewName(page);
+			return mav;
+			
 		}
 }

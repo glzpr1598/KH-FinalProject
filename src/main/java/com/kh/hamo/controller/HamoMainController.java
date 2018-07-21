@@ -110,7 +110,7 @@ public class HamoMainController {
 		return service.clubName_overLap(club_name);
 	}
 	// 동호회 만들기 요청
-	@RequestMapping(value = "//makeClub")
+	@RequestMapping(value = "/makeClub")
 	public  ModelAndView makeClub(
 			@RequestParam HashMap<String , String> map,HttpSession session) {
 		logger.info("동호회명 만들기 요청");

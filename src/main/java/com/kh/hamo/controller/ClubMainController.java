@@ -29,10 +29,8 @@ public class ClubMainController {
 	@RequestMapping(value = "/clubMain")
 	public String clubMain(Model model, @RequestParam String club_id) {
 		logger.info("동호회 메인 페이지 요청");
-		
 		// 동호회 사진, 소개글 전송
 		service.clubMain(model, club_id);
-		
 		return "c01";
 	}
 	
