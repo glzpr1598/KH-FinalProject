@@ -6,13 +6,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 </head>
 <style>
-	table{
-		width:800px;
+	#comunity {
+		background: #FDF5DC;
+		color: black;
 	}
-	#right{
-	float:left;
+	table{
+		margin-top: 20px;
+		width:800px;
 	}
 	table,th,td{
 		text-align: center;
@@ -20,29 +25,37 @@
 		border-width:1px 0px;
 		border-style:solid;
 		border-color:#ffbf00;
-		padding:10px;
-		font-size: 14px;
+		padding: 8px 10px;
+		font-size: 13px;
 	}
 	th{
 		background-color: #FDF5DC;
 	}
 	#writeBtn{
+		margin-top: 10px;
+		float: right;
 		border:none;
+		border-radius: 5px;
 		background-color: #FFBF00;
 		color:white;
-		padding:5px;
+		padding:5px 10px;
 		cursor: pointer;
+		font-weight: bold;
 	}
 	td a{
 		text-decoration: none;
 		color: black;
 	}
 	td a:hover{
-		color:red;
+		text-decoration: underline;
 	}
 	#menu #freeBbs{
-		font-weight: 900;
-		color:black;
+		color: black;
+		font-weight: bold;
+	}
+	
+	#space {
+		height: 200px;
 	}
 </style>
 <body>
@@ -69,15 +82,14 @@
 						</tr>
 					</c:forEach>
 				</table>
-					<input id="writeBtn" type="button" value="글쓰기">
-			</div>
+				<input id="writeBtn" type="button" value="글쓰기">
+				<div id="space"></div>
+		</div>
 	</div>
 </body>
 <script>
 	$("#writeBtn").click(function(){
-		console.log(${sessionScope.userId});
-		//세션 검사 추후에 개발
-		if(${sessionScope.userId ==null }){
+		if("${sessionScope.userId}" == "" ){
 			alert("로그인 후에 서비스 이용 가능합니다.");
 		}else{
 			location.href="freeBbsWriteForm";

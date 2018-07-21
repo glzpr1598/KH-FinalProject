@@ -37,6 +37,12 @@
 	#header #link a:hover {
 		text-decoration: underline;
 	}
+	#header #link a#loginId {
+		cursor: auto;
+	}
+	#header #link a#loginId:hover {
+		text-decoration: none;
+	}
 	
 	/* 로고, 검색창 div */
 	#header #areaSearch {
@@ -109,11 +115,13 @@
 </style>
 </head>
 <body>
-	<div id="header">
+	<div id="header">   
 		<div id="link">
+			<a id="loginId"></a>
+			<span id="bar"></span>
 			<a id="login"></a>
-			|
-			<a href="./updateForm" id="update">회원정보수정</a>
+			<span>|</span>
+			<a id="update">회원정보수정</a>
 		</div>
 		<div id="areaSearch">
 			<a href="./"><img id="logo" src="./resources/image/logo.png" /></a>
@@ -135,6 +143,8 @@
 	</div>
 </body>
 <script>
+/* href="./updateForm" */
+     
 	// 로고 클릭
 	$("#logo").click(function() {
 		location.href="./"
@@ -147,9 +157,14 @@
 	if('<%= session.getAttribute("userId") %>' == 'null') {  // 로그아웃 상태
 		loginState = "logout";
 		$("#login").html("로그인");
+		$("#update").html("회원가입");
+		$("#bar").html("");
 	} else {  // 로그인 상태
 		loginState = "login";
 		$("#login").html("로그아웃");
+		$("#update").html("회원정보수정");
+		$("#loginId").html('<%= session.getAttribute("userId") %>');
+		$("#bar").html("|");
 	}
 	
 	// 로그인/로그아웃 클릭
@@ -160,6 +175,16 @@
 		} else {  // 로그아웃 상태
 			// 로그인 페이지로 이동
 			location.href="./loginForm";       
+		}
+	});
+	
+	$("#update").click(function() {
+		if(loginState == "login") {  // 로그인 상태
+			// 로그아웃   
+			location.href="./updateForm";
+		} else {  // 로그아웃 상태
+			// 로그인 페이지로 이동
+			location.href="./hamoJoinForm";            
 		}
 	});
 

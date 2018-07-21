@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.service.HamoFileService;
 import com.kh.hamo.service.HamoFreeBbsService;
@@ -85,32 +86,30 @@ public class HamoComunityController {
 		return "m15";
 	}
 	@RequestMapping(value = "/freeBbsUpdate")
-	public String freeBbsUpdate(@RequestParam HashMap<String, String> map,Model model) {	
+	public ModelAndView freeBbsUpdate(@RequestParam HashMap<String, String> map,HttpSession session) {	
+		logger.info("글 수정 요청");
 		logger.info("글 번호: "+map.get("idx"));
 		logger.info("컨트롤러에서 수정 할 내용: "+map.get("content"));
-		hamoFreeBbsService.freeBbsUpdate(map);
-		String idx =map.get("idx");
+		String root = session.getServletContext().getRealPath("/");
 		//updateAfter=0을 같이 보내는 이유는 글 수정시에는 조회수 올라가는 것을 방지하기 위해
-		return "redirect:/freeBbsdetail?idx="+idx+"&updateAfter=0"; 
+		return hamoFreeBbsService.freeBbsUpdate(map,root);
 	}
 	// 글쓰기 버튼 누를 시 서버에 글쓰기 내용 전달하는 컨트롤러
 	@RequestMapping(value = "/freeBbsWrite")
-	public String freeBbsWrite(@RequestParam HashMap<String, String>map,HttpSession session) {
+	public ModelAndView freeBbsWrite(@RequestParam HashMap<String, String> map,HttpSession session) {
 		logger.info("글쓰기 요청");
-		logger.info("content: "+map.get("content"));
 		//글쓰기 요청 한 회원 id 를 map에 담아줌 . why ? 어떤 회원이 글쓰기를 하였는지 확인하기위해
 		map.put("userId", (String)session.getAttribute("userId"));
-		
-		//기본적으로 글쓰기 성공 후 해당 게시글 상세보기 요청
-		int mainBbs_id = hamoFreeBbsService.freeBbsWrite(map);
-		String result = "redirect:/freeBbsdetail?idx="+mainBbs_id+"&updateAfter=0";
-		return result;
+		String root = session.getServletContext().getRealPath("/");
+		return hamoFreeBbsService.freeBbsWrite(map,root);
 	}
 	// 글 삭제 후 게시글 리스트로 이동
 	@RequestMapping(value = "/freeBbsDelete")
-	public String freeBbsDelete(@RequestParam("idx") String idx) {
+	public String freeBbsDelete(@RequestParam("idx") String idx,HttpSession session) {
 		logger.info("글 삭제 요청");
-		hamoFreeBbsService.freeBbsWrite(idx);
+		String root = session.getServletContext().getRealPath("/");
+		logger.info("root 경로 : "+root);
+		hamoFreeBbsService.freeBbsWrite(idx,root);
 		return "redirect:/freeBbsList";
 	}
 	// 특정 글의 댓글 리스트 조회
@@ -147,59 +146,10 @@ public class HamoComunityController {
 	
 	
 	//다중파일업로드
-	@RequestMapping(value="/multiplePhotoUpload")
+	@RequestMapping(value="/file_uploader_html.do")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
-	    try {
-	         //파일정보
-	         String sFileInfo = "";
-	         //파일명을 받는다 - 일반 원본파일명
-	         String filename = request.getHeader("file-name");
-	         //파일 확장자
-	         String filename_ext = filename.substring(filename.lastIndexOf(".")+1);
-	         //확장자를소문자로 변경
-	         filename_ext = filename_ext.toLowerCase();
-	         //파일 기본경로
-	         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-	         logger.info("파일 기본 경로 : "+dftFilePath);
-	         //파일 기본경로 _ 상세경로
-	         String filePath = dftFilePath + "resources" + File.separator + "photo_upload" + File.separator;
-	         logger.info("상세 경로 : "+filePath);
-	         File file = new File(filePath);
-	         if(!file.exists()) {
-	            file.mkdirs();
-	         }
-	         String realFileNm = "";
-	         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-	         String today= formatter.format(new java.util.Date());
-	         realFileNm = today+UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
-	         String rlFileNm = filePath + realFileNm;
-	         ///////////////// 서버에 파일쓰기 /////////////////
-	         InputStream is = request.getInputStream();
-	         OutputStream os=new FileOutputStream(rlFileNm);
-	         int numRead;
-	         byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-	         while((numRead = is.read(b,0,b.length)) != -1){
-	            os.write(b,0,numRead);
-	         }
-	         if(is != null) {
-	            is.close();
-	         }
-	         os.flush();
-	         os.close();
-	         ///////////////// 서버에 파일쓰기 /////////////////
-	         // 정보 출력
-	         sFileInfo += "&bNewLine=true";
-	         // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
-	         sFileInfo += "&sFileName="+ filename;
-	         sFileInfo += "&sFileURL="+"/controller/resources/photo_upload/"+realFileNm;
-	         logger.info("sFileInfo: :  "+sFileInfo);
-	         PrintWriter print = response.getWriter();
-	         print.print(sFileInfo);
-	         print.flush();
-	         print.close();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+		logger.info("파일 업로드 요청");
+		hamoFreeBbsService.hamoFreeBbsUpload(request,response);
 	}
 	
 	

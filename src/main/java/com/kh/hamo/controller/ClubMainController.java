@@ -45,4 +45,16 @@ public class ClubMainController {
 		return service.clubInfo(club_id);
 	}
 	
+	@RequestMapping(value="/nickNameSearch")
+	public @ResponseBody HashMap<String, Object> nickNameSearch(
+			@RequestParam String userId, String clubId){
+		logger.info("해당 동호회 내 닉네임 가져오기");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String nick = service.nickNameSearch(userId,clubId);
+		map.put("nick", nick);
+		
+		return map;
+	}
+	
+	
 }

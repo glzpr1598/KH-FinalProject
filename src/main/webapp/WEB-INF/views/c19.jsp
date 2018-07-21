@@ -32,6 +32,22 @@
 		p{
 			width: 700px;
 		}
+		table{
+			background-color:#FDF5DC; 
+		}
+		a{
+			cursor: pointer;
+		}
+		#replyTable{
+			width: 800px;
+		}
+		.delA{
+			width:50px; 
+		}
+		
+		
+		
+		
 	</style>
 
 	</head>
@@ -42,32 +58,190 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 				<!------------------- 양식 ------------------->
-					<h1> | 모임일정 | </h1>
+					<h3> | 모임일정 | </h3>
 					<h2 id="subject">제목 :${list.meetingPlan_subject}</h2>
 					<h4>회비 :${list.meetingPlan_money}</h4>
 					<h4>모임일시 : ${list.meetingPlan_when}</h4>
 					<h4>내용</h4></br>
+					<input type="hidden" value="${list.member_id}" id="member"/>
 					<input type="hidden" value="${list.meetingPlan_locationX}" id="locationX"/>
 					<input type="hidden" value="${list.meetingPlan_locationY}" id="locationY"/>
 					<textarea readonly  rows="10" cols="70">${list.meetingPlan_content}</textarea>
-					<div id="map" style="width:750px;height:350px;"></div>
+					<div id="map" style="width:800px;height:350px;"></div>
 					<hr>
 					<button id="attend">참석</button>
 					<p><b>참석자</b></p>
 					<p id="attendName"></p>
 					<input type="hidden" value="${list.meetingPlan_id}" id="meetingPlan_id"/>
 					<hr>
+					
+					<div id="reply">
+						댓글 <span id="replyCount"></span>
+						<table id="replyTable">
+						</table>
+					</div>
+					<div id="replyfrm">
+							<input type="text" maxlength="150" id="replyContent" name="replyContent"/>
+							<input id="save" type="button" value="등록"/>
+					</div>
+					
+					<div id="btn">
+						<button id="back" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'">목록</button>
+						<button id="update" onclick="location.href='clubMeetingUpdateForm?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>&meetingPlan_id=${list.meetingPlan_id}'" >수정</button>
+						<button id="del" onclick="location.href='clubMeetingDel?meetingPlan_id=${list.meetingPlan_id}&member_id=<%= session.getAttribute("userId") %>&club_id=<%= request.getParameter("club_id") %>'">삭제</button>          
+					</div>	
+					
 				<!------------------- 양식 ------------------->
 			</div>
 		</div>
 		<!------------------- 양식 ------------------->
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
-	<script>	
+	<script>
+	console.log("+++++++++++++++++++++");
+	console.log($("#member").val());
+	console.log("<%= session.getAttribute("userId") %>");   
+	
+
+	if($("#member").val()!="<%= session.getAttribute("userId") %>"){
+		$("#update").hide();
+		$("#del").hide();
+	} 
+	                
+	       
+	var replyCount;
+	$(document).ready(function(){
+		//댓글
+		$.ajax({
+			type: "post",
+			dataType: "JSON",
+			error: function(e) {console.log(e)},
+			url: "./replyList",
+			data: {
+				"meetingPlan_id": $("#meetingPlan_id").val(),
+				"member_id": "<%= session.getAttribute("userId") %>",
+				"replyContent": $("#replyContent").val(),
+				"club_id":"<%= request.getParameter("club_id") %>",
+			},
+			success: function(data) {
+				console.log(data);    
+				replyList(data.list);
+				replyCount = data.replyCount;   
+				$("#replyCount").html(replyCount);   
+				     
+			}
+		});
+		function replyList(list){
+			console.log(list);
+			var content ="";
+			list.forEach(function(item, idx){
+				content += "<tr>";
+				content += "<td>"+item.clubJoin_nickname+"</td>";
+				content += "<td>"+item.meetingPlanReply_date+"</td>";       
+				content += "<td class='delA' rowspan=2 ><a class='replyDel' id='"+item.meetingPlanReply_id+"'>삭제</a></td>";
+				content += "</tr >";
+				content += "<tr>";
+				content += "<td colspan=2 >"+item.meetingPlanReply_content+"</td>";
+				content += "</tr>";
+			});		  
+			$("#replyTable").empty();
+			$("#replyTable").append(content);
+			
+			for (var i =0; i<list.length;i++ ){           
+				console.log(list[i].member_id);
+				console.log(list[i].meetingPlanReply_id);
+				console.log($("a#"+list[i].meetingPlanReply_id).attr("id"));
+				if(list[i].member_id=="<%= session.getAttribute("userId") %>"){
+					$("a#"+list[i].meetingPlanReply_id).show();
+				} else{
+					$("a#"+list[i].meetingPlanReply_id).hide();  
+				}
+			}
+		}
+		//댓글 삭제
+	 	$(document).on("click",".replyDel",function() {
+			$.ajax({
+				type: "post",  
+				dataType: "JSON",
+				error: function(e) {console.log(e)},
+				url: "./replyDel",
+				data: {
+					"meetingPlanReply_id":  $(this).attr('id'),     
+					"member_id": "<%= session.getAttribute("userId") %>"
+				},
+				success: function(data) {
+					console.log(data.list);
+					$(document).ready(function() {
+						$.ajax({
+							type: "post",
+							dataType: "JSON",
+							error: function(e) {console.log(e)},
+							url: "./replyList",
+							data: {
+								"meetingPlan_id": $("#meetingPlan_id").val(),
+								"member_id": "<%= session.getAttribute("userId") %>",
+								"replyContent": $("#replyContent").val(),
+								"club_id":"<%= request.getParameter("club_id") %>"
+							},
+							success: function(data) {
+								replyList(data.list);
+								replyCount = data.replyCount;   
+								$("#replyCount").html(replyCount);    
+								
+							}
+						});
+					});
+				}
+			});
+			
+		}); 
+		//댓글 등록
+		$("#save").click(function() {
+			$.ajax({
+				type: "post",
+				dataType: "JSON",
+				error: function(e) {
+					console.log(e);
+					//alert("동호회 회원가입해야 댓글을 작성할 수 있습니다. ");
+				},
+				url: "./replyAdd",
+				data: {
+					"meetingPlan_id": $("#meetingPlan_id").val(),
+					"member_id": "<%= session.getAttribute("userId") %>",
+					"replyContent": $("#replyContent").val()
+				},
+				success: function(data) {
+					$(document).ready(function() {
+						$.ajax({
+							type: "post",
+							dataType: "JSON",
+							error: function(e) {console.log(e)},
+							url: "./replyList",
+							data: {
+								"meetingPlan_id": $("#meetingPlan_id").val(),
+								"member_id": "<%= session.getAttribute("userId") %>",
+								"replyContent": $("#replyContent").val(),
+								"club_id":"<%= request.getParameter("club_id") %>"
+							},
+							success: function(data) {
+								replyList(data.list);
+								replyCount = data.replyCount;
+								$("#replyCount").html(replyCount); 
+							}
+						});
+					});
+				}
+			});
+		});
+	
 		var obj = {};
-		obj.error=function(e){console.log(e)};
+		obj.error=function(e){
+			console.log(e);
+			//alert("동호회 회원가입해야 참석할 수 있습니다. ");
+		};
 		obj.type="POST";
 		obj.dataType = "JSON";
+<<<<<<< HEAD
 		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(), "club_id": "<%= request.getParameter("club_id") %>","member_id":"<%= session.getAttribute("userId") %>"};
 		$(document).ready(function(){
 			obj.url="./meetingAttendList";
@@ -116,9 +290,61 @@
 					}
 				});
 				listPrint(data.list);
+=======
+		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(),
+				"club_id": "<%= request.getParameter("club_id") %>",
+				"member_id":"<%= session.getAttribute("userId") %>",
+				
+		};
+		
+		// 참석자 리스트
+		obj.url="./meetingAttendList";
+		obj.success = function(data){
+			console.log(data);
+			console.log(data.btn);
+			if(data.btn>=1){
+				$("#attend").html("참석취소");	
+>>>>>>> b5d407e63193f21ae7b3b15b45d9027171a71d03
 			}
-			ajaxCall(obj);
-		});
+			$("#attend").click(function(){
+				if($("#attend").html()=="참석"){
+					obj.url="./meetingAttend";
+					obj.success = function(data){
+						console.log(data);
+						$("#attend").html("참석취소");
+						$(document).ready(function(){
+							obj.url="./meetingAttendList";
+							obj.success = function(data){
+								console.log(data);
+								console.log(data.btn);
+								listPrint(data.list);
+							}
+							ajaxCall(obj);
+						});
+		 			}
+					ajaxCall(obj);
+				}else if ($("#attend").html()=="참석취소"){
+					obj.url="./meetingAttendCancel";
+					obj.success = function(data){
+						console.log(data);
+						$("#attend").html("참석");
+						$(document).ready(function(){
+							obj.url="./meetingAttendList";
+							obj.success = function(data){
+								console.log(data);
+								console.log(data.btn);
+								listPrint(data.list);
+							}
+							ajaxCall(obj);
+						});
+					} 
+					ajaxCall(obj);
+				}
+			});
+			listPrint(data.list);
+		}
+		ajaxCall(obj);
+		
 		    
 		
 		function listPrint(list){
@@ -138,7 +364,7 @@
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new daum.maps.LatLng($("#locationX").val(), $("#locationY").val()), // 지도의 중심좌표
-	        level: 3, // 지도의 확대 레벨
+	        level: 5, // 지도의 확대 레벨
 	        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
 	    }; 
 
@@ -180,6 +406,6 @@
 		
 		// 인포윈도우를 지도에 표시한다
 		infowindow.open(map, marker);
-			
+	});
 	</script>
 </html>

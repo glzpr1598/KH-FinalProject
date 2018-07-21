@@ -5,20 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<title>Insert title here</title>
+<title>HAMO</title>
 <style>
 	#head{
 		border-bottom: 3px solid #ffbf00;
 		border-top: 3px solid #ffbf00;
 		background-color: #FDF5DC;
 	}
-	#table{
+	table{
+		width: 100%;
 		margin-top: 2%;
 	}
-	table,tr,td,tr {
+	table,th,td{
 		border-collapse: collapse;
-		width: 780px;
-		height: 50px;
+		padding: 2% 0.5%;
+		text-align: center;
 	}
 	#title{
 	margin-left:0.5%;
@@ -30,13 +31,13 @@
 		background-color: #ffbf00;
 		width: 70px;
 		height: 30px;
-		position: relative;
-		left: 708px;
-		top: 30px;
+		margin-left:89%;
+		margin-top: 2%;
 		font-weight: 600;
 		color: white;
 		text-align: center;
 		display: none;
+		cursor: pointer;
 	}
 	#listTable{
 		text-align: center;
@@ -71,14 +72,18 @@
 					</tbody>
 				</table>
 				<input id="write" type="button" value="글쓰기"/>
+				<div id="pagingArea"></div>
 			</div>
 		</div>
 	</div>
 </body>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <script>
 	var club_id=<%=request.getParameter("club_id")%>
 	console.log("동호회 아이디 :"+club_id);
-	 
+		
 	 $(document).ready(function(){
 			$.ajax({
 				type : "get",
@@ -86,14 +91,14 @@
 				dataType:"json",
 				data:{
 					"club_id":"<%=request.getParameter("club_id")%>",
-					"member_id": "${sessionScope.member_id}"
+					"member_id": "${sessionScope.userId}"
 				},
 				success:function(data){
-					if(data.nick != null){
-						console.log("동호회 회장 : "+data.nick);
+					if(data.masternick != null){
+						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='inline';
 					}else{
-						console.log("동호회 회장 : "+data.nick);
+						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='none';
 					}
 				},
@@ -113,37 +118,35 @@
 					"sort": "<%=request.getParameter("sort")%>"
 				},
 				success:function(data){
-					if(data){
-						console.log(data.list);
-						listPrint(data.list);
-					}
+					$.pagingHash(data.list, 10, 10, listPrint);
 				},
 				error:function(e){
 					console.log(e);
 				}
 			});
+			
+			 function listPrint(list){
+					var content = "";
+					console.log(list);
+					$("#body").empty();
+					list.forEach(function(item){
+						content += "<tr>";
+						content += "<td>"+item.clubBbs_idx+"</td>";
+						content += "<td><a href='./clubNoticeDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
+						content += "<td>"+item.club_masterNickname+"</td>";
+						var date = new Date(item.clubBbs_date);
+						content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+						content += "<td>"+item.clubBbs_hit+"</td>";
+						content += "</tr>";
+					});
+					$("#body").append(content);
+				}
 		});
-
-	 function listPrint(list){
-			var content = "";
-			console.log(list);
-			$("#body").empty();
-			list.forEach(function(item){
-				content += "<tr>";
-				content += "<td>"+item.clubBbs_idx+"</td>";
-				content += "<td><a href='./clubNoticeDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
-				content += "<td>"+item.club_masterNickname+"</td>";
-				var date = new Date(item.clubBbs_date);
-				content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
-				content += "<td>"+item.clubBbs_hit+"</td>";
-				content += "</tr>";
-			});
-			$("#body").append(content);
-		}
 	 
 	$("#write").click(function(){
 		location.href="./clubNoticeWriteForm?club_id="+club_id;
 	});
+
 	
 </script>
 </html>

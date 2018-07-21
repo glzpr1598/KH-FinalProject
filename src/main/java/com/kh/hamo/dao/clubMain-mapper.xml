@@ -25,4 +25,9 @@
 			WHERE club_id = #{param1}
 	</select>
 	
+	<!-- 내 동호회 내 닉네임 가져오기 -->
+	<select id="nickNameSearch" resultType="String">
+		SELECT clubJoin_nickname FROM clubJoin WHERE member_id=#{param1} AND club_id=#{param2}
+	</select>
+	
 </mapper>

@@ -10,12 +10,25 @@ public class HamoMainDTO {
 	private int clubJoin_id;
 	private int club_memberCount;
 	private String club_location;
+	private String club_masterNickname;
 	private int clubPicture_id;
+	
+
 	private String clubPicture_oldName;
 
 	private int interest_id;
 	private String interest_interest;
 	private String member_id;
+	
+	
+	
+	
+	public String getClub_masterNickname() {
+		return club_masterNickname;
+	}
+	public void setClub_masterNickname(String club_masterNickname) {
+		this.club_masterNickname = club_masterNickname;
+	}
 	
 	public int getClubJoin_id() {
 		return clubJoin_id;

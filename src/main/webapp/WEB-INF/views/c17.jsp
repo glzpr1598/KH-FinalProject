@@ -9,15 +9,25 @@
 	<title>HAMO</title>
 	<style>
 		table{
-			width : 800px;
-			text-align: center;
-			border-collapse: collapse;
+		    margin-top: 10px;
+		    width: 800px;
+		    text-align: center;
+		    border-collapse: collapse;
+		    font-size: 13px;
 		}
 		th{
-			background-color:#F8F3D4;
+			background-color:#FDF5DC;
+			height: 35px;
 		}
 		td{
 			border-bottom: 1px solid #ffbf00;
+			height: 35px;
+		}
+		.idx{
+			width: 80px;
+		}
+		.subject{
+			width: 400px;
 		}
 		input[type="button"]{
 			width: 50px;
@@ -33,8 +43,7 @@
 			cursor: pointer;
 		}
 		#add{
-			position: relative;
-			left: 172px;
+			float: right;        
 		}
 		a{
 			color: black;
@@ -50,12 +59,12 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
-			<h1> | 모임일정 | </h1>
-			<table id="listTable">
+			<h3> | 모임일정 | </h3>
+			<table id="listTable">    
 				<thead>
 					<tr>
-						<th>글번호</th>
-						<th>제목</th>
+						<th class="idx">글번호</th>
+						<th class="subject">제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
 						<th>모임일시</th>
@@ -63,16 +72,10 @@
 				</thead>
 				<tbody >
 				</tbody>
-				<tfoot>
-					<tr>
-						<td style="text-align: right; border-color: white;" colspan="4">	
-							<input type="button" value="등록" id="add" onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>'"/>
-						</td>
-					</tr>
-				</tfoot>
 			</table>
-		
-		
+			<div>
+			<input type="button" value="등록" id="add" onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>'"/>
+			</div>
 		
 		<!------------------- 양식 ------------------->
 			</div>
@@ -101,9 +104,9 @@
 				content +="<tr>";
 				content +="<td>"+item.meetingPlan_idx+"</td>";
 				content +="<td><a href='clubMeetingDetail?club_id="+<%= request.getParameter("club_id") %>+"&meetingPlan_id="+item.meetingPlan_id+"'>"+item.meetingPlan_subject+"</a></td>";
-				content +="<td>"+item.clubJoin_nickname+"</td>";
-				content +="<td>"+item.meetingPlan_date+"</td>";
-				content +="<td>"+item.meetingPlan_when+"</td>";
+				content +="<td >"+item.clubJoin_nickname+"</td>";
+				content +="<td '>"+item.meetingPlan_date+"</td>";
+				content +="<td >"+item.meetingPlan_when+"</td>";
 				content += "</tr>";
 			});		
 			$("#listTable").append(content);

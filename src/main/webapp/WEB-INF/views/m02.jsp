@@ -43,7 +43,7 @@
 					border-radius: 5px;
 					background: #FFBF00;
 					color: #FFFFFF;
-					font-size: 16px;
+					font-size: 14px;
 					font-weight: bold;
 					cursor: pointer;
   			    }
@@ -69,7 +69,7 @@
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
-				    font-size: 15px;
+				    font-size: 14px;
 				    margin: 5px 0px;
 				    cursor: pointer;   
 				    box-sizing: border-box;   
@@ -85,7 +85,7 @@
 				    text-align: center;    
 				    text-decoration: none;
 				    display: inline-block;
-				    font-size: 15px;
+				    font-size: 14px;
 				    margin: 5px 0px;
 				    cursor: pointer;    
 				    box-sizing: border-box;      
@@ -94,15 +94,16 @@
 				}
 				
 				#spanId{
-					width: 300px;      
-					height: 100px;                  
-					margin: 10px auto;     
-					text-align: center;        
-					padding: 37px 0;                           
-					font-size: 15px;        
-					font-weight: bold;   
-					border: 2px solid #ffbf00;
-					box-sizing: border-box;     
+					width: 300px;
+				    height: 70px;
+				    margin: 5px auto;
+				    text-align: center;
+				    padding: 23px 0;
+				    font-size: 14px;
+				    /* font-weight: bold; */
+				    border: medium solid #ffbf00;
+				    border-radius: 5px;
+				    box-sizing: border-box;  
 				}    
 				
 				#emailId{
@@ -134,9 +135,13 @@
 							color: #ff1616;
 							box-sizing: border-box;  
   			    }  
-  			    .aTag:link { color: red; text-decoration: none;}
-				.aTag:visited { color: black; text-decoration: none;}
- 				.aTag:hover { color: blue; text-decoration: underline;}
+  			    .aTag:link { 
+  			   			font-size: 13px;    
+						color: black;
+						text-decoration: none;
+						cursor: pointer;
+  			   	}
+				.aTag:visited { color: black; text-decoration: none;}   
 				.aTag{display: none;}    
 				                
 		</style>
@@ -240,9 +245,9 @@
 							console.log("success");
 							if(data.success){
 								$("#spanId").show();      
-								document.getElementById("spanId").innerHTML = "회원님의 아이디는   "+data.userId+"   입니다.";
+								document.getElementById("spanId").innerHTML = "회원님의 아이디는 <b>"+data.userId+"</b>입니다.";
 								/* $("#msgChk").show();     */
-								$(".aTag").css("display","inline");
+					 			$(".aTag").css("display","inline"); 
 							}else{
 								alert(data.userId);  
 							}
@@ -250,11 +255,11 @@
 						error: function(e){console.log(e)}
 				});      
 			}				
-		});
+		});     
 
 	
 var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값이 필요
-
+	
 	$("#pwCheck").click(function(){
 		if($( "input[name='userId']").val()==""){//아이디확인
 			alert("아이디를 확인해주세요");
@@ -289,11 +294,19 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 					},
 					error: function(e){console.log(e)}
 			});
-		}				
+		}		
+		
 	});
 
+	var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;      
 	
+	/* ajax  1. 유효성 검사 통과 -> 2. 메일인증 전송 */     
 	$("#emailChk").click(function(){
+		if(!regExp.test($("#emailId").val())){ 
+		      alert("이메일 주소가 유효하지 않습니다"); 
+		      $("#emailId").focus();        
+		} else {   
+			alert("입력하신 이메일로 인증번호를 전송하였습니다.");   
 		$.ajax({
 			url: "./emailChk",
 			type: "post",
@@ -304,11 +317,11 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 			success: function(d) {
 				console.log("success");
 					serialNumber = d.serialNumber;		
-					alert("입력하신 이메일로 인증번호를 전송하였습니다.");
 					console.log(serialNumber);
 			},
 			error: function(e){console.log(e)}
 			});
+		}
 		});
 	
 	  $("#pwUpdate").click(function(){
