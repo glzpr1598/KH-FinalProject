@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<title>Insert title here</title>
+<title>HAMO</title>
 <style>
 	#title{
 		font-weight: 600;
@@ -57,8 +57,8 @@
 		<div id="table">
 			<table id="listTable">
 			</table>
+			<input id="write" type="button" value="글쓰기"/>
 		</div>
-		<input id="write" type="button" value="글쓰기"/>
 	</div>
 </div>
 </body>
@@ -73,39 +73,39 @@
 				"sort": "<%=request.getParameter("sort")%>"
 			},
 			success:function(data){
-				if(data){
-					console.log(data.list);
-					console.log(data.photolist);
-					listPrint(data.list, data.photolist);
-					if(data.nick != null){
-						document.getElementById("write").style.display='inline';
-					}else{
-						document.getElementById("write").style.display='none';
-					}
+				console.log(data.list);
+				console.log(data.photolist);
+				listPrint(data.list, data.photolist);
+				if(data.nick != null){
+					document.getElementById("write").style.display='inline';
+				}else{
+					document.getElementById("write").style.display='none';
 				}
 			},
 			error:function(e){
 				console.log(e);
 			}
 		});
+		
+		function listPrint(list, photolist){
+			var content = "";
+			var cnt = 0;
+			//console.log(photolist);
+			//console.log(list);
+			$("#listTable").empty();
+			content += "<tr>";
+			list.forEach(function(item, index){
+				cnt++;
+				content += "<td class='move'><a href='./clubPhotoBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'><img src='/hamo/resources/multiuploader/"+photolist[index]+"' width='250' height='280'></a><br/>"+item.clubBbs_subject+"</td><br/>";
+				if(cnt % 3 == 0){
+					content += "</tr>";
+					content += "<tr>";
+				}
+			});
+			$("#listTable").append(content);
+		}
+		
 	});
-	
-	function listPrint(list, photolist){
-		var content = "";
-		var cnt = 0;
-		console.log(list);
-		$("#listTable").empty();
-		content += "<tr>";
-		list.forEach(function(item, index){
-			cnt++;
-			content += "<td class='move'><a href='./clubPhotoBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'><img src='/hamo/resources/multiuploader/"+photolist[index]+"' width='250' height='280'></a><br/>"+item.clubBbs_subject+"</td><br/>";
-			if(cnt % 3 == 0){
-				content += "</tr>";
-				content += "<tr>";
-			}
-		});
-		$("#listTable").append(content);
-	}
 	
 	$("#write").click(function(){
 		location.href="./clubPhotoBbsWriteForm?club_id="+<%=request.getParameter("club_id")%>;

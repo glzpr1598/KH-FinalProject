@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<title>Insert title here</title>
+<title>HAMO</title>
 <style>
 	#title{
 		margin-left: 0.5%;
@@ -64,36 +64,6 @@
 		cursor: pointer;
 		float: right;
 	}
-	#del{
-		border: none;
-		background-color: #ffbf00;
-		width: 8%;
-		height: 4%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		cursor: pointer;
-	}
-	#update{
-		border: none;
-		background-color: #ffbf00;
-		width: 8%;
-		height: 4%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		cursor: pointer;
-	}
-	#back{
-		border: none;	
-		background-color: #ffbf00;
-		width: 8%;
-		height: 4%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		cursor: pointer;
-	}
 	.replyDel{
 		color: #5a5a5a;
 		font-weight: 600;
@@ -112,6 +82,16 @@
 		margin-left: 74.5%;
 		margin-top: 2%;
 		width: 800px;
+	}
+	#btn button{
+		border: none;
+		background-color: #ffbf00;
+		width: 8%;
+		height: 4%;
+		font-weight: 600;
+		color: white;
+		text-align: center;
+		cursor: pointer;
 	}
 	.date{
 		font-weight: 600;

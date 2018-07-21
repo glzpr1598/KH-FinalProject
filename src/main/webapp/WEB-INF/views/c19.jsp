@@ -58,7 +58,7 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 				<!------------------- 양식 ------------------->
-					<h1> | 모임일정 | </h1>
+					<h3> | 모임일정 | </h3>
 					<h2 id="subject">제목 :${list.meetingPlan_subject}</h2>
 					<h4>회비 :${list.meetingPlan_money}</h4>
 					<h4>모임일시 : ${list.meetingPlan_when}</h4>
@@ -241,6 +241,56 @@
 		};
 		obj.type="POST";
 		obj.dataType = "JSON";
+<<<<<<< HEAD
+		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(), "club_id": "<%= request.getParameter("club_id") %>","member_id":"<%= session.getAttribute("userId") %>"};
+		$(document).ready(function(){
+			obj.url="./meetingAttendList";
+			obj.success = function(data){
+				console.log(data);
+				console.log(data.btn);
+				if(data.btn>=1){
+					$("#attend").html("참석취소");	
+				}
+				$("#attend").click(function(){
+					if($("#attend").html()=="참석"){
+						obj.url="./meetingAttend";
+						obj.success = function(data){
+							console.log(data);
+							$("#attend").html("참석취소");
+							$(document).ready(function(){
+								obj.url="./meetingAttendList";
+								obj.success = function(data){
+									console.log(data);
+									console.log(data.btn);
+									listPrint(data.list);
+								}
+								ajaxCall(obj);
+							});
+							
+							
+			 			}
+						ajaxCall(obj);
+					}else if ($("#attend").html()=="참석취소"){
+						obj.url="./meetingAttendCancel";
+						obj.success = function(data){
+							console.log(data);
+							$("#attend").html("참석");
+							$(document).ready(function(){
+								obj.url="./meetingAttendList";
+								obj.success = function(data){
+									console.log(data);
+									console.log(data.btn);
+									listPrint(data.list);
+								}
+								ajaxCall(obj);
+							});
+							
+						} 
+						ajaxCall(obj);
+					}
+				});
+				listPrint(data.list);
+=======
 		obj.data={"meetingPlan_id": $("#meetingPlan_id").val(),
 				"club_id": "<%= request.getParameter("club_id") %>",
 				"member_id":"<%= session.getAttribute("userId") %>",
@@ -254,6 +304,7 @@
 			console.log(data.btn);
 			if(data.btn>=1){
 				$("#attend").html("참석취소");	
+>>>>>>> b5d407e63193f21ae7b3b15b45d9027171a71d03
 			}
 			$("#attend").click(function(){
 				if($("#attend").html()=="참석"){
