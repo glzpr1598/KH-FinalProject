@@ -111,7 +111,6 @@
 								ajaxCall(obj);
 							});
 							
-							
 						} 
 						ajaxCall(obj);
 					}
