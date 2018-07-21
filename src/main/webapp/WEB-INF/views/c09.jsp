@@ -7,47 +7,56 @@
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <title>HAMO</title>
 <style>
+	#menu3 {
+		color: black;
+		font-weight: bold;
+	}
+	
+	#title{
+		font-weight: bold;
+		font-size: large;
+	}
+	table{
+		width: 100%;
+		margin-top: 20px;;
+	}
+	table,th,td{
+		border-collapse: collapse;
+		padding: 8px 10px;
+		text-align: center;
+		font-size: 13px;
+	}
 	#head{
 		border-bottom: 3px solid #ffbf00;
 		border-top: 3px solid #ffbf00;
 		background-color: #FDF5DC;
 	}
-	table{
-		width: 100%;
-		margin-top: 2%;
-	}
-	table,th,td{
-		border-collapse: collapse;
-		padding: 2% 0.5%;
-		text-align: center;
-	}
-	#title{
-		margin-left:0.5%;
-		font-weight: 600;
-		font-size: large;
-	}
-	#write{
-		border: none;
-		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
-		margin-left:91.5%;
-		margin-top: 2%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		display: none;
-		cursor: pointer;
-	}
 	td a{
 		text-decoration: none;
 		color: black;
 	}
-	#listTable{
-		text-align: center;
+	td a:hover {
+		text-decoration: underline;
 	}
 	td{
 		border-bottom: 1px solid #ffbf00;
+	}
+	#writeArea {
+		text-align: right;
+	}
+	#write{
+		margin-top: 10px;
+		border:none;
+		border-radius: 5px;
+		background-color: #FFBF00;
+		color:white;
+		padding:5px 10px;
+		cursor: pointer;
+		font-weight: bold;
+		display: none;
+	}
+	#space {
+		height: 100px;
 	}
 </style>
 </head>
@@ -71,7 +80,9 @@
 				<tbody id="body">
 				</tbody>
 			</table>
-			<input id="write" type="button" value="글쓰기"/>
+			<div id="writeArea">
+				<input id="write" type="button" value="글쓰기"/>
+			</div>
 			<div id="pagingArea"></div>
 			</div>
 		</div>

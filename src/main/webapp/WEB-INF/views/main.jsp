@@ -38,7 +38,7 @@
 	#we {
 	    font-size: 27px;
 	    margin: 15px 0px 10px 0px;
-	    font-family: 'Jua';
+	    font-family: 'Jua', sans-serif;
 	}
 	
 	.picture {
@@ -56,7 +56,7 @@
 	}
 	.text .club_name {
 		font-size: 23px;
-		font-family: 'Nanum Gothic';
+		font-family: 'Nanum Gothic', sans-serif;
 		font-weight: bold;
 		margin-bottom: 15px;
 	}

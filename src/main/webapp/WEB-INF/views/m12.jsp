@@ -31,9 +31,11 @@
 	th{
 		background-color: #FDF5DC;
 	}
+	wrtieBtnArea {
+		text-align: right;
+	}
 	#writeBtn{
 		margin-top: 10px;
-		float: right;
 		border:none;
 		border-radius: 5px;
 		background-color: #FFBF00;
@@ -82,7 +84,9 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<input id="writeBtn" type="button" value="글쓰기">
+				<div id="wrtieBtnArea">
+					<input id="writeBtn" type="button" value="글쓰기">
+				</div>
 				<div id="space"></div>
 		</div>
 	</div>

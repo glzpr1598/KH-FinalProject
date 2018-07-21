@@ -116,7 +116,7 @@
 		<div id="meeting" class="menu">
 			<div>
 				<img id="list5" src="./resources/image/list.png" />
-				<a id="menu4" href="./clubMeetingList?club_id=<%= request.getParameter("club_id") %>">모임일정</a>
+				<a id="menu5" href="./clubMeetingList?club_id=<%= request.getParameter("club_id") %>">모임일정</a>
 			</div>
 		</div>
 		

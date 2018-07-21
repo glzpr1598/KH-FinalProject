@@ -8,44 +8,36 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <title>HAMO</title>
 <style>
-	#save{
-		border: none;
-		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
-		margin-left:3%;
-		margin-top:3%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		cursor: pointer;
+	#menu1 {
+		font-weight: bold;
+		color: black;
 	}
-	#cancel{
-		border: none;
-		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
-		margin-left:37%;
-		text-align: center;
-		color: white;
-		font-weight: 600;
-		font-size: small;
-		cursor: pointer;
-	}
-	#writefrm{
-		margin-left:0.5%;
-		margin-top:2%;
-		width: 800px;
-	}
+	
 	#title{
-		margin-left:0.5%;
-		font-weight: 600;
+		font-weight: bold;
 		font-size: large;
 	}
-	#text{
-		width: 400px;
+	
+	#text {
+		margin-top: 20px;
 		height: 30px;
-		margin-bottom: 2%;
+		width: 100%;
+		padding: 0px 5px;
+	}
+	
+	#btn{
+		margin-top: 10px;
+		margin-bottom: 100px;
+		text-align: center;
+	}
+	#btn input[type="button"] {
+		padding: 5px 10px;
+		background: #ffbf00;
+	    border: none;
+		border-radius: 5px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -57,10 +49,10 @@
 			<div id="title">| 전체글보기 |</div>
 			<form action="" name="writefrm" id="writefrm" method="post">
 				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20" value="${info.clubBbs_subject}"/>
-		    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;">${info.clubBbs_content}</textarea>
+		    	<textarea name="editor" id="editor" rows="10" cols="100" style="width:798px; height:412px;">${info.clubBbs_content}</textarea>
 		    	<div id="btn">
 	    			<input id="cancel" type="button" value="취소"/>
-	    			<button id="save">저장</button>
+	    			<input id="save" type="button" value="저장" />
 	    		</div>
 			</form>
 		</div>

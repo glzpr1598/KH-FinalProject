@@ -87,40 +87,38 @@ $(function(){
         //id가 smarteditor인 textarea에 에디터에서 대입
         editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
         
-        //폼 submit
-        if(confirm("수정 하시겠습니까?")){
-        	console.log("content:"+$("#smarteditor").val());
-        	if($("#smarteditor").val()== "<p>&nbsp;</p>" 
-        	|| $("#smarteditor").val()== ""
-        	|| $("#smarteditor").val()== '<p><br style="clear:both;">&nbsp;</p>' 
-        	|| $("#smarteditor").val()== '<br style="clear:both;"><br>'
-       		|| $("#smarteditor").val()== '<br style="clear:both;">'){
-        		alert("내용을 입력 해 주세요.");
-        	}else{
-        		var str = $("#smarteditor").val();
-        		var pattern = /src="(.*?)"/g;
-        		var list = str.match(pattern);
-        		if(list !=null){
-        			for(var i=0; i < list.length; i++){
-        				list[i] = list[i].substring(list[i].lastIndexOf('/') + 1);
-	        			list[i] = list[i].substring(0, list[i].length - 1);
-        			}
-        		}
-        		var param = "";
-    			var count =0; //선언
-    			if(list != null) {
-        			for(var i = 0; i < list.length; i++){
-        				param += "&filePath"+i+"="+list[i];
-        				console.log(param);
-        				count++;
-        				console.log("textarea 파일 개수 : "+count);
-        			}
-    			}
-    			console.log("글 수정 test");
-    			$("#frm").attr("action","freeBbsUpdate?count="+count+param);
-        		$("#frm").submit();	
-        	}
-        } 
+       //폼 submit
+       	console.log("content:"+$("#smarteditor").val());
+       	if($("#smarteditor").val()== "<p>&nbsp;</p>" 
+       	|| $("#smarteditor").val()== ""
+       	|| $("#smarteditor").val()== '<p><br style="clear:both;">&nbsp;</p>' 
+       	|| $("#smarteditor").val()== '<br style="clear:both;"><br>'
+      		|| $("#smarteditor").val()== '<br style="clear:both;">'){
+       		alert("내용을 입력 해 주세요.");
+       	}else{
+       		var str = $("#smarteditor").val();
+       		var pattern = /src="(.*?)"/g;
+       		var list = str.match(pattern);
+       		if(list !=null){
+       			for(var i=0; i < list.length; i++){
+       				list[i] = list[i].substring(list[i].lastIndexOf('/') + 1);
+        			list[i] = list[i].substring(0, list[i].length - 1);
+       			}
+       		}
+       		var param = "";
+   			var count =0; //선언
+   			if(list != null) {
+       			for(var i = 0; i < list.length; i++){
+       				param += "&filePath"+i+"="+list[i];
+       				console.log(param);
+       				count++;
+       				console.log("textarea 파일 개수 : "+count);
+       			}
+   			}
+   			console.log("글 수정 test");
+   			$("#frm").attr("action","freeBbsUpdate?count="+count+param);
+       		$("#frm").submit();	
+       	}
     });
     
     //수정 취소  클릭 시 
