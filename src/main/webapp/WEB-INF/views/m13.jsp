@@ -87,7 +87,9 @@ $(function(){
          	if( "${sessionScope.userId}" !=null){     	
 	         	if($("#subject").val()==""){
 	         		alert("제목을 입력 해 주세요.");
-	         	}else if($("#smarteditor").val()=="<p>&nbsp;</p>" || $("#smarteditor").val()==""){
+	         	}else if($("#smarteditor").val()=="<p>&nbsp;</p>"
+	         	|| $("#smarteditor").val()==""
+	         	|| $("#smarteditor").val() =='<p><br style="clear:both;">&nbsp;</p>'){
 	         		alert("내용을 입력 해 주세요.");
 	         	}else{
 	         		console.log($("#smarteditor").val());
@@ -128,8 +130,8 @@ $(function(){
      
     $("#cancel").click(function(){
     	if(confirm("작성을 취소하시겠습니까?")){ 
-    		//true 일 경우 자유게시판 리스트로 이동
-    		location.href="./freeBbsList";
+    		//true 일 경우 자유게시판 리스트 보여주는 페이지로 이동
+    		location.href="./freeBbsListPage";
     	}
     });
     

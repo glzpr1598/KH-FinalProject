@@ -67,22 +67,13 @@
 		<div id="right">
 			<div id="title">| 자유게시판 |</div>
 				<table>
-					<tr>
+					<tr id="append">
 						<th>글번호</th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일</th>
 						<th>조회수</th>
 					</tr>
-					<c:forEach items="${freeList}" var="bbs">
-						<tr>
-							<td>${bbs.mainBbs_idx }</td>
-							<td><a href="freeBbsdetail?idx=${bbs.mainBbs_id}&updateAfter=1">${bbs.mainBbs_subject }</a></td>
-							<td><a href="freeBbsdetail?idx=${bbs.mainBbs_id}&updateAfter=1">${bbs.member_id}</a></td>
-							<td>${bbs.mainBbs_date }</td>
-							<td>${bbs.mainBbs_hit }</td>
-						</tr>
-					</c:forEach>
 				</table>
 				<div id="wrtieBtnArea">
 					<input id="writeBtn" type="button" value="글쓰기">
@@ -92,6 +83,54 @@
 	</div>
 </body>
 <script>
+/* 리스트 조회 */
+$(document).ready(function(){
+	
+	$.ajax({
+		url:"freeBbsList",
+		type:"GET",
+		dataType:"JSON",
+		success:function(data){
+			console.log(data);
+			console.log(data.freeBbsList.length);
+			console.log(data.freeBbsList[0].mainBbs_id);
+			console.log(data.freeBbsList[0].member_id);
+			//글쓰기 리스트 생성하는 함수 호출
+			freeBbsList(data);
+		},error:function(error){console.log(error);}
+		
+	});
+});
+	function freeBbsList(data){
+		console.log("freeBbsList 함수 호출");
+		//초기화
+		$("#append").after("");
+		
+		var content ="";
+ 		for(var i=0; i<data.freeBbsList.length; i++){
+			content+="<tr>";
+			content+="<td>"+data.freeBbsList[i].mainBbs_id+"</td>"
+			content+="<td><a href=freeBbsdetail?idx="+data.freeBbsList[i].mainBbs_id+"&updateAfter=1>"+data.freeBbsList[i].mainBbs_subject+"</a></td>"
+			content+="<td><a href=freeBbsdetail?idx="+data.freeBbsList[i].mainBbs_id+"&updateAfter=1>"+data.freeBbsList[i].member_id+"</a></td>"
+			content+="<td>"+data.freeBbsList[i].mainBbs_date+"</td>"
+			content+="<td>"+data.freeBbsList[i].mainBbs_hit+"</td>"
+			content+="</tr>";
+		} 
+		$("#append").after(content);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 	$("#writeBtn").click(function(){
 		if("${sessionScope.userId}" == "" ){
 			alert("로그인 후에 서비스 이용 가능합니다.");

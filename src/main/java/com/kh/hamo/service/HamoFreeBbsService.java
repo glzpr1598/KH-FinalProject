@@ -39,12 +39,14 @@ public class HamoFreeBbsService {
 	private SqlSession sqlSession;
 
 	HamoFreeBbsInter inter;
-
+	
 	//자유게시판 글 리스트 조회
-	public void freeBbsList(Model model) {
+	public HashMap<String, Object> freeBbsList() {
 		inter = sqlSession.getMapper(HamoFreeBbsInter.class);
-		ArrayList<HamoBbsDTO> freeList = inter.freeBbsList();
-		model.addAttribute("freeList", freeList);
+		ArrayList<HamoBbsDTO> freeBbsList = inter.freeBbsList();
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		map.put("freeBbsList", freeBbsList);
+		return map;
 	}
 	//자유게시판 글 상세보기 
 	public void freeBbsdetail(String idx, int flag, Model model) {
