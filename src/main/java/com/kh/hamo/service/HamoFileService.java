@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.hamo.dao.HamoFreeBbsInter;
+import com.kh.hamo.dao.HamoBbsInter;
 import com.kh.hamo.dao.HamoFriendShipBbsInter;
 
 @Service
@@ -17,7 +17,7 @@ public class HamoFileService {
     @Autowired
 	private SqlSession sqlSession;
     
-    HamoFreeBbsInter hamoFreeBbsInterInter;
+    HamoBbsInter hamoFreeBbsInterInter;
     HamoFriendShipBbsInter hamoFriendShipInterInter;
 
 }

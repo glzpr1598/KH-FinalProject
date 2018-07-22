@@ -9,7 +9,7 @@ public class HamoBbsDTO {
 	private int mainBbs_idx;
 	private String mainBbs_subject;
 	private String mainBbs_content;
-	private Date mainBbs_date;
+	private String mainBbs_date;
 	private int mainBbs_replyCount;
 	private int mainBbs_hit;
 	
@@ -57,10 +57,10 @@ public class HamoBbsDTO {
 	public void setMainBbs_content(String mainBbs_content) {
 		this.mainBbs_content = mainBbs_content;
 	}
-	public Date getMainBbs_date() {
+	public String getMainBbs_date() {
 		return mainBbs_date;
 	}
-	public void setMainBbs_date(Date mainBbs_date) {
+	public void setMainBbs_date(String mainBbs_date) {
 		this.mainBbs_date = mainBbs_date;
 	}
 	public int getMainBbs_hit() {
