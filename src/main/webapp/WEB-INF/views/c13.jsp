@@ -36,6 +36,8 @@
 		height: 180px;
 	}
 	.imgArea .imgSubject {
+		display: block;
+		margin-top: 5px;
 		font-size: 13px;
 		font-weight: bold;
 		color: black;
