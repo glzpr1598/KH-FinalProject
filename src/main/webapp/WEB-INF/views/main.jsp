@@ -28,7 +28,7 @@
 	}
 	#back, #next {
 	    line-height: 294px;
-	    width: 50px;
+	    width: 70px;
 	    font-size: 30px;
 	    text-align: center;
 	    color: #ffbf00;
@@ -46,11 +46,12 @@
 	}
 	.picture img{
 		height: 215px;
-	    max-width: 400px;
+	    width: 300px;
+	    object-fit: cover;
 	}
 	
 	.text {
-		width: 470px;
+		width: 530px;
 		margin-left: 20px;
 		font-size: 13px;
 	}
@@ -75,7 +76,7 @@
 	/* 인기 동호회 */
 	#intContainer {
 		width: 1000px;
-		height: 300px;
+		height: 320px;
 		margin: 0 auto 20px auto;
 	}
 	#intTitle {
@@ -88,7 +89,7 @@
 		margin-right: 50px;
 		box-sizing: border-box;
 		width: 300px;
-		height: 250px;
+		height: 280px;
 		border: medium solid #ffbf00;
 		border-radius: 5px;
 		padding: 15px;
@@ -98,7 +99,8 @@
 	}
 	.intPicture img {
 	    width: 264px;
-    	height: 170px;
+    	height: 200px;
+    	object-fit: cover;
 	}
 	.intText1 {
 		margin-top: 8px;
@@ -117,7 +119,7 @@
 	/* 맞춤 동호회 */
 	#bestContainer {
 		width: 1000px;
-		height: 300px;
+		height: 320px;
 		margin: 0 auto 20px auto;
 	}
 	#bestTitle {
@@ -130,7 +132,7 @@
 		margin-right: 50px;
 		box-sizing: border-box;
 		width: 300px;
-		height: 250px;
+		height: 280px;
 		border: medium solid #ffbf00;
 		border-radius: 5px;
 		padding: 15px;
