@@ -33,13 +33,18 @@ public interface ClubMemberInter {
 	
 	//동호회 가입 
 	int clubJoin(HashMap<String, String> map);
+	
+	//동호회 블랙리스트 명단
+	ArrayList<String> blackList(String club_id); 
+	
 	//동호회 가입 성공 시 회원 수 증가
-	int memberCountUp(String string); 
+	int memberCountUp(String club_id); 
 
 	//동호회 탈퇴
 	int clubMemberOut(String member_id, String club_id);
 	//동호회 가입 성공 시 회원 수 감소
-	int memberCountDown(String string); 
+	int memberCountDown(String club_id);
+	
 	
 	
 	

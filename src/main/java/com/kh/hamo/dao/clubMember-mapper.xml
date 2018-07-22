@@ -67,7 +67,9 @@
 		INSERT INTO clubJoin(clubjoin_id,member_id,club_id,clubjoin_nickname)
 		VALUES( seq_clubjoin_id.NEXTVAL,#{member_id},#{club_id},#{nickname})
 	</insert>
-	
+	<select id="blackList" resultType="String">
+		SELECT member_id FROM blackList WHERE club_id = #{param1}
+	</select>
 	<delete id="clubMemberOut">
 		DELETE FROM clubJoin WHERE member_id = #{param1} AND club_id = #{param2}
 	</delete>

@@ -99,22 +99,35 @@ public class ClubMemberService {
 			return resultMap;
 		}
 		//동호회 가입하기
-		public String clubJoin(HashMap<String, String> map) {
+		public ModelAndView clubJoin(HashMap<String, String> map) {
 			logger.info("동호회 가입하기 서비스 요청");
-			//동호회 가입 실패시 이동 할 페이지
 			inter = sqlSession.getMapper(ClubMemberInter.class);
-			String page = "redirect:/clubJoinForm";
-
-			int success = inter.clubJoin(map);
-			if(success > 0 ) {
-				logger.info("동호회 가입 성공");
-				if(inter.memberCountUp(map.get("club_id")) > 0) {
-					logger.info("동호회 회원 증가");
-					page = "redirect:/clubMain?club_id="+map.get("club_id");
-				}
+			ModelAndView mav = new ModelAndView();
+			//동호회 가입 실패시 이동 할 페이지
+			String page = "redirect:/clubJoinForm?club_id="+map.get("club_id");
 			
+			int club_id = Integer.parseInt(map.get("club_id"));
+			String member_id = map.get("member_id");
+			
+			//블랙리스트에 등록되어 있는 회원인지 여부를 판단하여 가입 제제
+			ArrayList<String> blackListMemer = new ArrayList<String>();
+			//가입 하려는 동호회에 블랙리스트 명단
+			blackListMemer = inter.blackList((map.get("club_id")));
+			logger.info("포함 여부 : "+blackListMemer.contains(map.get("member_id")));
+			if(blackListMemer.contains(map.get("member_id"))) {
+				logger.info("블랙리스트 명단에 포함");
+			}else {
+				logger.info("블랙리스트 명단에 포함되지 않으므로 가입 허용");
+				if( inter.clubJoin(map) > 0 ) {
+					logger.info("동호회 가입 성공");
+					if(inter.memberCountUp((map.get("club_id"))) > 0) {
+						logger.info("동호회 회원 증가");
+						page = "redirect:/clubMain?club_id="+map.get("club_id");
+					}		
+				}
 			}
-			return page;
+			mav.setViewName(page);
+			return mav;
 		}
 
 		public ModelAndView clubMemberOut(String member_id, String club_id) {
@@ -122,7 +135,7 @@ public class ClubMemberService {
 			inter = sqlSession.getMapper(ClubMemberInter.class);
 			ModelAndView mav = new ModelAndView();
 			
-			//탈퇴하기 실패 시 경고창과 함께 다시 시도 		
+			
 			String page ="redirect:/clubOutForm?club_id=" + club_id;
 			int success = inter.clubMemberOut(member_id,club_id);
 			if(success > 0 ) {
