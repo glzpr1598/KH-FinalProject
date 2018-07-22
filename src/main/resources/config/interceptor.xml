@@ -17,12 +17,52 @@
 	<mvc:interceptors>
 		<!-- 로그인 여부 체크 -->
 		<mvc:interceptor>
-			<!-- 내 동호회 -->
-			<mvc:mapping path="/m09move" />
 			<!-- 회원정보수정 -->
 			<mvc:mapping path="/updateForm" />
+			<!-- 내 동호회 -->
+			<mvc:mapping path="/m09move" />
+			<!-- 동호회 만들기 -->
+			<mvc:mapping path="/makeClubForm" />
+			<!-- 메인 자유게시판 상세보기 -->
+			<mvc:mapping path="/freeBbsdetail" />
+			<!-- 메인 자유게시판 수정창 -->
+			<mvc:mapping path="/freeBbsUpdateForm" />
+			<!-- 메인 동호회친목 상세보기 -->
+			<mvc:mapping path="/friendShipBbsdetail" />
+			<!-- 메인 동호회친목 글쓰기 -->
+			<mvc:mapping path="/friendShipBbsWriteForm" />
+			<!-- 메인 동호회친목 수정창 -->
+			<mvc:mapping path="/friendShipBbsUpdateForm" />
+			
 			<!-- 동호회 가입하기 -->
 			<mvc:mapping path="/clubJoinForm" />
+			<!-- 전체글보기 상세보기 -->
+			<mvc:mapping path="/clubAllDetail" />
+			<!-- 공지사항 상세보기 -->
+			<mvc:mapping path="/clubNoticeDetail" />
+			<!-- 공지사항 글쓰기 -->
+			<mvc:mapping path="/clubNoticeWriteForm" />
+			<!-- 공지사항 수정창 -->
+			<mvc:mapping path="/clubNoticeUpdateForm" />
+			<!-- 자유게시판 상세보기 -->
+			<mvc:mapping path="/clubFreeBbsDetail" />
+			<!-- 자유게시판 글쓰기 -->
+			<mvc:mapping path="/clubFreeBbsWriteForm" />
+			<!-- 자유게시판 수정창 -->
+			<mvc:mapping path="/clubFreeBbsUpdateForm" />
+			<!-- 사진첩 상세보기 -->
+			<mvc:mapping path="/clubPhotoBbsDetail" />
+			<!-- 사진첩 글쓰기 -->
+			<mvc:mapping path="/clubPhotoBbsWriteForm" />
+			<!-- 사진첩 수정창 -->
+			<mvc:mapping path="/clubPhotoBbsUpdateForm" />
+			<!-- 모임일정 상세보기 -->
+			<mvc:mapping path="/clubMeetingDetailForm" />
+			<!-- 모임일정 등록 -->
+			<mvc:mapping path="/clubMeetingWriteForm" />
+			<!-- 모임일정 수정창 -->
+			<mvc:mapping path="/clubMeetingUpdateForm" />
+			
 			<bean class="com.kh.hamo.interceptor.LoginCheck" />
 		</mvc:interceptor>
 	</mvc:interceptors>

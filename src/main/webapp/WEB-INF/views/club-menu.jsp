@@ -69,7 +69,7 @@
 	#left .btn{
 		width: 100%;
 		padding: 7px 0px;
-		margin-bottom: 5px;
+		margin: 0 0 5px 0;
 		background-color: #ffbf00;
 		border: none;
 		border-radius: 5px;
