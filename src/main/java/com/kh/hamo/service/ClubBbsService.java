@@ -668,6 +668,7 @@ public class ClubBbsService {
 		if(member_id != null) {
 			nick = clubBbsInter.findnickName(club_id, member_id);
 		}
+		map.put("nick", nick);
 		return map;
 	}
 	

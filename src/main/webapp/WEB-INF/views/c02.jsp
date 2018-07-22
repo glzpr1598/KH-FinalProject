@@ -7,34 +7,42 @@
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <title>HAMO</title>
 <style>
+	#menu1 {
+		color: black;
+		font-weight: bold;
+	}
+	
+	#title{
+		font-weight: bold;
+		font-size: large;
+	}
+	table{
+		width: 100%;
+		margin-top: 20px;;
+	}
+	table,th,td{
+		border-collapse: collapse;
+		padding: 8px 10px;
+		text-align: center;
+		font-size: 13px;
+	}
 	#head{
 		border-bottom: 3px solid #ffbf00;
 		border-top: 3px solid #ffbf00;
 		background-color: #FDF5DC;
 	}
-	table{
-		width: 100%;
-		margin-top: 2%;
-	}
-	table,th,td{
-		border-collapse: collapse;
-		padding: 2% 0.5%;
-		text-align: center;
-	}
-	#title{
-		margin-left:0.5%;
-		font-weight: 600;
-		font-size: large;
-	}
 	td a{
 		text-decoration: none;
 		color: black;
 	}
-	#listTable{
-		text-align: center;
+	td a:hover {
+		text-decoration: underline;
 	}
 	td{
 		border-bottom: 1px solid #ffbf00;
+	}
+	#space {
+		height: 100px;
 	}
 </style>
 </head>
@@ -45,21 +53,22 @@
 		<div id="right">
 			<div id="title">| 전체글보기 |</div>
 			<div id="table">
-			<table id="listTable">
-				<thead>
-					<tr id="head">
-						<th>글번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tbody id="body">
-				</tbody>
-			</table>
-			<div id="pagingArea"></div>
+				<table id="listTable">
+					<thead>
+						<tr id="head">
+							<th>글번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody id="body">
+					</tbody>
+				</table>
+				<div id="pagingArea"></div>
 			</div>
+			<div id="space"></div>
 		</div>
 	</div>
 </body>
@@ -76,7 +85,7 @@
 				"club_id":"<%=request.getParameter("club_id")%>"
 			},
 			success:function(data){
-				$.pagingHash(data.list, 10, 10, listPrint);
+				$.pagingHash(data.list, 10, 5, listPrint);
 			},
 			error:function(e){
 				console.log(e);

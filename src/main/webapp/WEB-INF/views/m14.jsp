@@ -62,6 +62,7 @@
 }
 #reply_div1 .reply_del:hover {
 	text-decoration: underline;
+	cursor: pointer;
 }
 #reply_div1 .replyContent {
 	margin-top: 5px;
