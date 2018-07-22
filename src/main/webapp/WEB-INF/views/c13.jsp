@@ -28,7 +28,7 @@
 		display: inline-block;
 		margin: 10px;
 		width: 180px;
-		height: 200px;
+		height: 220px;
 	}
 	.imgArea img {
 		object-fit: cover;
@@ -44,7 +44,10 @@
 	.imgArea .imgSubject:hover {
 		text-decoration: underline;
 	}
-	
+	.imgArea .imgDate {
+		font-size: 12px;
+		color: gray;
+	}
 	
 	#writeArea {
 		text-align: right;
@@ -98,7 +101,7 @@
 				console.log(data.list);
 				console.log(data.photolist);
 				//listPrint(data.list, data.photolist);
-				$.pagingHash(data.list, data.photolist, 12, 10, listPrint);
+				$.pagingHash(data.list, data.photolist, 12, 5, listPrint);
 				if(data.nick != null){
 					document.getElementById("write").style.display='inline';
 				}else{
@@ -122,6 +125,7 @@
 				content += "<img src='/hamo/resources/multiuploader/"+photolist[index]+"'>";
 				content += "</a>";
 				content += "<a class='imgSubject' href='./clubPhotoBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a>";
+				content += "<div class='imgDate'>"+item.clubBbs_date_to_char+"</div>";
 				content += "</div>";
 			});
 			console.log(content);

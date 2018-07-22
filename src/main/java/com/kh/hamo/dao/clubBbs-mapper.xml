@@ -90,7 +90,7 @@
 	
 	<!-- 사진첩 게시글 제목 조회 -->
 	<select id="clubPhotoBbsList" resultType="com.kh.hamo.dto.ClubBbsDTO">
-		SELECT clubBbs_subject, clubBbs_id FROM clubBbs WHERE club_id=#{param1} AND clubBbs_sort=#{param2} ORDER BY clubBbs_idx DESC
+		SELECT clubBbs_subject, clubBbs_id, TO_CHAR(clubBbs_date, 'yyyy. mm. dd.') as clubBbs_date_to_char FROM clubBbs WHERE club_id=#{param1} AND clubBbs_sort=#{param2} ORDER BY clubBbs_idx DESC
 	</select>
 	
 	<!-- 사진첩 사진 조회 -->
