@@ -420,7 +420,7 @@ $(document).ready(function() {
 		dataType: "JSON",
 		error: function(e) {console.log(e);},
 		success: function(data) {
-			$.paging(data.list, 10, 10, listPrint);
+			$.paging(data.list, 10, 5, listPrint);
 			//listPrint(data.list);
 		}
 	});
@@ -448,7 +448,7 @@ $(document).ready(function() {
 				data.list.sort(function(a, b) { 
 				    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
 				});
-				$.paging(data.list, 10, 10, listPrint);
+				$.paging(data.list, 10, 5, listPrint);
 				//listPrint(data.list);
 			}
 		});
@@ -477,7 +477,7 @@ $(document).ready(function() {
 				data.list.sort(function(a, b) { 
 					return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
 				});
-				$.paging(data.list, 10, 10, listPrint);
+				$.paging(data.list, 10, 5, listPrint);
 				//listPrint(data.list);
 			}
 		});
@@ -534,7 +534,7 @@ $(document).ready(function() {
 			error: function(e) {console.log(e);},
 			success: function(data) {
 				history.pushState("", document.title, window.location.pathname + window.location.search);
-				$.paging(data.list, 10, 10, listPrint);
+				$.paging(data.list, 10, 5, listPrint);
 				//listPrint(data.list);
 			}
 		});
@@ -578,7 +578,7 @@ $(document).ready(function() {
 			dataType: "JSON",
 			error: function(e) {console.log(e);},
 			success: function(data) {
-				$.paging(data.list, 10, 10, listPrint);
+				$.paging(data.list, 10, 5, listPrint);
 				//listPrint(data.list);
 			}
 		});

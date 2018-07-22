@@ -85,7 +85,7 @@
 				"club_id":"<%=request.getParameter("club_id")%>"
 			},
 			success:function(data){
-				$.pagingHash(data.list, 10, 10, listPrint);
+				$.pagingHash(data.list, 10, 5, listPrint);
 			},
 			error:function(e){
 				console.log(e);

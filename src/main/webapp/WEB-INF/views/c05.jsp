@@ -130,7 +130,7 @@
 					"sort": "<%=request.getParameter("sort")%>"
 				},
 				success:function(data){
-					$.pagingHash(data.list, 10, 10, listPrint);
+					$.pagingHash(data.list, 10, 5, listPrint);
 				},
 				error:function(e){
 					console.log(e);

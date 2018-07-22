@@ -102,7 +102,7 @@
 				"sort": "<%=request.getParameter("sort")%>"
 			},
 			success:function(data){
-				$.pagingHash(data.list, 10, 10, listPrint);
+				$.pagingHash(data.list, 10, 5, listPrint);
 				if(data.nick != null){
 					document.getElementById("write").style.display='inline';
 				}else{
