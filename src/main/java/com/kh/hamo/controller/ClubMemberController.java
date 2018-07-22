@@ -71,6 +71,15 @@ public class ClubMemberController {
 		return "c23";
 	}
 	
+	//동호회 블랙리스트 포함 여부
+	@RequestMapping(value = "/blackList")
+	public @ResponseBody HashMap<String, Object> blackList(
+			@RequestParam String club_id ,HttpSession session) {
+		logger.info("동호회 블랙리스트 포함 여부 체크 요청");
+		String member_id = (String)session.getAttribute("userId");
+		return service.club_blackList(club_id,member_id);
+	}
+	
 	//동호회 닉네임 체크
 	@RequestMapping(value = "/club_overLap")
 	public @ResponseBody HashMap<String, Object> club_overLap(
@@ -78,7 +87,7 @@ public class ClubMemberController {
 		logger.info("동호회 닉네임 체크 요청");
 		return service.club_overLap(club_id,nickName);
 	}
-	
+
 	//동호회 가입하기
 	@RequestMapping(value = "/clubJoin")
 	public ModelAndView clubJoin(HttpSession session, 

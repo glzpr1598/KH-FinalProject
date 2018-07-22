@@ -87,7 +87,7 @@
 $(document).ready(function(){
 	
 	$.ajax({
-		url:"freeBbsList",
+		url:"./freeBbsList",
 		type:"GET",
 		dataType:"JSON",
 		success:function(data){

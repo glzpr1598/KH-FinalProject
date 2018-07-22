@@ -79,7 +79,23 @@ public class ClubMemberService {
 		model.addAttribute("introduce", introduce);
 		model.addAttribute("club_id", club_id);
 	}
-	
+	//동호회 블랙리스트 포함 여부
+	public HashMap<String, Object> club_blackList(
+			String club_id, String member_id) {
+		inter = sqlSession.getMapper(ClubMemberInter.class);
+		HashMap<String, Object> map  = new HashMap<String,Object>();
+		boolean allow = true;
+		//블랙리스트에 등록되어 있는 회원인지 여부를 판단하여 가입 제제
+		ArrayList<String> blackListMember = new ArrayList<String>();
+		//가입 하려는 동호회에 블랙리스트 명단
+		blackListMember = inter.blackList(club_id);
+		if(blackListMember.contains(member_id)) {
+			logger.info("블랙리스트 명단에 포함되어 있으므로 가입 제한");
+			allow = false;
+		}
+		map.put("allow",allow);
+		return map;
+	}
 	//동호회 닉네임 체크
 		public HashMap<String, Object> club_overLap( 
 				String club_id , String nickName){
@@ -108,24 +124,15 @@ public class ClubMemberService {
 			
 			int club_id = Integer.parseInt(map.get("club_id"));
 			String member_id = map.get("member_id");
-			
-			//블랙리스트에 등록되어 있는 회원인지 여부를 판단하여 가입 제제
-			ArrayList<String> blackListMemer = new ArrayList<String>();
-			//가입 하려는 동호회에 블랙리스트 명단
-			blackListMemer = inter.blackList((map.get("club_id")));
-			logger.info("포함 여부 : "+blackListMemer.contains(map.get("member_id")));
-			if(blackListMemer.contains(map.get("member_id"))) {
-				logger.info("블랙리스트 명단에 포함");
-			}else {
-				logger.info("블랙리스트 명단에 포함되지 않으므로 가입 허용");
-				if( inter.clubJoin(map) > 0 ) {
-					logger.info("동호회 가입 성공");
-					if(inter.memberCountUp((map.get("club_id"))) > 0) {
-						logger.info("동호회 회원 증가");
-						page = "redirect:/clubMain?club_id="+map.get("club_id");
-					}		
-				}
+		
+			if( inter.clubJoin(map) > 0 ) {
+				logger.info("동호회 가입 성공");
+				if(inter.memberCountUp((map.get("club_id"))) > 0) {
+					logger.info("동호회 회원 증가");
+					page = "redirect:/clubMain?club_id="+map.get("club_id");
+				}		
 			}
+			
 			mav.setViewName(page);
 			return mav;
 		}
@@ -150,4 +157,5 @@ public class ClubMemberService {
 			return mav;
 			
 		}
+
 }
