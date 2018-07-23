@@ -229,10 +229,7 @@
 	
  	$(document).on("click",".replyDel",function(){
  		var index = $(this).attr('id');
- 		if(nickName != $(this).val()){
- 			console.log($(this).val());
- 			alert("댓글을 삭제할 수 없습니다.");
- 		}else{
+ 		if(confirm("댓글을 삭제하시겠습니까?")){
 			$.ajax({
 				type : "get",
 				url: "./clubReplyDelete",
