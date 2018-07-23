@@ -43,7 +43,7 @@
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
 			<form action="" name="frm" id="frm" method="post">
-			 	<div id="title">| 동호회 게시판 |</div>
+			 	<div id="title">| 동호회 친목 |</div>
 				<input type="text" id="subject" placeholder="제목을 입력하세요." name="subject" maxlength="20">
 			    <textarea  name="content" id="smarteditor"  placeholder="10" cols="100" style="width:798px; height:300px;">
 			    </textarea>

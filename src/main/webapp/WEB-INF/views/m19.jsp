@@ -43,7 +43,7 @@
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
 			<form action="" name="frm" id="frm" method="POST">
-			 	<div id="title">| 동호회 게시판 |</div>
+			 	<div id="title">| 동호회 친목 |</div>
 			 	<input type="text" id="subject" value="${ detail.mainBbs_subject }" />
 			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:798px; height:300px;">
 			    </textarea>
@@ -53,8 +53,7 @@
 				    <input type="button" id="savebutton" value="저장" />
 			    </div>
 		    </form>
-		</div>
-		
+		</div>		
 	</div>
 		
 </body>

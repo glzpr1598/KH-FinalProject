@@ -65,7 +65,7 @@
 	<div id="container">
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
-			<div id="title">| 동호회 친목 게시판 |</div>
+			<div id="title">| 동호회 친목 |</div>
 				<table>
 					<tr id="append">
 						<th>글번호</th>

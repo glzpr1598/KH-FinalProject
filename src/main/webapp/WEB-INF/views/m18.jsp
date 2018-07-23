@@ -109,7 +109,7 @@
 	<div id="container">
 		<%@ include file="./main-community_menu.jsp"%>
 		<div id="right">
-			<div id="title">| 동호회 게시판 |</div>
+			<div id="title">| 동호회 친목 |</div>
 			<div id="subject">${detail.mainBbs_subject }</div>
 			<div id="member">
 				<b>${detail.member_id }</b>
@@ -126,9 +126,9 @@
 				</div>
 			</div>
 			<div id="btn">
-				<input id="freeBbsDelete" type="hidden" value="삭제"> 
-				<input id="freeBbsUpdateForm" type="hidden" value="수정"> 
-				<input id="freeBbsListPage" type="button" value="목록">
+				<input id="friendShipBbsDelete" type="hidden" value="삭제"> 
+				<input id="friendShipBbsUpdateForm" type="hidden" value="수정"> 
+				<input id="friendShipBbsListPage" type="button" value="목록">
 			</div>
 			<div id="space"></div>
 		</div>
@@ -145,8 +145,8 @@
 		
 		//로그인 회원 id 와 글작성 회원 id 를 비교 해서 버튼 활성화 여부 
 		if("${sessionScope.userId}" == "${detail.member_id }"){
-			$("#freeBbsDelete").attr("type","button");
-			$("#freeBbsUpdateForm").attr("type","button");
+			$("#friendShipBbsDelete").attr("type","button");
+			$("#friendShipBbsUpdateForm").attr("type","button");
 			
 		}
 		//상세보기 페이지가 리드되자마자 DB에 접속해 해당 게시글에 달린 댓글 리스트 조회해오기
@@ -264,19 +264,19 @@
 	});
 	
 	//삭제 버튼 클릭 시 리스트로
-	$("#freeBbsDelete").click(function(){
+	$("#friendShipBbsDelete").click(function(){
         if(confirm("글을 삭제 하시겠습니까?")){
     		location.href="./friendShipBbsDelete?idx=${detail.mainBbs_id}";
         }
 	});
 	
 	//수정 버튼 클릭 시 수정 폼 으로 
-	$("#freeBbsUpdateForm").click(function(){
+	$("#friendShipBbsUpdateForm").click(function(){
 		location.href="./friendShipUpdateForm?idx=${detail.mainBbs_id}";
 	});
 	
 	//목록 버튼 클릭 시 리스트로 
-	$("#freeBbsListPage").click(function(){
+	$("#friendShipBbsListPage").click(function(){
 		location.href="./friendShipBbsListPage";
 	});
 	
