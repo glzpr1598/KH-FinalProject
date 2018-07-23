@@ -23,6 +23,8 @@ public interface HamoBbsInter {
 	/**************동호회 친목**********************/
 	ArrayList<HamoBbsDTO> friendShipBbsList();
 	
+	ArrayList<HamoBbsDTO> friendShipAdmin(); 	//관리자가 쓴글은 공지사항 개념으로 최상단에 위치해 있기 위해
+	
 	int friendShipBbsWrite(HamoBbsDTO dto); //동호회 게시판 글쓰기
 	
 	
@@ -50,6 +52,8 @@ public interface HamoBbsInter {
 	int hamoBbsFileDel(int idx); //게시글 수정 시 기존 이미지 초기화시킴
 
 	ArrayList<HamoBbsDTO> selectFile(int idx); //수정 하기 전에 게시글에 업로드 된 이미지
+
+
 
 	
 

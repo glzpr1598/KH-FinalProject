@@ -31,6 +31,9 @@
 	th{
 		background-color: #FDF5DC;
 	}
+	.adminList{
+		background-color: #f2e1c4;
+	}
 	wrtieBtnArea {
 		text-align: right;
 	}
@@ -66,8 +69,8 @@
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
 			<div id="title">| 동호회 친목 |</div>
-				<table>
-					<tr id="append">
+				<table id="append">
+					<tr>
 						<th>글번호</th>
 						<th>제목</th>
 						<th>작성자</th>
@@ -93,6 +96,7 @@ $(document).ready(function(){
 		success:function(data){
 			console.log(data);
 			console.log(data.friendShipBbsList.length);
+			console.log(data.friendShipAdmin.length);
 			//글쓰기 리스트 생성하는 함수 호출
 			friendShipBbsList(data);
 		},error:function(error){console.log(error);}
@@ -103,21 +107,33 @@ $(document).ready(function(){
 		console.log("friendShipBbsList 함수 호출");
 		//초기화
 		$("#append").after("");
-		
-		var content ="";
+		var adminList ="";
+		for(var i=0; i< data.friendShipAdmin.length; i++){
+			var date = new Date(data.friendShipAdmin[i].mainBbs_date);
+			var reply_date=date.toJSON().substring(0,10);
+			adminList+="<tr class='adminList'>"
+			adminList+="<td>"+data.friendShipAdmin[i].mainBbs_idx+"</td>"
+			adminList+="<td><a href=friendShipBbsdetail?idx="+data.friendShipAdmin[i].mainBbs_id+"&updateAfter=1>"+data.friendShipAdmin[i].mainBbs_subject+"</a></td>"
+			adminList+="<td><a href=friendShipBbsdetail?idx="+data.friendShipAdmin[i].mainBbs_id+"&updateAfter=1>"+data.friendShipAdmin[i].member_id+"</a></td>"
+			adminList+="<td>"+reply_date+"</td>"
+			adminList+="<td>"+data.friendShipAdmin[i].mainBbs_hit+"</td>"
+			adminList+="</tr>"
+		}
+		$("#append").append(adminList);
+		var memberList ="";
  		for(var i=0; i<data.friendShipBbsList.length; i++){
 			var date = new Date(data.friendShipBbsList[i].mainBbs_date);
 			var reply_date=date.toJSON().substring(0,10);
 			
-			content+="<tr>";
-			content+="<td>"+data.friendShipBbsList[i].mainBbs_idx+"</td>"
-			content+="<td><a href=friendShipBbsdetail?idx="+data.friendShipBbsList[i].mainBbs_id+"&updateAfter=1>"+data.friendShipBbsList[i].mainBbs_subject+"</a></td>"
-			content+="<td><a href=friendShipBbsdetail?idx="+data.friendShipBbsList[i].mainBbs_id+"&updateAfter=1>"+data.friendShipBbsList[i].member_id+"</a></td>"
-			content+="<td>"+reply_date+"</td>"
-			content+="<td>"+data.friendShipBbsList[i].mainBbs_hit+"</td>"
-			content+="</tr>";
+			memberList+="<tr>"
+			memberList+="<td>"+data.friendShipBbsList[i].mainBbs_idx+"</td>"
+			memberList+="<td><a href=friendShipBbsdetail?idx="+data.friendShipBbsList[i].mainBbs_id+"&updateAfter=1>"+data.friendShipBbsList[i].mainBbs_subject+"</a></td>"
+			memberList+="<td><a href=friendShipBbsdetail?idx="+data.friendShipBbsList[i].mainBbs_id+"&updateAfter=1>"+data.friendShipBbsList[i].member_id+"</a></td>"
+			memberList+="<td>"+reply_date+"</td>"
+			memberList+="<td>"+data.friendShipBbsList[i].mainBbs_hit+"</td>"
+			memberList+="</tr>"
 		} 
-		$("#append").after(content);
+ 		$("#append").append(memberList);
 	}
 
 

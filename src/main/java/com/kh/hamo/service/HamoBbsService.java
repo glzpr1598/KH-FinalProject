@@ -45,7 +45,6 @@ public class HamoBbsService {
 		inter = sqlSession.getMapper(HamoBbsInter.class);
 		ArrayList<HamoBbsDTO> freeBbsList = inter.freeBbsList();
 		HashMap<String, Object> map = new HashMap<String,Object>();
-		logger.info("날짜 : "+freeBbsList.get(0).getMainBbs_date());
 		map.put("freeBbsList", freeBbsList);
 		return map;
 	}
@@ -278,12 +277,18 @@ public class HamoBbsService {
 		return map;
 	}
 	
-	/********동호회 친목 게시판*****************/
+	/**************동호회 친목 게시판*****************/
 	
 	public HashMap<String, Object> friendShipBbsList() {
 		inter = sqlSession.getMapper(HamoBbsInter.class);
-		ArrayList<HamoBbsDTO> friendShipBbsList = inter.friendShipBbsList();
 		HashMap<String, Object> map = new HashMap<String,Object>();
+		//관리자가 쓴글은 공지사항 개념으로 최상단에 위치해 있기 위해
+		ArrayList<HamoBbsDTO> friendShipAdmin = inter.friendShipAdmin();
+		
+		//관리자가 쓴 글 제외
+		ArrayList<HamoBbsDTO> friendShipBbsList = inter.friendShipBbsList();
+
+		map.put("friendShipAdmin", friendShipAdmin);
 		map.put("friendShipBbsList", friendShipBbsList);
 		return map;
 	}
