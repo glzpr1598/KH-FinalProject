@@ -231,6 +231,9 @@
 			var option = "width=350px, height=160px left=200px top=100px";
 			window.open(url, "_blank", option);
 		});
+
+		
+		
 		
 	});
 </script>

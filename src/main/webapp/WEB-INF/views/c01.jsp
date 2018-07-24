@@ -138,17 +138,6 @@
         }
         return "";
     }
-
-	
-	
-	//동호회 회원 탈퇴 (자식 window 객체로 부터 호출됨)
-	function memberOut(url) {
-		location.href=url;
-	}
-
-	
-	
-	
 	
 </script>
 </html>

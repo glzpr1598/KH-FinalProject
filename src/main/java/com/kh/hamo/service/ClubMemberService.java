@@ -143,14 +143,13 @@ public class ClubMemberService {
 			ModelAndView mav = new ModelAndView();
 			
 			
-			String page ="redirect:/clubOutForm?club_id=" + club_id;
+			String page ="close-reload";
 			int success = inter.clubMemberOut(member_id,club_id);
 			if(success > 0 ) {
 				logger.info("탈퇴 성공!");
 				if(inter.memberCountDown(club_id) > 0) {
 					logger.info("동호회 회원 감소");
 				}
-				page = "redirect:/clubMain?club_id="+club_id;
 			}
 			
 			mav.setViewName(page);
