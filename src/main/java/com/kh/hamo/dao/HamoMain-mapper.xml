@@ -30,7 +30,9 @@
 	<delete id="myClubDel">
 		DELETE FROM clubJoin WHERE clubJoin_id = #{param1}
 	</delete>
-	
+	<update id="memberCnt">
+		UPDATE club SET club_memberCount =club_memberCount-1  WHERE club_id=#{param1}
+	</update>
 	<select id="home" resultType="com.kh.hamo.dto.HamoMainDTO">
 		SELECT club_id, club_name, club_introduce, TO_CHAR(club_date, 'yyyy.mm.dd.') as club_date, club_memberCount, club_location, club_masterNickname, interest_id, member_id FROM club
 	</select>
