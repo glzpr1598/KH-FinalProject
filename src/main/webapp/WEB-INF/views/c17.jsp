@@ -76,7 +76,7 @@
 			<div>
 			<input type="button" value="등록" id="add" onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>'"/>
 			</div>
-		
+			<div id="pagingArea"></div>
 		<!------------------- 양식 ------------------->
 			</div>
 		</div>
@@ -113,7 +113,7 @@
 				content +="<td >"+item.meetingPlan_when+"</td>";
 				content += "</tr>";
 			});		
-			$("#listTable").append(content);
+			$("#listTable tbody").html(content);
 			
 		}
 		function ajaxCall(param){
