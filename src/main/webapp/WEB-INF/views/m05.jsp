@@ -106,6 +106,21 @@
 				    cursor: pointer;     
 				    height: 40px;  
 				}
+				
+					#emailUpdate{     
+					width:90px;                 
+				    background-color: white;
+				    border: 2px solid #ffbf00;
+				    color:black;
+	 			    padding: 3px 0; 
+				    text-align: center;
+				    text-decoration: none;
+				    display: inline-block;          
+				    font-size: 15px;   
+ 				    margin-right: 115px;                                   
+				    cursor: pointer;     
+				    height: 40px;  
+				}
   			    input[type='button']{
   			    	width:50px;
 				    background-color: #ffbf00;
@@ -219,8 +234,9 @@
 						<button id="pwUpdate" class="updateBtn"  onclick="pwPopup()">수정</button>
 
 
-						<hr size="1" color="#ffbf00">   <h5 class="h5email">이메일</h5>    
-						<button id="emailUpdate"class="updateBtn" onclick="emailPopup()">수정</button>   
+						<hr size="1" color="#ffbf00">   <h5 class="h5email">이메일</h5>   
+						<input class="idtxt" type="text" name="email" placeholder="이메일" value="${bbs.member_email}" readonly />     
+						<button id="emailUpdate"class="updateBtn" onclick="emailPopup()">수정</button>      
 
 
 
