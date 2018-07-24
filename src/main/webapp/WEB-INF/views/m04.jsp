@@ -523,7 +523,7 @@ $("#only_number2").keyup(function () {
 	
 	
 	
-
+//전화번호 유효성검사 
 	$(function(){
 	 
 	    $("#only_number").on('keydown', function(e){
