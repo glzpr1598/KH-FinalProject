@@ -7,7 +7,7 @@
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <title>HAMO</title>
 <style>
-	#menu2 {
+	#menu3 {
 		font-weight: bold;
 		color: black;
 	}
