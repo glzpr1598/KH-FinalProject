@@ -102,7 +102,7 @@
 					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
 					<input id="locationX" type="hidden" name="locationX" value=""/>
 					<input id="locationY" type="hidden" name="locationY" value=""/>
-					<input type="button" value="저장" class="bottomBtn" onclick="addMeeting()"/>
+					<input id="save" type="button" value="저장" class="bottomBtn"/>
 					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'"/>
 				</div>
 			</form>
@@ -405,8 +405,8 @@
 		   
 		    locationY
 		});
-		function addMeeting(){
-		 	if($("#subject").val()==""){
+		$("#save").click(function() {
+		 	if($("input[name='subject']").val()==""){
 		 		alert("제목을 입력해 주세요 ");      
 			}else if($("#day").val()==""){
 				alert("모임일시를 입력해 주세요 ");    
@@ -419,7 +419,7 @@
 			}else {
 		 		$("#form1").submit();
 		 	}
-		}
+		});
 		
 	</script>
 </html>

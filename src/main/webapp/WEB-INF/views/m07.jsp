@@ -60,7 +60,7 @@
 					<td><hr size="1" color="white"><input id="email" class="inputTxt" type="text" name="email" placeholder="변경할 이메일"><span id='emailMsg'></span></td>
 				</tr>
 				<tr>
-					<td><hr size="1" color="white"><input id="serialNumber" class="inputTxt" type="text" name="serialNumber" placeholder="인증번호"></td>
+					<td><hr size="1" color="white"><input id="serialNumber" class="inputTxt" type="text" name="serialNumber" placeholder="인증번호"><span id='serialMsg'></span></td>
 				</tr>
 			</table>          
 			<hr size="1" color="white">         
@@ -70,11 +70,18 @@
 	</body>
 	<script>
 	var userId = "${userId}";
-	console.log(userId);
+	var email = "";
+	
+	var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;  
 	
 	var serialNumber = "인증미완료";
+	var email = "";
 	
 	$("#emailChk").click(function(){
+		if(!regExp.test($("#email").val())){ 
+			document.getElementById("emailMsg").innerHTML =" 이메일 주소가 유효하지 않습니다.";
+		      $("#email").focus(); 
+		}else{
 		$.ajax({
 			url:"./emailOverlay",
 			type:"post",
@@ -85,31 +92,34 @@
 					document.getElementById("emailMsg").innerHTML =" 사용중인 이메일 입니다.";
 					$("#emailMsg").css("color","red");
 				}else{
+					document.getElementById("emailMsg").innerHTML ="입력하신 이메일로 인증번호를 전송하였습니다.";
+					$("#emailMsg").css("color","green");
 					$.ajax({
 						url:"./emailChk",
 						type:"post",
 						dataType:"json",
 						data:{"email":$("input[name='email']").val()},
 						success:function(d){
-							document.getElementById("emailMsg").innerHTML ="입력하신 이메일로 인증번호를 전송하였습니다.";
-							$("#emailMsg").css("color","green");
 							serialNumber = d.serialNumber;		
+							email = $("input[name='email']").val();
 							console.log(serialNumber);
+							console.log(email);       
 						}          
 					});
 				}
 			}          
 		}); 
+		}    
 	});
 
 
 	$("#emailUpdate").click(function(){
 
-			if($("input[name='email']").val()==""){//이메일 입력 확인
-				alert("이메일을 확인 해 주세요");
+			if($("input[name='email']").val()=="" || $("input[name='email']").val()!=email ){//이메일 입력 확인
+				document.getElementById("serialMsg").innerHTML =" 이메일을 확인해주세요";
 				$("input[name='email']").focus();//포커스 이동   
 			}else if( ($("input[name='serialNumber']").val()!=serialNumber) || ( serialNumber == "인증미완료") ){// 인증번호 확인
-				alert("인증번호를 확인해주세요");
+				document.getElementById("serialMsg").innerHTML =" 인증번호를 확인해주세요";
 				$("input[name='serial']").focus();//포커스 이동
 			}else{
 					$.ajax({
@@ -121,12 +131,7 @@
 						"id": userId
 					},
 					success:function(data){
-						if(data.success == 1){
-							alert("이메일이 수정되었습니다.");
-							close(); 
-						}else{
-							alert("이메일 수정실패");
-						}
+						if(data.success == 1){close();}
 				}
 			});	
 		}	
