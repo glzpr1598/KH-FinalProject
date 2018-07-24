@@ -36,10 +36,17 @@ public class ClubMeetingPlanService {
 		
 	}
 	// 동호회 정보(지역) 가져오기 서비스
-	public void clubLocation(Model model, String club_id) {
+	public ModelAndView clubLocation(Model model, String club_id, String member_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		String club_location = inter.clubLocation(club_id);
-		model.addAttribute("club_location", club_location);
+		int clubJoinCheck = inter.clubJoinCheck(club_id,member_id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("club_location", club_location);
+		mav.setViewName("c18");
+		if(clubJoinCheck==0) {
+			mav.setViewName("c18-error");
+		}
+		return mav;
 	}
 	//모임 일정 등록 
 	public void clubMeetingWrite(HashMap<String, String> list) {
@@ -63,15 +70,20 @@ public class ClubMeetingPlanService {
 					meetingPlan_when,meetingPlan_money,meetingPlan_content);
 		}
 	}
+	
 	//모임 일정 상세보기 
-	public ModelAndView clubMeetingDetail(String meetingPlan_id) {
+	public ModelAndView clubMeetingDetail(String meetingPlan_id, String club_id, String member_id) {
 		logger.info("모임 일정 상세보기  서비스");
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		ClubMeetingDTO dto = new ClubMeetingDTO();
 		dto= inter.clubMeetingDetail(Integer.parseInt(meetingPlan_id));
+		int clubJoinCheck = inter.clubJoinCheck(club_id,member_id);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",dto);
 		mav.setViewName("c19");
+		if(clubJoinCheck==0) {
+			mav.setViewName("c18-error");
+		}
 		return mav;
 	}
 	//모임 참석자 리스트
@@ -166,5 +178,7 @@ public class ClubMeetingPlanService {
 		int success = inter.clubMeetingDel(meetingPlan_id,member_id);
 		logger.info("삭제 성공 :"+success);
 	}
+
+	
 
 }

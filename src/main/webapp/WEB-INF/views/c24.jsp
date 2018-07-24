@@ -50,11 +50,8 @@ $(document).ready(function(){
  	
 	$("#btn1").click(function(){
 			var url = "./clubMemberOut?club_id="+club_id;
-			opener.memberOut(url);
-			window.close();		
+			location.href=url;
 	});
-	
-	
 	
 });
 

@@ -86,7 +86,6 @@
 	<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
 	<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 	<script>
-	
 		var obj = {};
 		obj.error=function(e){console.log(e)};
 		obj.type="POST";
@@ -107,7 +106,7 @@
 			list.forEach(function(item, idx){
 				content +="<tr>";
 				content +="<td>"+item.meetingPlan_idx+"</td>";
-				content +="<td><a href='clubMeetingDetail?club_id="+<%= request.getParameter("club_id") %>+"&meetingPlan_id="+item.meetingPlan_id+"'>"+item.meetingPlan_subject+"</a></td>";
+				content +="<td><a href='clubMeetingDetail?club_id="+<%= request.getParameter("club_id") %>+"&meetingPlan_id="+item.meetingPlan_id+"&member_id="+"<%= session.getAttribute("userId") %>"+"'>"+item.meetingPlan_subject+"</a></td>";
 				content +="<td >"+item.clubJoin_nickname+"</td>";
 				content +="<td '>"+item.meetingPlan_date+"</td>";
 				content +="<td >"+item.meetingPlan_when+"</td>";
