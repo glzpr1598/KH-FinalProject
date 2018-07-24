@@ -74,7 +74,7 @@
 				</tbody>
 			</table>
 			<div>
-			<input type="button" value="등록" id="add" onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>'"/>
+			<input type="button" value="등록" id="add" onclick="location.href='clubMeetingWriteForm?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>'"/>
 			</div>
 		
 		<!------------------- 양식 ------------------->
