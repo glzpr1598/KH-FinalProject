@@ -82,6 +82,9 @@
 		</div>
 		<!------------------- 양식 ------------------->
 	</body>
+	<script src="./resources/paging/paging.js" type="text/javascript"></script>
+	<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 	<script>
 	
 		var obj = {};
@@ -93,7 +96,8 @@
 			obj.data = {"club_id": "<%= request.getParameter("club_id") %>","member_id":"<%= session.getAttribute("userId") %>"};
 			obj.success = function(data){
 				console.log(data);
-				listPrint(data.list);
+				//listPrint(data.list);
+				$.pagingHash(data.list, 10, 5, listPrint);
 		}
 			ajaxCall(obj);
 		});
