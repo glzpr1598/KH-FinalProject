@@ -100,9 +100,6 @@
 				"sort": "<%=request.getParameter("sort")%>"
 			},
 			success:function(data){
-				console.log(data.list);
-				console.log(data.photolist);
-				//listPrint(data.list, data.photolist);
 				$.pagingHash(data.list, data.photolist, 12, 5, listPrint);
 				if(data.nick != null){
 					document.getElementById("write").style.display='inline';

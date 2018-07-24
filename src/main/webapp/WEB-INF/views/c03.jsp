@@ -180,7 +180,6 @@
 			},
 			success:function(data){
 				if(data){
-					console.log(data);
 					listPrint(data.list);
 					replyCount(data.replyCount);
 				}
@@ -233,7 +232,6 @@
 					"club_id":"<%=request.getParameter("club_id")%>"
 				},
 				success:function(data){
-					console.log(data);
 					listPrint(data.list);
 					replyCount(data.replyCount);
 				},
