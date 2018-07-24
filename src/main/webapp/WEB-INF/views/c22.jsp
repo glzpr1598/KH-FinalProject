@@ -76,13 +76,16 @@
         // 텍스트 길이
         var textLength = $(this).val().length;
         
+        // 제한된 길이보다 입력된 길이가 큰 경우 제한 길이만큼만 자름
+        if (textLength > limit) {
+            $(this).val($(this).val().substr(0, limit));
+            // 길이 업데이트
+            textLength = $(this).val().length;
+        }
+        
         // 텍스트 길이 표시
         $("#textLength").html(textLength);
  
-        // 제한된 길이보다 입력된 길이가 큰 경우 제한 길이만큼만 자르고 텍스트영역에 넣음
-        if (textLength > limit) {
-            $(this).val($(this).val().substr(0, limit));
-        }
     });
 	
 	/* 수정 클릭 */
@@ -93,6 +96,7 @@
 		}
 		// 소개글을 입력한 경우
 		else {
+			$("#introduce").val($("#introduce").val().substring(0, 100));
 			$("#form").submit();
 		}
 	});
