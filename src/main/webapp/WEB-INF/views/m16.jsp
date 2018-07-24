@@ -38,7 +38,7 @@
 		font-weight: bold;
 		color: red;
 	}
-	wrtieBtnArea {
+	#writeBtnArea {
 		text-align: right;
 	}
 	#writeBtn{
@@ -74,21 +74,29 @@
 		<div id="right">
 			<div id="title">| 동호회 친목 |</div>
 				<table id="append">
-					<tr>
-						<th>글번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
+					<thead>
+						<tr>
+							<th>글번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
 				</table>
-				<div id="wrtieBtnArea">
+				<div id="writeBtnArea">
 					<input id="writeBtn" type="button" value="글쓰기">
 				</div>
+				<div id="pagingArea"></div>
 				<div id="space"></div>
 		</div>
 	</div>
 </body>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <script>
 /* 리스트 조회 */
 $(document).ready(function(){
@@ -101,16 +109,17 @@ $(document).ready(function(){
 			console.log(data);
 			console.log(data.friendShipBbsList.length);
 			console.log(data.friendShipAdmin.length);
-			//글쓰기 리스트 생성하는 함수 호출
-			friendShipBbsList(data);
+			// 공지사항 출력
+			noticeList(data);
+			// 글 출력
+			$.pagingHash(data.friendShipBbsList, 10, 5, friendShipBbsList);
 		},error:function(error){console.log(error);}
 		
 	});
 });
-	function friendShipBbsList(data){
-		console.log("friendShipBbsList 함수 호출");
+	// 공지사항 출력
+	function noticeList(data) {
 		//초기화
-		$("#append").after("");
 		var adminList ="";
 		for(var i=0; i< data.friendShipAdmin.length; i++){
 			var date = new Date(data.friendShipAdmin[i].mainBbs_date);
@@ -123,24 +132,28 @@ $(document).ready(function(){
 			adminList+="<td>"+data.friendShipAdmin[i].mainBbs_hit+"</td>"
 			adminList+="</tr>"
 		}
-		$("#append").append(adminList);
+		$("thead").append(adminList);
+	};
+	
+	// 글 출력
+	function friendShipBbsList(data){
+		console.log("friendShipBbsList 함수 호출");
+		
 		var memberList ="";
- 		for(var i=0; i<data.friendShipBbsList.length; i++){
-			var date = new Date(data.friendShipBbsList[i].mainBbs_date);
+ 		for(var i=0; i<data.length; i++){
+			var date = new Date(data[i].mainBbs_date);
 			var reply_date=date.toJSON().substring(0,10);
 			
 			memberList+="<tr>"
-			memberList+="<td>"+data.friendShipBbsList[i].mainBbs_idx+"</td>"
-			memberList+="<td><a href=friendShipBbsdetail?idx="+data.friendShipBbsList[i].mainBbs_id+"&updateAfter=1>"+data.friendShipBbsList[i].mainBbs_subject+"</a></td>"
-			memberList+="<td><a href=friendShipBbsdetail?idx="+data.friendShipBbsList[i].mainBbs_id+"&updateAfter=1>"+data.friendShipBbsList[i].member_id+"</a></td>"
+			memberList+="<td>"+data[i].mainBbs_idx+"</td>"
+			memberList+="<td><a href=friendShipBbsdetail?idx="+data[i].mainBbs_id+"&updateAfter=1>"+data[i].mainBbs_subject+"</a></td>"
+			memberList+="<td><a href=friendShipBbsdetail?idx="+data[i].mainBbs_id+"&updateAfter=1>"+data[i].member_id+"</a></td>"
 			memberList+="<td>"+reply_date+"</td>"
-			memberList+="<td>"+data.friendShipBbsList[i].mainBbs_hit+"</td>"
+			memberList+="<td>"+data[i].mainBbs_hit+"</td>"
 			memberList+="</tr>"
 		} 
- 		$("#append").append(memberList);
+ 		$("tbody").html(memberList);
 	}
-
-
 
 	$("#writeBtn").click(function(){
 		if("${sessionScope.userId}" == "" ){

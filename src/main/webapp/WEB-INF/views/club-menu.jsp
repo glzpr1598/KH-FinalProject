@@ -232,9 +232,7 @@
 			window.open(url, "_blank", option);
 		});
 
-		
-		
-		
+			
 	});
 </script>
 </html>

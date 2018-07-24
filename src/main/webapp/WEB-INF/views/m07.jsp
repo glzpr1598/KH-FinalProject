@@ -47,7 +47,12 @@
 				
 				#emailMsg{
   				    font-weight: bold;   
-  			    	font-size: 10px;      
+  			    	font-size: 12px;      
+  			    }
+  			    
+  			    #serialMsg{
+  				    font-weight: bold;      
+  			    	font-size: 12px;      
   			    }
 		</style>
 		
@@ -57,10 +62,16 @@
 			<hr size="1" color="#ffbf00">
 			<table>
 				<tr>
-					<td><hr size="1" color="white"><input id="email" class="inputTxt" type="text" name="email" placeholder="변경할 이메일"><span id='emailMsg'></span></td>
+					<td><hr size="1" color="white"><input id="email" class="inputTxt" type="text" name="email" placeholder="변경할 이메일"></td>
 				</tr>
 				<tr>
-					<td><hr size="1" color="white"><input id="serialNumber" class="inputTxt" type="text" name="serialNumber" placeholder="인증번호"><span id='serialMsg'></span></td>
+					<td><span id='emailMsg'></span></td>
+				</tr>
+				<tr>
+					<td><hr size="1" color="white"><input id="serialNumber" class="inputTxt" type="text" name="serialNumber" placeholder="인증번호"></td>
+				</tr>
+				<tr>
+					<td><span id='serialMsg'></span></td>
 				</tr>
 			</table>          
 			<hr size="1" color="white">         
@@ -75,11 +86,12 @@
 	var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;  
 	
 	var serialNumber = "인증미완료";
-	var email = "";
+	var email = "";  
 	
 	$("#emailChk").click(function(){
 		if(!regExp.test($("#email").val())){ 
 			document.getElementById("emailMsg").innerHTML =" 이메일 주소가 유효하지 않습니다.";
+			$("#emailMsg").css("color","red");   
 		      $("#email").focus(); 
 		}else{
 		$.ajax({
@@ -117,9 +129,11 @@
 
 			if($("input[name='email']").val()=="" || $("input[name='email']").val()!=email ){//이메일 입력 확인
 				document.getElementById("serialMsg").innerHTML =" 이메일을 확인해주세요";
+				$("#serialMsg").css("color","red");
 				$("input[name='email']").focus();//포커스 이동   
 			}else if( ($("input[name='serialNumber']").val()!=serialNumber) || ( serialNumber == "인증미완료") ){// 인증번호 확인
 				document.getElementById("serialMsg").innerHTML =" 인증번호를 확인해주세요";
+				$("#serialMsg").css("color","red");
 				$("input[name='serial']").focus();//포커스 이동
 			}else{
 					$.ajax({
