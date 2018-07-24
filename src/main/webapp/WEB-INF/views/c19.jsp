@@ -106,7 +106,7 @@
 			alert("댓글을 입력해 주세요");
 		}
 	});	
-
+	   
 	if($("#member").val()!="<%= session.getAttribute("userId") %>"){
 		$("#update").hide();
 		$("#del").hide();
@@ -231,6 +231,7 @@
 								replyList(data.list);
 								replyCount = data.replyCount;
 								$("#replyCount").html(replyCount); 
+								$("#replyContent").val(""); 
 							}
 						});
 					});
