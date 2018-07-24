@@ -14,7 +14,7 @@ public interface HamoBbsInter {
 	
 	void hamoBbsHit(String idx); //특정 글 상세 보기 시 조회수 올리기
 	
-	int hamoBbsUpdate(int idx, String content); //자유게시판 글 수정하기
+	int hamoBbsUpdate(int idx, String subject, String content); //하모 게시판 글 수정하기
 
 	int freeBbsWrite(HamoBbsDTO dto); //자유게시판 글쓰기
 

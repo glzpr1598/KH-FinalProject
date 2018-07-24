@@ -34,9 +34,9 @@
 		VALUES(seq_mainbbsfile_id.NEXTVAL,#{param1},#{param3},#{param2})
 	</insert>
 
-	<!-- 자유게시판 글 수정하기 -->
+	<!-- 하모게시판 글 수정하기 -->
 	<update id="hamoBbsUpdate">
-		UPDATE mainBbs SET mainBbs_content=#{param2} WHERE mainBbs_id=#{param1}
+		UPDATE mainBbs SET mainBbs_subject = #{param2} , mainBbs_content= #{param3} WHERE mainBbs_id=#{param1}
 	</update>
 	<!-- 게시판 이미지 삭제  -->
 	<delete id="hamoBbsFileDel">
@@ -84,6 +84,7 @@
 	
 	
 	<!-- **************댓글********************** -->
+	
 	<!-- 하모 게시판 댓글 리스트  -->
 	<select id="hamoBbsReplyList" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT mainBbsReply_id,mainBbs_id,member_id,mainBbsReply_content,
