@@ -194,12 +194,10 @@
 			if(d.idLength >=4 && d.idLength <=20) {
 					if(d.success==1){
 						document.getElementById("idChk").innerHTML =" 사용중인 아이디 입니다.";
-						$("input[name='userId']").val("");
 						$("#idChk").css("color","red");
 						overChk = false;
 					}else{
-						document.getElementById("idChk").innerHTML =" 사용 가능한 아이디 입니다.";
-						 $("input[name='userId']").css("color","green");	 
+						document.getElementById("idChk").innerHTML =" 사용 가능한 아이디 입니다.";         
 						 $("#idChk").css("color","green");
 						overChk = true;
 					}

@@ -249,7 +249,7 @@
 					content +="<td>"+item.club_location+"</td>";
 					content +="<td>"+item.club_date+"</td>";
 					content +="<td>"+item.club_memberCount+"</td>";
-					content +="<td><form action='myClubRemove'><input type='hidden' name='myClubRemove' value='"+item.clubJoin_id+"'/><input type='submit' onclick='clubDel()' value='탈퇴'/></form></td>";
+					content +="<td><form action='myClubRemove'><input type='hidden' name='myClubRemove' value='"+item.clubJoin_id+"'/><input type='hidden' name='club_id' value='"+item.club_id+"'/><input type='submit' onclick='clubDel()' value='탈퇴'/></form></td>";
 					content += "</tr>";
 				}
 			});		
