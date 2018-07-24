@@ -42,13 +42,19 @@
 			<hr size="1" color="#ffbf00">
 			<table>
 				<tr>
-					<td><input id="userPw" class="inputTxt" type="password" name="userPw" placeholder="현재 비밀번호" onkeyup="chkword(this, 20)"/><span id='pwdChk2'></span></td>
+					<td><input id="userPw" class="inputTxt" type="password" name="userPw" placeholder="현재 비밀번호" onkeyup="chkword(this, 20)"/></td>
+				</tr>
+				<tr>
+				<td><div id='pwdChk2'></div></td>      
 				</tr>
 				<tr>
 					<td><hr size="1" color="white"><input id="pwUpdate" class="inputTxt" type="password" name="pwUpdate" placeholder="변경할 비밀번호"onkeyup="chkword(this, 20)"/></td>
 				</tr>
 				<tr>
-					<td><input id="pwUpdateChk" class="inputTxt" type="password" name="pwUpdateChk" placeholder="비밀번호 확인"onkeyup="chkword(this, 20)"/><span id='pwdChk1'></span></td>
+					<td><input id="pwUpdateChk" class="inputTxt" type="password" name="pwUpdateChk" placeholder="비밀번호 확인"onkeyup="chkword(this, 20)"/></td>   
+				</tr>
+				<tr>
+				<td><div id='pwdChk1'></div></td>
 				</tr>
 			</table>
 			<hr size="1" color="white">
@@ -75,6 +81,7 @@
 			
 	}else{
 		document.getElementById("pwdChk1").innerHTML = " 패스워드는 10자 이상 20자 이하로 입력해주세요.";
+		$("#pwdChk1").css("color","red");   
 		pwdCheck = 0
 	}
 	});
