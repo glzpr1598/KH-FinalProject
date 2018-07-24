@@ -156,21 +156,13 @@
 	});
 	
 	$("#del").click(function(){
-		if(nickName != "${info.member_id}"){
-			alert("삭제 권한이 없습니다.");
-			return;
-		}else{
-			console.log(clubBbs_id);
+		if(confirm("글을 삭제 하시겠습니까?")){
 			location.href="./clubFreeBbsDelete?club_id="+${info.club_id}+"&clubBbs_id="+clubBbs_id;
 		}
 	});
+	
 	$("#update").click(function(){
-		if(nickName != "${info.member_id}"){
-			alert("수정 권한이 없습니다.");
-			return;
-		}else{
-			location.href="./clubFreeUpdateForm?club_id="+${info.club_id}+"&clubBbs_id="+clubBbs_id;
-		}
+		location.href="./clubFreeUpdateForm?club_id="+${info.club_id}+"&clubBbs_id="+clubBbs_id;
 	});
 	
 	$("#back").click(function(){
