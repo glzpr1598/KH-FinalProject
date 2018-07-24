@@ -32,7 +32,11 @@
 		background-color: #FDF5DC;
 	}
 	.adminList{
-		background-color: #f2e1c4;
+		background-color: #F2F2F2;
+	}
+	.adminList .detail{
+		font-weight: bold;
+		color: red;
 	}
 	wrtieBtnArea {
 		text-align: right;
@@ -113,7 +117,7 @@ $(document).ready(function(){
 			var reply_date=date.toJSON().substring(0,10);
 			adminList+="<tr class='adminList'>"
 			adminList+="<td>"+data.friendShipAdmin[i].mainBbs_idx+"</td>"
-			adminList+="<td><a href=friendShipBbsdetail?idx="+data.friendShipAdmin[i].mainBbs_id+"&updateAfter=1>"+data.friendShipAdmin[i].mainBbs_subject+"</a></td>"
+			adminList+="<td><a class='detail' href=friendShipBbsdetail?idx="+data.friendShipAdmin[i].mainBbs_id+"&updateAfter=1>"+data.friendShipAdmin[i].mainBbs_subject+"</a></td>"
 			adminList+="<td><a href=friendShipBbsdetail?idx="+data.friendShipAdmin[i].mainBbs_id+"&updateAfter=1>"+data.friendShipAdmin[i].member_id+"</a></td>"
 			adminList+="<td>"+reply_date+"</td>"
 			adminList+="<td>"+data.friendShipAdmin[i].mainBbs_hit+"</td>"
