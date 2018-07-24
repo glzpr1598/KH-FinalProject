@@ -66,6 +66,7 @@ public class HamoBbsService {
 		ModelAndView mav = new ModelAndView();
 
 		int idx = Integer.parseInt(map.get("idx"));
+		String subject = map.get("subject");
 		String content = map.get("content");
 		String page ="redirect:/freeBbsUpdateForm?idx="+idx; //수정 실패했을 경우 다시 수정창으로.
 		int fileCount = Integer.parseInt(map.get("count"));
@@ -109,7 +110,7 @@ public class HamoBbsService {
 			}
 		}
 		//글쓰기 수정
-		if(inter.hamoBbsUpdate(idx,content) > 0 ) { 
+		if(inter.hamoBbsUpdate(idx,subject,content) > 0 ) { 
 			page = "redirect:/freeBbsdetail?idx="+idx+"&updateAfter=0";
 		}		
 		mav.setViewName(page);
@@ -299,6 +300,7 @@ public class HamoBbsService {
 		ModelAndView mav = new ModelAndView();
 
 		int idx = Integer.parseInt(map.get("idx"));
+		String subject =map.get("subject");
 		String content = map.get("content");
 		String page ="redirect:/friendShipBbsUpdateForm?idx="+idx; //수정 실패했을 경우 다시 수정창으로.
 		int fileCount = Integer.parseInt(map.get("count"));
@@ -342,7 +344,7 @@ public class HamoBbsService {
 			}
 		}
 		//글쓰기 수정
-		if(inter.hamoBbsUpdate(idx,content) > 0 ) { 
+		if(inter.hamoBbsUpdate(idx,subject,content) > 0 ) { 
 			page = "redirect:/friendShipBbsdetail?idx="+idx+"&updateAfter=0";
 		}		
 		mav.setViewName(page);
