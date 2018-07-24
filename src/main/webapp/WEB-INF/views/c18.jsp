@@ -8,6 +8,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
+		#menu5{
+			font-weight: bold;
+			color: black;
+		}
 		.meeting{
 			height: 50px;
 			margin-top: 10px; 
@@ -92,11 +96,11 @@
 			<!------------------- 양식 ------------------->
 			<h3> | 모임일정 | </h3>
 			<form id="form1" action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
-				<input id="subject" type="text" class="meeting" name="subject" placeholder="제목"/>
-				<input id="day" type="text" class="meeting" name="day" placeholder="모임 일시 "/>
-				<input id="money" type="text" class="meeting" name="money" placeholder="회비"/>
+				<input id="subject" type="text" class="meeting" name="subject" placeholder="제목"  maxlength="20" />     
+				<input id="day" type="text" class="meeting" name="day" placeholder="모임 일시 " maxlength="20"/>
+				<input id="money" type="text" class="meeting" name="money" placeholder="회비" maxlength="20"/>
 				<P>내용</P>
-				<textarea  id="content" name="content" rows="10" cols="70"></textarea>
+				<textarea  id="content" name="content" rows="10" cols="70" maxlength="2000"></textarea>
 				<div  id="ok">
 					<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>"/>
 					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
@@ -130,7 +134,12 @@
 		</div>
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
-	<script>
+	<script>	
+           
+    
+
+		
+	
 		$("#exit").click(function(){alert("모임일정 작성 취소");});
 	
 		var markers = [];
