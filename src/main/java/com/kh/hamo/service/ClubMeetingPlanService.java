@@ -36,10 +36,17 @@ public class ClubMeetingPlanService {
 		
 	}
 	// 동호회 정보(지역) 가져오기 서비스
-	public void clubLocation(Model model, String club_id) {
+	public ModelAndView clubLocation(Model model, String club_id, String member_id) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
 		String club_location = inter.clubLocation(club_id);
-		model.addAttribute("club_location", club_location);
+		String clubJoinCheck = inter.clubJoinCheck(club_id,member_id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("club_location", club_location);
+		mav.setViewName("c18");
+		if(clubJoinCheck==null) {
+			mav.setViewName("c17");
+		}
+		return mav;
 	}
 	//모임 일정 등록 
 	public void clubMeetingWrite(HashMap<String, String> list) {
@@ -166,5 +173,6 @@ public class ClubMeetingPlanService {
 		int success = inter.clubMeetingDel(meetingPlan_id,member_id);
 		logger.info("삭제 성공 :"+success);
 	}
+	
 
 }

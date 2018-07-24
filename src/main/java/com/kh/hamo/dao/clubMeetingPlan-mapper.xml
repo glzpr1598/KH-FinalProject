@@ -67,5 +67,7 @@
 		DELETE FROM meetingPlan
 		WHERE meetingPlan_id=#{param1} AND member_id=#{param2}
 	</delete>
-	
+	<select id="clubJoinCheck" resultType="String">
+		SELECT * FROM clubJoin WHERE club_id=#{param1} and member_id=#{param2}
+	</select>
 </mapper>
