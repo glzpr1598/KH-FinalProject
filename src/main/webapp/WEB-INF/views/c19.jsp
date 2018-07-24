@@ -101,7 +101,11 @@
 	console.log("+++++++++++++++++++++");
 	console.log($("#member").val());
 	console.log("<%= session.getAttribute("userId") %>");   
-	
+	$("#save").click(function(){
+		if($("#replyContent").val()==""){         
+			alert("댓글을 입력해 주세요");
+		}
+	});	
 
 	if($("#member").val()!="<%= session.getAttribute("userId") %>"){
 		$("#update").hide();
