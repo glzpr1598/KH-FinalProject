@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.service.ClubBbsService;
-import com.kh.hamo.service.ClubFileService;
 
 @Controller
 public class ClubBbsController {
@@ -26,8 +25,6 @@ public class ClubBbsController {
 	
 	@Autowired
 	ClubBbsService clubBbsService;
-	@Autowired
-	ClubFileService clubFileService;
 	
 	/*************************************공지사항***************************************/
 	
