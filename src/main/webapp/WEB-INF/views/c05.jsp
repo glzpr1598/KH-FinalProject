@@ -94,7 +94,6 @@
 <link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <script>
 	var club_id=<%=request.getParameter("club_id")%>
-	console.log("동호회 아이디 :"+club_id);
 		
 	 $(document).ready(function(){
 			$.ajax({
@@ -107,10 +106,8 @@
 				},
 				success:function(data){
 					if(data.masternick != null){
-						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='inline';
 					}else{
-						console.log("동호회 회장 : "+data.masternick);
 						document.getElementById("write").style.display='none';
 					}
 				},

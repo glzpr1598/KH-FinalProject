@@ -163,7 +163,7 @@
 					success:function(data){
 						console.log(data);
 						createOk = data.success;
-						if(createOk || $("input[name='club_name']").val() !=""){
+						if(createOk && $("input[name='club_name']").val() !=""){
 							$("#nameMsg").html("사용 가능한 동호회명 입니다.");
 							$("#nameMsg").css("color","blue");
 							before_name = $("input[name='club_name']").val();

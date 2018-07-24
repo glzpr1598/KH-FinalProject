@@ -116,7 +116,6 @@
 		
 		function listPrint(list){
 			var content = "";
-			console.log(list);
 			$("#body").empty();
 			list.forEach(function(item){
 				content += "<tr>";
