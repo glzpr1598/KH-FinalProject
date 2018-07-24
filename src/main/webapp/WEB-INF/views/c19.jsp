@@ -101,9 +101,8 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>
-	console.log("+++++++++++++++++++++");
-	console.log($("#member").val());
-	console.log("<%= session.getAttribute("userId") %>");   
+	//console.log("+++++++++++++++++++++");
+	//console.log($("#member").val());
 	$("#save").click(function(){
 		if($("#replyContent").val()==""){         
 			alert("댓글을 입력해 주세요");
@@ -131,7 +130,7 @@
 				"club_id":"<%= request.getParameter("club_id") %>",
 			},
 			success: function(data) {
-				console.log(data);    
+				//console.log(data);    
 				replyList(data.list);
 				replyCount = data.replyCount;   
 				$("#replyCount").html(replyCount);   
@@ -139,7 +138,7 @@
 			}
 		});
 		function replyList(list){
-			console.log(list);
+			//console.log(list);
 			var content ="";
 			list.forEach(function(item, idx){
 				content += "<tr>";
@@ -155,9 +154,8 @@
 			$("#replyTable").append(content);
 			
 			for (var i =0; i<list.length;i++ ){           
-				console.log(list[i].member_id);
-				console.log(list[i].meetingPlanReply_id);
-				console.log($("a#"+list[i].meetingPlanReply_id).attr("id"));
+				//console.log(list[i].member_id);
+				//console.log(list[i].meetingPlanReply_id);
 				if(list[i].member_id=="<%= session.getAttribute("userId") %>"){
 					$("a#"+list[i].meetingPlanReply_id).show();
 				} else{
@@ -177,7 +175,7 @@
 					"member_id": "<%= session.getAttribute("userId") %>"
 				},
 				success: function(data) {
-					console.log(data.list);
+					//console.log(data.list);
 					$(document).ready(function() {
 						$.ajax({
 							type: "post",
@@ -257,8 +255,8 @@
 		// 참석자 리스트
 		obj.url="./meetingAttendList";
 		obj.success = function(data){
-			console.log(data);
-			console.log(data.btn);
+			//console.log(data);
+			//console.log(data.btn);
 			if(data.btn>=1){
 				$("#attend").html("참석취소");	
 			}
@@ -266,13 +264,13 @@
 				if($("#attend").html()=="참석"){
 					obj.url="./meetingAttend";
 					obj.success = function(data){
-						console.log(data);
+						//console.log(data);
 						$("#attend").html("참석취소");
 						$(document).ready(function(){
 							obj.url="./meetingAttendList";
 							obj.success = function(data){
-								console.log(data);
-								console.log(data.btn);
+								//console.log(data);
+								//console.log(data.btn);
 								listPrint(data.list);
 							}
 							ajaxCall(obj);
@@ -282,13 +280,13 @@
 				}else if ($("#attend").html()=="참석취소"){
 					obj.url="./meetingAttendCancel";
 					obj.success = function(data){
-						console.log(data);
+						//console.log(data);
 						$("#attend").html("참석");
 						$(document).ready(function(){
 							obj.url="./meetingAttendList";
 							obj.success = function(data){
-								console.log(data);
-								console.log(data.btn);
+								//console.log(data);
+								//console.log(data.btn);
 								listPrint(data.list);
 							}
 							ajaxCall(obj);
@@ -304,7 +302,7 @@
 		    
 		
 		function listPrint(list){
-			console.log(list);
+			//console.log(list);
 			var content ="";
 			list.forEach(function(item, idx){
 				content += item +" , ";

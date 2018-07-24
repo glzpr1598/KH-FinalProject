@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" href="./resources/image/icon-32.png" />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-<title>HAMO - 가입하기</title>
+<title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 	/* 제목 */
@@ -105,7 +105,6 @@
 $(document).ready(function() {
 	/* 동호회 소개 말  가져오기 */
 	var club_introduce = "${introduce}"; 
-	console.log( $('#nick_name').val());
 	$("#club_introduce").html(club_introduce);
 	
 	/* 동호회 닉네임 중복 여부 체크  */
@@ -113,7 +112,6 @@ $(document).ready(function() {
 	var nickName_ok  = false;
 	
 	$("input[name='nickname']").focusout(function(){
-		console.log("focusout");
 		if($(this).val() != "") {
 			$.ajax({
 				url:"./club_overLap",
@@ -124,7 +122,6 @@ $(document).ready(function() {
 				},
 				dataType:"JSON",
 				success:function(data){
-					console.log(data);
 					nickName_ok = data.success ; 
 					if(nickName_ok){
 						$("#nickNameMsg").html("사용가능한 닉네임 입니다.");

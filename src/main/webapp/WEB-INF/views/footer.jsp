@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div id="footer">
-	    Website 2018 by 김준도, 윤지현, 이민철, 김응주, 배은경 Hamo
+	    HAMO by 김응주, 김준도, 배은경, 윤지현, 이민철 in 2018
 	</div>
 </body>
 <script>

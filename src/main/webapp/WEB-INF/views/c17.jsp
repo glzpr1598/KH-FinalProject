@@ -98,14 +98,14 @@
 			obj.url="./MeetingList";
 			obj.data = {"club_id": "<%= request.getParameter("club_id") %>","member_id":"<%= session.getAttribute("userId") %>"};
 			obj.success = function(data){
-				console.log(data);
+				//console.log(data);
 				//listPrint(data.list);
 				$.pagingHash(data.list, 10, 5, listPrint);
 		}
 			ajaxCall(obj);
 		});
 		function listPrint(list){
-			console.log(list);
+			//console.log(list);
 			var content ="";
 			list.forEach(function(item, idx){
 				content +="<tr>";

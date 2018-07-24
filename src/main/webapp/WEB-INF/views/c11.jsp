@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+<link rel="icon" href="./resources/image/icon-32.png" />
 <title>HAMO</title>
 <style>
 	#menu3 {

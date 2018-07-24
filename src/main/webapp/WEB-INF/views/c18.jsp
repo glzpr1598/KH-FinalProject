@@ -381,7 +381,7 @@
 		    };
 		 var latlng = map.getCenter(); 
 		 var message = "중심 좌표는 위도 " + latlng.getLat() + ", 경도 " + latlng.getLng() + "입니다";
-		    console.log(message);
+		    //console.log(message);
 			
 		// 마커 이미지를 생성한다     
 		var markerImage = new daum.maps.MarkerImage(markerImageUrl, markerImageSize, markerImageOptions);

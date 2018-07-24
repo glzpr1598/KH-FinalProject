@@ -452,7 +452,7 @@ if(a==5){
 		$("#d3").hide();
 		$("#d4").hide();
 		$("#d5").hide();
-		console.log(a);
+		//console.log(a);
 		if(a==5){
 			a=4;
 			$("#d2").show();
@@ -477,7 +477,7 @@ if(a==5){
 		$("#d3").hide();
 		$("#d4").hide();
 		$("#d5").hide();
-	   console.log(a);
+	    //console.log(a);
 		if(a==5){
 			a=1;
 			$("#d2").show();
@@ -538,7 +538,7 @@ if(size==4){
 			$("#d3").hide();
 			$("#d4").hide();
 
-			console.log(a);
+			//console.log(a);
 			if(a==4){
 				a=3;
 				$("#d2").show();
@@ -560,7 +560,7 @@ if(size==4){
 			$("#d3").hide();
 			$("#d4").hide();
 
-		   console.log(a);
+		    //console.log(a);
 			if(a==4){
 				a=1;
 				$("#d2").show();
@@ -614,7 +614,7 @@ if(a==3){
 		$("#d2").hide();
 		$("#d3").hide();
 
-		console.log(a);
+		//console.log(a);
 		if(a==3){
 			a=2;
 			$("#d2").show();
@@ -632,7 +632,7 @@ if(a==3){
 		$("#d2").hide();
 		$("#d3").hide();
 
-	   console.log(a);
+	    //console.log(a);
 		if(a==3){
 			a=1;
 			$("#d2").show();
@@ -680,7 +680,7 @@ if(a==2){
      	$("#d1").hide();
 		$("#d2").hide();
 
-		console.log(a);
+		//console.log(a);
 		if(a==2){
 			a=1;
 			$("#d1").show();
@@ -694,7 +694,7 @@ if(a==2){
      	$("#d1").hide();
 		$("#d2").hide();
 
-	   console.log(a);
+	    //console.log(a);
 		if(a==2){
 			a=1;
 			$("#d1").show();
@@ -717,10 +717,14 @@ if(size==1){
  
    
 if(size==0){
-	 function next(){ console.log("동호회없음");}
-	 function back(){ console.log("동호회없음");}
+	function next(){ 
+		 //console.log("동호회없음");
+	}
+	function back(){ 
+		 //console.log("동호회없음");
+	}
 }
- 
+
  
 </script>
 </html>

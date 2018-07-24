@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" href="./resources/image/icon-32.png" />
-<title>HAMO - 동호회 폐쇄</title>
+<title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 	/* 내용 */

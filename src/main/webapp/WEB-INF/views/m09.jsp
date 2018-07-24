@@ -187,7 +187,7 @@
 			obj.url="./myClubJoin";
 			obj.data = {"id": "<%= session.getAttribute("userId") %>"};
 			obj.success = function(data){
-				 console.log(data);
+				 //console.log(data);
 				 listPrint2(data.myClubJoin);
 				 
 				 /* 설립일 순 클릭 햇을 때 */
@@ -238,7 +238,7 @@
 			$("#myClubListTable").append(content);
 		}
 		function listPrint2(list){
-			console.log(list);
+			//console.log(list);
 			var content ="";
 			list.forEach(function(item, idx){
 				// 회장이 아닐 경우에만 출력
