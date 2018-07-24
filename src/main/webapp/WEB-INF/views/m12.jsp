@@ -31,7 +31,7 @@
 	th{
 		background-color: #FDF5DC;
 	}
-	wrtieBtnArea {
+	#writeBtnArea {
 		text-align: right;
 	}
 	#writeBtn{
@@ -67,21 +67,29 @@
 		<div id="right">
 			<div id="title">| 자유게시판 |</div>
 				<table>
-					<tr id="append">
-						<th>글번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
+					<thead>
+						<tr id="append">
+							<th>글번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
 				</table>
-				<div id="wrtieBtnArea">
+				<div id="writeBtnArea">
 					<input id="writeBtn" type="button" value="글쓰기">
 				</div>
+				<div id="pagingArea"></div>
 				<div id="space"></div>
 		</div>
 	</div>
 </body>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <script>
 /* 리스트 조회 */
 $(document).ready(function(){
@@ -94,43 +102,30 @@ $(document).ready(function(){
 			console.log(data);
 			console.log(data.freeBbsList.length);
 			//글쓰기 리스트 생성하는 함수 호출
-			freeBbsList(data);
+			//freeBbsList(data);
+			$.pagingHash(data.freeBbsList, 10, 5, freeBbsList);
 		},error:function(error){console.log(error);}
 		
 	});
-});
-	function freeBbsList(data){
+
+	function freeBbsList(freeBbsList){
 		console.log("freeBbsList 함수 호출");
-		//초기화
-		$("#append").after("");
 		
 		var content ="";
- 		for(var i=0; i<data.freeBbsList.length; i++){
-			var date = new Date(data.freeBbsList[i].mainBbs_date);
+ 		for(var i=0; i<freeBbsList.length; i++){
+			var date = new Date(freeBbsList[i].mainBbs_date);
 			var reply_date=date.toJSON().substring(0,10);
 			
 			content+="<tr>";
-			content+="<td>"+data.freeBbsList[i].mainBbs_idx+"</td>"
-			content+="<td><a href=freeBbsdetail?idx="+data.freeBbsList[i].mainBbs_id+"&updateAfter=1>"+data.freeBbsList[i].mainBbs_subject+"</a></td>"
-			content+="<td><a href=freeBbsdetail?idx="+data.freeBbsList[i].mainBbs_id+"&updateAfter=1>"+data.freeBbsList[i].member_id+"</a></td>"
+			content+="<td>"+freeBbsList[i].mainBbs_idx+"</td>"
+			content+="<td><a href=freeBbsdetail?idx="+freeBbsList[i].mainBbs_id+"&updateAfter=1>"+freeBbsList[i].mainBbs_subject+"</a></td>"
+			content+="<td><a href=freeBbsdetail?idx="+freeBbsList[i].mainBbs_id+"&updateAfter=1>"+freeBbsList[i].member_id+"</a></td>"
 			content+="<td>"+reply_date+"</td>"
-			content+="<td>"+data.freeBbsList[i].mainBbs_hit+"</td>"
+			content+="<td>"+freeBbsList[i].mainBbs_hit+"</td>"
 			content+="</tr>";
 		} 
-		$("#append").after(content);
+		$("tbody").html(content);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 	$("#writeBtn").click(function(){
 		if("${sessionScope.userId}" == "" ){
@@ -138,7 +133,8 @@ $(document).ready(function(){
 		}else{
 			location.href="freeBbsWriteForm";
 		}
-	
 	});
+	
+});
 </script>
 </html>
