@@ -38,7 +38,7 @@ public class ClubAdminService {
 	}
 	
 	// 동호회 폐쇄 날짜 확인 후 동호회 삭제
-	@Scheduled(cron = "0/5 * * * * * ")  // 5초마다
+	@Scheduled(cron = "0/10 * * * * * ")  // 10초마다
 	public void clubCloseSchedule() {
 		logger.info("동호회 폐쇄 검사");
 		

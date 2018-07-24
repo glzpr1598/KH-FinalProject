@@ -71,7 +71,10 @@
 	<body>
 		<%@ include file="./main-header.jsp" %>
 		<div id="container">
-			<div id="search"><b>'${ search }'</b>에 대한 검색결과입니다.</div>
+			<div id="search">
+				<b>'${ search }'</b>에 대한 검색결과입니다.
+				(총 <b><span id="resultCount"></span></b>건)
+			</div>
 			<div id="sortArea">
 				<a id="day" class="sort">
 					<i class="fa fa-check"></i>
@@ -109,6 +112,7 @@
 			obj.url="./totalClubSearch";
 			obj.data ={"search": "${search}"};
 			obj.success = function(data){
+				$("#resultCount").html(data.list.length);
 				$.pagingHash(data.list, 10, 5, listPrint);
 				
 				/* 설립일순 정렬 */

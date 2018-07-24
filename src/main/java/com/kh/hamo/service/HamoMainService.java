@@ -2,6 +2,7 @@ package com.kh.hamo.service;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -35,9 +36,15 @@ public class HamoMainService {
 	public HashMap<String, Object> totalClubSearch(HashMap<String, String> map) {
 		logger.info("종합검색 서비스 실행");
 		inter = sqlSession.getMapper(HamoMainInter.class);
-		ArrayList<HamoMainDTO> totalClubSearch = inter.totalClubSearch(map);
+		
+		// 검색어를 띄어쓰기를 기준으로 나누어서 list에 담음
+		String[] array = map.get("search").split(" ");
+		ArrayList<String> list = new ArrayList<>(Arrays.asList(array));
+		
+		ArrayList<HamoMainDTO> totalClubSearch = inter.totalClubSearch(list);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", totalClubSearch);
+		
 		return result;
 	}
 	//설립한 동호회 리스트
