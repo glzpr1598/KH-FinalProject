@@ -44,7 +44,7 @@
 		<div id="right">
 			<form action="" name="frm" id="frm" method="POST">
 			 	<div id="title">| 동호회 친목 |</div>
-			 	<input type="text" id="subject" name ="subject" value="${ detail.mainBbs_subject }" />
+			 	<input type="text" id="subject" name ="subject" value="${ detail.mainBbs_subject }" maxlength="20" />
 			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:798px; height:300px;">
 			    </textarea>
 			    <div id="btn">
