@@ -89,6 +89,7 @@ public class HamoComunityController {
 	public ModelAndView freeBbsUpdate(@RequestParam HashMap<String, String> map,HttpSession session) {	
 		logger.info("글 수정 요청");
 		logger.info("글 번호: "+map.get("idx"));
+		logger.info("컨트롤러에서 수정 할 제목: "+map.get("subject"));
 		logger.info("컨트롤러에서 수정 할 내용: "+map.get("content"));
 		String root = session.getServletContext().getRealPath("/");
 		//updateAfter=0을 같이 보내는 이유는 글 수정시에는 조회수 올라가는 것을 방지하기 위해
@@ -205,6 +206,7 @@ public class HamoComunityController {
 	public ModelAndView friendShipBbsUpdate(@RequestParam HashMap<String, String> map,HttpSession session) {	
 		logger.info("글 수정 요청");
 		logger.info("글 번호: "+map.get("idx"));
+		logger.info("제목 : " +map.get("subject"));
 		logger.info("컨트롤러에서 수정 할 내용: "+map.get("content"));
 		String root = session.getServletContext().getRealPath("/");
 		//updateAfter=0을 같이 보내는 이유는 글 수정시에는 조회수 올라가는 것을 방지하기 위해

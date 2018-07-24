@@ -91,7 +91,6 @@
 		}else{
 			if($("#editor").val().length > 2000){
 				alert("최대 2000자까지 입력 가능합니다.");
-				return;	
 			}else{
 				var str = $("#editor").val();
 
