@@ -56,7 +56,7 @@ public interface ClubMeetingPlanInter {
 
 	int clubMeetingDel(String meetingPlan_id, String member_id);//모임 일정 삭제
 
-	String clubJoinCheck(String club_id, String member_id);//회원가입 체크
+	int clubJoinCheck(String club_id, String member_id);//회원가입 체크
 
 
 
