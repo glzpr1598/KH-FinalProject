@@ -68,7 +68,7 @@
 <script>
 	// 동호회 아이디
 	var club_id = "<%= request.getParameter("club_id") %>"; 
-	
+
 	// 사진 보여주기
 	var picture = "${picture}";
 	var picturePath = "./resources/club-picture/" + picture;
@@ -138,5 +138,16 @@
         return "";
     }
 
+	
+	
+	//동호회 회원 탈퇴 (자식 window 객체로 부터 호출됨)
+	function memberOut(url) {
+		location.href=url;
+	}
+
+	
+	
+	
+	
 </script>
 </html>

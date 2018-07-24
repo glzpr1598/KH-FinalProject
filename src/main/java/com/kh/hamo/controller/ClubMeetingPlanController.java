@@ -117,15 +117,26 @@ public class ClubMeetingPlanController {
 		return service.clubMeetingUpdateForm(meetingPlan_id,member_id);
 	}
 	//모임 일정 수정 
-		@RequestMapping(value = "/clubMeetingUpdate")
-		public String clubMeetingUpdate(@RequestParam HashMap<String, String> list) {
-			logger.info("clubMeetingUpdate 요청");
-			String club_id=  list.get("club_id");
-			String meetingPlan_id=list.get("meetingPlan_id");
-			String meetingPlan_locationX=list.get("locationX");
-			System.out.println(meetingPlan_id);
-			System.out.println(meetingPlan_locationX);
-			service.clubMeetingUpdate(list);
-			return "redirect:/clubMeetingDetail?club_id="+club_id+"&meetingPlan_id="+meetingPlan_id;
-		}
+	@RequestMapping(value = "/clubMeetingUpdate")
+	public String clubMeetingUpdate(@RequestParam HashMap<String, String> list) {
+		logger.info("clubMeetingUpdate 요청");
+		String club_id=  list.get("club_id");
+		String meetingPlan_id=list.get("meetingPlan_id");
+		String meetingPlan_locationX=list.get("locationX");
+		System.out.println(meetingPlan_id);
+		System.out.println(meetingPlan_locationX);
+		service.clubMeetingUpdate(list);
+		return "redirect:/clubMeetingDetail?club_id="+club_id+"&meetingPlan_id="+meetingPlan_id;
+	}
+	//모임 일정 삭제 
+	@RequestMapping(value = "/clubMeetingDel")
+	public String clubMeetingDel(@RequestParam ("meetingPlan_id") String meetingPlan_id,@RequestParam ("member_id") String member_id,
+			@RequestParam String club_id) {
+		logger.info("clubMeetingDel 요청");
+		service.clubMeetingDel(meetingPlan_id,member_id);
+		return "redirect:/clubMeetingList?club_id="+club_id;
+	}
+	
+	
+	
 }

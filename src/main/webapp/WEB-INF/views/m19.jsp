@@ -1,7 +1,7 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!--****자유게시판 글 수정하기 폼 jsp  ****-->
+<!--****동호회 친목 게시판 글 수정하기 폼 jsp  ****-->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,7 +10,7 @@
 	src="<%=request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
-	#menu #freeBbs{
+	#menu #friendBbs{
 		font-weight: bold;
 		color:black;
 	}
@@ -43,7 +43,7 @@
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
 			<form action="" name="frm" id="frm" method="POST">
-			 	<div id="title">| 자유게시판 |</div>
+			 	<div id="title">| 동호회 친목 |</div>
 			 	<input type="text" id="subject" value="${ detail.mainBbs_subject }" />
 			    <textarea name="content" id="smarteditor" rows="10" cols="80" style="width:798px; height:300px;">
 			    </textarea>
@@ -53,8 +53,7 @@
 				    <input type="button" id="savebutton" value="저장" />
 			    </div>
 		    </form>
-		</div>
-		
+		</div>		
 	</div>
 		
 </body>
@@ -116,7 +115,7 @@ $(function(){
        			}
    			}
    			console.log("글 수정 test");
-   			$("#frm").attr("action","freeBbsUpdate?count="+count+param);
+   			$("#frm").attr("action","friendShipBbsUpdate?count="+count+param);
        		$("#frm").submit();	
        	}
     });
@@ -124,7 +123,7 @@ $(function(){
     //수정 취소  클릭 시 
     $("#cancelbutton").click(function(){
     	if(confirm("수정 취소하시겠습니까?")){ 
-    		location.href="./freeBbsdetail?idx=${detail.mainBbs_id}&updateAfter=0";
+    		location.href="./friendShipBbsdetail?idx=${detail.mainBbs_id}&updateAfter=0";
     	}
     });
     

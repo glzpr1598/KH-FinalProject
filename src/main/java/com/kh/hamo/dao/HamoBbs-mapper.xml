@@ -2,23 +2,23 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
-<mapper namespace="com.kh.hamo.dao.HamoFreeBbsInter">
+<mapper namespace="com.kh.hamo.dao.HamoBbsInter">
 	<!--parameterType : 인터페이스에서 전달할때 받기위해서 파라메터 타입을 같게   
 		HashMap 에 값이 들어있음
 		  resultType :  쿼리문 돌린 결과를 담을 클래스명
 	-->
-	<!-- ArrayList 에 자동으로 담아줌 -->
 	
 	<!--자유게시판 글 리스트 조회  -->
 	<select id="freeBbsList" resultType="com.kh.hamo.dto.HamoBbsDTO">
-		SELECT * FROM mainBbs order by mainBbs_idx DESC 
+		SELECT * FROM mainBbs WHERE mainBbs_sort = '자유게시판' order by mainBbs_idx DESC 
 	</select>
-	<!--자유게시판 글 상세보기  -->
-	<select id="freeBbsdetail" resultType="com.kh.hamo.dto.HamoBbsDTO">
+	
+	<!--게시판 글 상세보기  -->
+	<select id="hamoBbsdetail" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT * FROM mainBbs WHERE mainBbs_id=#{param1}	
 	</select>
-	<!-- 자유게시판 조회 수 update -->
-	<update id="freeBbsHit">
+	<!-- 게시판 조회 수 update -->
+	<update id="hamoBbsHit">
 		UPDATE mainBbs SET mainBbs_hit=mainBbs_hit+1 WHERE mainBbs_id=#{param1}	
 	</update>
 
@@ -28,55 +28,87 @@
 			mainBbs_content,mainBbs_date,mainBbs_replyCount,mainBbs_hit)
 			VALUES(seq_mainbbs_id.NEXTVAL,#{member_id},'자유게시판',seq_freebbs_idx.NEXTVAL,#{mainBbs_subject},#{mainBbs_content},SYSDATE,0,0)
 	</insert>
-	<!-- 자유게시판 이미지 업로드 -->
-	<insert id="freeBbsUpload">
+	<!-- 게시판 이미지 업로드 -->
+	<insert id="hamoBbsUpload">
 		INSERT INTO mainBbsFile(mainBbsFile_id,mainBbs_id,mainBbsFile_oldName,mainBbsFile_newName)
 		VALUES(seq_mainbbsfile_id.NEXTVAL,#{param1},#{param3},#{param2})
 	</insert>
 
 	<!-- 자유게시판 글 수정하기 -->
-	<update id="freeBbsUpdate">
+	<update id="hamoBbsUpdate">
 		UPDATE mainBbs SET mainBbs_content=#{param2} WHERE mainBbs_id=#{param1}
 	</update>
-	<delete id="freeBbsFileDel">
+	<!-- 게시판 이미지 삭제  -->
+	<delete id="hamoBbsFileDel">
 		DELETE FROM mainBbsFile WHERE mainBbs_id = #{param1}
 	</delete>
+	
+	<!-- 해당 게시글에 업로드 된 파일명 조회 -->
 	<select id="selectFile" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT mainBbsFile_newName , mainBbsFile_oldName FROM mainBbsFile WHERE mainBbs_id = #{param1}
 	</select>
+	
 	<!-- 자유게시판 글 삭제  -->
-	<delete id="freeBbsDelete">
+	<delete id="hamoBbsDelete">
 	 	DELETE FROM mainBbs WHERE mainBbs_id = #{param1}
 	</delete>
-	<select id="freeBbsImage" resultType="String">
+	<select id="hamoBbsImage" resultType="String">
 		SELECT mainBbsFile_newName FROM mainBbsFile WHERE mainBbs_id =#{param1}
 	</select>
-	<!-- 자유게시판 댓글 등록 -->
-	<insert id="freeBbsReply" parameterType="com.kh.hamo.dto.HamoBbsDTO" useGeneratedKeys="true" keyProperty="mainBbsReply_id" keyColumn="mainBbsReply_id">
-		INSERT INTO mainBbsReply(mainBbsReply_id,mainBbs_id,member_id,mainBbsReply_content,mainBbsReply_date)
-		VALUES(seq_mainbbsreply_id.NEXTVAL,#{mainBbs_id},#{member_id},#{mainBbsReply_content},SYSDATE)
-	</insert>
-	<!-- 자유게시판  댓글 달린 날짜 조회 why?쿼리문에 자동으로 SYSDATE해줬기 떄문에 날짜는 따로 조회해와야함-->
-	<select id="reply_date" resultType="String">
-		SELECT TO_CHAR(mainBbsReply_date,'yyyy.mm.dd. hh24:mi') as mainBbsReply_date FROM mainBbsReply WHERE mainBbsReply_id =#{param1}
+	
+	
+	
+	<!-- *****************동호회 친목 게시판******************* -->
+	
+	<select id="friendShipAdmin" resultType="com.kh.hamo.dto.HamoBbsDTO">
+		SELECT * FROM mainBbs WHERE mainBbs_sort = '동호회 게시판' AND member_id = 'Hamo 관리자' order by mainBbs_idx DESC 
 	</select>
-	<!-- 자유게시판 댓글 리스트  -->
-	<select id="freeBbsReplyList" resultType="com.kh.hamo.dto.HamoBbsDTO">
+	
+	
+	<select id="friendShipBbsList" resultType="com.kh.hamo.dto.HamoBbsDTO">
+		SELECT * FROM mainBbs WHERE mainBbs_sort = '동호회 게시판' AND member_id NOT IN ('Hamo 관리자') order by mainBbs_idx DESC 
+	</select>
+	
+
+	<insert id="friendShipBbsWrite" parameterType="com.kh.hamo.dto.HamoBbsDTO" useGeneratedKeys="true" keyProperty="mainBbs_id" keyColumn="mainBbs_id" >
+			INSERT INTO mainBbs(mainBbs_id,member_id,mainBbs_sort,mainBbs_idx,mainBbs_subject,
+			mainBbs_content,mainBbs_date,mainBbs_replyCount,mainBbs_hit)
+			VALUES(seq_mainbbs_id.NEXTVAL,#{member_id},'동호회 게시판',seq_friendship_idx.NEXTVAL,#{mainBbs_subject},#{mainBbs_content},SYSDATE,0,0)
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- **************댓글********************** -->
+	<!-- 하모 게시판 댓글 리스트  -->
+	<select id="hamoBbsReplyList" resultType="com.kh.hamo.dto.HamoBbsDTO">
 		SELECT mainBbsReply_id,mainBbs_id,member_id,mainBbsReply_content,
 		TO_CHAR(mainBbsReply_date,'yyyy.mm.dd. hh24:mi') as mainBbsReply_date FROM mainBbsReply WHERE mainBbs_id =#{param1} 
 		ORDER BY mainBbsReply_date ASC
 	</select>
 	
- 	<!--자유게시판 삭제 하기 전 댓글을 입력한 회원ID 조회 (댓글 삭제 권한 부여위해) -->
-	<!-- <select id="freeBbsReply_IdCheck" resultType="String">
-		SELECT member_id FROM mainBbsReply WHERE mainBbsReply_id = #{param1}
-	</select> -->
-	 
-	<!-- 자유게시판 댓글 삭제 -->
-	<delete id="freBbsReplyDel">
+	<!-- 하모 게시판 댓글 등록 -->
+	<insert id="hamoBbsReply" parameterType="com.kh.hamo.dto.HamoBbsDTO" useGeneratedKeys="true" keyProperty="mainBbsReply_id" keyColumn="mainBbsReply_id">
+		INSERT INTO mainBbsReply(mainBbsReply_id,mainBbs_id,member_id,mainBbsReply_content,mainBbsReply_date)
+		VALUES(seq_mainbbsreply_id.NEXTVAL,#{mainBbs_id},#{member_id},#{mainBbsReply_content},SYSDATE)
+	</insert>
+	
+	<!-- 하모 게시판  댓글 달린 날짜 조회 why?쿼리문에 자동으로 SYSDATE해줬기 떄문에 날짜는 따로 조회해와야함-->
+	<select id="reply_date" resultType="String">
+		SELECT TO_CHAR(mainBbsReply_date,'yyyy.mm.dd. hh24:mi') as mainBbsReply_date FROM mainBbsReply WHERE mainBbsReply_id =#{param1}
+	</select>
+
+	
+	<!-- 하모 게시판 댓글 삭제 -->
+	<delete id="hamoBbsReplyDel">
 		DELETE FROM mainBbsReply WHERE mainBbsReply_id = #{param1}
 	</delete>
-	<!-- 댓글 수 update -->
+	
+	<!-- 하모 게시판 댓글 수 update -->
 	<update id="reply_countUpdate">
 		UPDATE mainBbs 
 			<choose>
@@ -89,8 +121,26 @@
 			</choose> 
 		WHERE mainBbs_id =#{param1}
 	</update>
-	<!-- 댓글 수 조회 -->
+	
+	<!-- 하모게시판 댓글 수 조회 -->
 	<select id="reply_count" resultType="int">
 		SELECT mainBbs_replyCount FROM mainBbs WHERE mainBbs_id =#{param1}
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!--****자유게시판 글쓰기 jsp  ****-->
+<!--****동호회 게시판 글쓰기 jsp  ****-->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,7 +10,7 @@
 	src="<%=request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <style>
-	#menu #freeBbs{
+	#menu #friendBbs{
 		font-weight: bold;
 		color:black;
 	}
@@ -43,7 +43,7 @@
 		<%@ include file="./main-community_menu.jsp" %>
 		<div id="right">
 			<form action="" name="frm" id="frm" method="post">
-			 	<div id="title">| 자유게시판 |</div>
+			 	<div id="title">| 동호회 친목 |</div>
 				<input type="text" id="subject" placeholder="제목을 입력하세요." name="subject" maxlength="20">
 			    <textarea  name="content" id="smarteditor"  placeholder="10" cols="100" style="width:798px; height:300px;">
 			    </textarea>
@@ -90,8 +90,8 @@ $(function(){
 	         	}else if($("#smarteditor").val()=="<p>&nbsp;</p>"
 	         	|| $("#smarteditor").val()==""
 	         	|| $("#smarteditor").val() =='<p><br style="clear:both;">&nbsp;</p>'
-         		|| $("#smarteditor").val()== '<br style="clear:both;">'
-       			|| $("#smarteditor").val()== '<br style="clear:both;"><br>'){
+	         	|| $("#smarteditor").val()== '<br style="clear:both;"><br>'
+         		|| $("#smarteditor").val()== '<br style="clear:both;">'){
 	         		alert("내용을 입력 해 주세요.");
 	         	}else{
 	         		console.log($("#smarteditor").val());
@@ -121,7 +121,7 @@ $(function(){
 		        			}
 	        			}
 	        			console.log("글 쓰기 test");
-	        			$("#frm").attr("action","./freeBbsWrite?count="+count+param);
+	        			$("#frm").attr("action","./friendShipBbsWrite?count="+count+param);
 	        			$("#frm").submit();
 	         		}
 	         	}
@@ -133,7 +133,7 @@ $(function(){
     $("#cancel").click(function(){
     	if(confirm("작성을 취소하시겠습니까?")){ 
     		//true 일 경우 자유게시판 리스트 보여주는 페이지로 이동
-    		location.href="./freeBbsListPage";
+    		location.href="./friendShipBbsListPage";
     	}
     });
     

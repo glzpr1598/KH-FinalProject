@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.hamo.dao.ClubMemberInter;
+import com.kh.hamo.dto.ClubMemberDTO;
+import com.kh.hamo.dto.HamoMainDTO;
 
 @Service
 public class ClubMemberService {
@@ -77,7 +79,23 @@ public class ClubMemberService {
 		model.addAttribute("introduce", introduce);
 		model.addAttribute("club_id", club_id);
 	}
-	
+	//동호회 블랙리스트 포함 여부
+	public HashMap<String, Object> club_blackList(
+			String club_id, String member_id) {
+		inter = sqlSession.getMapper(ClubMemberInter.class);
+		HashMap<String, Object> map  = new HashMap<String,Object>();
+		boolean allow = true;
+		//블랙리스트에 등록되어 있는 회원인지 여부를 판단하여 가입 제제
+		ArrayList<String> blackListMember = new ArrayList<String>();
+		//가입 하려는 동호회에 블랙리스트 명단
+		blackListMember = inter.blackList(club_id);
+		if(blackListMember.contains(member_id)) {
+			logger.info("블랙리스트 명단에 포함되어 있으므로 가입 제한");
+			allow = false;
+		}
+		map.put("allow",allow);
+		return map;
+	}
 	//동호회 닉네임 체크
 		public HashMap<String, Object> club_overLap( 
 				String club_id , String nickName){
@@ -97,16 +115,47 @@ public class ClubMemberService {
 			return resultMap;
 		}
 		//동호회 가입하기
-		public String clubJoin(HashMap<String, String> map) {
+		public ModelAndView clubJoin(HashMap<String, String> map) {
 			logger.info("동호회 가입하기 서비스 요청");
-			//동호회 가입 실패시 이동 할 페이지
 			inter = sqlSession.getMapper(ClubMemberInter.class);
-			String page = "redirect:/clubJoinForm";
-			int success = inter.clubJoin(map);
-			if(success > 0 ) {
+			ModelAndView mav = new ModelAndView();
+			//동호회 가입 실패시 이동 할 페이지
+			String page = "redirect:/clubJoinForm?club_id="+map.get("club_id");
+			
+			int club_id = Integer.parseInt(map.get("club_id"));
+			String member_id = map.get("member_id");
+		
+			if( inter.clubJoin(map) > 0 ) {
 				logger.info("동호회 가입 성공");
-				page = "redirect:/clubMain?club_id="+map.get("club_id");
+				if(inter.memberCountUp((map.get("club_id"))) > 0) {
+					logger.info("동호회 회원 증가");
+					page = "redirect:/clubMain?club_id="+map.get("club_id");
+				}		
 			}
-			return page;
+			
+			mav.setViewName(page);
+			return mav;
 		}
+
+		public ModelAndView clubMemberOut(String member_id, String club_id) {
+			logger.info("동호회 탈퇴하기 서비스 요청");
+			inter = sqlSession.getMapper(ClubMemberInter.class);
+			ModelAndView mav = new ModelAndView();
+			
+			
+			String page ="redirect:/clubOutForm?club_id=" + club_id;
+			int success = inter.clubMemberOut(member_id,club_id);
+			if(success > 0 ) {
+				logger.info("탈퇴 성공!");
+				if(inter.memberCountDown(club_id) > 0) {
+					logger.info("동호회 회원 감소");
+				}
+				page = "redirect:/clubMain?club_id="+club_id;
+			}
+			
+			mav.setViewName(page);
+			return mav;
+			
+		}
+
 }

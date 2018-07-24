@@ -69,7 +69,7 @@
 	#left .btn{
 		width: 100%;
 		padding: 7px 0px;
-		margin-bottom: 5px;
+		margin: 0 0 5px 0;
 		background-color: #ffbf00;
 		border: none;
 		border-radius: 5px;
@@ -116,7 +116,7 @@
 		<div id="meeting" class="menu">
 			<div>
 				<img id="list5" src="./resources/image/list.png" />
-				<a id="menu4" href="./clubMeetingList?club_id=<%= request.getParameter("club_id") %>">모임일정</a>
+				<a id="menu5" href="./clubMeetingList?club_id=<%= request.getParameter("club_id") %>">모임일정</a>
 			</div>
 		</div>
 		
@@ -181,7 +181,29 @@
 		
 		// 가입하기 클릭
 		$("#btn1").click(function(){
-			location.href="./clubJoinForm?club_id=" + club_id;
+		
+			$.ajax({
+				url:"./blackList",
+				type:"GET",
+				data:{
+					"club_id" : club_id
+				},
+				dataType:"JSON",
+				success:function(data){
+					console.log(data);
+					//가입하기 승인이 true 일 경우
+					if(data.allow){
+						location.href="./clubJoinForm?club_id=" + club_id;
+					}else{
+						alert("동호회 가입 제한이 있습니다.");
+					}
+				},error:function(error){console.log(error);}
+				
+			});
+			
+		
+		
+		
 		});
 		
 		// 탈퇴하기 클릭

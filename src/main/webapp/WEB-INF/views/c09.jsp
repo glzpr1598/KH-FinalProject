@@ -5,49 +5,58 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<title>Insert title here</title>
+<title>HAMO</title>
 <style>
+	#menu3 {
+		color: black;
+		font-weight: bold;
+	}
+	
+	#title{
+		font-weight: bold;
+		font-size: large;
+	}
+	table{
+		width: 100%;
+		margin-top: 20px;;
+	}
+	table,th,td{
+		border-collapse: collapse;
+		padding: 8px 10px;
+		text-align: center;
+		font-size: 13px;
+	}
 	#head{
 		border-bottom: 3px solid #ffbf00;
 		border-top: 3px solid #ffbf00;
 		background-color: #FDF5DC;
 	}
-	#table{
-		margin-left: 0.5%;
-		margin-top: 2%;
-	}
-	table,tr,td,tr {
-		border-collapse: collapse;
-		width: 800px;
-		height: 50px;
-	}
-	#title{
-		margin-left:0.5%;
-		font-weight: 600;
-		font-size: large;
-	}
-	#write{
-		border: none;
-		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
-		margin-left:91.5%;
-		margin-top: 2%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		display: none;
-		cursor: pointer;
-	}
 	td a{
 		text-decoration: none;
 		color: black;
 	}
-	#listTable{
-		text-align: center;
+	td a:hover {
+		text-decoration: underline;
 	}
 	td{
 		border-bottom: 1px solid #ffbf00;
+	}
+	#writeArea {
+		text-align: right;
+	}
+	#write{
+		margin-top: 10px;
+		border:none;
+		border-radius: 5px;
+		background-color: #FFBF00;
+		color:white;
+		padding:5px 10px;
+		cursor: pointer;
+		font-weight: bold;
+		display: none;
+	}
+	#space {
+		height: 100px;
 	}
 </style>
 </head>
@@ -71,11 +80,17 @@
 				<tbody id="body">
 				</tbody>
 			</table>
-			<input id="write" type="button" value="글쓰기"/>
+			<div id="writeArea">
+				<input id="write" type="button" value="글쓰기"/>
+			</div>
+			<div id="pagingArea"></div>
 			</div>
 		</div>
 	</div>
 </body>
+<script src="./resources/paging/paging.js" type="text/javascript"></script>
+<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <script>
 	$(document).ready(function(){
 		$.ajax({
@@ -83,42 +98,40 @@
 			url: "./clubFreeBbsListForm",
 			dataType:"json",
 			data:{
-				"club_id":"<%=request.getParameter("club_id")%>",
+				"club_id": "<%=request.getParameter("club_id")%>",
 				"sort": "<%=request.getParameter("sort")%>"
 			},
 			success:function(data){
-				if(data){
-					console.log(data.list);
-					listPrint(data.list);
-					if(data.nick != null){
-						document.getElementById("write").style.display='inline';
-					}else{
-						document.getElementById("write").style.display='none';
-					}
+				$.pagingHash(data.list, 10, 5, listPrint);
+				if(data.nick != null){
+					document.getElementById("write").style.display='inline';
+				}else{
+					document.getElementById("write").style.display='none';
 				}
 			},
 			error:function(e){
 				console.log(e);
 			}
 		});
+		
+		function listPrint(list){
+			var content = "";
+			console.log(list);
+			$("#body").empty();
+			list.forEach(function(item){
+				content += "<tr>";
+				content += "<td>"+item.clubBbs_idx+"</td>";
+				content += "<td><a class='move' href='./clubFreeBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
+				content += "<td>"+item.clubJoin_nickname+"</td>";
+				var date = new Date(item.clubBbs_date);
+				content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
+				content += "<td>"+item.clubBbs_hit+"</td>";
+				content += "</tr>";
+			});
+			$("#body").append(content);
+		}
+		
 	});
-
-	function listPrint(list){
-		var content = "";
-		console.log(list);
-		$("#body").empty();
-		list.forEach(function(item){
-			content += "<tr>";
-			content += "<td>"+item.clubBbs_idx+"</td>";
-			content += "<td><a class='move' href='./clubFreeBbsDetail?club_id="+<%=request.getParameter("club_id")%>+"&clubBbs_id="+item.clubBbs_id+"'>"+item.clubBbs_subject+"</a></td>";
-			content += "<td>"+item.clubJoin_nickname+"</td>";
-			var date = new Date(item.clubBbs_date);
-			content += "<td>"+date.toLocaleDateString("ko-KR")+"</td>";
-			content += "<td>"+item.clubBbs_hit+"</td>";
-			content += "</tr>";
-		});
-		$("#body").append(content);
-	}
 	
 	$("#write").click(function(){
 			location.href="./clubFreeBbsWriteForm?club_id="+<%=request.getParameter("club_id")%>;

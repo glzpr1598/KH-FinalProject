@@ -43,6 +43,9 @@
 		border: thin solid #ffbf00;
 		border-radius: 5px;
 	}
+	#nickNameMsg {
+		font-size: 12px;
+	}
 	
 	/* 경고글 */
 	#alertText {
@@ -111,26 +114,31 @@ $(document).ready(function() {
 	
 	$("input[name='nickname']").focusout(function(){
 		console.log("focusout");
-		$.ajax({
-			url:"./club_overLap",
-			type:"GET",
-			data:{
-				"club_id" : "${club_id}",
-				"nickName" : $('#nick_name').val()
-			},
-			dataType:"JSON",
-			success:function(data){
-				console.log(data);
-				nickName_ok = data.success ; 
-				if(nickName_ok){
-					$("#nickNameMsg").html("사용가능한 닉네임 입니다.");
-					$("#nickNameMsg").css("color","red");
-				}else{
-					$("#nickNameMsg").html("이미 사용중인 닉네임 입니다.");
-					$("#nickNameMsg").css("color","red");
-				}
-			},error:function(error){console.log(error);}
-		});	
+		if($(this).val() != "") {
+			$.ajax({
+				url:"./club_overLap",
+				type:"GET",
+				data:{
+					"club_id" : "${club_id}",
+					"nickName" : $('#nick_name').val()
+				},
+				dataType:"JSON",
+				success:function(data){
+					console.log(data);
+					nickName_ok = data.success ; 
+					if(nickName_ok){
+						$("#nickNameMsg").html("사용가능한 닉네임 입니다.");
+						$("#nickNameMsg").css("color","blue");
+					}else{
+						$("#nickNameMsg").html("이미 사용중인 닉네임 입니다.");
+						$("#nickNameMsg").css("color","red");
+					}
+				},error:function(error){console.log(error);}
+			});	
+		} else {
+			$("#nickNameMsg").html("닉네임을 입력해주세요.");
+			$("#nickNameMsg").css("color","red");
+		}
 	});
 	
 	$("#joinBtn").click(function(){
@@ -144,11 +152,11 @@ $(document).ready(function() {
 			submit++
 		}
 		if($('#nick_name').val() == ""){
-			$("#nickNameMsg").html("닉네임을 입력 해주세요");
+			$("#nickNameMsg").html("닉네임을 입력해주세요.");
 			$("#nickNameMsg").css("color","red");
 			submit++
 		}else if(!nickName_ok){
-			$("#nickNameMsg").html("닉네임 중복 여부 확인해주세요");
+			$("#nickNameMsg").html("닉네임 중복 여부 확인해주세요.");
 			$("#nickNameMsg").css("color","red");
 			submit++
 		}

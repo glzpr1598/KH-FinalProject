@@ -58,11 +58,11 @@
 		<div id="menu">
 			<div class="margin">
 				<img class="list" src="./resources/image/list.png" />
-				<a class="menu1" id="freeBbs" href="./freeBbsList">자유게시판</a>
+				<a class="menu1" id="freeBbs" href="./freeBbsListPage">자유게시판</a>
 			</div>
 			<div class="margin">
 				<img class="list" src="./resources/image/list.png" />
-				<a class="menu1" id="friendBbs"  href="./friendShipBbsList">동호회 친목</a>
+				<a class="menu1" id="friendBbs"  href="./friendShipBbsListPage">동호회 친목</a>
 			</div>
 			
 		</div>

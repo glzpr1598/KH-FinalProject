@@ -42,5 +42,22 @@
 	</div>
 </body>
 <script>
+$(document).ready(function(){
+	
+ 	var club_id = "${club_id}";
+ 	
+ 	
+ 	
+	$("#btn1").click(function(){
+			var url = "./clubMemberOut?club_id="+club_id;
+			opener.memberOut(url);
+			window.close();		
+	});
+	
+	
+	
+});
+
+	
 </script>
 </html>

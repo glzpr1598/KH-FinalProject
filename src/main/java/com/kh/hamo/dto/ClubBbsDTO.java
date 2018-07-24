@@ -15,6 +15,7 @@ public class ClubBbsDTO {
 	private int clubBbs_replyCount;
 	private int clubBbs_hit;
 	private Date clubBbs_date;
+	private String clubBbs_date_to_char;
 	private int clubBbsFile_id;
 	private String clubBbsFile_oldName;
 	private String clubBbsFile_newName;
@@ -24,6 +25,12 @@ public class ClubBbsDTO {
 	private String club_masterNickname;
 	private String clubJoin_nickname;
 	
+	public String getClubBbs_date_to_char() {
+		return clubBbs_date_to_char;
+	}
+	public void setClubBbs_date_to_char(String clubBbs_date_to_char) {
+		this.clubBbs_date_to_char = clubBbs_date_to_char;
+	}
 	public int getClubBbs_id() {
 		return clubBbs_id;
 	}

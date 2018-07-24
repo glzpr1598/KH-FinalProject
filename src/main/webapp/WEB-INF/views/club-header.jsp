@@ -55,7 +55,7 @@
 		font-size: 40px;
 		color: black;
 		text-decoration: none;
-		font-family: 'Jua'
+		font-family: 'Jua', sans-serif;
 	}
 </style>
 </head>

@@ -11,7 +11,7 @@
 		<style>
   			    #all{
 				width: 300px;
-				margin: 150px auto;      
+				margin: 70px auto;      
 				text-align: center;    
 				box-sizing: border-box;                  
   			    }         
@@ -30,6 +30,7 @@
   			    input[type='text'], input[type='password']{
   			    padding-left: 10px;      
   					border: 2px solid #ffbf00;
+  					border-radius: 5px;
   					height: 30px;
 					width: 300px;   
 					margin-top: 8px;    
@@ -39,11 +40,11 @@
   			    #emailInput{
   			    	width: 260px;     
   			    	box-sizing: border-box;    
+  			    	border-radius: 5px 0px 0px 5px;
   			    }
   			    
   			    #idChk, #pwdChk, #emailMsg{
-  			    			margin: 5px;
-							font-size: 13px;
+							font-size: 12px;
 							text-align: left;
 							color: #ff1616;
   			    }
@@ -56,9 +57,10 @@
 				    text-align: center;
 				    text-decoration: none;
 				    display: inline-block;
-				    font-size: 15px;     
+				    font-size: 16px;     
+				    font-weight: bold;
 				    cursor: pointer;
-				    border-radius:10px;
+				    border-radius:5px;
 				    box-sizing: border-box;           
 				    margin-top: 5px;      
 				}
@@ -67,11 +69,11 @@
   			    select {
 				    width: 147px;        
 				    height: 30px;
-				    padding-left: 10px;
+				    padding-left: 7px;
 				    font-size: 14px;
 				    color: black;   
 				    border: 2px solid #ffbf00;
-				    border-radius: 3px;
+				    border-radius: 5px;
 				    box-sizing: border-box;   
 				    margin-top: 5px;       
 				}
@@ -108,13 +110,13 @@
 
     					<input class="inputTxt" id="idtxt" type="text" name="userId" id="userId" placeholder="아이디"  onkeyup="chkword(this, 20)"/>
     					
-    					<span id='idChk'></span>
+    					<div id='idChk'></div>
     					
 				    <input  id="Password" type="password" name="userPw" placeholder="비밀번호" onkeyup="chkword(this, 20)"/>
-				    <input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)"/><span id='pwdChk'></span>
-			     	<input id="nameChk" class="inputTxt" type="text" name="userName" placeholder="이름" onkeyup="chkword(this, 5)"/>
+				    <input id="PasswordChk" type="password" name="pwChk" placeholder="비밀번호 확인" onkeyup="chkword(this, 20)"/><div id='pwdChk'></div>
+			     	<input id="nameChk" class="inputTxt" type="text" name="userName" placeholder="이름" maxlength="10"/>
 					<input class="idtxt" type="text" name="phone" placeholder="전화번호" id="only_number"/>
-					<input id="emailInput"class="inputTxt" type="text" name="email" maxlength="30" placeholder="이메일"/><input  type="button" id="emailChk" value="인증"/><span id='emailMsg'></span>
+					<input id="emailInput"class="inputTxt" type="text" name="email" maxlength="30" placeholder="이메일"/><input  type="button" id="emailChk" value="인증"/><div id='emailMsg'></div>
 			     	<input class="inputTxt" type="text" name="serial" placeholder="인증번호" id="only_number2"/>
 
 							<select id="select1" onchange="itemChange()">

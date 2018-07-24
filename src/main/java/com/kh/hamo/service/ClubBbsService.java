@@ -80,7 +80,7 @@ public class ClubBbsService {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		ModelAndView mav = new ModelAndView();
 		
-		String club_id = params.get("club_id");
+		int club_id = Integer.parseInt(params.get("club_id"));
 		String clubBbs_id = params.get("clubBbs_id");
 		
 		String nick = clubBbsInter.findnickName(club_id,member_id);
@@ -285,7 +285,7 @@ public class ClubBbsService {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		ModelAndView mav = new ModelAndView();
 		
-		String club_id = params.get("club_id");
+		int club_id = Integer.parseInt(params.get("club_id"));
 		String clubBbs_id = params.get("clubBbs_id");
 		logger.info("클럽 아이디 : "+club_id+" 게시판 글번호 : "+clubBbs_id);
 		
@@ -409,7 +409,7 @@ public class ClubBbsService {
 	/*************************************자유게시판***************************************/
 	
 	//자유게시판 리스트
-	public HashMap<String, Object> clubFreeBbsList(String club_id, String clubBbs_sort,String member_id, String root) {
+	public HashMap<String, Object> clubFreeBbsList(int club_id, String clubBbs_sort,String member_id, String root) {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		
 		if(fileList.size() > 0) {
@@ -429,7 +429,10 @@ public class ClubBbsService {
 		
 		ArrayList<ClubBbsDTO> list = clubBbsInter.clubFreeBbsList(club_id,clubBbs_sort);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		String nick = clubBbsInter.findnickName(club_id, member_id);
+		String nick = null;
+		if(member_id != null) {
+			nick = clubBbsInter.findnickName(club_id, member_id);
+		}
 		map.put("list", list);
 		map.put("nick", nick);
 		return map;
@@ -442,7 +445,7 @@ public class ClubBbsService {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		ModelAndView mav = new ModelAndView();
 		
-		String club_id = params.get("club_id");
+		int club_id = Integer.parseInt(params.get("club_id"));
 		String clubBbs_id = params.get("clubBbs_id");
 		
 		String nick = clubBbsInter.findnickName(club_id, member_id);
@@ -658,11 +661,14 @@ public class ClubBbsService {
 			String photoName   = clubBbsInter.clubPhoto(clubBbs_id);
 			allList.add(photoName);
 		}
-		String clubId = Integer.toString(club_id);
 		map.put("photolist", allList);
 		map.put("list",list);
-		String nick = clubBbsInter.findnickName(clubId, member_id);
-		map.put("nick",nick);
+		//map.put("list", allList);
+		String nick = null;
+		if(member_id != null) {
+			nick = clubBbsInter.findnickName(club_id, member_id);
+		}
+		map.put("nick", nick);
 		return map;
 	}
 	
@@ -672,7 +678,7 @@ public class ClubBbsService {
 		clubBbsInter = sqlSession.getMapper(ClubBbsInter.class);
 		ModelAndView mav = new ModelAndView();
 		
-		String club_id = params.get("club_id");
+		int club_id = Integer.parseInt(params.get("club_id"));
 		String clubBbs_id = params.get("clubBbs_id");
 		
 		String nick = clubBbsInter.findnickName(club_id, member_id);
@@ -942,8 +948,7 @@ public class ClubBbsService {
 	}
 		
 	
-	/*************************************댓글
-	 * @param club_id ***************************************/
+	/*************************************댓글 ***************************************/
 	
 	//댓글 리스트
 	public HashMap<String, Object> clubReplyList(String clubBbs_id, String club_id) {

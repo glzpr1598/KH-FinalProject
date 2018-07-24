@@ -9,9 +9,11 @@ public class HamoMemberDTO {
 	private String member_email;
 	private String member_phone;
 	private String member_location;
+	
 	/*interest*/
 	private int interest_id;
 	private String interest_interest;
+	
 	/*memberInterest*/
 	private int memberInterest_id;
 	

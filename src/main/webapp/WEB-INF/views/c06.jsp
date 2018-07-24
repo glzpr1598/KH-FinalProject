@@ -6,46 +6,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="<%= request.getContextPath() %>/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<title>Insert title here</title>
+<title>HAMO</title>
 <style>
-	#save{
-		border: none;
-		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
-		margin-left:3%;
-		margin-top:3%;
-		font-weight: 600;
-		color: white;
-		text-align: center;
-		cursor: pointer;
+	#menu2 {
+		font-weight: bold;
+		color: black;
 	}
-	#cancel{
-		border: none;
-		background-color: #ffbf00;
-		width: 70px;
-		height: 30px;
-		margin-left:37%;
-		text-align: center;
-		color: white;
-		font-weight: 600;
-		font-size: small;
-		cursor: pointer;
-	}
-	#writefrm{
-		margin-left:0.5%;
-		margin-top:2%;
-		width: 800px;
-	}
+	
 	#title{
-		margin-left:0.5%;
-		font-weight: 600;
+		font-weight: bold;
 		font-size: large;
 	}
-	#text{
-		width: 400px;
+	
+	#text {
+		margin-top: 20px;
 		height: 30px;
-		margin-bottom: 2%;
+		width: 100%;
+		padding: 0px 5px;
+	}
+	
+	#btn{
+		margin-top: 10px;
+		margin-bottom: 100px;
+		text-align: center;
+	}
+	#btn input[type="button"] {
+		padding: 5px 10px;
+		background: #ffbf00;
+	    border: none;
+		border-radius: 5px;
+		color: white;
+		font-weight: bold;
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -55,14 +47,14 @@
 		<jsp:include page="club-menu.jsp"/>
 		<div id="right">
 			<div id="title">| 공지사항 |</div>
-				<form action="" name="writefrm" id="writefrm" method="post">
-					<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/>
-	    			<textarea name="editor" id="editor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
-	    			<div id="btn">
-		    			<input id="cancel" type="button" value="취소"/>
-		    			<input type="button" id="save" value="저장"/>
-	    			</div>
-				</form>
+			<form action="" name="writefrm" id="writefrm" method="post">
+				<input id="text" type="text" name="subject" placeholder="제목을 입력하세요" maxlength="20"/>
+    			<textarea name="editor" id="editor" rows="10" cols="100" style="width:798px; height:412px;"></textarea>
+    			<div id="btn">
+	    			<input id="cancel" type="button" value="취소"/>
+	    			<input type="button" id="save" value="저장"/>
+    			</div>
+			</form>
 		</div>
 	</div>
 </body>
