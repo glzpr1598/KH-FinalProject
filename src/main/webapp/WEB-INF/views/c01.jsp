@@ -26,6 +26,7 @@
 		padding: 10px;
 		border: medium solid #ffbf00;
 		border-radius: 5px;
+		word-break: break-all;
 	}
 	
 	/* 버튼 */

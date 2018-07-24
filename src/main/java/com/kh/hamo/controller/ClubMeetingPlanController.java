@@ -36,9 +36,10 @@ public class ClubMeetingPlanController {
 	}
 	//모임 일정 등록페이지 이동  
 	@RequestMapping(value = "/clubMeetingWriteForm")
-	public String clubMeetingWriteForm(Model model, @RequestParam String club_id) {
+	public String clubMeetingWriteForm(Model model, @RequestParam String club_id, @RequestParam String member_id) {
 		logger.info("clubMeetingWriteForm 요청");
 		// 동호회 정보(지역) 가져오기 서비스
+		logger.info(member_id);
 		service.clubLocation(model, club_id);
 		return "c18";
 	}

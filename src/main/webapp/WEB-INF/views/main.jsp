@@ -71,6 +71,7 @@
 	.text .club_introduce {
 		font-size: 14px;
 		margin-top: 10px;
+		word-break: break-all;
 	}
 	
 	/* 인기 동호회 */
