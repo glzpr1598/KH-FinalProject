@@ -58,7 +58,7 @@ public class HamoComunityController {
 		return hamoBbsService.freeBbsList();
 	}	
 
-	@RequestMapping(value = "/freeBbsdetail") // o 
+	@RequestMapping(value = "/freeBbsdetail") 
 	public String freeBbsdetail(@RequestParam HashMap<String, String> map,Model model) {
 		logger.info("자유게시판 글 상세보기 요청");
 		logger.info("글 번호 :::::::::::"+map.get("idx"));

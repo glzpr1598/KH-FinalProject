@@ -61,12 +61,12 @@
 	<!-- *****************동호회 친목 게시판******************* -->
 	
 	<select id="friendShipAdmin" resultType="com.kh.hamo.dto.HamoBbsDTO">
-		SELECT * FROM mainBbs WHERE mainBbs_sort = '동호회 게시판' AND member_id = 'Hamo 관리자' order by mainBbs_idx DESC 
+		SELECT * FROM mainBbs WHERE mainBbs_sort = '동호회 게시판' AND member_id = 'HAMO 관리자' order by mainBbs_idx DESC 
 	</select>
 	
 	
 	<select id="friendShipBbsList" resultType="com.kh.hamo.dto.HamoBbsDTO">
-		SELECT * FROM mainBbs WHERE mainBbs_sort = '동호회 게시판' AND member_id NOT IN ('Hamo 관리자') order by mainBbs_idx DESC 
+		SELECT * FROM mainBbs WHERE mainBbs_sort = '동호회 게시판' AND member_id NOT IN ('HAMO 관리자') order by mainBbs_idx DESC 
 	</select>
 	
 
