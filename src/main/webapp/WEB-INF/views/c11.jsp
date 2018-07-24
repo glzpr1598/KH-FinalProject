@@ -263,7 +263,7 @@
 	}
 	
 	function replyCount(replyCount){
-		$("#replyCount").html(replyCount.clubBbs_replyCount);
+		$("#replyCount").html(replyCount);
 	}
 	
 </script>

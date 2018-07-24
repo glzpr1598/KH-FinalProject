@@ -65,7 +65,7 @@ public interface ClubBbsInter {
 	String clubPhoto(int clubBbs_id);
 	
 	//댓글 찾기
-	ClubBbsDTO findReply(String clubBbs_id);
+	int findReply(String clubBbs_id);
 	
 	//댓글 리스트
 	ArrayList<ClubBbsDTO> clubReplyList(String clubBbs_id, String club_id);
