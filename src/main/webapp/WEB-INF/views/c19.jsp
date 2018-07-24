@@ -44,7 +44,10 @@
 		.delA{
 			width:50px; 
 		}
-		
+		#menu5{
+			font-weight: bold;
+			color: black;
+		}
 		
 		
 		
@@ -81,7 +84,7 @@
 						</table>
 					</div>
 					<div id="replyfrm">
-							<input type="text" maxlength="150" id="replyContent" name="replyContent"/>
+							<input type="text" maxlength="100" id="replyContent" name="replyContent"/>
 							<input id="save" type="button" value="등록"/>
 					</div>
 					

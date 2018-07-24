@@ -8,6 +8,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>HAMO</title>
 		<style>
+			#menu5{
+				font-weight: bold;
+				color: black;
+			}
 			.meeting{
 				height: 50px;
 				margin-top: 10px; 
@@ -93,11 +97,11 @@
 			<!------------------- 양식 ------------------->
 			<h1> | 모임일정 | </h1>
 			<form action="clubMeetingUpdate?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
-				<input type="text" class="meeting" name="subject" placeholder="제목" value="${list.meetingPlan_subject}"/>        
-				<input type="text" class="meeting" name="day" placeholder="모임 일시 " value="${list.meetingPlan_when}"/>
-				<input type="text" class="meeting" name="money" placeholder="회비" value="${list.meetingPlan_money}"/>
+				<input type="text" class="meeting" name="subject" placeholder="제목" value="${list.meetingPlan_subject}"  maxlength="20"/>        
+				<input type="text" class="meeting" name="day" placeholder="모임 일시 " value="${list.meetingPlan_when}"  maxlength="20"/>
+				<input type="text" class="meeting" name="money" placeholder="회비" value="${list.meetingPlan_money}"  maxlength="20"/>
 				<P>내용</P>
-				<textarea name="content" rows="10" cols="70">${list.meetingPlan_content}</textarea>
+				<textarea name="content" rows="10" cols="70"  maxlength="2000">${list.meetingPlan_content}</textarea>
 				<div  id="ok">
 					
 					<input type="hidden" name="meetingPlan_id" value="${list.meetingPlan_id}"/>
