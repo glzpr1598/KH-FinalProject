@@ -87,7 +87,6 @@
 		|| $("#editor").val() == "<p><br style='clear:both;'>&nbsp;<p>" 
 		|| $("#editor").val() == "<br style='clear:both;'><br/>" 
 		|| $("#editor").val() == "<br style='clear:both;'>"){
-			console.log($("#editor").val());
 			alert("내용을 입력하세요.");
 		}else{
 			if($("#editor").val().length > 2000){
