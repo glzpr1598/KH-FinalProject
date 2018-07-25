@@ -1,5 +1,7 @@
 package com.kh.hamo.interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +18,11 @@ public class LoginCheck extends HandlerInterceptorAdapter {
 		
 		// 로그아웃 상태
 		if(userId == null) {
-			response.sendRedirect("./loginForm?");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인이 필요한 서비스입니다.'); location.href='./loginForm';</script>");
+			out.flush();
+			
 			return false;
 		} else {
 			return true;

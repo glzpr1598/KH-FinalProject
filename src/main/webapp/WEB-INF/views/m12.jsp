@@ -9,6 +9,8 @@
 <script src="./resources/paging/paging.js" type="text/javascript"></script>
 <link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO</title>
 </head>
 <style>
 	#comunity {
@@ -99,8 +101,8 @@ $(document).ready(function(){
 		type:"GET",
 		dataType:"JSON",
 		success:function(data){
-			console.log(data);
-			console.log(data.freeBbsList.length);
+			//console.log(data);
+			//console.log(data.freeBbsList.length);
 			//글쓰기 리스트 생성하는 함수 호출
 			//freeBbsList(data);
 			$.pagingHash(data.freeBbsList, 10, 5, freeBbsList);
@@ -109,7 +111,7 @@ $(document).ready(function(){
 	});
 
 	function freeBbsList(freeBbsList){
-		console.log("freeBbsList 함수 호출");
+		//console.log("freeBbsList 함수 호출");
 		
 		var content ="";
  		for(var i=0; i<freeBbsList.length; i++){

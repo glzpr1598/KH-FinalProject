@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
@@ -115,7 +116,7 @@
 							serialNumber = d.serialNumber;		
 							email = $("input[name='email']").val();
 							console.log(serialNumber);
-							console.log(email);       
+							//console.log(email);       
 						}          
 					});
 				}

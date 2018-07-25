@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" href="./resources/image/icon-32.png" />
-<title>HAMO - 동호회</title>
+<title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 	/* 사진 */
@@ -15,6 +15,7 @@
 		width: 600px;
 		border: medium solid #ffbf00;
 		border-radius: 5px;
+		cursor: pointer;
 	}
 	
 	/* 소개글 */
@@ -76,6 +77,12 @@
 	if(picture != "") {  // 사진이 있으면
 		$("#picture").attr("src", picturePath);
 	}
+	
+	// 사진 클릭
+	$("#picture").click(function() {
+		var url = $(this).attr("src");
+		window.open(url, "_blank");
+	});
 	
 	// 사진 삭제 클릭
 	$("#pictureDelete").click(function() {

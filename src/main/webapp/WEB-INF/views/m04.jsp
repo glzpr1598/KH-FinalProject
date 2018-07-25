@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
@@ -206,7 +207,7 @@
 				$("#idChk").html(" 아이디는 4자 이상 20자 이하로 입력해주세요.");
 			}
 		};		
-		console.log(obj);
+		//console.log(obj);
 		ajaxCall(obj);
 	});
 	
@@ -261,7 +262,7 @@
 							serialNumber = d.serialNumber;		
 							email = $("input[name='email']").val();
 							console.log(serialNumber);
-							console.log(email);       
+							//console.log(email);       
 						};
 						ajaxCall(obj);   
 				}
@@ -613,7 +614,7 @@ $("#only_number2").keyup(function () {
 			}else if($("#select44").val()=="소분류"){
 				alert("지역을 설정해주세요");
 			}else{
-				console.log("서버 전송");
+				//console.log("서버 전송");
 				obj.url="./hamoJoin";
 				obj.data.id=$("input[name='userId']").val();
 				obj.data.pw=$("input[name='userPw']").val();
@@ -633,7 +634,7 @@ $("#only_number2").keyup(function () {
 						location.href="loginForm"; 
 					}
 				}
-				console.log(obj);
+				//console.log(obj);
 				ajaxCall(obj);
 			}				
 		}

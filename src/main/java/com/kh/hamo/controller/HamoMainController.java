@@ -124,5 +124,12 @@ public class HamoMainController {
 		map.put("member_id",(String)session.getAttribute("userId"));
 		return service.makeClub(map);
 	}
+	
+	// 404에러 페이지
+	@RequestMapping(value = "/error404")
+	public String error404() {
+		logger.info("404 에러페이지 요청");
+		return "error-404";
+	}
 
 }

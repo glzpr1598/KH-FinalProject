@@ -6,7 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <link rel="icon" href="./resources/image/icon-32.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>HAMO - 동호회 만들기</title>
+<title>HAMO</title>
 <style>
 	#makeClub {
 		background-color: #FDF5DC;
@@ -161,7 +161,7 @@
 					},
 					dataType:"JSON",
 					success:function(data){
-						console.log(data);
+						//console.log(data);
 						createOk = data.success;
 						if(createOk && $("input[name='club_name']").val() !=""){
 							$("#nameMsg").html("사용 가능한 동호회명 입니다.");
@@ -274,7 +274,7 @@
 			$("select[name='interest2']").empty();
 			
 			if($("#sel_ck1").val() == $("#sel_ck1 option:eq(1)").val()){
-				console.log("운동/스포츠");
+				//console.log("운동/스포츠");
 				content+="<option>축구</option>"
 				content+="<option>농구</option>"
 				content+="<option>야구</option>"
@@ -287,7 +287,7 @@
 				content+="<option>족구</option>"
 				$("select[name='interest2']").append(content);
 			}else if($("#sel_ck1").val() == $("#sel_ck1 option:eq(2)").val()){
-				console.log("아웃도어/여행");
+				//console.log("아웃도어/여행");
 				content+="<option>등산</option>"
 				content+="<option>캠핑</option>"
 				content+="<option>국내여행</option>"
@@ -295,7 +295,7 @@
 				content+="<option>낚시</option>"
 				$("select[name='interest2']").append(content);
 			}else if($("#sel_ck1").val() == $("#sel_ck1 option:eq(3)").val()){
-				console.log("공연/문화");
+				//console.log("공연/문화");
 				content+="<option>뮤지컬/오페라</option>"
 				content+="<option>공연/연극</option>"
 				content+="<option>영화</option>"
@@ -303,7 +303,7 @@
 				content+="<option>고궁/문화재</option>"
 				$("select[name='interest2']").append(content);
 			}else if($("#sel_ck1").val() == $("#sel_ck1 option:eq(4)").val()){
-				console.log("음악/악기");
+				//console.log("음악/악기");
 				content+="<option>노래/보컬</option>"
 				content+="<option>기타/베이스</option>"
 				content+="<option>드럼</option>"
@@ -315,7 +315,7 @@
 				content+="<option>락/메탈</option>"
 				$("select[name='interest2']").append(content);
 			}else if($("#sel_ck1").val() == $("#sel_ck1 option:eq(5)").val()){
-				console.log("인문학/책/글");
+				//console.log("인문학/책/글");
 				content+="<option>책/독서</option>"
 				content+="<option>인문학</option>"
 				content+="<option>심리학</option>"
@@ -324,7 +324,7 @@
 				content+="<option>시사/경제</option>"
 				$("select[name='interest2']").append(content);
 			}else if($("#sel_ck1").val() == $("#sel_ck1 option:eq(6)").val()){
-				console.log("봉사활동");
+				//console.log("봉사활동");
 				content+="<option>양로원</option>"
 				content+="<option>보육원</option>"
 				content+="<option>환경봉사</option>"
@@ -333,7 +333,7 @@
 				content+="<option>유기동물보호</option>"
 				$("select[name='interest2']").append(content);
 			}else if($("#sel_ck1").val() == $("#sel_ck1 option:eq(7)").val()){
-				console.log("공예/만들기");
+				//console.log("공예/만들기");
 				content+="<option>미술/그림</option>"
 				content+="<option>캘리그라피</option>"
 				content+="<option>천연비누</option>"
@@ -343,7 +343,7 @@
 				content+="<option>도자/점토공예</option>"
 				$("select[name='interest2']").append(content);
 			}else if($("#sel_ck1").val() == $("#sel_ck1 option:eq(8)").val()){
-				console.log("차/오토바이");
+				//console.log("차/오토바이");
 				content+="<option>국내차</option>"
 				content+="<option>일본차</option>"
 				content+="<option>미국차</option>"
@@ -361,7 +361,7 @@
 			var content ="";
 			$("select[name='location2']").empty();
 			if($("#sel_ck2").val() == $("#sel_ck2 option:eq(1)").val()){
-				console.log("강남");
+				//console.log("강남");
 				content+="<option>강남/역삼</option>"
 				content+="<option>논현/학동</option>"
 				content+="<option>대치/도곡/양재</option>"
@@ -371,14 +371,14 @@
 				content+="<option>압구정/청담/신사</option>"
 				$("select[name='location2']").append(content);
 			}else if($("#sel_ck2").val() == $("#sel_ck2 option:eq(2)").val()){
-				console.log("강동");
+				//console.log("강동");
 				content+="<option>강동/천호</option>"
 				content+="<option>광진/구의/건대</option>"
 				content+="<option>송파/가락/방이</option>"
 				content+="<option>신천/잠실</option>"
 				$("select[name='location2']").append(content);
 			}else if($("#sel_ck2").val() == $("#sel_ck2 option:eq(3)").val()){
-				console.log("강북");
+				//console.log("강북");
 				content+="<option>강북/수유/미아</option>"
 				content+="<option>노원/도봉</option>"
 				content+="<option>대학로/성북</option>"
@@ -391,7 +391,7 @@
 				content+="<option>중랑/상봉</option>"
 				$("select[name='location2']").append(content);
 			}else if($("#sel_ck2").val() == $("#sel_ck2 option:eq(4)").val()){
-				console.log("강서");
+				//console.log("강서");
 				content+="<option>강서/양천</option>"
 				content+="<option>여의도/영등포/당산</option>"
 				content+="<option>신촌/이대/서대문</option>"

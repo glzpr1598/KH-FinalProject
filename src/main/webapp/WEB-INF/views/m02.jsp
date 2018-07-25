@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
@@ -232,7 +233,7 @@
 				alert("이메일을 확인해주세요");
 				$("input[name='email1']").focus();//포커스 이동
 			}else{
-				console.log("서버 전송");
+				//console.log("서버 전송");
 				$.ajax({
 						url: "./idSearch",
 						type: "post",
@@ -242,7 +243,7 @@
 							"email": $("input[name='email1']").val()
 						},
 						success: function(data) {
-							console.log("success");
+							//console.log("success");
 							if(data.success){
 								$("#spanId").show();      
 								document.getElementById("spanId").innerHTML = "회원님의 아이디는 <b>"+data.userId+"</b>입니다.";
@@ -271,7 +272,7 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 			alert("인증번호를 확인해주세요");
 			$("input[name='serial']").focus();//포커스 이동
 		}else{
-			console.log("서버 전송");
+			//console.log("서버 전송");
 			$.ajax({
 					url: "./pwSearch",
 					type: "post",
@@ -281,10 +282,10 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 						"email": $("input[name='email2']").val()
 					},
 					success: function(data) {
-						console.log("success");
+						//console.log("success");
 						if(data.success){
 							userId = $("input[name='userId']").val();
-							console.log(userId);
+							//console.log(userId);
 					    	$("#div1").hide();
 					        $("#div2").hide(); 
 					        $("#div3").show();
@@ -315,9 +316,9 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 				"email": $("input[name='email2']").val()
 			},
 			success: function(d) {
-				console.log("success");
+				//console.log("success");
 					serialNumber = d.serialNumber;		
-					console.log(serialNumber);
+					//console.log(serialNumber);
 			},
 			error: function(e){console.log(e)}
 			});

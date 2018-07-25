@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
@@ -103,6 +104,21 @@
 				    display: inline-block;          
 				    font-size: 15px;   
  				    margin-right: 205px;                      
+				    cursor: pointer;     
+				    height: 40px;  
+				}
+				
+					#emailUpdate{     
+					width:90px;                 
+				    background-color: white;
+				    border: 2px solid #ffbf00;
+				    color:black;
+	 			    padding: 3px 0; 
+				    text-align: center;
+				    text-decoration: none;
+				    display: inline-block;          
+				    font-size: 15px;   
+ 				    margin-right: 115px;                                   
 				    cursor: pointer;     
 				    height: 40px;  
 				}
@@ -219,8 +235,9 @@
 						<button id="pwUpdate" class="updateBtn"  onclick="pwPopup()">수정</button>
 
 
-						<hr size="1" color="#ffbf00">   <h5 class="h5email">이메일</h5>    
-						<button id="emailUpdate"class="updateBtn" onclick="emailPopup()">수정</button>   
+						<hr size="1" color="#ffbf00">   <h5 class="h5email">이메일</h5>   
+						<input class="idtxt" type="text" name="email" placeholder="이메일" value="${bbs.member_email}" readonly />     
+						<button id="emailUpdate"class="updateBtn" onclick="emailPopup()">수정</button>      
 
 
 
