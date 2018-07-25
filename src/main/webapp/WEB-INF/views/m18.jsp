@@ -35,6 +35,11 @@
 	font-size: 13px;
 }
 
+#content img {
+	max-width: 780px;
+	cursor: pointer;
+}
+
 #reply_count {
 	padding: 10px;
 	font-size: 13px;
@@ -280,6 +285,11 @@
 		location.href="./friendShipBbsListPage";
 	});
 	
+	// 이미지 클릭
+	$("#content img").click(function() {
+		var url = $(this).attr("src");
+		window.open(url, "_blank");
+	});
 
 </script>
 </html>

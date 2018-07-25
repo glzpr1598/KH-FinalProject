@@ -15,6 +15,7 @@
 		width: 600px;
 		border: medium solid #ffbf00;
 		border-radius: 5px;
+		cursor: pointer;
 	}
 	
 	/* 소개글 */
@@ -76,6 +77,12 @@
 	if(picture != "") {  // 사진이 있으면
 		$("#picture").attr("src", picturePath);
 	}
+	
+	// 사진 클릭
+	$("#picture").click(function() {
+		var url = $(this).attr("src");
+		window.open(url, "_blank");
+	});
 	
 	// 사진 삭제 클릭
 	$("#pictureDelete").click(function() {

@@ -34,6 +34,7 @@
 	}
 	#text img{
 		max-width: 780px;
+		cursor: pointer;
 	}
 	
 	#reply_count {
@@ -154,6 +155,12 @@
 			$("#del").css("display", "inline");
 			$("#update").css("display", "inline");
 		}
+	});
+	
+	// 이미지 클릭
+	$("#text img").click(function() {
+		var url = $(this).attr("src");
+		window.open(url, "_blank");
 	});
 	
 	$("#del").click(function(){
