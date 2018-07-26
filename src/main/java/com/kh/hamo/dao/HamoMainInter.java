@@ -7,7 +7,7 @@ import com.kh.hamo.dto.HamoMainDTO;
 
 public interface HamoMainInter {
 
-	ArrayList<HamoMainDTO> totalClubSearch(HashMap<String, String> map);  //종합검색 
+	ArrayList<HamoMainDTO> totalClubSearch(ArrayList<String> list);  //종합검색 
 
 	ArrayList<HamoMainDTO> myClubList(String id);//설립한 동호회 리스트
 

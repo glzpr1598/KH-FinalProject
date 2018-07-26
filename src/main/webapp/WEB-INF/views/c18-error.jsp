@@ -6,6 +6,7 @@
 	<link rel="icon" href="./resources/image/icon-32.png" />
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="./resources/image/icon-32.png" />
 	<title>HAMO</title>
 	<style>
 	</style>

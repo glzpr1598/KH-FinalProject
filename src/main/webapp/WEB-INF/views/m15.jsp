@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO</title>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" 
 	src="<%=request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -62,7 +64,7 @@
 $(function(){
 	//textarea에 값 넣기
 	$("#smarteditor").val( '${detail.mainBbs_content }' );
-	console.log("초기 content: "+$("#smarteditor").val());
+	//console.log("초기 content: "+$("#smarteditor").val());
 	
 	
     //전역변수선언
@@ -88,7 +90,7 @@ $(function(){
         editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
         
        //폼 submit
-       	console.log("content:"+$("#smarteditor").val());
+       	//console.log("content:"+$("#smarteditor").val());
        	if($("#smarteditor").val()== "<p>&nbsp;</p>" 
        	|| $("#smarteditor").val()== ""
        	|| $("#smarteditor").val()== '<p><br style="clear:both;">&nbsp;</p>' 
@@ -110,12 +112,12 @@ $(function(){
    			if(list != null) {
        			for(var i = 0; i < list.length; i++){
        				param += "&filePath"+i+"="+list[i];
-       				console.log(param);
+       				//console.log(param);
        				count++;
-       				console.log("textarea 파일 개수 : "+count);
+       				//console.log("textarea 파일 개수 : "+count);
        			}
    			}
-   			console.log("글 수정 test");
+   			//console.log("글 수정 test");
    			$("#frm").attr("action","freeBbsUpdate?count="+count+param);
        		$("#frm").submit();	
        	}

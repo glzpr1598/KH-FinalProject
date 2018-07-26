@@ -131,6 +131,7 @@
 	            $("#subject").html(data.INTEREST_INTEREST);
 	            $("#location").html(data.CLUB_LOCATION);
 
+<<<<<<< HEAD
 							    		$.ajax({
 							    	        url: "./nickNameSearch",
 							    	        type: "post",
@@ -147,10 +148,30 @@
 							    	        },
 							    	        error: function(err) {console.log(err);}
 							    	    });
+=======
+	    		$.ajax({
+	    	        url: "./nickNameSearch",
+	    	        type: "post",
+	    	        data: {
+	    	            "userId": '<%= session.getAttribute("userId") %>',
+	    	            "clubId" : '<%= request.getParameter("club_id") %>'          
+	    	        },
+	    	        dataType: "json",
+	    	        success: function(data) {
+	    	        	if(data.nick != null){
+	    	      	      $("#nickName").html(data.nick);
+	    		      	  $("#bar").html("|");
+	    	        	}           
+	    	        },
+	    	        error: function(err) {console.log(err);}
+	    	    });
+>>>>>>> 5f5d28f01888e0bada7d0f3165aaba2e2435df5e
 	            
 	            
 	        },
-	        error: function(err) {console.log(err);}
+	        error: function(err) {
+	        	location.href="./error404";
+	        }
 	    });
 	});
 

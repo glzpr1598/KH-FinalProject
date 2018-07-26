@@ -8,6 +8,8 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" 
 	src="<%=request.getContextPath() %>/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<link rel="icon" href="./resources/image/icon-32.png" />
+<title>HAMO</title>
 </head>
 <style>
 	#menu #freeBbs{
@@ -82,8 +84,8 @@ $(function(){
 	    editor_object.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
 		         
          //폼 submit
-         	console.log("subject: "+$("#subject").val());
-         	console.log("content: "+$("#smarteditor").val());
+         	//console.log("subject: "+$("#subject").val());
+         	//console.log("content: "+$("#smarteditor").val());
          	if( "${sessionScope.userId}" !=null){     	
 	         	if($("#subject").val()==""){
 	         		alert("제목을 입력 해 주세요.");
@@ -94,7 +96,7 @@ $(function(){
        			|| $("#smarteditor").val()== '<br style="clear:both;"><br>'){
 	         		alert("내용을 입력 해 주세요.");
 	         	}else{
-	         		console.log($("#smarteditor").val());
+	         		//console.log($("#smarteditor").val());
 	         		//글쓰기 내용 입력 제한
 	         		if($("#smarteditor").val().length > 2000){
 	         			alert("최대 2000자 까지 입력 가능합니다");
@@ -115,12 +117,12 @@ $(function(){
 	        			if(list != null) {
 		        			for(var i = 0; i < list.length; i++){
 		        				param += "&filePath"+i+"="+list[i];
-		        				console.log(param);
+		        				//console.log(param);
 		        				count++;
-		        				console.log("textarea 파일 개수 : "+count);
+		        				//console.log("textarea 파일 개수 : "+count);
 		        			}
 	        			}
-	        			console.log("글 쓰기 test");
+	        			//console.log("글 쓰기 test");
 	        			$("#frm").attr("action","./freeBbsWrite?count="+count+param);
 	        			$("#frm").submit();
 	         		}
@@ -138,8 +140,8 @@ $(function(){
     });
     
 	$("#subject").keyup(function(){
-		console.log("제목 keyup");
-		console.log($("#subject").val().length);
+		//console.log("제목 keyup");
+		//console.log($("#subject").val().length);
 		if($("#subject").val().length>"20"){
 			alert("제목은 최대 20자까지만 입력 가능합니다.");
 		}

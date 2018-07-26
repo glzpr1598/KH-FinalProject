@@ -63,6 +63,11 @@
 			<!-- 모임일정 수정창 -->
 			<mvc:mapping path="/clubMeetingUpdateForm" />
 			
+			<!-- 멤버관리 -->
+			<mvc:mapping path="/clubMemberList" />
+			<!-- 동호회 폐쇄 -->
+			<mvc:mapping path="/clubCloseForm" />
+			
 			<bean class="com.kh.hamo.interceptor.LoginCheck" />
 		</mvc:interceptor>
 	</mvc:interceptors>

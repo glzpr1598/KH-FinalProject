@@ -9,6 +9,7 @@
 	<link href="./resources/paging/paging.css" type="text/css" rel="stylesheet">
 	<link href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" rel="stylesheet" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="./resources/image/icon-32.png" />
 	<title>HAMO</title>
 	<style>
 		#container {
@@ -20,7 +21,7 @@
 		}
 		table{
 			width : 1000px;
-			margin: 15px 0px;
+			margin: 10px 0px;
 			border-collapse: collapse;
 			font-size: 13px;
 		}
@@ -44,12 +45,47 @@
 		.club:hover {
 			text-decoration: underline;
 		}
+		
+		#sortArea {
+			margin-top: 15px;
+		}
+		.sort {
+			cursor:pointer;
+			color: black;
+			text-decoration: none;
+			font-size: 12px;
+		}
+		.sort i, .sort span {
+			font-size: 13px;
+			cursor: pointer;
+			color: #a4a4a4;
+		}
+		#day i {
+			color: #ffbf00;
+		}
+		#day span {
+			color: #000000;
+		}
 	</style>
 	</head>
 	<body>
 		<%@ include file="./main-header.jsp" %>
 		<div id="container">
-			<div id="search"><b>'${ search }'</b>에 대한 검색결과입니다.</div>
+			<div id="search">
+				<b>'${ search }'</b>에 대한 검색결과입니다.
+				(총 <b><span id="resultCount"></span></b>건)
+			</div>
+			<div id="sortArea">
+				<a id="day" class="sort">
+					<i class="fa fa-check"></i>
+					<span>설립일순</span>
+				</a>
+				&nbsp;
+				<a id="count" class="sort">
+					<i class="fa fa-check"></i>
+					<span>회원수순</span>
+				</a>
+			</div>
 			<table id="listTable">
 				<thead>
 					<tr>
@@ -76,7 +112,36 @@
 			obj.url="./totalClubSearch";
 			obj.data ={"search": "${search}"};
 			obj.success = function(data){
+				$("#resultCount").html(data.list.length);
 				$.pagingHash(data.list, 10, 5, listPrint);
+				
+				/* 설립일순 정렬 */
+				$("#day").click(function(){
+					// 색 바꾸기
+					$("#day i").css("color", "#ffbf00");
+					$("#day span").css("color", "#000000");
+					$("#count i").css("color", "#a4a4a4");
+					$("#count span").css("color", "#a4a4a4");
+					
+					data.list.sort(function(a, b) { // 내림차순
+					    return a.club_date > b.club_date ? -1 : a.club_date < b.club_date ? 1 : 0;
+					}); 
+					$.pagingHash(data.list, 10, 5, listPrint);
+				});
+				
+				/* 회원수순 정렬 */
+				$("#count").click(function(){
+					// 색 바꾸기
+					$("#day i").css("color", "#a4a4a4");
+					$("#day span").css("color", "#a4a4a4");
+					$("#count i").css("color", "#ffbf00");
+					$("#count span").css("color", "#000000");
+					
+					data.list.sort(function(a, b) { // 내림차순
+					    return a.club_memberCount > b.club_memberCount ? -1 : a.club_memberCount < b.club_memberCount ? 1 : 0;
+					}); 
+					$.pagingHash(data.list, 10, 5, listPrint);
+				});
 			}
 			$.ajax(obj);
 			

@@ -6,20 +6,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" href="./resources/image/icon-32.png" />
-<title>HAMO - 동호회 폐쇄</title>
+<title>HAMO</title>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 	/* 내용 */
 	#content {
-		margin-top: 45px;
+		margin-top: 35px;
 		text-align: center;
 		font-size: 14px;
 		font-weight: bold;
 	}
+	#content div {
+		padding: 2px 0px;
+	}
 	
 	/* 버튼 */
 	#btn {
-		margin-top: 30px;
+		margin-top: 20px;
 		text-align: center;
 	}
 	#btn1 {
@@ -36,7 +39,10 @@
 </style>
 </head>
 <body>
-	<div id="content">정말로 동호회를 탈퇴하시겠습니까?</div>
+	<div id="content">
+		<div>탈퇴 시 작성한 글과 댓글은 모두 삭제됩니다.</div>
+		<div>정말로 동호회를 탈퇴하시겠습니까?</div>
+	</div>
 	<div id="btn">
 		<button id="btn1">탈퇴하기</button>
 	</div>

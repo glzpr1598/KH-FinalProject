@@ -35,6 +35,11 @@
 	font-size: 13px;
 }
 
+#content img {
+	max-width: 780px;
+	cursor: pointer;
+}
+
 #reply_count {
 	padding: 10px;
 	font-size: 13px;
@@ -250,7 +255,7 @@
 				},
 				dataType:"JSON",
 				success:function(data){
-					console.log(data);
+					//console.log(data);
 					//하나의 댓글을 감싸고 있는 div 태그 제거
 					div.remove();
 					//댓글 개수 update
@@ -280,6 +285,11 @@
 		location.href="./friendShipBbsListPage";
 	});
 	
+	// 이미지 클릭
+	$("#content img").click(function() {
+		var url = $(this).attr("src");
+		window.open(url, "_blank");
+	});
 
 </script>
 </html>
