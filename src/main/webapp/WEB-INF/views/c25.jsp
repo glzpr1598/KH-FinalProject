@@ -40,6 +40,10 @@
 		padding: 5px 10px;
 		cursor: pointer;
 	}
+	
+	#space {
+		height: 100px;
+	}
 </style>
 </head>
 <body>
@@ -81,6 +85,7 @@
 					
 				</c:forEach>
 			</table>
+			<div id="space"></div>
 	<!------------------- 양식 ------------------->
 		</div>
 	</div>

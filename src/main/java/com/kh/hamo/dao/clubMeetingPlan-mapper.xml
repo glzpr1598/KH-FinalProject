@@ -24,12 +24,16 @@
 		SYSDATE,#{param4},#{param5},	#{param6},#{param7},#{param8})
 	</insert>
 	<select id="clubMeetingDetail" resultType="com.kh.hamo.dto.ClubMeetingDTO" >
-		SELECT member_id,meetingPlan_id,meetingPlan_subject,meetingPlan_money,meetingPlan_when,meetingPlan_content,meetingPlan_locationX,meetingPlan_locationY  
-		FROM meetingPlan WHERE meetingPlan_id=#{param1}
+		SELECT m.member_id,m.meetingPlan_id,m.meetingPlan_subject,m.meetingPlan_money,m.meetingPlan_when,m.meetingPlan_content,m.meetingPlan_locationX,m.meetingPlan_locationY, to_char(m.meetingPlan_date, 'YYYY-MM-DD') as meetingPlan_date, c.clubJoin_nickname  
+		FROM meetingPlan m
+		JOIN clubJoin c
+		ON (m.member_id = c.member_id AND m.club_id = c.club_id)
+		WHERE meetingPlan_id=#{param1}
 	</select>
 	 <select id="meetingAttendList" resultType="String" >
 	 	SELECT cj.clubJoin_nickname 
 	 	FROM meetingAttend ma JOIN clubJoin cj ON ma.member_id=cj.member_id WHERE ma.MEETINGPLAN_ID=#{param1} AND cj.club_id=#{param2}
+	 	ORDER BY ma.meetingAttend_id ASC
 	 </select>
 	<insert id="meetingAttend">
 		INSERT INTO meetingAttend VALUES(SEQ_MEETINGATTEND_ID.NEXTVAL,#{param2},#{param1})

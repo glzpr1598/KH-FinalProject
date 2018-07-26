@@ -46,6 +46,10 @@
 		font-size: 13px;
 		cursor: pointer;
 	}
+	
+	#space {
+		height: 100px;
+	}
 </style>
 </head>
 <body>
@@ -62,6 +66,7 @@
 				<input class="masterBtn" id="pictureEdit" type="hidden" value="사진 수정" />
 				<input class="masterBtn" id="introduceEdit" type="hidden" value="소개글 수정" />
 			</div>
+			<div id="space"></div>
 	<!------------------- 양식 ------------------->
 		</div>
 	</div>

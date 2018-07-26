@@ -8,8 +8,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
+		#title {
+			font-weight: bold;
+			font-size: large;
+		}
 		table{
-		    margin-top: 10px;
+		    margin-top: 20px;
 		    width: 800px;
 		    text-align: center;
 		    border-collapse: collapse;
@@ -26,20 +30,14 @@
 		.idx{
 			width: 80px;
 		}
-		.subject{
-			width: 400px;
-		}
 		input[type="button"]{
-			width: 50px;
-			padding: 7px 0px;
-			margin-top : 5px;
-			margin-bottom: 5px;
-			background-color: #ffbf00;
-			border: none;
+			margin-top: 10px;
+			padding: 5px 10px;
+			background: #ffbf00;
+		    border: none;
 			border-radius: 5px;
 			color: white;
 			font-weight: bold;
-			font-size: 14px;
 			cursor: pointer;
 		}
 		#add{
@@ -63,7 +61,7 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
-			<h3> | 모임일정 | </h3>
+			<div id='title'> | 모임일정 | </div>
 			<table id="listTable">    
 				<thead>
 					<tr>
