@@ -140,7 +140,7 @@
 							    	        },
 							    	        dataType: "json",
 							    	        success: function(data) {
-							    	        	if(data.nick != null){
+							    	        	if(data.nick != null){  
 							    	      	      $("#nickName").html(data.nick);
 							    		      	  $("#bar").html("|");
 							    	        	}           

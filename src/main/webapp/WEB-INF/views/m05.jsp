@@ -10,15 +10,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
   			    #all{
-  			    width: 400px;                 
-				margin: 150px auto;      
-				text-align: center;    
-				box-sizing: border-box;   
+	  			    width: 400px;                 
+					margin: 150px auto;      
+					text-align: center;    
+					box-sizing: border-box;   
   			    }         
   			    #logo {
-		height: 80px;
-		margin-bottom: 20px;
-		cursor: pointer;
+					height: 80px;
+					margin-bottom: 20px;
+					cursor: pointer;
   			    }
      		    
      		    .h5{              
