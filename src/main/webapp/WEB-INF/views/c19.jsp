@@ -75,6 +75,7 @@
 		#reply_count {
 			padding: 10px;
 			font-size: 13px;
+			font-weight: bold;
 		}
 		#reply{
 			background-color: #FDF5DC;
@@ -134,6 +135,9 @@
 		.delA{
 			width:50px; 
 		}
+		#space {
+			height: 100px;
+		}
 		
 	</style>
 	</head>
@@ -161,7 +165,7 @@
 						<div class="btnArea">
 							<button id="attend">참석</button>
 						</div>
-						<div id="attendTitle">참석자</div>
+						<div id="attendTitle">참석자 <span id="attendCount"></span></div>
 						<div id="attendName"></div>
 						<input type="hidden" value="${list.meetingPlan_id}" id="meetingPlan_id"/>
 					</div>
@@ -177,11 +181,11 @@
 					</div>
 					
 					<div class="btnAreaRight">
-						<button id="back" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'">목록</button>
+						<button id="del">삭제</button>          
 						<button id="update" onclick="location.href='clubMeetingUpdateForm?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>&meetingPlan_id=${list.meetingPlan_id}'" >수정</button>
-						<button id="del" onclick="location.href='clubMeetingDel?meetingPlan_id=${list.meetingPlan_id}&member_id=<%= session.getAttribute("userId") %>&club_id=<%= request.getParameter("club_id") %>'">삭제</button>          
+						<button id="back" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'">목록</button>
 					</div>	
-					
+					<div id="space"></div>
 				<!------------------- 양식 ------------------->
 			</div>
 		</div>
@@ -189,8 +193,13 @@
 	</body>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>
-	//console.log("+++++++++++++++++++++");
-	//console.log($("#member").val());
+	// 삭제 클릭
+	$("#del").click(function() {
+		if(confirm('모임일정을 삭제하시겠습니까?')) {
+		location.href='clubMeetingDel?meetingPlan_id=${list.meetingPlan_id}&member_id=<%= session.getAttribute("userId") %>&club_id=<%= request.getParameter("club_id") %>';
+		}
+	});
+	
 	$("#save").click(function(){
 		if($("#replyContent").val()==""){         
 			alert("댓글을 입력해 주세요");
@@ -289,7 +298,7 @@
 				type: "post",
 				dataType: "JSON",
 				error: function(e) {
-					console.log(e);
+					//console.log(e);
 					//alert("동호회 회원가입해야 댓글을 작성할 수 있습니다. ");
 				},
 				url: "./replyAdd",
@@ -341,14 +350,14 @@
 			//console.log(data);
 			//console.log(data.btn);
 			if(data.btn>=1){
-				$("#attend").html("참석취소");	
+				$("#attend").html("참석 취소");	
 			}
 			$("#attend").click(function(){
 				if($("#attend").html()=="참석"){
 					obj.url="./meetingAttend";
 					obj.success = function(data){
 						//console.log(data);
-						$("#attend").html("참석취소");
+						$("#attend").html("참석 취소");
 						$(document).ready(function(){
 							obj.url="./meetingAttendList";
 							obj.success = function(data){
@@ -360,7 +369,7 @@
 						});
 		 			}
 					ajaxCall(obj);
-				}else if ($("#attend").html()=="참석취소"){
+				}else if ($("#attend").html()=="참석 취소"){
 					obj.url="./meetingAttendCancel";
 					obj.success = function(data){
 						//console.log(data);
@@ -386,6 +395,7 @@
 		
 		function listPrint(list){
 			//console.log(list);
+			$("#attendCount").html(list.length);
 			var content ="";
 			list.forEach(function(item, idx){
 				content += item +", ";

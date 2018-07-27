@@ -10,36 +10,36 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<style>
-  			    #all{
+  			#all{
   			    width: 400px;                 
 				margin: 150px auto;      
 				text-align: center;    
 				box-sizing: border-box;   
-  			    }         
-  			    #logo {
-		height: 80px;
-		margin-bottom: 20px;
-		cursor: pointer;
-  			    }
+  			}         
+		    #logo {
+				height: 80px;
+				margin-bottom: 20px;
+				cursor: pointer;
+  			}
      		    
-     		    .h5{              
-  				   width: 120px;        
-  				   height: 30px;          
-		     		font-size: 18px;              
-					text-align: left;            
-					margin:5px 0px;                                
-					box-sizing: border-box;                                            
-		     }
+     		.h5{              
+				width: 120px;        
+				height: 30px;          
+				font-size: 18px;              
+				text-align: left;            
+				margin:5px 0px;                                
+				box-sizing: border-box;                                            
+		    }
      		    
-  			   .h5Join{         
-  				   width: 100px; 
-  				   height: 30px;      
-		     		font-size: 13px;        
-					text-align: left;         
-					margin:5px 0px;                                
-					box-sizing: border-box;     
-					display: inline-block;                                    
-		     } 
+			.h5Join{         
+				width: 100px; 
+				height: 30px;      
+				font-size: 13px;        
+				text-align: left;         
+				margin:5px 0px;                                
+				box-sizing: border-box;     
+				display: inline-block;                                    
+			} 
 	
 			.interest{
   				width: 90px;     
@@ -67,92 +67,98 @@
 				display: inline-block;       
 			}
  
-  			    input[type='text'], input[type='password']{
-  			 	   padding-left: 10px;   
-  				    margin:10px 0px;    
-  					border: 2px solid #ffbf00;
-  					height: 30px; 
-					width: 300px;   
-					box-sizing: border-box;            
-  			    }
-  			    
-  			          
-  			    #update {   
-				    width:400px;
-				    background-color: #ffbf00;
-				    border: none;
-				    color:#fff;
-				    padding: 15px 0;
-				    text-align: center;
-				    text-decoration: none;
-				    display: inline-block;
-				    font-size: 15px;
-				    margin: 4px;
-				    cursor: pointer;
-				    border-radius:10px;
-				    box-sizing: border-box; 
-				}
-				
-				.updateBtn{
-					width:90px;                 
-				    background-color: white;
-				    border: 2px solid #ffbf00;
-				    color:black;
-	 			    padding: 3px 0; 
-				    text-align: center;
-				    text-decoration: none;
-				    display: inline-block;          
-				    font-size: 15px;   
- 				    margin-right: 205px;                      
-				    cursor: pointer;     
-				    height: 40px;  
-				}
-				
-					#emailUpdate{     
-					width:90px;                 
-				    background-color: white;
-				    border: 2px solid #ffbf00;
-				    color:black;
-	 			    padding: 3px 0; 
-				    text-align: center;
-				    text-decoration: none;
-				    display: inline-block;          
-				    font-size: 15px;   
- 				    margin-right: 115px;                                   
-				    cursor: pointer;     
-				    height: 40px;  
-				}
-  			    input[type='button']{
-  			    	width:50px;
-				    background-color: #ffbf00;
-				    border: none;
-				    color:#fff;
-				    padding: 8px 0;
-				    text-align: center;
-				    text-decoration: none;
-				    display: inline-block;
-				    font-size: 14px;
-				    margin: 2px;
-				    cursor: pointer;
-				    box-sizing: border-box;     
-  			    } 
-  			    
-  			    
-  			    select {   
-				    width: 145px;  
-				    height: 30px;
-				    padding-left: 10px;    
-				    margin-top:5px;         
-				    font-size: 14px;
-				    color: black;
-				    border: 2px solid #ffbf00;
-				    border-radius: 3px;
-				    box-sizing: border-box;         
-				}
-				
-
-  			        
-  			       
+		    input[type='text'], input[type='password']{
+				padding-left: 10px;   
+				margin:10px 0px;    
+				border: 2px solid #ffbf00;
+				border-radius: 5px;
+				height: 30px; 
+				width: 300px;   
+				box-sizing: border-box;            
+		    }
+			    
+			          
+		    #update {   
+			    width:400px;
+			    background-color: #ffbf00;
+			    border: none;
+			    color:#fff;
+			    padding: 15px 0;
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;
+			    font-size: 15px;
+			    margin: 4px;
+			    cursor: pointer;
+			    border-radius:10px;
+			    box-sizing: border-box; 
+			}
+			
+			.updateBtn{
+				width:90px;                 
+			    background-color: white;
+			    border: 2px solid #ffbf00;
+			    border-radius: 5px;
+			    color:black;
+				padding: 3px 0; 
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;          
+			    font-size: 15px;   
+				margin-right: 205px;                      
+			    cursor: pointer;     
+			    height: 40px;  
+			}
+			
+			#emailUpdate{     
+				width:90px;                 
+			    background-color: white;
+			    border: 2px solid #ffbf00;
+			    border-radius: 5px;
+			    color:black;
+				padding: 3px 0; 
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;          
+			    font-size: 15px;   
+				margin-right: 115px;         
+				margin-bottom: 10px;                          
+			    cursor: pointer;     
+			    height: 40px;  
+			}
+			input[type='button']{
+			   	width:50px;
+			    background-color: #ffbf00;
+			    border: none;
+			    color:#fff;
+			    padding: 8px 0;
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;
+			    font-size: 14px;
+			    margin: 2px;
+			    cursor: pointer;
+			    box-sizing: border-box;     
+			} 
+				    
+			select {   
+			    width: 145px;  
+			    height: 30px;
+			    padding-left: 10px;    
+			    margin-top:5px;         
+			    font-size: 14px;
+			    color: black;
+			    border: 2px solid #ffbf00;
+			    border-radius: 3px;
+			    box-sizing: border-box;         
+			}
+			
+			#email {
+			    display: inline-block;
+			    width: 300px;
+			    text-align: left;
+			    font-size: 13px;
+			}
 		</style>    
 	</head>
 	<body>
@@ -235,14 +241,14 @@
 						<button id="pwUpdate" class="updateBtn"  onclick="pwPopup()">수정</button>
 
 
-						<hr size="1" color="#ffbf00">   <h5 class="h5email">이메일</h5>   
-						<input class="idtxt" type="text" name="email" placeholder="이메일" value="${bbs.member_email}" readonly />     
+						<hr size="1" color="#ffbf00">   <h5 class="h5email">이메일</h5>
+						<div class="idtxt" id="email">${bbs.member_email}</div>     
 						<button id="emailUpdate"class="updateBtn" onclick="emailPopup()">수정</button>      
 
 
 
 						<hr size="1" color="#ffbf00">          
-    					<button id="update">수정완료</button>
+    					<button id="update">수정</button>
 
     		</div>
 	</body>

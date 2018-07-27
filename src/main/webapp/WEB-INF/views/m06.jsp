@@ -61,7 +61,7 @@
 			<hr size="1" color="white">
 			
 			
-			<button id="pwUpdateBtn">확인</button>
+			<button id="pwUpdateBtn">수정</button>
 	</body>
 	<script>
 	var userId = "${userId}";
@@ -156,12 +156,7 @@ var userPw = 0; // 0 현재 비밀번호 확인되지 않음 | 1 현재 비밀�
 					"pw":$("input[name='pwUpdate']").val() 
 				},
 				success:function(d){
-					if(d.success){
-						alert("비밀번호가 수정되었습니다.");
-						close();
-					}else{
-						alert("비밀번호 수정실패");
-					}
+					close();
 				}
 			});
 		}

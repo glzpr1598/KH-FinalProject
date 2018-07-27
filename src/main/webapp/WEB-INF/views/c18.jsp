@@ -428,15 +428,15 @@
 		});
 		$("#save").click(function() {
 		 	if($("input[name='subject']").val()==""){
-		 		alert("제목을 입력해 주세요 ");      
+		 		alert("제목을 입력해 주세요.");      
 			}else if($("#day").val()==""){
-				alert("모임일시를 입력해 주세요 ");    
+				alert("모임일시를 입력해 주세요.");    
 			}else if($("#money").val()==""){
-				alert("회비를 입력해 주세요 ");    
+				alert("회비를 입력해 주세요.");    
 			}else if($("#content").val()==""){
-				alert("내용을 입력해 주세요 ")
+				alert("내용을 입력해 주세요.")
 			}else  if($("#locationX").val()=="" && $("#locationY").val()==""){
-				alert("지역을 선택해 주세요 "); 
+				alert("위치을 선택해 주세요."); 
 			}else {
 		 		$("#form1").submit();
 		 	}

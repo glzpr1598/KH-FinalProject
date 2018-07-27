@@ -43,9 +43,12 @@
 		#add{
 			float: right;        
 		}
-		a{
+		#right a{
 			color: black;
 			text-decoration: none;
+		}
+		#right a:hover{
+			text-decoration: underline;
 		}
 		#menu5{
 			font-weight: bold;
@@ -67,9 +70,9 @@
 					<tr>
 						<th class="idx">글번호</th>
 						<th class="subject">제목</th>
+						<th>모임일시</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>모임일시</th>
 					</tr>
 				</thead>
 				<tbody >
@@ -109,9 +112,9 @@
 				content +="<tr>";
 				content +="<td>"+item.meetingPlan_idx+"</td>";
 				content +="<td><a href='clubMeetingDetail?club_id="+<%= request.getParameter("club_id") %>+"&meetingPlan_id="+item.meetingPlan_id+"&member_id="+"<%= session.getAttribute("userId") %>"+"'>"+item.meetingPlan_subject+"</a></td>";
+				content +="<td >"+item.meetingPlan_when+"</td>";
 				content +="<td >"+item.clubJoin_nickname+"</td>";
 				content +="<td '>"+item.meetingPlan_date+"</td>";
-				content +="<td >"+item.meetingPlan_when+"</td>";
 				content += "</tr>";
 			});		
 			$("#listTable tbody").html(content);
