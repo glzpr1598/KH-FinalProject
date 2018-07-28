@@ -16,7 +16,7 @@
 
 	#header {
 		width: 1000px;
-		height: 100px;
+		height: 40px;
 		margin: auto;
 		position: relative;
 	}
@@ -46,10 +46,12 @@
 	/* 동호회 이름 */
 	#clubNameArea {
 		width: 1000px;
-		height: 120px;
-		margin: auto;
+		line-height: 140px;
+		margin: 15px auto;
 		position: relative;
 		text-align: center;
+		border: medium solid #ffbf00;
+    	border-radius: 5px;
 	}
 	#clubNameArea #clubName {
 		font-size: 40px;

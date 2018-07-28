@@ -12,7 +12,7 @@
 		<style>
   			#all{
   			    width: 400px;                 
-				margin: 150px auto;      
+				margin: 70px auto;      
 				text-align: center;    
 				box-sizing: border-box;   
   			}         
