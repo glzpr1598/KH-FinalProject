@@ -131,26 +131,28 @@
 	            $("#subject").html(data.INTEREST_INTEREST);
 	            $("#location").html(data.CLUB_LOCATION);
 
-							    		$.ajax({
-							    	        url: "./nickNameSearch",
-							    	        type: "post",
-							    	        data: {
-							    	            "userId": '<%= session.getAttribute("userId") %>',
-							    	            "clubId" : '<%= request.getParameter("club_id") %>'          
-							    	        },
-							    	        dataType: "json",
-							    	        success: function(data) {
-							    	        	if(data.nick != null){
-							    	      	      $("#nickName").html(data.nick);
-							    		      	  $("#bar").html("|");
-							    	        	}           
-							    	        },
-							    	        error: function(err) {console.log(err);}
-							    	    });
+	    		$.ajax({
+	    	        url: "./nickNameSearch",
+	    	        type: "post",
+	    	        data: {
+	    	            "userId": '<%= session.getAttribute("userId") %>',
+	    	            "clubId" : '<%= request.getParameter("club_id") %>'          
+	    	        },
+	    	        dataType: "json",
+	    	        success: function(data) {
+	    	        	if(data.nick != null){
+	    	      	      $("#nickName").html(data.nick);
+	    		      	  $("#bar").html("|");
+	    	        	}           
+	    	        },
+	    	        error: function(err) {console.log(err);}
+	    	    });
 	            
 	            
 	        },
-	        error: function(err) {console.log(err);}
+	        error: function(err) {
+	        	location.href="./error404";
+	        }
 	    });
 	});
 
