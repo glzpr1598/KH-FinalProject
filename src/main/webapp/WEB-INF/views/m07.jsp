@@ -115,7 +115,7 @@
 						success:function(d){
 							serialNumber = d.serialNumber;		
 							email = $("input[name='email']").val();
-							console.log(serialNumber);
+							//console.log(serialNumber);
 							//console.log(email);       
 						}          
 					});

@@ -317,8 +317,8 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 			},
 			success: function(d) {
 				//console.log("success");
-					serialNumber = d.serialNumber;		
-					console.log(serialNumber);
+				serialNumber = d.serialNumber;		
+				//console.log(serialNumber);
 			},
 			error: function(e){console.log(e)}
 			});
