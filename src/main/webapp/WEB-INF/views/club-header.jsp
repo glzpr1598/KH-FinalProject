@@ -131,7 +131,7 @@
 	            $("#subject").html(data.INTEREST_INTEREST);
 	            $("#location").html(data.CLUB_LOCATION);
 
-<<<<<<< HEAD
+
 							    		$.ajax({
 							    	        url: "./nickNameSearch",
 							    	        type: "post",
@@ -148,7 +148,7 @@
 							    	        },
 							    	        error: function(err) {console.log(err);}
 							    	    });
-=======
+
 	    		$.ajax({
 	    	        url: "./nickNameSearch",
 	    	        type: "post",
@@ -165,7 +165,7 @@
 	    	        },
 	    	        error: function(err) {console.log(err);}
 	    	    });
->>>>>>> 5f5d28f01888e0bada7d0f3165aaba2e2435df5e
+
 	            
 	            
 	        },
