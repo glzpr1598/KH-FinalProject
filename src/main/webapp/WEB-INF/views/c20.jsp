@@ -8,46 +8,54 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>HAMO</title>
 		<style>
-			#menu5{
-				font-weight: bold;
-				color: black;
-			}
-			.meeting{
-				height: 50px;
-				margin-top: 10px; 
-				font-size: 20px;
-				border: 0px;
-				width: 100%;
-			}
-			p{
-				font-size: 20px;
-			}
-			textarea{
-				font-size: 20px;
-				width: 100%;
-				resize: none;
-			}
+			#menu5 {
+			font-weight: bold;
+			color: black;
+		}
+		
+		#title {
+			font-weight: bold;
+			font-size: large;
+		}
+		
+		form {
+			margin: 0px;
+		}
+		
+		#subject {
+			margin-top: 20px;
 			
-			#ok{
-				position: relative; 
-				top: 640px;
-				margin-bottom: 25px;			
-			}
-			.bottomBtn{
-				width: 50px;
-				padding: 7px 0px;
-				margin-top : 5px;
-				margin-bottom: 5px;
-				background-color: #ffbf00;
-				border: none;
-				border-radius: 5px;
-				color: white;
-				font-weight: bold;
-				font-size: 14px;
-				cursor: pointer;
-				position: relative;
-				left: 40%;
-			}
+		}
+		.meeting {
+			height: 30px;
+			width: 100%;
+			padding: 0px 5px;
+		}
+		
+		#content {
+			width: 100%;
+			resize: none;
+			padding: 5px;
+			font: 400 13.3333px Arial;
+		}
+		
+		#ok{
+			margin-top: 10px;
+			text-align: center;
+		}
+		.bottomBtn{
+			padding: 5px 10px;
+			background: #ffbf00;
+		    border: none;
+			border-radius: 5px;
+			color: white;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		
+		#space {
+			height: 100px;
+		}
 		
 			.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 			.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -95,42 +103,41 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
-			<h1> | 모임일정 | </h1>
-			<form action="clubMeetingUpdate?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
-				<input type="text" class="meeting" name="subject" placeholder="제목" value="${list.meetingPlan_subject}"  maxlength="20"/>        
-				<input type="text" class="meeting" name="day" placeholder="모임 일시 " value="${list.meetingPlan_when}"  maxlength="20"/>
-				<input type="text" class="meeting" name="money" placeholder="회비" value="${list.meetingPlan_money}"  maxlength="20"/>
-				<P>내용</P>
-				<textarea name="content" rows="10" cols="70"  maxlength="2000">${list.meetingPlan_content}</textarea>
-				<div  id="ok">
-					
+				<div id="title"> | 모임일정 | </div>
+				<form id="form1" action="clubMeetingUpdate">
+					<input id="subject" type="text" class="meeting" name="subject" placeholder="제목" value="${list.meetingPlan_subject}"  maxlength="20"/>        
+					<input id="day" type="text" class="meeting" name="day" placeholder="모임 일시 " value="${list.meetingPlan_when}"  maxlength="20"/>
+					<input id="money" type="text" class="meeting" name="money" placeholder="회비" value="${list.meetingPlan_money}"  maxlength="20"/>
+					<textarea id="content" name="content" rows="10" cols="70"  maxlength="2000">${list.meetingPlan_content}</textarea>
 					<input type="hidden" name="meetingPlan_id" value="${list.meetingPlan_id}"/>
 					<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>"/>
 					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
 					<input id="locationX" type="hidden" name="locationX" value="${list.meetingPlan_locationX}"/>
 					<input id="locationY" type="hidden" name="locationY" value="${list.meetingPlan_locationY}"/>
-					<input type="submit" value="수정" class="bottomBtn" />
-					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingDetail?club_id=<%= request.getParameter("club_id") %>&meetingPlan_id=${list.meetingPlan_id}'"/>
+				</form>                     
+				<P>지역</P>
+				<div class="map_wrap" id="mapdiv">
+				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+				
+				    <div id="menu_wrap" class="bg_white">
+				        <div class="option">
+				            <div>
+				                <form onsubmit="searchPlaces(); return false;">
+									검색 <input type="text" value="" id="keyword" size="15"> 
+				                    <button type="submit">검색하기</button> 
+				                </form>
+				            </div>
+				        </div>
+				        <hr>
+				        <ul id="placesList"></ul>
+				        <div id="pagination"></div>
+				    </div>
 				</div>
-			</form>                     
-			<P>지역</P>
-			<div class="map_wrap" id="mapdiv">
-			    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-			
-			    <div id="menu_wrap" class="bg_white">
-			        <div class="option">
-			            <div>
-			                <form onsubmit="searchPlaces(); return false;">
-								검색 : <input type="text" value="" id="keyword" size="15"> 
-			                    <button type="submit">검색하기</button> 
-			                </form>
-			            </div>
-			        </div>
-			        <hr>
-			        <ul id="placesList"></ul>
-			        <div id="pagination"></div>
-			    </div>
-			</div>
+				<div id="ok">
+					<input id="exit" type="button" value="취소" class="bottomBtn" />
+					<input id="save" type="button" value="저장" class="bottomBtn" />
+				</div>
+				<div id='space'></div>
 			<!------------------- 양식 ------------------->
 			</div>
 		</div>
@@ -139,8 +146,18 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=217bc7d15bb1073faf6529f765e194a5&libraries=services"></script>
 	<script>
 		
+		// 취소 클릭
+		$("#exit").click(function() {
+			if(confirm('수정을 취소하시겠습니까?')) {
+				location.href='clubMeetingDetail?club_id=<%= request.getParameter("club_id") %>&meetingPlan_id=${list.meetingPlan_id}&member_id='+'<%= session.getAttribute("userId") %>';
+			}
+		});
 		
-	
+		// 저장 클릭
+		$("#save").click(function() {
+			$("#form1").submit();
+		});
+		
 		var markers = [];
 		var locationX =$("#locationX").val();
 		var locationY =$("#locationY").val();
@@ -373,7 +390,7 @@
 		
 		var map = new daum.maps.Map(mapContainer, mapOption); 
 		// 마커 이미지의 주소
-		var markerImageUrl = 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Push-Pin-1-Azure-icon.png', 
+		var markerImageUrl = 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png', 
 		    markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
 		    markerImageOptions = { 
 		        offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
@@ -408,12 +425,5 @@
 		    $("#locationY").val(updateLocationY);
 		    locationY
 		});
-		// 마커 위에 표시할 인포윈도우를 생성한다
-		var infowindow = new daum.maps.InfoWindow({
-		    content : '<div style="padding:5px;" >여기</div>' // 인포윈도우에 표시할 내용
-		});
-		
-		// 인포윈도우를 지도에 표시한다
-		infowindow.open(map, marker);
 	</script>
 </html>

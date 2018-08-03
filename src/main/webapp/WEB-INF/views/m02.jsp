@@ -317,8 +317,13 @@ var userId =""; // 비밀번호 변경화면으로 바뀌었을때 아이디값�
 			},
 			success: function(d) {
 				//console.log("success");
+<<<<<<< HEAD
 					serialNumber = d.serialNumber;		
 					console.log(serialNumber);        
+=======
+				serialNumber = d.serialNumber;		
+				//console.log(serialNumber);
+>>>>>>> 7afbca5ed0dc65f32223bdd6ae45128f085f1dbd
 			},
 			error: function(e){console.log(e)}
 			});

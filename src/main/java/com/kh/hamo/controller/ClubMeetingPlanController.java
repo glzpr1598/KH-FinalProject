@@ -2,6 +2,8 @@ package com.kh.hamo.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,15 +114,16 @@ public class ClubMeetingPlanController {
 	}
 	//모임 일정 수정 
 	@RequestMapping(value = "/clubMeetingUpdate")
-	public String clubMeetingUpdate(@RequestParam HashMap<String, String> list) {
+	public String clubMeetingUpdate(@RequestParam HashMap<String, String> list, HttpSession session) {
 		logger.info("clubMeetingUpdate 요청");
+		String userId = (String) session.getAttribute("userId");
 		String club_id=  list.get("club_id");
 		String meetingPlan_id=list.get("meetingPlan_id");
 		String meetingPlan_locationX=list.get("locationX");
 		System.out.println(meetingPlan_id);
 		System.out.println(meetingPlan_locationX);
 		service.clubMeetingUpdate(list);
-		return "redirect:/clubMeetingDetail?club_id="+club_id+"&meetingPlan_id="+meetingPlan_id;
+		return "redirect:/clubMeetingDetail?club_id="+club_id+"&meetingPlan_id="+meetingPlan_id+"&member_id="+userId;
 	}
 	//모임 일정 삭제 
 	@RequestMapping(value = "/clubMeetingDel")

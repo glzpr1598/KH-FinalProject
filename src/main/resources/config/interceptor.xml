@@ -57,14 +57,11 @@
 			<!-- 사진첩 수정창 -->
 			<mvc:mapping path="/clubPhotoBbsUpdateForm" />
 			<!-- 모임일정 상세보기 -->
-			<mvc:mapping path="/clubMeetingDetailForm" />
+			<mvc:mapping path="/clubMeetingDetail" />
 			<!-- 모임일정 등록 -->
 			<mvc:mapping path="/clubMeetingWriteForm" />
 			<!-- 모임일정 수정창 -->
 			<mvc:mapping path="/clubMeetingUpdateForm" />
-			
-			<!-- 멤버관리 -->
-			<mvc:mapping path="/clubMemberList" />
 			<!-- 동호회 폐쇄 -->
 			<mvc:mapping path="/clubCloseForm" />
 			

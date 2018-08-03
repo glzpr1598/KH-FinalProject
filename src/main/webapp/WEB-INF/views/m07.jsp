@@ -78,7 +78,7 @@
 			<hr size="1" color="white">         
 			
 			<div id=serialBtn><button id="emailChk">인증</button></div>
-			<button id="emailUpdate">확인</button>        
+			<button id="emailUpdate">수정</button>        
 	</body>
 	<script>
 	var userId = "${userId}";
@@ -115,7 +115,7 @@
 						success:function(d){
 							serialNumber = d.serialNumber;		
 							email = $("input[name='email']").val();
-							console.log(serialNumber);
+							//console.log(serialNumber);
 							//console.log(email);       
 						}          
 					});
@@ -146,7 +146,11 @@
 						"id": userId
 					},
 					success:function(data){
-						if(data.success == 1){close();}
+						if(data.success == 1){
+							// 부모창 이메일 변경
+							$("#email",opener.document).html($("#email").val());
+							close();
+						}
 				}
 			});	
 		}	

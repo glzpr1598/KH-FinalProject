@@ -8,49 +8,58 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
-		#menu5{
+		#menu5 {
 			font-weight: bold;
 			color: black;
 		}
-		.meeting{
-			height: 50px;
-			margin-top: 10px; 
-			font-size: 20px;
-			border: 0px;
+		
+		#title {
+			font-weight: bold;
+			font-size: large;
+		}
+		
+		form {
+			margin: 0px;
+		}
+		
+		#subject {
+			margin-top: 20px;
+			
+		}
+		.meeting {
+			height: 30px;
 			width: 100%;
+			padding: 0px 5px;
 		}
-		p{
-			font-size: 20px;
-		}
-		textarea{
-			font-size: 20px;
+		
+		#content {
 			width: 100%;
 			resize: none;
+			padding: 5px;
+			font: 400 13.3333px Arial;
 		}
 		
 		#ok{
-			position: relative; 
-			top: 640px;
-			margin-bottom: 25px;			
+			margin-top: 10px;
+			text-align: center;
 		}
 		.bottomBtn{
-			width: 50px;
-			padding: 7px 0px;
-			margin-top : 5px;
-			margin-bottom: 5px;
-			background-color: #ffbf00;
-			border: none;
+			padding: 5px 10px;
+			background: #ffbf00;
+		    border: none;
 			border-radius: 5px;
 			color: white;
 			font-weight: bold;
-			font-size: 14px;
 			cursor: pointer;
-			position: relative;
-			left: 40%;
 		}
+		
+		#space {
+			height: 100px;
+		}
+		
 		.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 		.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-		.map_wrap {position:relative;width:100%;height:500px;}
+		.map_wrap {position:relative;width:100%;height:400px;}
 		#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 		.bg_white {background:#fff;}
 		#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
@@ -94,41 +103,40 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
-			<h3> | 모임일정 | </h3>
-			<form id="form1" action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
-				<input id="subject" type="text" class="meeting" name="subject" placeholder="제목"  maxlength="20" />     
-				<input id="day" type="text" class="meeting" name="day" placeholder="모임 일시 " maxlength="20"/>
-				<input id="money" type="text" class="meeting" name="money" placeholder="회비" maxlength="20"/>
-				<P>내용</P>
-				<textarea  id="content" name="content" rows="10" cols="70" maxlength="2000"></textarea>
-				<div  id="ok">
+				<div id="title"> | 모임일정 | </div>
+				<form id="form1" action="clubMeetingWrite?club_id=<%= request.getParameter("club_id") %>&member_id=<%= session.getAttribute("userId") %>">
+					<input id="subject" type="text" class="meeting" name="subject" placeholder="제목"  maxlength="20" />     
+					<input id="day" type="text" class="meeting" name="day" placeholder="모임 일시 " maxlength="20"/>
+					<input id="money" type="text" class="meeting" name="money" placeholder="회비" maxlength="20"/>
+					<textarea id="content" name="content" rows="15" maxlength="2000" placeholder="내용"></textarea>
+					
 					<input type="hidden" name="club_id" value="<%= request.getParameter("club_id") %>"/>
 					<input type="hidden" name="member_id" value="<%= session.getAttribute("userId") %>"/>
 					<input id="locationX" type="hidden" name="locationX" value=""/>
 					<input id="locationY" type="hidden" name="locationY" value=""/>
-					<input id="save" type="button" value="저장" class="bottomBtn"/>
-					<input id="exit" type="button" value="취소" class="bottomBtn" onclick="location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>'"/>
+				</form>
+				<div class="map_wrap" id="mapdiv">
+				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+				
+				    <div id="menu_wrap" class="bg_white">
+				        <div class="option">
+				            <div>
+				                <form onsubmit="searchPlaces(); return false;">
+									검색 <input type="text" value=${ club_location } id="keyword" size="15"> 
+				                    <button type="submit">검색하기</button> 
+				                </form>
+				            </div>
+				        </div>
+				        <hr>
+				        <ul id="placesList"></ul>
+				        <div id="pagination"></div>
+				    </div>
 				</div>
-			</form>
-			<P>지역</P>
-			<div class="map_wrap" id="mapdiv">
-			    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-			
-			    <div id="menu_wrap" class="bg_white">
-			        <div class="option">
-			            <div>
-			                <form onsubmit="searchPlaces(); return false;">
-								검색 : <input type="text" value=${ club_location } id="keyword" size="15"> 
-			                    <button type="submit">검색하기</button> 
-			                </form>
-			            </div>
-			        </div>
-			        <hr>
-			        <ul id="placesList"></ul>
-			        <div id="pagination"></div>
-			    </div>
-			</div>
- 			
+				<div id="ok">
+					<input id="exit" type="button" value="취소" class="bottomBtn"/>
+					<input id="save" type="button" value="저장" class="bottomBtn"/>
+				</div>
+				<div id='space'></div>
 			<!------------------- 양식 ------------------->
 			</div>
 		</div>
@@ -140,7 +148,11 @@
 
 		
 	
-		$("#exit").click(function(){alert("모임일정 작성 취소");});
+		$("#exit").click(function(){
+			if(confirm('모임일정 등록을 취소하시겠습니까?')) {
+				location.href='clubMeetingList?club_id=<%= request.getParameter("club_id") %>';
+			}
+		});
 	
 		var markers = [];
 	
@@ -374,7 +386,7 @@
 		
 		var map = new daum.maps.Map(mapContainer, mapOption); 
 		// 마커 이미지의 주소
-		var markerImageUrl = 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Push-Pin-1-Azure-icon.png', 
+		var markerImageUrl = 'http://icons.iconarchive.com/icons/paomedia/small-n-flat/128/map-marker-icon.png', 
 		    markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
 		    markerImageOptions = { 
 		        offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
@@ -416,15 +428,15 @@
 		});
 		$("#save").click(function() {
 		 	if($("input[name='subject']").val()==""){
-		 		alert("제목을 입력해 주세요 ");      
+		 		alert("제목을 입력해 주세요.");      
 			}else if($("#day").val()==""){
-				alert("모임일시를 입력해 주세요 ");    
+				alert("모임일시를 입력해 주세요.");    
 			}else if($("#money").val()==""){
-				alert("회비를 입력해 주세요 ");    
+				alert("회비를 입력해 주세요.");    
 			}else if($("#content").val()==""){
-				alert("내용을 입력해 주세요 ")
+				alert("내용을 입력해 주세요.")
 			}else  if($("#locationX").val()=="" && $("#locationY").val()==""){
-				alert("지역을 선택해 주세요 "); 
+				alert("위치을 선택해 주세요."); 
 			}else {
 		 		$("#form1").submit();
 		 	}

@@ -40,6 +40,10 @@
 		padding: 5px 10px;
 		cursor: pointer;
 	}
+	
+	#space {
+		height: 100px;
+	}
 </style>
 </head>
 <body>
@@ -81,6 +85,7 @@
 					
 				</c:forEach>
 			</table>
+			<div id="space"></div>
 	<!------------------- 양식 ------------------->
 		</div>
 	</div>
@@ -100,5 +105,13 @@
 			location.href = uri;
 		}
 	});
+	
+	// 로그인 체크
+	if("<%= session.getAttribute("userId") %>" == "null") {
+		alert("로그인이 필요한 서비스입니다.");
+		location.href="./clubMain?club_id="+"<%= request.getParameter("club_id") %>";
+	} else {
+		
+	}
 </script>
 </html>

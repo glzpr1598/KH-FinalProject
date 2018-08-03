@@ -8,8 +8,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>HAMO</title>
 	<style>
+		#title {
+			font-weight: bold;
+			font-size: large;
+		}
 		table{
-		    margin-top: 10px;
+		    margin-top: 20px;
 		    width: 800px;
 		    text-align: center;
 		    border-collapse: collapse;
@@ -26,28 +30,25 @@
 		.idx{
 			width: 80px;
 		}
-		.subject{
-			width: 400px;
-		}
 		input[type="button"]{
-			width: 50px;
-			padding: 7px 0px;
-			margin-top : 5px;
-			margin-bottom: 5px;
-			background-color: #ffbf00;
-			border: none;
+			margin-top: 10px;
+			padding: 5px 10px;
+			background: #ffbf00;
+		    border: none;
 			border-radius: 5px;
 			color: white;
 			font-weight: bold;
-			font-size: 14px;
 			cursor: pointer;
 		}
 		#add{
 			float: right;        
 		}
-		a{
+		#right a{
 			color: black;
 			text-decoration: none;
+		}
+		#right a:hover{
+			text-decoration: underline;
 		}
 		#menu5{
 			font-weight: bold;
@@ -63,15 +64,15 @@
 			<%@ include file="./club-menu.jsp" %>
 			<div id="right"> <!-- width: 800px -->
 			<!------------------- 양식 ------------------->
-			<h3> | 모임일정 | </h3>
+			<div id='title'> | 모임일정 | </div>
 			<table id="listTable">    
 				<thead>
 					<tr>
 						<th class="idx">글번호</th>
 						<th class="subject">제목</th>
+						<th>모임일시</th>
 						<th>작성자</th>
 						<th>작성일</th>
-						<th>모임일시</th>
 					</tr>
 				</thead>
 				<tbody >
@@ -111,9 +112,9 @@
 				content +="<tr>";
 				content +="<td>"+item.meetingPlan_idx+"</td>";
 				content +="<td><a href='clubMeetingDetail?club_id="+<%= request.getParameter("club_id") %>+"&meetingPlan_id="+item.meetingPlan_id+"&member_id="+"<%= session.getAttribute("userId") %>"+"'>"+item.meetingPlan_subject+"</a></td>";
+				content +="<td >"+item.meetingPlan_when+"</td>";
 				content +="<td >"+item.clubJoin_nickname+"</td>";
 				content +="<td '>"+item.meetingPlan_date+"</td>";
-				content +="<td >"+item.meetingPlan_when+"</td>";
 				content += "</tr>";
 			});		
 			$("#listTable tbody").html(content);
