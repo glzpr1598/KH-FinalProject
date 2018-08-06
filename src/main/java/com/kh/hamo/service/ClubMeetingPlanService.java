@@ -117,13 +117,18 @@ public class ClubMeetingPlanService {
 	//모임참석 댓글 등록
 	public HashMap<String, Object> replyAdd(String meetingPlan_id, String member_id, String replyContent) {
 		inter = sqlSession.getMapper(ClubMeetingPlanInter.class);
-		int success = inter.replyAdd(Integer.parseInt(meetingPlan_id),member_id,replyContent);
-		int replyCount = inter.replyCount(meetingPlan_id);
-		HashMap<String , Object> map = new HashMap<String , Object>();
-		map.put("list", success);
-		map.put("replyCount",replyCount);
-		logger.info("등록 : "+success);
-		return map;
+		if(replyContent.isEmpty()) {
+			
+		}else {
+			int success = inter.replyAdd(Integer.parseInt(meetingPlan_id),member_id,replyContent);
+			int replyCount = inter.replyCount(meetingPlan_id);
+			HashMap<String , Object> map = new HashMap<String , Object>();
+			map.put("list", success);
+			map.put("replyCount",replyCount);
+			return map;
+		}
+		return null;
+		
 	}
 	//모임 댓글 리스트
 	public HashMap<String, Object> replyList(String meetingPlan_id, String club_id) {

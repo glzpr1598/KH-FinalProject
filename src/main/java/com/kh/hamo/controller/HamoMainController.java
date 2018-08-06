@@ -67,9 +67,11 @@ public class HamoMainController {
 	}
 	//가입한 동호회 탈퇴
 	@RequestMapping(value = "/myClubRemove")
-	public ModelAndView myClubRemove(@RequestParam ("myClubRemove") String myClubRemove) {
+	public ModelAndView myClubRemove(@RequestParam ("myClubRemove") String myClubRemove,@RequestParam String club_id) {
 		logger.info("가입한 동호회 탈퇴 리스트");
-		return service.myClubRemove(myClubRemove);
+		logger.info(myClubRemove);
+		logger.info(club_id);
+		return service.myClubRemove(myClubRemove,club_id);
 	}
 	//동호회 찾기 페이지 이동
 	@RequestMapping(value = "/m10move")

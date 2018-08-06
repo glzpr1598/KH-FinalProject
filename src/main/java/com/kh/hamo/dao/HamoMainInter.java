@@ -42,6 +42,8 @@ public interface HamoMainInter {
 
 	int insertMaster(HamoMainDTO dto); //회장 닉네임 동호회 회원 관리 테이블에 추가
 
+	int memberCnt(String club_id);
+
 
 
 }
