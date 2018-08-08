@@ -34,7 +34,7 @@
 	
 	<!-- 회원수 업데이트 -->
 	<update id="clubMemberCountUpdate">
-		UPDATE club SET club_memberCount = (SELECT count(*) from clubjoin WHERE club_id=#{param1})
+		UPDATE club SET club_memberCount = (SELECT count(*) from clubjoin WHERE club_id=#{param1}) WHERE club_id=#{param1}
 	</update>
 	
 	<!-- 동호회 가입 여부 확인 -->
