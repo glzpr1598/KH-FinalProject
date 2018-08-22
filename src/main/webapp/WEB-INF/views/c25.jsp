@@ -105,5 +105,13 @@
 			location.href = uri;
 		}
 	});
+	
+	// 로그인 체크
+	if("<%= session.getAttribute("userId") %>" == "null") {
+		alert("로그인이 필요한 서비스입니다.");
+		location.href="./clubMain?club_id="+"<%= request.getParameter("club_id") %>";
+	} else {
+		
+	}
 </script>
 </html>
